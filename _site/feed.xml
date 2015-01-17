@@ -1,20 +1,20 @@
 <?xml version="1.0"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Brume</title>
+    <title></title>
     <link></link>
     <atom:link href="/feed.xml" rel="self" type="application/rss+xml" />
-    <description>It's simple. It's easy to use. It's a Jekyll theme.</description>
+    <description></description>
     <language>en-us</language>
-    <pubDate>Sat, 17 Jan 2015 21:31:19 +0200</pubDate>
-    <lastBuildDate>Sat, 17 Jan 2015 21:31:19 +0200</lastBuildDate>
+    <pubDate>Sun, 18 Jan 2015 00:49:35 +0200</pubDate>
+    <lastBuildDate>Sun, 18 Jan 2015 00:49:35 +0200</lastBuildDate>
 
     
       <item>
         <title>Demo post</title>
         <link>/demo-post</link>
-        <pubDate>Fri, 07 Mar 2014 00:00:00 +0200</pubDate>
-        <author>Aigars Dzerviniks</author>
+        <pubDate>Sat, 17 Jan 2015 00:00:00 +0200</pubDate>
+        <author></author>
         <description>&lt;p&gt;Praesent tincidunt vestibulum sem nec eleifend. Pellentesque adipiscing mollis adipiscing. Sed ipsum sem, eleifend eget dapibus in, tincidunt ut dolor. Curabitur gravida urna leo, eget auctor turpis feugiat non. Vivamus pharetra, lorem id ullamcorper rutrum, eros erat condimentum erat, ac dignissim lorem nisi nec nunc. Praesent tellus mi, volutpat quis nisl et, consectetur blandit nibh.&lt;/p&gt;
 
 &lt;p&gt;Nulla sit amet nulla non odio sodales mollis elementum sed sem. Aenean et laoreet enim. Curabitur vulputate, mi rutrum commodo condimentum, enim nunc feugiat magna, vel rutrum sapien ante nec ante. Donec nec nibh placerat, molestie felis ac, vulputate arcu. Donec condimentum pellentesque nibh vel tincidunt. Fusce sem ipsum, varius at laoreet vitae, accumsan sed nisl. Nunc eget viverra diam. Aliquam pulvinar, enim id commodo tincidunt, risus lectus pharetra lacus, et semper enim ligula ut mauris. Sed vitae sollicitudin ante. In sollicitudin placerat dui et sagittis.&lt;/p&gt;
