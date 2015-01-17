@@ -1,50 +1,39 @@
-<!doctype html>
-<html>
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="chrome=1">
-    <title>saumilp.github.io by SaumilP</title>
+---
+layout: default
+title: Home
+---
 
-    <link rel="stylesheet" href="stylesheets/styles.css">
-    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
-    <script src="javascripts/scale.fix.js"></script>
-    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
-    <!--[if lt IE 9]>
-    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
-  </head>
-  <body>
-    <div class="wrapper">
-      <header>
-        <h1 class="header">saumilp.github.io</h1>
-        <p class="header">Github.io</p>
+<section class="archive">
+{% for post in site.posts %}
+{% unless post.next %}
 
+{% unless forloop.first %}</div></div>{% endunless %}
 
+  <div class="bundle row gutters fadeInDown animated">
+    <h2 class="post-year col span_2">{{ post.date | date: '%Y' }}</h2>
+    <div class="posts-by-year col span_10">
 
-        <ul>
-          <li><a class="buttons github" href="https://github.com/SaumilP">GitHub Profile</a></li>
-        </ul>
+{% else %}
+{% capture year %}{{ post.date | date: '%Y' }}{% endcapture %}
+{% capture nyear %}{{ post.next.date | date: '%Y' }}{% endcapture %}
+{% if year != nyear %}
 
-      </header>
-      <section>
-        <h1>
-<a id="saumilpgithubio" class="anchor" href="#saumilpgithubio" aria-hidden="true"><span class="octicon octicon-link"></span></a>saumilp.github.io</h1>
+{% unless forloop.first %}</div></div>{% endunless %}
 
-<p>Personal web page: <a href="http://saumilp.github.io/">saumilp.github.io</a></p>
+  <div class="bundle row gutters fadeInDown animated">
+    <h2 class="post-year col span_2">{{ post.date | date: '%Y' }}</h2>
+    <div class="posts-by-year col span_10">
+{% endif %}
+{% endunless %}
 
-<h2>
-<a id="posts" class="anchor" href="#posts" aria-hidden="true"><span class="octicon octicon-link"></span></a><strong>Posts</strong>
-</h2>
-
-<ul>
-<li><a href="http://saumilp.github.io/2015/01/first-page/">The first post</a></li>
-</ul>
-      </section>
-      <footer>
-        <p><small>Hosted on <a href="http://pages.github.com">GitHub Pages</a> using the Dinky theme</small></p>
-      </footer>
+  <article class="row gutters">
+    <a href="{{ site.baseurl }}{{ post.url }}" title="{{ post.title }}" class="col span_8">{{ post.title }}</a>
+    <div class="post-date col span_4">
+      <time datetime="{{ post.date | date: '%Y-%m-%d' }}">{{ post.date | date: "%-d %B" }}</time>
     </div>
-    <!--[if !IE]><script>fixScale(document);</script><![endif]-->
-		
-  </body>
-</html>
+  </article>
+
+{% if forloop.last %}</div></div>{% endif %}
+
+{% endfor %}
+</section>
