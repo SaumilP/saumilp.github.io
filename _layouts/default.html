@@ -14,11 +14,18 @@
         {% include navigation.html %}
       </header>
 
+      <div class="tag_cloud">
+        {% tag_cloud %}
+      </div>
+
       {{ content }}
 
       <footer>
-        <p>
-        </p>
+        <!-- <p class="profiles">
+          <a title="Github" href="{{ site.data.accounts.github.site }}"><li class="icon-github-sign"></li></a>
+          <a title="Twitter" href="{{ site.data.accounts.twitter.site}}"><li class="icon-twitter-sign"></li></a>
+          <a title="LinkedIn" href="{{ site.data.accounts.linkedin.site }}"><li class="icon-linkedin-sign"></li></a>
+        </p> -->
       </footer>
     </div>
 

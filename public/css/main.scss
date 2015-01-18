@@ -217,13 +217,14 @@ footer {
 }
 
 .not-found {
-  margin-top: 150px;
+  margin-top: 70px;
   text-align: center;
-  font-size: 2rem;
+  font-size: 1.5rem;
 }
 
 .not-found h1 {
-  font-size: 8rem;
+  font-size: 5rem;
+  padding-bottom: 40px;
 }
 
 dl,
@@ -236,6 +237,124 @@ dl,
 dl,
 .clearfix:after {
     clear: both;
+}
+
+/*----------------------------------------------------------------------------*/
+
+.tag-cloud {
+  list-style: none;
+  padding: 0;
+  text-align: justify; 
+  font-size: 16px;
+  li {
+    display: inline-block;
+    margin: 0 12px 12px 0; 
+  }
+}
+#archives {
+  padding: 5px;
+}
+.archive-group {
+  margin: 5px;
+  border-top: 1px solid #ddd;
+}
+.archive-item {
+  margin-left: 5px;
+}
+.post-tags {
+  text-align: right;
+}
+
+/* RIGHT CORNERED LINKS */
+.right-span {
+  padding-left: 35%;
+}
+
+.icon-linkedin-sign {
+  border : 0;
+  height: 20px;
+  background : url(/public/images/icon-linkedin-sign.png) center center no-repeat;
+}
+
+.icon-github-sign {
+  border : 0;
+  height: 20px;
+  background : url(/public/images/icon-github-sign.png) center center no-repeat;
+}
+
+.icon-twitter-sign {
+  border : 0;
+  height: 20px;
+  background : url(/public/images/icon-twitter-sign.png) center center no-repeat;
+}
+
+.side {
+  text-align: right;
+  font-size: 2rem;
+  width: 160px;
+  float: left;
+  margin: 0 10px;
+  padding: 30px 0;
+}
+
+.side h2 {
+    margin: 4px 0 18px;
+    text-align: center;
+}
+
+.side ul {
+    margin-bottom: 18px;
+}
+
+.side ul li {
+    padding: 6px;
+    border-top: 1px solid #424242;
+}
+
+.side ul li:first-child {
+    border-top: none;
+}
+
+.side ul li:last-child {
+    border-bottom: 1px solid #424242;
+}
+
+.side ul li a {
+    font-weight: bold;
+    display: block;
+    border-bottom: none;
+}
+
+.side ul li a:hover {
+    display: block;
+    color: #505050;
+}
+
+.side .profiles {
+  margin: 8px 0;
+}
+
+.side .profiles a {
+  font-size: 1.6em;
+  border-bottom: none;
+}
+
+.warp {
+  height: 100%;
+  min-height: 752px;
+  width: 1000px;
+  float: left;
+  margin: 0 9px 0 10px;
+}
+
+.wrap:before, .wrap:after {
+  display: table;
+  line-height: 0;
+  content: "";
+}
+
+.wrap:after {
+  clear:both;
 }
 
 /*============================================================================*/

@@ -1,8 +1,9 @@
+name: saumilp.github.io
 markdown: redcarpet
 highlighter: null
 permalink: /:title
 
-url:
+url: http://saumilp.github.io
 baseurl:
 
 redcarpet:

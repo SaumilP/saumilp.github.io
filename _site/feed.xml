@@ -1,18 +1,18 @@
 <?xml version="1.0"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/">
   <channel>
-    <title></title>
-    <link></link>
-    <atom:link href="/feed.xml" rel="self" type="application/rss+xml" />
+    <title>Saumil</title>
+    <link>http://saumilp.github.io</link>
+    <atom:link href="http://saumilp.github.io/feed.xml" rel="self" type="application/rss+xml" />
     <description></description>
     <language>en-us</language>
-    <pubDate>Sun, 18 Jan 2015 00:49:35 +0200</pubDate>
-    <lastBuildDate>Sun, 18 Jan 2015 00:49:35 +0200</lastBuildDate>
+    <pubDate>Sun, 18 Jan 2015 13:57:49 +0200</pubDate>
+    <lastBuildDate>Sun, 18 Jan 2015 13:57:49 +0200</lastBuildDate>
 
     
       <item>
         <title>Demo post</title>
-        <link>/demo-post</link>
+        <link>http://saumilp.github.io/demo-post</link>
         <pubDate>Sat, 17 Jan 2015 00:00:00 +0200</pubDate>
         <author></author>
         <description>&lt;p&gt;Praesent tincidunt vestibulum sem nec eleifend. Pellentesque adipiscing mollis adipiscing. Sed ipsum sem, eleifend eget dapibus in, tincidunt ut dolor. Curabitur gravida urna leo, eget auctor turpis feugiat non. Vivamus pharetra, lorem id ullamcorper rutrum, eros erat condimentum erat, ac dignissim lorem nisi nec nunc. Praesent tellus mi, volutpat quis nisl et, consectetur blandit nibh.&lt;/p&gt;

@@ -61,9 +61,6 @@
 	}
 }
 
-
-
-
 /*	COLUMN WIDTH ON DISPLAYS +768px 
 	You might need to play with media queries here to suite your design. */
 @media ( min-width : 768px ) {
