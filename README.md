@@ -1,4 +1,4 @@
 Github Pages
 =================
 
-[blog.saumil.io](http://blog.saumil.io/)
+[saumilp.github.io](http://saumilp.github.io/)
