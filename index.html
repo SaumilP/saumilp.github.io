@@ -1,47 +1,39 @@
-<!DOCTYPE html>
-<html>
+---
+layout: default
+title: Home
+---
 
-  <head>
-    <meta charset='utf-8'>
-    <meta http-equiv="X-UA-Compatible" content="chrome=1">
-    <meta name="description" content="blog.saumil.io : ">
+<section class="archive">
+{% for post in site.posts %}
+{% unless post.next %}
 
-    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
+{% unless forloop.first %}</div></div>{% endunless %}
 
-    <title>blog.saumil.io</title>
-  </head>
+  <div class="bundle row gutters fadeInDown animated">
+    <h2 class="post-year col span_2">{{ post.date | date: '%Y' }}</h2>
+    <div class="posts-by-year col span_10">
 
-  <body>
+{% else %}
+{% capture year %}{{ post.date | date: '%Y' }}{% endcapture %}
+{% capture nyear %}{{ post.next.date | date: '%Y' }}{% endcapture %}
+{% if year != nyear %}
 
-    <!-- HEADER -->
-    <div id="header_wrap" class="outer">
-        <header class="inner">
-          <a id="forkme_banner" href="https://github.com/SaumilP">View on GitHub</a>
+{% unless forloop.first %}</div></div>{% endunless %}
 
-          <h1 id="project_title">blog.saumil.io</h1>
-          <h2 id="project_tagline"></h2>
+  <div class="bundle row gutters fadeInDown animated">
+    <h2 class="post-year col span_2">{{ post.date | date: '%Y' }}</h2>
+    <div class="posts-by-year col span_10">
+{% endif %}
+{% endunless %}
 
-        </header>
+  <article class="row gutters">
+    <a href="{{ site.baseurl }}{{ post.url }}" title="{{ post.title }}" class="col span_8">{{ post.title }}</a>
+    <div class="post-date col span_4">
+      <time datetime="{{ post.date | date: '%Y-%m-%d' }}">{{ post.date | date: "%-d %B" }}</time>
     </div>
+  </article>
 
-    <!-- MAIN CONTENT -->
-    <div id="main_content_wrap" class="outer">
-      <section id="main_content" class="inner">
-        <h1>
-<a id="github-pages" class="anchor" href="#github-pages" aria-hidden="true"><span class="octicon octicon-link"></span></a>Github Pages</h1>
+{% if forloop.last %}</div></div>{% endif %}
 
-<p><a href="http://blog.saumil.io/">blog.saumil.io</a></p>
-      </section>
-    </div>
-
-    <!-- FOOTER  -->
-    <div id="footer_wrap" class="outer">
-      <footer class="inner">
-        <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
-      </footer>
-    </div>
-
-    
-
-  </body>
-</html>
+{% endfor %}
+</section>
