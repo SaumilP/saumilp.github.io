@@ -1,26 +1,89 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>http://saumilp.github.io/demo-post</loc>
-    <lastmod>2015-01-17T00:00:00+02:00</lastmod>
+    <loc>saumilp.github.io/posts/currying-function-in-java/</loc>
+    <lastmod>2015-01-31T09:27:00+02:00</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>http://saumilp.github.io/404.html</loc>
-    <lastmod>2015-01-19T23:10:58+02:00</lastmod>
+    <loc>saumilp.github.io/posts/closures-in-java/</loc>
+    <lastmod>2015-01-23T02:10:00+02:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>saumilp.github.io/404.html</loc>
+    <lastmod>2015-02-01T09:53:41+02:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>http://saumilp.github.io/</loc>
-    <lastmod>2015-01-19T23:10:58+02:00</lastmod>
+    <loc>saumilp.github.io/about.html</loc>
+    <lastmod>2015-02-01T09:53:41+02:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>saumilp.github.io/archive.html</loc>
+    <lastmod>2015-02-01T09:53:41+02:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>saumilp.github.io/</loc>
+    <lastmod>2015-02-01T09:53:41+02:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>http://saumilp.github.io/about/</loc>
-    <lastmod>2015-01-19T23:10:58+02:00</lastmod>
+    <loc>saumilp.github.io/about/</loc>
+    <lastmod>2015-02-01T09:53:41+02:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>saumilp.github.io/tags.html</loc>
+    <lastmod>2015-02-01T09:53:41+02:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>saumilp.github.io/node_modules/grunt/node_modules/colors/example.html</loc>
+    <lastmod>2013-07-26T07:36:07+02:00</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>saumilp.github.io/node_modules/grunt/node_modules/grunt-legacy-log/node_modules/underscore.string/test/test.html</loc>
+    <lastmod>2013-07-10T11:41:16+02:00</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>saumilp.github.io/node_modules/grunt/node_modules/grunt-legacy-log/node_modules/underscore.string/test/test_standalone.html</loc>
+    <lastmod>2013-07-10T11:41:16+02:00</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>saumilp.github.io/node_modules/grunt/node_modules/grunt-legacy-log/node_modules/underscore.string/test/test_underscore/index.html</loc>
+    <lastmod>2013-07-11T10:39:45+02:00</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>saumilp.github.io/node_modules/grunt/node_modules/underscore.string/test/test.html</loc>
+    <lastmod>2013-07-10T11:41:16+02:00</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>saumilp.github.io/node_modules/grunt/node_modules/underscore.string/test/test_standalone.html</loc>
+    <lastmod>2013-07-10T11:41:16+02:00</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>saumilp.github.io/node_modules/grunt/node_modules/underscore.string/test/test_underscore/temp_tests.html</loc>
+    <lastmod>2013-07-10T12:31:52+02:00</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>saumilp.github.io/node_modules/grunt/node_modules/underscore.string/test/test_underscore/test.html</loc>
+    <lastmod>2013-07-10T12:31:52+02:00</lastmod>
+    <priority>0.6</priority>
   </url>
 </urlset>
