@@ -1,6 +1,6 @@
 name: saumilp.github.io
 markdown: redcarpet
-highlighter: null
+highlighter: rouge
 permalink: /:title
 
 url: http://saumilp.github.io
