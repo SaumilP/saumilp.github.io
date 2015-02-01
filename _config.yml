@@ -10,7 +10,7 @@ permalink:        /posts/:title/
 # User Configuration
 title:            codeground
 tagline:          'coding.isFun()'
-description:      'Enthusistic & passionate about Technology'
+description:      'Code, Thoughts and Ideas'
 url:              saumilp.github.io
 baseurl:          '/'
 paginate:         3
