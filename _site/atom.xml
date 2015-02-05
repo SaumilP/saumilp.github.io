@@ -4,13 +4,50 @@
  <title>codeground</title>
  <link href="saumilp.github.io/atom.xml" rel="self"/>
  <link href="saumilp.github.io/"/>
- <updated>2015-02-04T19:16:32+02:00</updated>
+ <updated>2015-02-05T20:44:54+02:00</updated>
  <id>saumilp.github.io</id>
  <author>
    <name>Saumil Patel</name>
    <email></email>
  </author>
 
+ 
+ <entry>
+   <title>XML Document Indexing in Solr</title>
+   <link href="saumilp.github.io/posts/xml-indexing-in-solr/"/>
+   <updated>2015-01-31T09:27:00+02:00</updated>
+   <id>saumilp.github.io/posts/xml-indexing-in-solr</id>
+   <content type="html">
+     
+
+
+     &lt;br&gt;
+
+     &lt;a href="saumilp.github.io/posts/xml-indexing-in-solr/"&gt;
+         Read entire post...
+     &lt;/a&gt;
+
+   </content>
+ </entry>
+ 
+ <entry>
+   <title>GeoSpatial Queries in Solr</title>
+   <link href="saumilp.github.io/posts/geospatial-queries-in-solr/"/>
+   <updated>2015-01-31T09:27:00+02:00</updated>
+   <id>saumilp.github.io/posts/geospatial-queries-in-solr</id>
+   <content type="html">
+     
+
+
+
+     &lt;br&gt;
+
+     &lt;a href="saumilp.github.io/posts/geospatial-queries-in-solr/"&gt;
+         Read entire post...
+     &lt;/a&gt;
+
+   </content>
+ </entry>
  
  <entry>
    <title>Curried Function in Java</title>
@@ -69,6 +106,25 @@
      &lt;br&gt;
 
      &lt;a href="saumilp.github.io/posts/currying-function-in-java/"&gt;
+         Read entire post...
+     &lt;/a&gt;
+
+   </content>
+ </entry>
+ 
+ <entry>
+   <title>Quick Solr Setup</title>
+   <link href="saumilp.github.io/posts/quick-solr-setup/"/>
+   <updated>2015-01-31T00:00:00+02:00</updated>
+   <id>saumilp.github.io/posts/quick-solr-setup</id>
+   <content type="html">
+     &lt;hr /&gt;
+
+
+
+     &lt;br&gt;
+
+     &lt;a href="saumilp.github.io/posts/quick-solr-setup/"&gt;
          Read entire post...
      &lt;/a&gt;
 

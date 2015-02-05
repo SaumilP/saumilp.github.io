@@ -5,7 +5,7 @@ date:   2015-01-31 07:27:00
 categories: java
 tags: currying-functions functions
 comments: true
-analytics: true
+analytics: false
 ---
 
 <strong>Currying</strong> is a technique of transforming a function with multiple arguments into a function with just single argument. The single argument is the value of the first argument from the original function and it returns another single argument function. This in turn would take the second original argument and itself return another single argument function. This kind of chaining continues over the arguments of the original. The last in the chain will have access to all the arguments and so can do whatever it needs to do.
