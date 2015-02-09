@@ -29,11 +29,12 @@ Some of the characteristics of this pattern are:
 One of the ceavet while considering this patter, do not use this pattern when you would want to reuse types.
 Enough with the theory, let's have a look at the example.
 
-![Visual Representation](http://{{ site.url }}/assets/images/russian_doll.png)
+![Russian Doll XSD](http://{{ site.url }}/assets/images/russian_doll.png)
 
 Equivalent Xml Schema Document can be found below:
 {% highlight xml %}
 <?xml version="1.0"?>
+<?xml-stylesheet href="../2008/09/xsd.xsl" type="text/xsl"?>
 <xs:schema targetNamespace="http://www.w3.org/XML/1998/namespace" xml:lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:xs="http://www.w3.org/2001/XMLSchema">
 	<xs:annotation>
 		<xs:documentation>Schema using Russian Doll Pattern</xs:documentation>
@@ -106,3 +107,187 @@ This design pattern is perhaps an appropriate design to use when wrapping legacy
 
 ### Salami Slice ###
 --------
+This pattern represents opposite end of the design spectrum from Russian Doll.
+
+By using this pattern, use can declare all the elements as global, but declare all types locally. Pattern is named as Salami Slice because of the ability to set all the elements in global namespace and to make them reusable - which acts as a single definition <strong>slice</strong>. These slices can be used to combined with others for better reusablility.
+
+With this pattern, schema can have more components, all defined individually - which are then brought together into global elements. This pattern is entirely open, allowing a wide variety of possible combinations compared to its counter part pattern Russian Doll - which is absolutely rigid and inflexible. Physical structure of the Russian Doll allows only one way to put the constituents toghether, while slices offer no guidance for how they might be arranged in schema.
+
+Some of the characteristics of this pattern are:
+
+*	All elements are global
+*	All elements are defined within global namespace
+*	All types are local
+*	Element declarations are never nested
+*	Element declarations are reusable.
+*	It is difficult to determine intended root element, as there can be many potential choices.
+
+Example from Russian Doll has been redesigned and represented differently with salami slice:
+![Salami Slice XSD](http://{{ site.url }}/assets/images/salami_slice_2015_02_09.png)
+
+Equivalent Xml Schema Document can be found below:
+{% highlight xml %}
+<?xml version="1.0"?>
+<?xml-stylesheet href="../2008/09/xsd.xsl" type="text/xsl"?>
+<xs:schema targetNamespace="http://www.w3.org/XML/1998/namespace" xml:lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://design.pattern.org/salami" elementFormDefault="qualified">
+	<xs:annotation>
+		<xs:documentation>Schema using Salami Slice Design Pattern</xs:documentation>
+	</xs:annotation>
+	<xs:complexType name="ProducerType">
+		<xs:sequence>
+			<xs:element name="Name" type="xs:string" />
+			<xs:element name="ExecutiveProducer" type="xs:string" minOccurs="1" maxOccurs="unbounded" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="CastType">
+		<xs:sequence>
+			<xs:element name="ActorName" type="xs:string" />
+			<xs:element name="CastingRole" type="xs:string" minOccurs="1" maxOccurs="unbounded" />
+			<xs:element name="CastingName" type="xs:string" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="NominationType">
+		<xs:sequence>
+			<xs:element name="Category" type="xs:string" minOccurs="1" maxOccurs="unbounded" />
+			<xs:element name="Year" type="xs:int" />
+			<xs:element name="Actor" minOccurs="1" maxOccurs="unbounded">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="Name" type="xs:string" />
+						<xs:element name="Role" type="xs:string" minOccurs="1" maxOccurs="unbounded" />
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="WriterType">
+		<xs:sequence>
+			<xs:element name="Name" type="xs:string" />
+			<xs:element name="Scene" type="xs:string" minOccurs="1" maxOccurs="unbounded" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="Name" type="xs:string" />
+	<xs:element name="Producers" type="xml:ProducerType" />
+	<xs:element name="Writers" type="xml:WriterType" />
+	<xs:element name="Nominations" type="xml:NominationType" />
+	<xs:element name="Performer" type="xml:CastType" />
+	<xs:element name="Director" type="xs:string" />
+	<xs:element name="Production">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="xml:Name" />
+				<xs:element name="Type">
+					<xs:simpleType>
+						<xs:restriction base="xs:string">
+							<xs:enumeration value="TheatrePlay" />
+							<xs:enumeration value="Movie" />
+							<xs:enumeration value="MusicAlbum" />
+						</xs:restriction>
+					</xs:simpleType>
+				</xs:element>
+				<xs:element ref="xml:Producers" />
+				<xs:element ref="xml:Writers" />
+				<xs:element ref="xml:Nominations" />
+				<xs:element ref="xml:Director" />
+				<xs:element ref="xml:Performer" />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>
+{% endhighlight %}
+
+The main advantage of this pattern is that becuase the elements are declared globally, schema is reusable. But because changing an element affects the composing elements, this pattern is considered tightly coupled.
+
+This schema design pattern are verbose and are clearly arranged and flat.
+
+### Venetian Blind ###
+--------
+This pattern is an extension of Russian Doll Pattern. It contains only one signle global root element. It departs from Russian Doll in that it allows for reuse of all the types as well asd the global root element.
+
+Use of this pattern means that schema designer wants to define a single global root element for instanciantion and compose it with externally defined types. This has the benefit of miximiizing reuse.
+
+Some of the characteristics of this pattern are:
+
+*	It has a single global root element
+*	It mixes global and local declarations
+*	It has high cohesion but also high coupling
+*	It maximizes reuse of all the types.
+*	Encapsulation is limited due to types being exposed.
+*	It allows designers to use multiple files to define schema
+*	It is verbose. Breaking apart each type in a way provides very selective, granular control over each individual aspect on the element, but makes for a lot of typing.
+
+Original Example from Russian Doll has been redesigned and represented differently with salami slice:
+![Venetian Blind XSD](http://{{ site.url }}/assets/images/venetian_blind_2015_02_09.png)
+
+Equivalent Xml Schema Document can be found below:
+{% highlight xml %}
+<?xml version="1.0"?>
+<?xml-stylesheet href="../2008/09/xsd.xsl" type="text/xsl"?>
+<xs:schema targetNamespace="http://www.w3.org/XML/1998/namespace" xml:lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://design.pattern.org/salami" elementFormDefault="qualified">
+	<xs:annotation>
+		<xs:documentation>Schema using Venetian Blind Design Pattern</xs:documentation>
+	</xs:annotation>
+	<xs:complexType name="ProducerType">
+		<xs:sequence>
+			<xs:element name="Name" type="xs:string" />
+			<xs:element name="ExecutiveProducer" type="xs:string" minOccurs="1" maxOccurs="unbounded" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="CastType">
+		<xs:sequence>
+			<xs:element name="ActorName" type="xs:string" />
+			<xs:element name="CastingRole" type="xs:string" minOccurs="1" maxOccurs="unbounded" />
+			<xs:element name="CastingName" type="xs:string" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="NominationType">
+		<xs:sequence>
+			<xs:element name="Category" type="xs:string" minOccurs="1" maxOccurs="unbounded" />
+			<xs:element name="Year" type="xs:int" />
+			<xs:element name="Actor" minOccurs="1" maxOccurs="unbounded">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="Name" type="xs:string" />
+						<xs:element name="Role" type="xs:string" minOccurs="1" maxOccurs="unbounded" />
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="WriterType">
+		<xs:sequence>
+			<xs:element name="Name" type="xs:string" />
+			<xs:element name="Scene" type="xs:string" minOccurs="1" maxOccurs="unbounded" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="Name" type="xs:string" />
+	<xs:element name="Producers" type="xml:ProducerType" />
+	<xs:element name="Writers" type="xml:WriterType" />
+	<xs:element name="Nominations" type="xml:NominationType" />
+	<xs:element name="Performer" type="xml:CastType" />
+	<xs:element name="Director" type="xs:string" />
+	<xs:element name="Production">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="xml:Name" />
+				<xs:element name="Type">
+					<xs:simpleType>
+						<xs:restriction base="xs:string">
+							<xs:enumeration value="TheatrePlay" />
+							<xs:enumeration value="Movie" />
+							<xs:enumeration value="MusicAlbum" />
+						</xs:restriction>
+					</xs:simpleType>
+				</xs:element>
+				<xs:element ref="xml:Producers" />
+				<xs:element ref="xml:Writers" />
+				<xs:element ref="xml:Nominations" />
+				<xs:element ref="xml:Director" />
+				<xs:element ref="xml:Performer" />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>
+{% endhighlight %}
+
+Because this pattern has more flexibiliy, it is de-facto design pattern during XML Design pattern. There are several other patterns - like Garden of Eden and Chameleon - make uses of these basic patterns to solve other issues. I will try and attend rest of the patterns in next part.
