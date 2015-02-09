@@ -11,7 +11,7 @@
 
   <title>
     
-      Saumil Patel &middot; coding.isFun()
+      XML Schema Design Patterns &middot; Saumil Patel
     
   </title>
 
@@ -32,7 +32,7 @@
   <!-- RSS -->
   <link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml">
 
-  <link rel="canonical" href="/index.html" />
+  <link rel="canonical" href="/posts/xml-schema-design-patterns/" />
 
   <script async src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
   <script>window.jQuery || document.write('<script src="/bower_components/jquery/dist/jquery.min.js"><\/script>')</script>
@@ -144,31 +144,9 @@
       </div>
 
       <div class="container content">
-        <div class="posts">
-  
-
-  <ul class="tags">
-    
-      <li><a href="/tags.html#design-patterns" class="tag">design-patterns</a></li>
-    
-      <li><a href="/tags.html#architecture" class="tag">architecture</a></li>
-    
-  </ul>
-
-  <div class="post">
-    <h1 class="post-title">
-      <a href="/posts/xml-schema-design-patterns/">
-        XML Schema Design Patterns
-      </a>
-    </h1>
-
-    <div>
-      <span class="post-date" style="float: left;">09 Feb 2015</span>
-      <span class="post-date" data-post-url="/posts/xml-schema-design-patterns/" style="float: right;"></span>
-    </div>
-    <div style="clear: both;"></div>​
-
-    <p>This might be one of the old topic - specially when lot of developers are working with RESTful Services, but i would like to point out couple of pros and cons. </p>
+        <div class="page">
+  <h1 class="page-title">XML Schema Design Patterns</h1>
+  <p>This might be one of the old topic - specially when lot of developers are working with RESTful Services, but i would like to point out couple of pros and cons. </p>
 
 <p>As most of the developers know, XML schema is very powerful, but they lack object-orientation, and are intended to capture a data model rather than an object model. In last one and half decades, there has been few tools available to architects and developers to be able to make use off some of the object orientation principles - like polymorphism for flexibility. But ultimately the whole point of the services must be general enough that it can communicate across languages. Hence i have attempted to put together some information around some of the very well known Design patterns.</p>
 
@@ -269,93 +247,26 @@ Enough with the theory, let’s have a look at the example.</p>
 <h3 id="salami-slice">Salami Slice</h3>
 <hr />
 
-
-
-    <br>
-
-    <a href="/posts/xml-schema-design-patterns/">
-        Continue reading...
-    </a>
-  </div>
-  
-
-  <ul class="tags">
-    
-      <li><a href="/tags.html#currying-functions" class="tag">currying-functions</a></li>
-    
-      <li><a href="/tags.html#functions" class="tag">functions</a></li>
-    
-  </ul>
-
-  <div class="post">
-    <h1 class="post-title">
-      <a href="/posts/xml-indexing-in-solr/">
-        XML Document Indexing in Solr
-      </a>
-    </h1>
-
-    <div>
-      <span class="post-date" style="float: left;">31 Jan 2015</span>
-      <span class="post-date" data-post-url="/posts/xml-indexing-in-solr/" style="float: right;"></span>
-    </div>
-    <div style="clear: both;"></div>​
-
-    
-
-
-    <br>
-
-    <a href="/posts/xml-indexing-in-solr/">
-        Continue reading...
-    </a>
-  </div>
-  
-
-  <ul class="tags">
-    
-      <li><a href="/tags.html#currying-functions" class="tag">currying-functions</a></li>
-    
-      <li><a href="/tags.html#functions" class="tag">functions</a></li>
-    
-  </ul>
-
-  <div class="post">
-    <h1 class="post-title">
-      <a href="/posts/geospatial-queries-in-solr/">
-        GeoSpatial Queries in Solr
-      </a>
-    </h1>
-
-    <div>
-      <span class="post-date" style="float: left;">31 Jan 2015</span>
-      <span class="post-date" data-post-url="/posts/geospatial-queries-in-solr/" style="float: right;"></span>
-    </div>
-    <div style="clear: both;"></div>​
-
-    
-
-
-
-    <br>
-
-    <a href="/posts/geospatial-queries-in-solr/">
-        Continue reading...
-    </a>
-  </div>
-  
-</div>
-
-<div class="pagination">
-  
-    <a class="pagination-item older" href="/page2">Older</a>
-  
-  
-    <span class="pagination-item newer">Newer</span>
-  
 </div>
 
 
         
+  <!-- Add Disqus comments. -->
+  <div id="disqus_thread"></div>
+  <script type="text/javascript">
+      /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+      var disqus_shortname = 'SaumilP';
+
+      /* * * DON'T EDIT BELOW THIS LINE * * */
+      (function() {
+          var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+          dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+          (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+      })();
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
 
 
       </div>
@@ -385,7 +296,7 @@ Enough with the theory, let’s have a look at the example.</p>
     var jqxhr = $.ajax("")
           .done(function(response) {
               if (response !== undefined) {
-                var page_url = "/index.html";
+                var page_url = "/posts/xml-schema-design-patterns/";
                 var page_views = undefined;
                 var total_views = undefined;
                 var oPageViews = {};

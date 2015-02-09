@@ -4,13 +4,131 @@
  <title>codeground</title>
  <link href="saumilp.github.io/atom.xml" rel="self"/>
  <link href="saumilp.github.io/"/>
- <updated>2015-02-05T20:44:54+02:00</updated>
+ <updated>2015-02-09T23:49:45+02:00</updated>
  <id>saumilp.github.io</id>
  <author>
    <name>Saumil Patel</name>
    <email></email>
  </author>
 
+ 
+ <entry>
+   <title>XML Schema Design Patterns</title>
+   <link href="saumilp.github.io/posts/xml-schema-design-patterns/"/>
+   <updated>2015-02-09T00:00:00+02:00</updated>
+   <id>saumilp.github.io/posts/xml-schema-design-patterns</id>
+   <content type="html">
+     &lt;p&gt;This might be one of the old topic - specially when lot of developers are working with RESTful Services, but i would like to point out couple of pros and cons. &lt;/p&gt;
+
+&lt;p&gt;As most of the developers know, XML schema is very powerful, but they lack object-orientation, and are intended to capture a data model rather than an object model. In last one and half decades, there has been few tools available to architects and developers to be able to make use off some of the object orientation principles - like polymorphism for flexibility. But ultimately the whole point of the services must be general enough that it can communicate across languages. Hence i have attempted to put together some information around some of the very well known Design patterns.&lt;/p&gt;
+
+&lt;p&gt;Some of the XML Schema design patterns include Russian Doll, Venetian Blind &amp;amp; Salami Slice.&lt;/p&gt;
+
+&lt;h3 id=&quot;russian-doll&quot;&gt;Russian Doll&lt;/h3&gt;
+&lt;hr /&gt;
+&lt;p&gt;Let us have a look at Russian Doll Design pattern. As name indicates - this design pattern permits single global root element which contains constituent types. All element declarations are nested inside the root element, and can therefore only be used once in within the context.&lt;/p&gt;
+
+&lt;p&gt;Some of the characteristics of this pattern are:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;It has a single global root Element&lt;/li&gt;
+  &lt;li&gt;All the types are local&lt;/li&gt;
+  &lt;li&gt;It supports only schemas designed in a single file&lt;/li&gt;
+  &lt;li&gt;Exposed schema is fully encapsulated&lt;/li&gt;
+  &lt;li&gt;It has high cohesion with minimal coupling&lt;/li&gt;
+  &lt;li&gt;Easy to read and write&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;One of the ceavet while considering this patter, do not use this pattern when you would want to reuse types.
+Enough with the theory, let’s have a look at the example.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;saumilp.github.io/assets/images/russian_doll.png&quot; alt=&quot;Visual Representation&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Equivalent Xml Schema Document can be found below:&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-xml&quot; data-lang=&quot;xml&quot;&gt;&lt;span class=&quot;cp&quot;&gt;&amp;lt;?xml version=&amp;quot;1.0&amp;quot;?&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;xs:schema&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;targetNamespace=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;http://www.w3.org/XML/1998/namespace&amp;quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;xml:lang=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;en&amp;quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;xmlns=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;http://www.w3.org/1999/xhtml&amp;quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;xmlns:xs=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;http://www.w3.org/2001/XMLSchema&amp;quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+	&lt;span class=&quot;nt&quot;&gt;&amp;lt;xs:annotation&amp;gt;&lt;/span&gt;
+		&lt;span class=&quot;nt&quot;&gt;&amp;lt;xs:documentation&amp;gt;&lt;/span&gt;Schema using Russian Doll Pattern&lt;span class=&quot;nt&quot;&gt;&amp;lt;/xs:documentation&amp;gt;&lt;/span&gt;
+	&lt;span class=&quot;nt&quot;&gt;&amp;lt;/xs:annotation&amp;gt;&lt;/span&gt;
+	&lt;span class=&quot;nt&quot;&gt;&amp;lt;xs:element&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;Production&amp;quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+		&lt;span class=&quot;nt&quot;&gt;&amp;lt;xs:complexType&amp;gt;&lt;/span&gt;
+			&lt;span class=&quot;nt&quot;&gt;&amp;lt;xs:sequence&amp;gt;&lt;/span&gt;
+				&lt;span class=&quot;nt&quot;&gt;&amp;lt;xs:element&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;Name&amp;quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;type=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;xs:string&amp;quot;&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
+				&lt;span class=&quot;nt&quot;&gt;&amp;lt;xs:element&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;Type&amp;quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+					&lt;span class=&quot;nt&quot;&gt;&amp;lt;xs:simpleType&amp;gt;&lt;/span&gt;
+						&lt;span class=&quot;nt&quot;&gt;&amp;lt;xs:restriction&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;base=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;xs:string&amp;quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+							&lt;span class=&quot;nt&quot;&gt;&amp;lt;xs:enumeration&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;value=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;TheatrePlay&amp;quot;&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
+							&lt;span class=&quot;nt&quot;&gt;&amp;lt;xs:enumeration&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;value=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;Movie&amp;quot;&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
+							&lt;span class=&quot;nt&quot;&gt;&amp;lt;xs:enumeration&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;value=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;MusicAlbum&amp;quot;&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
+						&lt;span class=&quot;nt&quot;&gt;&amp;lt;/xs:restriction&amp;gt;&lt;/span&gt;
+					&lt;span class=&quot;nt&quot;&gt;&amp;lt;/xs:simpleType&amp;gt;&lt;/span&gt;
+				&lt;span class=&quot;nt&quot;&gt;&amp;lt;/xs:element&amp;gt;&lt;/span&gt;
+				&lt;span class=&quot;nt&quot;&gt;&amp;lt;xs:element&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;Producers&amp;quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;minOccurs=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;1&amp;quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;maxOccurs=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;unbounded&amp;quot;&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+					&lt;span class=&quot;nt&quot;&gt;&amp;lt;xs:complexType&amp;gt;&lt;/span&gt;
+						&lt;span class=&quot;nt&quot;&gt;&amp;lt;xs:sequence&amp;gt;&lt;/span&gt;
+							&lt;span class=&quot;nt&quot;&gt;&amp;lt;xs:element&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;Name&amp;quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;type=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;xs:string&amp;quot;&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
+							&lt;span class=&quot;nt&quot;&gt;&amp;lt;xs:element&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;ExecutiveProducer&amp;quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;type=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;xs:string&amp;quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;minOccurs=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;1&amp;quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;maxOccurs=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;unbounded&amp;quot;&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
+						&lt;span class=&quot;nt&quot;&gt;&amp;lt;/xs:sequence&amp;gt;&lt;/span&gt;
+					&lt;span class=&quot;nt&quot;&gt;&amp;lt;/xs:complexType&amp;gt;&lt;/span&gt;
+				&lt;span class=&quot;nt&quot;&gt;&amp;lt;/xs:element&amp;gt;&lt;/span&gt;
+				&lt;span class=&quot;nt&quot;&gt;&amp;lt;xs:element&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;Writers&amp;quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;minOccurs=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;1&amp;quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;maxOccurs=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;unbounded&amp;quot;&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+					&lt;span class=&quot;nt&quot;&gt;&amp;lt;xs:complexType&amp;gt;&lt;/span&gt;
+						&lt;span class=&quot;nt&quot;&gt;&amp;lt;xs:sequence&amp;gt;&lt;/span&gt;
+							&lt;span class=&quot;nt&quot;&gt;&amp;lt;xs:element&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;Name&amp;quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;type=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;xs:string&amp;quot;&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
+							&lt;span class=&quot;nt&quot;&gt;&amp;lt;xs:element&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;Scene&amp;quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;type=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;xs:string&amp;quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;minOccurs=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;1&amp;quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;maxOccurs=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;unbounded&amp;quot;&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
+						&lt;span class=&quot;nt&quot;&gt;&amp;lt;/xs:sequence&amp;gt;&lt;/span&gt;
+					&lt;span class=&quot;nt&quot;&gt;&amp;lt;/xs:complexType&amp;gt;&lt;/span&gt;
+				&lt;span class=&quot;nt&quot;&gt;&amp;lt;/xs:element&amp;gt;&lt;/span&gt;
+				&lt;span class=&quot;nt&quot;&gt;&amp;lt;xs:element&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;Nominations&amp;quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;minOccurs=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;1&amp;quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;maxOccurs=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;unbounded&amp;quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+					&lt;span class=&quot;nt&quot;&gt;&amp;lt;xs:complexType&amp;gt;&lt;/span&gt;
+						&lt;span class=&quot;nt&quot;&gt;&amp;lt;xs:sequence&amp;gt;&lt;/span&gt;
+							&lt;span class=&quot;nt&quot;&gt;&amp;lt;xs:element&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;Category&amp;quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;type=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;xs:string&amp;quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;minOccurs=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;1&amp;quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;maxOccurs=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;unbounded&amp;quot;&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
+							&lt;span class=&quot;nt&quot;&gt;&amp;lt;xs:element&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;Year&amp;quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;type=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;xs:int&amp;quot;&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
+							&lt;span class=&quot;nt&quot;&gt;&amp;lt;xs:element&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;Actor&amp;quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;minOccurs=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;1&amp;quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;maxOccurs=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;unbounded&amp;quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+								&lt;span class=&quot;nt&quot;&gt;&amp;lt;xs:complexType&amp;gt;&lt;/span&gt;
+									&lt;span class=&quot;nt&quot;&gt;&amp;lt;xs:sequence&amp;gt;&lt;/span&gt;
+										&lt;span class=&quot;nt&quot;&gt;&amp;lt;xs:element&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;Name&amp;quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;type=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;xs:string&amp;quot;&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
+										&lt;span class=&quot;nt&quot;&gt;&amp;lt;xs:element&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;Role&amp;quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;type=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;xs:string&amp;quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;minOccurs=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;1&amp;quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;maxOccurs=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;unbounded&amp;quot;&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
+									&lt;span class=&quot;nt&quot;&gt;&amp;lt;/xs:sequence&amp;gt;&lt;/span&gt;
+								&lt;span class=&quot;nt&quot;&gt;&amp;lt;/xs:complexType&amp;gt;&lt;/span&gt;
+							&lt;span class=&quot;nt&quot;&gt;&amp;lt;/xs:element&amp;gt;&lt;/span&gt;
+						&lt;span class=&quot;nt&quot;&gt;&amp;lt;/xs:sequence&amp;gt;&lt;/span&gt;
+					&lt;span class=&quot;nt&quot;&gt;&amp;lt;/xs:complexType&amp;gt;&lt;/span&gt;
+				&lt;span class=&quot;nt&quot;&gt;&amp;lt;/xs:element&amp;gt;&lt;/span&gt;
+				&lt;span class=&quot;nt&quot;&gt;&amp;lt;xs:element&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;Cast&amp;quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;minOccurs=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;1&amp;quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;maxOccurs=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;unbounded&amp;quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+					&lt;span class=&quot;nt&quot;&gt;&amp;lt;xs:complexType&amp;gt;&lt;/span&gt;
+									&lt;span class=&quot;nt&quot;&gt;&amp;lt;xs:sequence&amp;gt;&lt;/span&gt;
+										&lt;span class=&quot;nt&quot;&gt;&amp;lt;xs:element&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;ActorName&amp;quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;type=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;xs:string&amp;quot;&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
+										&lt;span class=&quot;nt&quot;&gt;&amp;lt;xs:element&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;CastingRole&amp;quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;type=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;xs:string&amp;quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;minOccurs=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;1&amp;quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;maxOccurs=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;unbounded&amp;quot;&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
+										&lt;span class=&quot;nt&quot;&gt;&amp;lt;xs:element&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;CastingName&amp;quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;type=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;xs:string&amp;quot;&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
+									&lt;span class=&quot;nt&quot;&gt;&amp;lt;/xs:sequence&amp;gt;&lt;/span&gt;
+								&lt;span class=&quot;nt&quot;&gt;&amp;lt;/xs:complexType&amp;gt;&lt;/span&gt;
+				&lt;span class=&quot;nt&quot;&gt;&amp;lt;/xs:element&amp;gt;&lt;/span&gt;
+			&lt;span class=&quot;nt&quot;&gt;&amp;lt;/xs:sequence&amp;gt;&lt;/span&gt;
+		&lt;span class=&quot;nt&quot;&gt;&amp;lt;/xs:complexType&amp;gt;&lt;/span&gt;
+	&lt;span class=&quot;nt&quot;&gt;&amp;lt;/xs:element&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;/xs:schema&amp;gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;As you can see, above schema defines a single global element &lt;string&gt;Production&lt;/string&gt; and it is easy to read and write because there is no mixing. The types required to create a production element are all the nested within it. Elements and types cannot be referenced, and Namespaces are localized. And because it is self-contained, changing types will not affect other schemas.&lt;/p&gt;
+
+&lt;p&gt;One of the biggest disadvantages of this pattern with respect to straight XML is that the types you carefully defined cannot be reused elsewhere, hence causing very large schema. &lt;/p&gt;
+
+&lt;p&gt;This design pattern is perhaps an appropriate design to use when wrapping legacy data from a source that is fairly static.&lt;/p&gt;
+
+&lt;h3 id=&quot;salami-slice&quot;&gt;Salami Slice&lt;/h3&gt;
+&lt;hr /&gt;
+
+
+
+     &lt;br&gt;
+
+     &lt;a href="saumilp.github.io/posts/xml-schema-design-patterns/"&gt;
+         Read entire post...
+     &lt;/a&gt;
+
+   </content>
+ </entry>
  
  <entry>
    <title>XML Document Indexing in Solr</title>
@@ -118,7 +236,16 @@
    <updated>2015-01-31T00:00:00+02:00</updated>
    <id>saumilp.github.io/posts/quick-solr-setup</id>
    <content type="html">
-     &lt;hr /&gt;
+     &lt;h4 id=&quot;environment&quot;&gt;Environment&lt;/h4&gt;
+&lt;ul&gt;
+  &lt;li&gt;OS X 10.8 or newer versions&lt;/li&gt;
+  &lt;li&gt;Java SE Runtime 1.7&lt;/li&gt;
+  &lt;li&gt;Apache Solr 4.10.0&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&quot;installation&quot;&gt;Installation&lt;/h4&gt;
+
+&lt;p&gt;The easiest way to install Solr is by using homebrew.&lt;/p&gt;
 
 
 
