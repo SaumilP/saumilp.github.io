@@ -225,17 +225,27 @@ Equivalent Xml Schema Document can be found below:
 <?xml-stylesheet href="../2008/09/xsd.xsl" type="text/xsl"?>
 <xs:schema targetNamespace="http://www.w3.org/XML/1998/namespace" xml:lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://design.pattern.org/salami" elementFormDefault="qualified">
 	<xs:annotation>
-		<xs:documentation>Schema using Venetian Blind Design Pattern</xs:documentation>
+		<xs:documentation>Schema using Salami Slice Design Pattern</xs:documentation>
 	</xs:annotation>
-	<xs:complexType name="ProducerType">
+	<xs:complexType name="CommonName">
 		<xs:sequence>
 			<xs:element name="Name" type="xs:string" />
-			<xs:element name="ExecutiveProducer" type="xs:string" minOccurs="1" maxOccurs="unbounded" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:group name="ContributionGroup">
+		<xs:sequence>
+			<xs:element name="Name" type="xml:CommonName" />
+			<xs:element name="Contribution" type="xs:string" minOccurs="1" maxOccurs="unbounded" />
+		</xs:sequence>
+	</xs:group>
+	<xs:complexType name="ProducerType">
+		<xs:sequence>
+			<xs:group ref="xml:ContributionGroup" minOccurs="1" maxOccurs="unbounded"/>
 		</xs:sequence>
 	</xs:complexType>
 	<xs:complexType name="CastType">
 		<xs:sequence>
-			<xs:element name="ActorName" type="xs:string" />
+			<xs:element name="ActorName" type="xml:CommonName" />
 			<xs:element name="CastingRole" type="xs:string" minOccurs="1" maxOccurs="unbounded" />
 			<xs:element name="CastingName" type="xs:string" />
 		</xs:sequence>
@@ -244,20 +254,12 @@ Equivalent Xml Schema Document can be found below:
 		<xs:sequence>
 			<xs:element name="Category" type="xs:string" minOccurs="1" maxOccurs="unbounded" />
 			<xs:element name="Year" type="xs:int" />
-			<xs:element name="Actor" minOccurs="1" maxOccurs="unbounded">
-				<xs:complexType>
-					<xs:sequence>
-						<xs:element name="Name" type="xs:string" />
-						<xs:element name="Role" type="xs:string" minOccurs="1" maxOccurs="unbounded" />
-					</xs:sequence>
-				</xs:complexType>
-			</xs:element>
+			<xs:group ref="xml:ContributionGroup" minOccurs="1" maxOccurs="unbounded"/>			
 		</xs:sequence>
 	</xs:complexType>
 	<xs:complexType name="WriterType">
 		<xs:sequence>
-			<xs:element name="Name" type="xs:string" />
-			<xs:element name="Scene" type="xs:string" minOccurs="1" maxOccurs="unbounded" />
+			<xs:group ref="xml:ContributionGroup" minOccurs="1" maxOccurs="unbounded"/>
 		</xs:sequence>
 	</xs:complexType>
 	<xs:element name="Name" type="xs:string" />
@@ -270,7 +272,7 @@ Equivalent Xml Schema Document can be found below:
 		<xs:complexType>
 			<xs:sequence>
 				<xs:element ref="xml:Name" />
-				<xs:element name="Type">
+				<xs:element name="Type" >
 					<xs:simpleType>
 						<xs:restriction base="xs:string">
 							<xs:enumeration value="TheatrePlay" />
