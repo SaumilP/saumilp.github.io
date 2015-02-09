@@ -29,7 +29,7 @@ Some of the characteristics of this pattern are:
 One of the ceavet while considering this patter, do not use this pattern when you would want to reuse types.
 Enough with the theory, let's have a look at the example.
 
-![Visual Representation]({{ site.url }}/assets/images/russian_doll.png)
+![Visual Representation](http://{{ site.url }}/assets/images/russian_doll.png)
 
 Equivalent Xml Schema Document can be found below:
 {% highlight xml %}
