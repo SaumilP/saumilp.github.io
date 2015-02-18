@@ -84,7 +84,7 @@ Other few examples can be found in (progfun)[https://github.com/SaumilP/java-pro
 
 In Java 8, streams can be used to make use of newly added feature - lambda expressions.
 {% highlight java %}
-final Integer noBiggerThanFive = someList.stream().filter(no -> no > 5 ).reduce();
+final Integer noBiggerThanFive = someList.stream().filter(no -> no > 5 ).get();
 {% endhighlight %}
 
 It is less verbose compared to older version of the code, but it gives neat and short presentation of the code.
