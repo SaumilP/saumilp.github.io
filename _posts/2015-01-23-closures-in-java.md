@@ -9,7 +9,7 @@ analytics: true
 ---
 
 Working on last few projects, i realized that use of closure can come really handy especially when the same sort of work is required on regularly basis.
-Can you imagine writing loops after loops to extract or collect properties from list of custom objects ? It can be tiering and painful. And hence i have decided to add this post - mainly to point out couple of situations where introduction to  closures can really ease this pain.
+Can you imagine writing loops after loops to extract or collect properties from list of custom objects ? It can be tiring and painful. And hence i have decided to add this post - mainly to point out couple of situations where introduction to  closures can really ease this pain.
 
 Most of you must have used <i>Project Lambok</i> or <i>Functional Java</i> to achive this, unfortunately not everyone gets the choice to be able to use opensource libraries. Yeah, there are clients who prefers to avoid use of opensource libraries in this day and age, can you believe it ? Anyways, i have tried to point out some of the features offerred by closures in this post.
 
