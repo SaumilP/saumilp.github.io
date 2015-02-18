@@ -112,6 +112,10 @@
         
       
     
+      
+        
+      
+    
 
 <!--     <a class="sidebar-nav-item" href="https://github.com/SaumilP/archive/v.zip">Download</a> -->
     <!--<a class="sidebar-nav-item" href="https://github.com/SaumilP">GitHub project</a>-->
@@ -145,6 +149,125 @@
 
       <div class="container content">
         <div class="posts">
+  
+
+  <ul class="tags">
+    
+      <li><a href="/tags.html#configuration" class="tag">configuration</a></li>
+    
+      <li><a href="/tags.html#setup" class="tag">setup</a></li>
+    
+  </ul>
+
+  <div class="post">
+    <h1 class="post-title">
+      <a href="/posts/unique-id-generation-in-solr/">
+        Automatic ID generation in Apache Solr
+      </a>
+    </h1>
+
+    <div>
+      <span class="post-date" style="float: left;">16 Feb 2015</span>
+      <span class="post-date" data-post-url="/posts/unique-id-generation-in-solr/" style="float: right;"></span>
+    </div>
+    <div style="clear: both;"></div>​
+
+    <p>I have been working on Apache Solr for last few months, and have been recieving requirements to speed up query process. As part of the investigation, i found out as retrieved documents’ unique id generation contributes query processing.And hence i have decided to add this post. </p>
+
+<h4 id="data-structure">Data Structure</h4>
+
+<p>Our sample data structure (field section from <strong>schema.xml</strong>) looks like specified below:</p>
+
+<div class="highlight"><pre><code class="language-xml" data-lang="xml"><span class="nt">&lt;fields&gt;</span>
+	<span class="nt">&lt;field</span> <span class="na">name=</span><span class="s">&quot;id&quot;</span> <span class="na">type=</span><span class="s">&quot;string&quot;</span> <span class="na">indexed=</span><span class="s">&quot;true&quot;</span> <span class="na">stored=</span><span class="s">&quot;true&quot;</span> <span class="na">required=</span><span class="s">&quot;true&quot;</span> <span class="na">multiValued=</span><span class="s">&quot;false&quot;</span> <span class="nt">/&gt;</span>
+	<span class="nt">&lt;field</span> <span class="na">name=</span><span class="s">&quot;name&quot;</span> <span class="na">type=</span><span class="s">&quot;text_general&quot;</span> <span class="na">indexed=</span><span class="s">&quot;true&quot;</span> <span class="na">stored=</span><span class="s">&quot;true&quot;</span> <span class="nt">/&gt;</span>
+	<span class="nt">&lt;field</span> <span class="na">name=</span><span class="s">&quot;_version_&quot;</span> <span class="na">type=</span><span class="s">&quot;long&quot;</span> <span class="na">indexed=</span><span class="s">&quot;true&quot;</span> <span class="na">stored=</span><span class="s">&quot;true&quot;</span> <span class="nt">/&gt;</span>
+<span class="nt">&lt;/fields&gt;</span></code></pre></div>
+
+<p>In addition to this, I’ve added the information about which field is the one that should contain unique identifiers.
+This was also done in <i>schema.xml</i> file:</p>
+
+<div class="highlight"><pre><code class="language-xml" data-lang="xml"><span class="nt">&lt;uniqueKey&gt;</span>id<span class="nt">&lt;/uniqueKey&gt;</span></code></pre></div>
+
+<h4 id="solr-configuration">Solr Configuration</h4>
+<p>In addition to changes in the <i>schema.xml</i> file, i need to modify the <i>solrconfig.xml</i> file and introduce a proper <i>UpdateRequestProcessorChain</i> like specified below:</p>
+
+<div class="highlight"><pre><code class="language-xml" data-lang="xml"><span class="nt">&lt;updateRequestProcessorChain&gt;</span>
+	<span class="nt">&lt;processor</span> <span class="na">class=</span><span class="s">&quot;solr.UUIDUpdateProcessorFactory&quot;</span><span class="nt">&gt;</span>
+		<span class="nt">&lt;str</span> <span class="na">name=</span><span class="s">&quot;fieldName&quot;</span><span class="nt">&gt;</span>id<span class="nt">&lt;/str&gt;</span>
+	<span class="nt">&lt;/processor&gt;</span>
+	<span class="nt">&lt;processor</span> <span class="na">class=</span><span class="s">&quot;solr.LogUpdateProcessoryFactory&quot;</span> <span class="nt">/&gt;</span>
+	<span class="nt">&lt;processor</span> <span class="na">class=</span><span class="s">&quot;solr.RunUpdateProcessorFactory&quot;</span> <span class="nt">/&gt;</span>
+<span class="nt">&lt;/updateRequestProcessorChain&gt;</span></code></pre></div>
+
+<p>Above informs Solr that <i>id</i> field contents are to be generated automatically.</p>
+
+<h4 id="simple-test">Simple Test</h4>
+<p>Enough with the configuration, time to test the configuration. Run below command from terminal to update document before querying indexed documents.</p>
+
+<div class="highlight"><pre><code class="language-html" data-lang="html">curl -XPOST &#39;localhost:8993/solr/update?commit=true&#39; --data-binary &#39;<span class="nt">&lt;add&gt;&lt;doc&gt;&lt;field</span> <span class="na">name=</span><span class="s">&quot;name&quot;</span><span class="nt">&gt;</span>Test<span class="nt">&lt;/field&gt;&lt;/doc&gt;&lt;/add&gt;</span>&#39; -H &#39;Content-type:application/xml&#39;</code></pre></div>
+
+<p>If above command runs successfully without any errors, document will get indexed. After then, in order to query below command can be used:</p>
+
+<div class="highlight"><pre><code class="language-html" data-lang="html">curl -XGET &#39;localhost:8993/solr/select?q=*:*<span class="err">&amp;</span>indent=true&#39;</code></pre></div>
+
+<p>Above will return queried documents specified below:</p>
+
+<div class="highlight"><pre><code class="language-xml" data-lang="xml"><span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span>
+<span class="nt">&lt;response&gt;</span>
+ <span class="nt">&lt;lst</span> <span class="na">name=</span><span class="s">&quot;responseHeader&quot;</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;int</span> <span class="na">name=</span><span class="s">&quot;status&quot;</span><span class="nt">&gt;</span>0<span class="nt">&lt;/int&gt;</span>
+  <span class="nt">&lt;int</span> <span class="na">name=</span><span class="s">&quot;QTime&quot;</span><span class="nt">&gt;</span>0<span class="nt">&lt;/int&gt;</span>
+  <span class="nt">&lt;lst</span> <span class="na">name=</span><span class="s">&quot;params&quot;</span><span class="nt">&gt;</span>
+   <span class="nt">&lt;str</span> <span class="na">name=</span><span class="s">&quot;indent&quot;</span><span class="nt">&gt;</span>true<span class="nt">&lt;/str&gt;</span>
+   <span class="nt">&lt;str</span> <span class="na">name=</span><span class="s">&quot;q&quot;</span><span class="nt">&gt;</span>*:*<span class="nt">&lt;/str&gt;</span>
+  <span class="nt">&lt;/lst&gt;</span>
+ <span class="nt">&lt;/lst&gt;</span>
+ <span class="nt">&lt;result</span> <span class="na">name=</span><span class="s">&quot;response&quot;</span> <span class="na">numFound=</span><span class="s">&quot;1&quot;</span> <span class="na">start=</span><span class="s">&quot;0&quot;</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;doc&gt;</span>
+   <span class="nt">&lt;str</span> <span class="na">name=</span><span class="s">&quot;name&quot;</span><span class="nt">&gt;</span>Test<span class="nt">&lt;/str&gt;</span>
+   <span class="nt">&lt;str</span> <span class="na">name=</span><span class="s">&quot;id&quot;</span><span class="nt">&gt;</span>1cdee8b4-c42d-4101-8301-4dc350a4d522<span class="nt">&lt;/str&gt;</span>
+   <span class="nt">&lt;long</span> <span class="na">name=</span><span class="s">&quot;_version_&quot;</span><span class="nt">&gt;</span>1439726523307261952<span class="nt">&lt;/long&gt;</span>
+  <span class="nt">&lt;/doc&gt;</span>
+ <span class="nt">&lt;/result&gt;</span>
+<span class="nt">&lt;/response&gt;</span></code></pre></div>
+
+<p>If you analyze response, you can see the unique identifier was automatically generated. Now if you run same commands ( addition of document &amp; query ) then result would looks like this:</p>
+
+<div class="highlight"><pre><code class="language-xml" data-lang="xml"><span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span>
+<span class="nt">&lt;response&gt;</span>
+ <span class="nt">&lt;lst</span> <span class="na">name=</span><span class="s">&quot;responseHeader&quot;</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;int</span> <span class="na">name=</span><span class="s">&quot;status&quot;</span><span class="nt">&gt;</span>0<span class="nt">&lt;/int&gt;</span>
+  <span class="nt">&lt;int</span> <span class="na">name=</span><span class="s">&quot;QTime&quot;</span><span class="nt">&gt;</span>1<span class="nt">&lt;/int&gt;</span>
+  <span class="nt">&lt;lst</span> <span class="na">name=</span><span class="s">&quot;params&quot;</span><span class="nt">&gt;</span>
+   <span class="nt">&lt;str</span> <span class="na">name=</span><span class="s">&quot;indent&quot;</span><span class="nt">&gt;</span>true<span class="nt">&lt;/str&gt;</span>
+   <span class="nt">&lt;str</span> <span class="na">name=</span><span class="s">&quot;q&quot;</span><span class="nt">&gt;</span>*:*<span class="nt">&lt;/str&gt;</span>
+  <span class="nt">&lt;/lst&gt;</span>
+ <span class="nt">&lt;/lst&gt;</span>
+ <span class="nt">&lt;result</span> <span class="na">name=</span><span class="s">&quot;response&quot;</span> <span class="na">numFound=</span><span class="s">&quot;2&quot;</span> <span class="na">start=</span><span class="s">&quot;0&quot;</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;doc&gt;</span>
+   <span class="nt">&lt;str</span> <span class="na">name=</span><span class="s">&quot;name&quot;</span><span class="nt">&gt;</span>Test<span class="nt">&lt;/str&gt;</span>
+   <span class="nt">&lt;str</span> <span class="na">name=</span><span class="s">&quot;id&quot;</span><span class="nt">&gt;</span>1cdee8b4-c42d-4101-8301-4dc350a4d522<span class="nt">&lt;/str&gt;</span>
+   <span class="nt">&lt;long</span> <span class="na">name=</span><span class="s">&quot;_version_&quot;</span><span class="nt">&gt;</span>1439726523307261952<span class="nt">&lt;/long&gt;</span>
+  <span class="nt">&lt;/doc&gt;</span>
+  <span class="nt">&lt;doc&gt;</span>
+   <span class="nt">&lt;str</span> <span class="na">name=</span><span class="s">&quot;name&quot;</span><span class="nt">&gt;</span>Test<span class="nt">&lt;/str&gt;</span>
+   <span class="nt">&lt;str</span> <span class="na">name=</span><span class="s">&quot;id&quot;</span><span class="nt">&gt;</span>9bedcb5f-1b71-4ab7-80a9-9882a6bf319e<span class="nt">&lt;/str&gt;</span>
+   <span class="nt">&lt;long</span> <span class="na">name=</span><span class="s">&quot;_version_&quot;</span><span class="nt">&gt;</span>1439726693819351040<span class="nt">&lt;/long&gt;</span>
+  <span class="nt">&lt;/doc&gt;</span>
+ <span class="nt">&lt;/result&gt;</span>
+<span class="nt">&lt;/response&gt;</span></code></pre></div>
+
+<p>As you can see both documents show two different unique identifier generated by solr.</p>
+
+
+
+    <br>
+
+    <a href="/posts/unique-id-generation-in-solr/">
+        Continue reading...
+    </a>
+  </div>
   
 
   <ul class="tags">
@@ -390,17 +513,27 @@ Enough with the theory, let’s have a look at the example.</p>
 <span class="cp">&lt;?xml-stylesheet href=&quot;../2008/09/xsd.xsl&quot; type=&quot;text/xsl&quot;?&gt;</span>
 <span class="nt">&lt;xs:schema</span> <span class="na">targetNamespace=</span><span class="s">&quot;http://www.w3.org/XML/1998/namespace&quot;</span> <span class="na">xml:lang=</span><span class="s">&quot;en&quot;</span> <span class="na">xmlns=</span><span class="s">&quot;http://www.w3.org/1999/xhtml&quot;</span> <span class="na">xmlns:xs=</span><span class="s">&quot;http://www.w3.org/2001/XMLSchema&quot;</span> <span class="na">xmlns:tns=</span><span class="s">&quot;http://design.pattern.org/salami&quot;</span> <span class="na">elementFormDefault=</span><span class="s">&quot;qualified&quot;</span><span class="nt">&gt;</span>
 	<span class="nt">&lt;xs:annotation&gt;</span>
-		<span class="nt">&lt;xs:documentation&gt;</span>Schema using Venetian Blind Design Pattern<span class="nt">&lt;/xs:documentation&gt;</span>
+		<span class="nt">&lt;xs:documentation&gt;</span>Schema using Salami Slice Design Pattern<span class="nt">&lt;/xs:documentation&gt;</span>
 	<span class="nt">&lt;/xs:annotation&gt;</span>
-	<span class="nt">&lt;xs:complexType</span> <span class="na">name=</span><span class="s">&quot;ProducerType&quot;</span><span class="nt">&gt;</span>
+	<span class="nt">&lt;xs:complexType</span> <span class="na">name=</span><span class="s">&quot;CommonName&quot;</span><span class="nt">&gt;</span>
 		<span class="nt">&lt;xs:sequence&gt;</span>
 			<span class="nt">&lt;xs:element</span> <span class="na">name=</span><span class="s">&quot;Name&quot;</span> <span class="na">type=</span><span class="s">&quot;xs:string&quot;</span> <span class="nt">/&gt;</span>
-			<span class="nt">&lt;xs:element</span> <span class="na">name=</span><span class="s">&quot;ExecutiveProducer&quot;</span> <span class="na">type=</span><span class="s">&quot;xs:string&quot;</span> <span class="na">minOccurs=</span><span class="s">&quot;1&quot;</span> <span class="na">maxOccurs=</span><span class="s">&quot;unbounded&quot;</span> <span class="nt">/&gt;</span>
+		<span class="nt">&lt;/xs:sequence&gt;</span>
+	<span class="nt">&lt;/xs:complexType&gt;</span>
+	<span class="nt">&lt;xs:group</span> <span class="na">name=</span><span class="s">&quot;ContributionGroup&quot;</span><span class="nt">&gt;</span>
+		<span class="nt">&lt;xs:sequence&gt;</span>
+			<span class="nt">&lt;xs:element</span> <span class="na">name=</span><span class="s">&quot;Name&quot;</span> <span class="na">type=</span><span class="s">&quot;xml:CommonName&quot;</span> <span class="nt">/&gt;</span>
+			<span class="nt">&lt;xs:element</span> <span class="na">name=</span><span class="s">&quot;Contribution&quot;</span> <span class="na">type=</span><span class="s">&quot;xs:string&quot;</span> <span class="na">minOccurs=</span><span class="s">&quot;1&quot;</span> <span class="na">maxOccurs=</span><span class="s">&quot;unbounded&quot;</span> <span class="nt">/&gt;</span>
+		<span class="nt">&lt;/xs:sequence&gt;</span>
+	<span class="nt">&lt;/xs:group&gt;</span>
+	<span class="nt">&lt;xs:complexType</span> <span class="na">name=</span><span class="s">&quot;ProducerType&quot;</span><span class="nt">&gt;</span>
+		<span class="nt">&lt;xs:sequence&gt;</span>
+			<span class="nt">&lt;xs:group</span> <span class="na">ref=</span><span class="s">&quot;xml:ContributionGroup&quot;</span> <span class="na">minOccurs=</span><span class="s">&quot;1&quot;</span> <span class="na">maxOccurs=</span><span class="s">&quot;unbounded&quot;</span><span class="nt">/&gt;</span>
 		<span class="nt">&lt;/xs:sequence&gt;</span>
 	<span class="nt">&lt;/xs:complexType&gt;</span>
 	<span class="nt">&lt;xs:complexType</span> <span class="na">name=</span><span class="s">&quot;CastType&quot;</span><span class="nt">&gt;</span>
 		<span class="nt">&lt;xs:sequence&gt;</span>
-			<span class="nt">&lt;xs:element</span> <span class="na">name=</span><span class="s">&quot;ActorName&quot;</span> <span class="na">type=</span><span class="s">&quot;xs:string&quot;</span> <span class="nt">/&gt;</span>
+			<span class="nt">&lt;xs:element</span> <span class="na">name=</span><span class="s">&quot;ActorName&quot;</span> <span class="na">type=</span><span class="s">&quot;xml:CommonName&quot;</span> <span class="nt">/&gt;</span>
 			<span class="nt">&lt;xs:element</span> <span class="na">name=</span><span class="s">&quot;CastingRole&quot;</span> <span class="na">type=</span><span class="s">&quot;xs:string&quot;</span> <span class="na">minOccurs=</span><span class="s">&quot;1&quot;</span> <span class="na">maxOccurs=</span><span class="s">&quot;unbounded&quot;</span> <span class="nt">/&gt;</span>
 			<span class="nt">&lt;xs:element</span> <span class="na">name=</span><span class="s">&quot;CastingName&quot;</span> <span class="na">type=</span><span class="s">&quot;xs:string&quot;</span> <span class="nt">/&gt;</span>
 		<span class="nt">&lt;/xs:sequence&gt;</span>
@@ -409,20 +542,12 @@ Enough with the theory, let’s have a look at the example.</p>
 		<span class="nt">&lt;xs:sequence&gt;</span>
 			<span class="nt">&lt;xs:element</span> <span class="na">name=</span><span class="s">&quot;Category&quot;</span> <span class="na">type=</span><span class="s">&quot;xs:string&quot;</span> <span class="na">minOccurs=</span><span class="s">&quot;1&quot;</span> <span class="na">maxOccurs=</span><span class="s">&quot;unbounded&quot;</span> <span class="nt">/&gt;</span>
 			<span class="nt">&lt;xs:element</span> <span class="na">name=</span><span class="s">&quot;Year&quot;</span> <span class="na">type=</span><span class="s">&quot;xs:int&quot;</span> <span class="nt">/&gt;</span>
-			<span class="nt">&lt;xs:element</span> <span class="na">name=</span><span class="s">&quot;Actor&quot;</span> <span class="na">minOccurs=</span><span class="s">&quot;1&quot;</span> <span class="na">maxOccurs=</span><span class="s">&quot;unbounded&quot;</span><span class="nt">&gt;</span>
-				<span class="nt">&lt;xs:complexType&gt;</span>
-					<span class="nt">&lt;xs:sequence&gt;</span>
-						<span class="nt">&lt;xs:element</span> <span class="na">name=</span><span class="s">&quot;Name&quot;</span> <span class="na">type=</span><span class="s">&quot;xs:string&quot;</span> <span class="nt">/&gt;</span>
-						<span class="nt">&lt;xs:element</span> <span class="na">name=</span><span class="s">&quot;Role&quot;</span> <span class="na">type=</span><span class="s">&quot;xs:string&quot;</span> <span class="na">minOccurs=</span><span class="s">&quot;1&quot;</span> <span class="na">maxOccurs=</span><span class="s">&quot;unbounded&quot;</span> <span class="nt">/&gt;</span>
-					<span class="nt">&lt;/xs:sequence&gt;</span>
-				<span class="nt">&lt;/xs:complexType&gt;</span>
-			<span class="nt">&lt;/xs:element&gt;</span>
+			<span class="nt">&lt;xs:group</span> <span class="na">ref=</span><span class="s">&quot;xml:ContributionGroup&quot;</span> <span class="na">minOccurs=</span><span class="s">&quot;1&quot;</span> <span class="na">maxOccurs=</span><span class="s">&quot;unbounded&quot;</span><span class="nt">/&gt;</span>			
 		<span class="nt">&lt;/xs:sequence&gt;</span>
 	<span class="nt">&lt;/xs:complexType&gt;</span>
 	<span class="nt">&lt;xs:complexType</span> <span class="na">name=</span><span class="s">&quot;WriterType&quot;</span><span class="nt">&gt;</span>
 		<span class="nt">&lt;xs:sequence&gt;</span>
-			<span class="nt">&lt;xs:element</span> <span class="na">name=</span><span class="s">&quot;Name&quot;</span> <span class="na">type=</span><span class="s">&quot;xs:string&quot;</span> <span class="nt">/&gt;</span>
-			<span class="nt">&lt;xs:element</span> <span class="na">name=</span><span class="s">&quot;Scene&quot;</span> <span class="na">type=</span><span class="s">&quot;xs:string&quot;</span> <span class="na">minOccurs=</span><span class="s">&quot;1&quot;</span> <span class="na">maxOccurs=</span><span class="s">&quot;unbounded&quot;</span> <span class="nt">/&gt;</span>
+			<span class="nt">&lt;xs:group</span> <span class="na">ref=</span><span class="s">&quot;xml:ContributionGroup&quot;</span> <span class="na">minOccurs=</span><span class="s">&quot;1&quot;</span> <span class="na">maxOccurs=</span><span class="s">&quot;unbounded&quot;</span><span class="nt">/&gt;</span>
 		<span class="nt">&lt;/xs:sequence&gt;</span>
 	<span class="nt">&lt;/xs:complexType&gt;</span>
 	<span class="nt">&lt;xs:element</span> <span class="na">name=</span><span class="s">&quot;Name&quot;</span> <span class="na">type=</span><span class="s">&quot;xs:string&quot;</span> <span class="nt">/&gt;</span>
@@ -435,7 +560,7 @@ Enough with the theory, let’s have a look at the example.</p>
 		<span class="nt">&lt;xs:complexType&gt;</span>
 			<span class="nt">&lt;xs:sequence&gt;</span>
 				<span class="nt">&lt;xs:element</span> <span class="na">ref=</span><span class="s">&quot;xml:Name&quot;</span> <span class="nt">/&gt;</span>
-				<span class="nt">&lt;xs:element</span> <span class="na">name=</span><span class="s">&quot;Type&quot;</span><span class="nt">&gt;</span>
+				<span class="nt">&lt;xs:element</span> <span class="na">name=</span><span class="s">&quot;Type&quot;</span> <span class="nt">&gt;</span>
 					<span class="nt">&lt;xs:simpleType&gt;</span>
 						<span class="nt">&lt;xs:restriction</span> <span class="na">base=</span><span class="s">&quot;xs:string&quot;</span><span class="nt">&gt;</span>
 							<span class="nt">&lt;xs:enumeration</span> <span class="na">value=</span><span class="s">&quot;TheatrePlay&quot;</span> <span class="nt">/&gt;</span>
@@ -493,39 +618,6 @@ Enough with the theory, let’s have a look at the example.</p>
     <br>
 
     <a href="/posts/xml-indexing-in-solr/">
-        Continue reading...
-    </a>
-  </div>
-  
-
-  <ul class="tags">
-    
-      <li><a href="/tags.html#currying-functions" class="tag">currying-functions</a></li>
-    
-      <li><a href="/tags.html#functions" class="tag">functions</a></li>
-    
-  </ul>
-
-  <div class="post">
-    <h1 class="post-title">
-      <a href="/posts/geospatial-queries-in-solr/">
-        GeoSpatial Queries in Solr
-      </a>
-    </h1>
-
-    <div>
-      <span class="post-date" style="float: left;">31 Jan 2015</span>
-      <span class="post-date" data-post-url="/posts/geospatial-queries-in-solr/" style="float: right;"></span>
-    </div>
-    <div style="clear: both;"></div>​
-
-    
-
-
-
-    <br>
-
-    <a href="/posts/geospatial-queries-in-solr/">
         Continue reading...
     </a>
   </div>
