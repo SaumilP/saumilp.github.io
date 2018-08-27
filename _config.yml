@@ -13,7 +13,7 @@ title:            codeground
 tagline:          'coding.isFun()'
 description:      'Concepts, Thoughts and Ideas on programming'
 url:              saumilp.github.io
-baseurl:          '/'
+baseurl:          'http://saumilp.github.io/'
 paginate:         3
 excerpt_separator: '<br>'
 gems:
