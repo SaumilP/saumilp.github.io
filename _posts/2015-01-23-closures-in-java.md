@@ -8,12 +8,12 @@ comments: true
 analytics: true
 ---
 
-Working on last few projects, i realized that use of closure can come really handy especially when the same sort of work is required on regularly basis.
-Can you imagine writing loops after loops to extract or collect properties from list of custom objects ? It can be tiring and painful. And hence i have decided to add this post - mainly to point out couple of situations where introduction to  closures can really ease this pain.
+Working on last few projects, i've realized that use of closures can come really handy in day-to-day work.
+Can you imagine writing loops after loops to extract or collect properties from list of custom objects? It can be tiring and painful. And hence, I have decided to add this post - mainly to point out couple of situations where introduction to  closures can really ease this pain.
 
-Most of you must have used <i>Project Lambok</i> or <i>Functional Java</i> to achive this, unfortunately not everyone gets the choice to be able to use opensource libraries. Yeah, there are clients who prefers to avoid use of opensource libraries in this day and age, can you believe it ? Anyways, i have tried to point out some of the features offerred by closures in this post.
+Most of you must have used [<i>Project Lambok</i>](https://projectlombok.org) or <i>Functional Java</i> to achive this. Unfortunately not everyone gets the choice to be able to use opensource libraries. Yeah, there are clients who prefers to avoid use of opensource libraries in this day and age, can you believe it ? Anyways, i have tried to point out some of the features offerred by closures in this post.
 
-Before going forward in more details, lets try and understand what closures mean in Java and what it can bring on the table. 
+Before going forward in more details, let's try and understand what closures mean in Java and what it can bring on the table. 
 A Closure is a first class function or reference to a function together with a referencing environment. Most of the time, function types, anonumous functions and inline function-valued expressions are also refered as closures in java. An anonymous function that contains some context surrounding it as a snapshot & can be passed as a parameter. The definition of closure can be broken down into two main parts - callbacks and contextual information surrounding this callback function. 
 
 Please note, Anonymous classes in java are close to being called as closures, but they do not fully support definition of closure. But they come close to it and hence you can find lot of literature calling anonymous inner classes as closures. The main reason behind not supporting definition, is due to the fact that inner class can only access <strong><i>final</i></strong> local variable of the enclosing method. And also, because these variables get created and stored in a stack, they get  destroyed when execution of the method completes and result gets returned. And If you want to make an anonymous inner class as a closure, it should be allowed to access all the fields surrounding body - which is not permissible by current memory management.

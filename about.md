@@ -3,11 +3,10 @@ layout: page
 title: About Me
 ---
 
-My name is Saumil Patel.
+I'm  a software engineer with gradute degrees from University of Johannesburg and University of Pune.
 
-I'm  a software engineer and graduate from University of Johannesburg as well as University of Pune.
+I work on things that helps in doing day-to-day work easily. In doing so, I try and work smartly overcoming some of the legacy difficulties. This blog site is an attempt to evaluate different options available to software engineers now a days.
 
-I like to work with simple things - things can help do day to day job easier for any software developer.
 Most of the time i am behind a computer trying to find better ways to solve problems. And, obviously i pick up few new things now and then when trying to find solutions.
 
 #### Profile ####
