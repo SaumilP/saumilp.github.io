@@ -2,8 +2,8 @@
 markdown:         kramdown
 redcarpet:
   extensions:     [strikethrough,smart,with_toc_data]
-highlighter:      pygments
-#highlighter:      rouge
+#highlighter:      pygments
+highlighter:      rouge
 
 # Permalinks
 permalink:        /posts/:title/
@@ -11,7 +11,7 @@ permalink:        /posts/:title/
 # User Configuration
 title:            codeground
 tagline:          'coding.isFun()'
-description:      'Code, Thoughts and Ideas'
+description:      'Concepts, Thoughts and Ideas on programming'
 url:              saumilp.github.io
 baseurl:          '/'
 paginate:         3
@@ -45,4 +45,4 @@ github:
   feedback:       
 
 # Version Info
-# version:          0.0.1
+version:          0.0.1
