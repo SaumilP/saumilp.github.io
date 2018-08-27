@@ -11,7 +11,7 @@
 
   <title>
     
-      XML Document Indexing in Solr &middot; Saumil Patel
+      Quick Solr Setup &middot; Saumil Patel
     
   </title>
 
@@ -32,7 +32,7 @@
   <!-- RSS -->
   <link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml">
 
-  <link rel="canonical" href="/posts/xml-indexing-in-solr/" />
+  <link rel="canonical" href="/posts/solr-performance-improvements/" />
 
   <script async src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
   <script>window.jQuery || document.write('<script src="/bower_components/jquery/dist/jquery.min.js"><\/script>')</script>
@@ -149,8 +149,17 @@
 
       <div class="container content">
         <div class="page">
-  <h1 class="page-title">XML Document Indexing in Solr</h1>
-  
+  <h1 class="page-title">Quick Solr Setup</h1>
+  <h4 id="environment">Environment</h4>
+<ul>
+  <li>OS X 10.8 or newer versions</li>
+  <li>Java SE Runtime 1.7</li>
+  <li>Apache Solr 4.10.0</li>
+</ul>
+
+<h4 id="installation">Installation</h4>
+
+<p>The easiest way to install Solr is by using homebrew.</p>
 
 </div>
 
@@ -201,7 +210,7 @@
     var jqxhr = $.ajax("")
           .done(function(response) {
               if (response !== undefined) {
-                var page_url = "/posts/xml-indexing-in-solr/";
+                var page_url = "/posts/solr-performance-improvements/";
                 var page_views = undefined;
                 var total_views = undefined;
                 var oPageViews = {};

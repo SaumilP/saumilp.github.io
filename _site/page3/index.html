@@ -128,7 +128,7 @@
     </p>
 
     <p>
-      &copy; 2015. Saumil Patel.
+      &copy; 2018. Saumil Patel.
     </p>
       All rights reserved.
   </div>
@@ -153,6 +153,44 @@
 
   <ul class="tags">
     
+  </ul>
+
+  <div class="post">
+    <h1 class="post-title">
+      <a href="/posts/quick-solr-setup/">
+        Quick Solr Setup
+      </a>
+    </h1>
+
+    <div>
+      <span class="post-date" style="float: left;">31 Jan 2015</span>
+      <span class="post-date" data-post-url="/posts/quick-solr-setup/" style="float: right;"></span>
+    </div>
+    <div style="clear: both;"></div>​
+
+    <h4 id="environment">Environment</h4>
+<ul>
+  <li>OS X 10.8 or newer versions</li>
+  <li>Java SE Runtime 1.7</li>
+  <li>Apache Solr 4.10.0</li>
+</ul>
+
+<h4 id="installation">Installation</h4>
+
+<p>The easiest way to install Solr is by using homebrew.</p>
+
+
+
+    <br>
+
+    <a href="/posts/quick-solr-setup/">
+        Continue reading...
+    </a>
+  </div>
+  
+
+  <ul class="tags">
+    
       <li><a href="/tags.html#closures" class="tag">closures</a></li>
     
       <li><a href="/tags.html#functions" class="tag">functions</a></li>
@@ -172,22 +210,22 @@
     </div>
     <div style="clear: both;"></div>​
 
-    <p>Working on last few projects, i realized that use of closure can come really handy especially when the same sort of work is required on regularly basis.
-Can you imagine writing loops after loops to extract or collect properties from list of custom objects ? It can be tiering and painful. And hence i have decided to add this post - mainly to point out couple of situations where introduction to  closures can really ease this pain.</p>
+    <p>Working on last few projects, i’ve realized that use of closures can come really handy in day-to-day work.
+Can you imagine writing loops after loops to extract or collect properties from list of custom objects? It can be tiring and painful. And hence, I have decided to add this post - mainly to point out couple of situations where introduction to  closures can really ease this pain.</p>
 
-<p>Most of you must have used <i>Project Lambok</i> or <i>Functional Java</i> to achive this, unfortunately not everyone gets the choice to be able to use opensource libraries. Yeah, there are clients who prefers to avoid use of opensource libraries in this day and age, can you believe it ? Anyways, i have tried to point out some of the features offerred by closures in this post.</p>
+<p>Most of you must have used <a href="https://projectlombok.org"><i>Project Lambok</i></a> or <i>Functional Java</i> to achive this. Unfortunately not everyone gets the choice to be able to use opensource libraries. Yeah, there are clients who prefers to avoid use of opensource libraries in this day and age, can you believe it ? Anyways, i have tried to point out some of the features offerred by closures in this post.</p>
 
-<p>Before going forward in more details, lets try and understand what closures mean in Java and what it can bring on the table. 
-A Closure is a first class function or reference to a function together with a referencing environment. Most of the time, function types, anonumous functions and inline function-valued expressions are also refered as closures in java. An anonymous function that contains some context surrounding it as a snapshot &amp; can be passed as a parameter. The definition of closure can be broken down into two main parts - callbacks and contextual information surrounding this callback function. </p>
+<p>Before going forward in more details, let’s try and understand what closures mean in Java and what it can bring on the table. 
+A Closure is a first class function or reference to a function together with a referencing environment. Most of the time, function types, anonumous functions and inline function-valued expressions are also refered as closures in java. An anonymous function that contains some context surrounding it as a snapshot &amp; can be passed as a parameter. The definition of closure can be broken down into two main parts - callbacks and contextual information surrounding this callback function.</p>
 
-<p>Please note, Anonymous classes in java are close to being called as closures, but they do not fully support definition of closure. But they come close to it and hence you can find lot of literature calling anonymous inner classes as closures. The main reason behind not supporting definition, is due to the fact that inner class can only access <strong>final</strong> local variable of the enclosing method. And also, because these variables get created and stored in a stack, they get  destroyed when execution of the method completes and result gets returned. And If you want to make an anonymous inner class as a closure, it should be allowed to access all the fields surrounding body - which is not permissible by current memory management.</p>
+<p>Please note, Anonymous classes in java are close to being called as closures, but they do not fully support definition of closure. But they come close to it and hence you can find lot of literature calling anonymous inner classes as closures. The main reason behind not supporting definition, is due to the fact that inner class can only access <strong><i>final</i></strong> local variable of the enclosing method. And also, because these variables get created and stored in a stack, they get  destroyed when execution of the method completes and result gets returned. And If you want to make an anonymous inner class as a closure, it should be allowed to access all the fields surrounding body - which is not permissible by current memory management.</p>
 
 <p>Enough with the explanation, let’s look at some of the examples!</p>
 
 <p>In pre Java 8, versions we can simulate closures</p>
 
 <div class="highlight"><pre><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">interface</span> <span class="nc">Funct</span><span class="o">&lt;</span><span class="n">A</span><span class="o">,</span><span class="n">B</span><span class="o">&gt;</span> <span class="o">{</span>
-	<span class="kd">public</span> <span class="n">B</span> <span class="nf">func</span><span class="o">(</span><span class="n">A</span> <span class="n">a</span><span class="o">);</span>
+<span class="kd">public</span> <span class="n">B</span> <span class="nf">func</span><span class="o">(</span><span class="n">A</span> <span class="n">a</span><span class="o">);</span>
 <span class="o">}</span></code></pre></div>
 
 <p>We can use this interface to emulate anonymous inner class easily. Below mentioned methods can be used to perform simple comparison tasks and can be later extended to combine with interface <code>Funct&lt;A,B&gt;</code> to simulate closures.</p>
@@ -235,11 +273,11 @@ A Closure is a first class function or reference to a function together with a r
 
 <span class="kt">int</span> <span class="n">numbersBiggerThanFive</span> <span class="o">=</span> <span class="n">firstMatch</span><span class="o">(</span> <span class="n">someIntegerList</span><span class="o">,</span> <span class="n">greaterThanFive</span><span class="o">,</span> <span class="n">defaultValue</span> <span class="o">);</span></code></pre></div>
 
-<p>Other few examples can be found in (progfun)[https://github.com/SaumilP/java-progfun]. </p>
+<p>Other few examples can be found in (progfun)[https://github.com/SaumilP/java-progfun].</p>
 
 <p>In Java 8, streams can be used to make use of newly added feature - lambda expressions.</p>
 
-<div class="highlight"><pre><code class="language-java" data-lang="java"><span class="kd">final</span> <span class="n">Integer</span> <span class="n">noBiggerThanFive</span> <span class="o">=</span> <span class="n">someList</span><span class="o">.</span><span class="na">stream</span><span class="o">().</span><span class="na">filter</span><span class="o">(</span><span class="n">no</span> <span class="o">-&gt;</span> <span class="n">no</span> <span class="o">&gt;</span> <span class="mi">5</span> <span class="o">).</span><span class="na">reduce</span><span class="o">();</span></code></pre></div>
+<div class="highlight"><pre><code class="language-java" data-lang="java"><span class="kd">final</span> <span class="n">Integer</span> <span class="n">noBiggerThanFive</span> <span class="o">=</span> <span class="n">someList</span><span class="o">.</span><span class="na">stream</span><span class="o">().</span><span class="na">filter</span><span class="o">(</span><span class="n">no</span> <span class="o">-&gt;</span> <span class="n">no</span> <span class="o">&gt;</span> <span class="mi">5</span> <span class="o">).</span><span class="na">get</span><span class="o">();</span></code></pre></div>
 
 <p>It is less verbose compared to older version of the code, but it gives neat and short presentation of the code.
 Developers can focus more on the work getting done instead of worrying about getting syntax correct.</p>

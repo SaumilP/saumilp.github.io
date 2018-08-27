@@ -4,7 +4,7 @@
  <title>codeground</title>
  <link href="saumilp.github.io/atom.xml" rel="self"/>
  <link href="saumilp.github.io/"/>
- <updated>2015-02-18T22:40:58+02:00</updated>
+ <updated>2018-08-27T22:27:03+02:00</updated>
  <id>saumilp.github.io</id>
  <author>
    <name>Saumil Patel</name>
@@ -13,12 +13,40 @@
 
  
  <entry>
+   <title>Quick Solr Setup</title>
+   <link href="saumilp.github.io/posts/solr-performance-improvements/"/>
+   <updated>2015-04-25T00:00:00+02:00</updated>
+   <id>saumilp.github.io/posts/solr-performance-improvements</id>
+   <content type="html">
+     &lt;h4 id=&quot;environment&quot;&gt;Environment&lt;/h4&gt;
+&lt;ul&gt;
+  &lt;li&gt;OS X 10.8 or newer versions&lt;/li&gt;
+  &lt;li&gt;Java SE Runtime 1.7&lt;/li&gt;
+  &lt;li&gt;Apache Solr 4.10.0&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&quot;installation&quot;&gt;Installation&lt;/h4&gt;
+
+&lt;p&gt;The easiest way to install Solr is by using homebrew.&lt;/p&gt;
+
+
+
+     &lt;br&gt;
+
+     &lt;a href="saumilp.github.io/posts/solr-performance-improvements/"&gt;
+         Read entire post...
+     &lt;/a&gt;
+
+   </content>
+ </entry>
+ 
+ <entry>
    <title>Automatic ID generation in Apache Solr</title>
    <link href="saumilp.github.io/posts/unique-id-generation-in-solr/"/>
    <updated>2015-02-16T00:00:00+02:00</updated>
    <id>saumilp.github.io/posts/unique-id-generation-in-solr</id>
    <content type="html">
-     &lt;p&gt;I have been working on Apache Solr for last few months, and have been recieving requirements to speed up query process. As part of the investigation, i found out as retrieved documents’ unique id generation contributes query processing.And hence i have decided to add this post. &lt;/p&gt;
+     &lt;p&gt;I have been working on Apache Solr for last few months, and have been recieving requirements to speed up query process. As part of the investigation, i found out as retrieved documents’ unique id generation contributes query processing.And hence i have decided to add this post.&lt;/p&gt;
 
 &lt;h4 id=&quot;data-structure&quot;&gt;Data Structure&lt;/h4&gt;
 
@@ -123,7 +151,7 @@ This was also done in &lt;i&gt;schema.xml&lt;/i&gt; file:&lt;/p&gt;
    <updated>2015-02-09T00:00:00+02:00</updated>
    <id>saumilp.github.io/posts/xml-schema-design-patterns</id>
    <content type="html">
-     &lt;p&gt;This might be one of the old topic - specially when lot of developers are working with RESTful Services, but i would like to point out couple of pros and cons. &lt;/p&gt;
+     &lt;p&gt;This might be one of the old topic - specially when lot of developers are working with RESTful Services, but i would like to point out couple of pros and cons.&lt;/p&gt;
 
 &lt;p&gt;As most of the developers know, XML schema is very powerful, but they lack object-orientation, and are intended to capture a data model rather than an object model. In last one and half decades, there has been few tools available to architects and developers to be able to make use off some of the object orientation principles - like polymorphism for flexibility. But ultimately the whole point of the services must be general enough that it can communicate across languages. Hence i have attempted to put together some information around some of the very well known Design patterns.&lt;/p&gt;
 
@@ -218,7 +246,7 @@ Enough with the theory, let’s have a look at the example.&lt;/p&gt;
 
 &lt;p&gt;As you can see, above schema defines a single global element &lt;string&gt;Production&lt;/string&gt; and it is easy to read and write because there is no mixing. The types required to create a production element are all the nested within it. Elements and types cannot be referenced, and Namespaces are localized. And because it is self-contained, changing types will not affect other schemas.&lt;/p&gt;
 
-&lt;p&gt;One of the biggest disadvantages of this pattern with respect to straight XML is that the types you carefully defined cannot be reused elsewhere, hence causing very large schema. &lt;/p&gt;
+&lt;p&gt;One of the biggest disadvantages of this pattern with respect to straight XML is that the types you carefully defined cannot be reused elsewhere, hence causing very large schema.&lt;/p&gt;
 
 &lt;p&gt;This design pattern is perhaps an appropriate design to use when wrapping legacy data from a source that is fairly static.&lt;/p&gt;
 
@@ -558,22 +586,22 @@ Enough with the theory, let’s have a look at the example.&lt;/p&gt;
    <updated>2015-01-23T02:10:00+02:00</updated>
    <id>saumilp.github.io/posts/closures-in-java</id>
    <content type="html">
-     &lt;p&gt;Working on last few projects, i realized that use of closure can come really handy especially when the same sort of work is required on regularly basis.
-Can you imagine writing loops after loops to extract or collect properties from list of custom objects ? It can be tiering and painful. And hence i have decided to add this post - mainly to point out couple of situations where introduction to  closures can really ease this pain.&lt;/p&gt;
+     &lt;p&gt;Working on last few projects, i’ve realized that use of closures can come really handy in day-to-day work.
+Can you imagine writing loops after loops to extract or collect properties from list of custom objects? It can be tiring and painful. And hence, I have decided to add this post - mainly to point out couple of situations where introduction to  closures can really ease this pain.&lt;/p&gt;
 
-&lt;p&gt;Most of you must have used &lt;i&gt;Project Lambok&lt;/i&gt; or &lt;i&gt;Functional Java&lt;/i&gt; to achive this, unfortunately not everyone gets the choice to be able to use opensource libraries. Yeah, there are clients who prefers to avoid use of opensource libraries in this day and age, can you believe it ? Anyways, i have tried to point out some of the features offerred by closures in this post.&lt;/p&gt;
+&lt;p&gt;Most of you must have used &lt;a href=&quot;https://projectlombok.org&quot;&gt;&lt;i&gt;Project Lambok&lt;/i&gt;&lt;/a&gt; or &lt;i&gt;Functional Java&lt;/i&gt; to achive this. Unfortunately not everyone gets the choice to be able to use opensource libraries. Yeah, there are clients who prefers to avoid use of opensource libraries in this day and age, can you believe it ? Anyways, i have tried to point out some of the features offerred by closures in this post.&lt;/p&gt;
 
-&lt;p&gt;Before going forward in more details, lets try and understand what closures mean in Java and what it can bring on the table. 
-A Closure is a first class function or reference to a function together with a referencing environment. Most of the time, function types, anonumous functions and inline function-valued expressions are also refered as closures in java. An anonymous function that contains some context surrounding it as a snapshot &amp;amp; can be passed as a parameter. The definition of closure can be broken down into two main parts - callbacks and contextual information surrounding this callback function. &lt;/p&gt;
+&lt;p&gt;Before going forward in more details, let’s try and understand what closures mean in Java and what it can bring on the table. 
+A Closure is a first class function or reference to a function together with a referencing environment. Most of the time, function types, anonumous functions and inline function-valued expressions are also refered as closures in java. An anonymous function that contains some context surrounding it as a snapshot &amp;amp; can be passed as a parameter. The definition of closure can be broken down into two main parts - callbacks and contextual information surrounding this callback function.&lt;/p&gt;
 
-&lt;p&gt;Please note, Anonymous classes in java are close to being called as closures, but they do not fully support definition of closure. But they come close to it and hence you can find lot of literature calling anonymous inner classes as closures. The main reason behind not supporting definition, is due to the fact that inner class can only access &lt;strong&gt;final&lt;/strong&gt; local variable of the enclosing method. And also, because these variables get created and stored in a stack, they get  destroyed when execution of the method completes and result gets returned. And If you want to make an anonymous inner class as a closure, it should be allowed to access all the fields surrounding body - which is not permissible by current memory management.&lt;/p&gt;
+&lt;p&gt;Please note, Anonymous classes in java are close to being called as closures, but they do not fully support definition of closure. But they come close to it and hence you can find lot of literature calling anonymous inner classes as closures. The main reason behind not supporting definition, is due to the fact that inner class can only access &lt;strong&gt;&lt;i&gt;final&lt;/i&gt;&lt;/strong&gt; local variable of the enclosing method. And also, because these variables get created and stored in a stack, they get  destroyed when execution of the method completes and result gets returned. And If you want to make an anonymous inner class as a closure, it should be allowed to access all the fields surrounding body - which is not permissible by current memory management.&lt;/p&gt;
 
 &lt;p&gt;Enough with the explanation, let’s look at some of the examples!&lt;/p&gt;
 
 &lt;p&gt;In pre Java 8, versions we can simulate closures&lt;/p&gt;
 
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-java&quot; data-lang=&quot;java&quot;&gt;&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;interface&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Funct&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;A&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;B&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-	&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;B&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;func&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;A&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;B&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;func&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;A&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
 &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;p&gt;We can use this interface to emulate anonymous inner class easily. Below mentioned methods can be used to perform simple comparison tasks and can be later extended to combine with interface &lt;code&gt;Funct&amp;lt;A,B&amp;gt;&lt;/code&gt; to simulate closures.&lt;/p&gt;
@@ -621,11 +649,11 @@ A Closure is a first class function or reference to a function together with a r
 
 &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;numbersBiggerThanFive&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;firstMatch&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;someIntegerList&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;greaterThanFive&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;defaultValue&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
-&lt;p&gt;Other few examples can be found in (progfun)[https://github.com/SaumilP/java-progfun]. &lt;/p&gt;
+&lt;p&gt;Other few examples can be found in (progfun)[https://github.com/SaumilP/java-progfun].&lt;/p&gt;
 
 &lt;p&gt;In Java 8, streams can be used to make use of newly added feature - lambda expressions.&lt;/p&gt;
 
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-java&quot; data-lang=&quot;java&quot;&gt;&lt;span class=&quot;kd&quot;&gt;final&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Integer&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;noBiggerThanFive&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;someList&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;stream&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;().&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;filter&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;no&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;no&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;5&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;reduce&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-java&quot; data-lang=&quot;java&quot;&gt;&lt;span class=&quot;kd&quot;&gt;final&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Integer&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;noBiggerThanFive&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;someList&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;stream&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;().&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;filter&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;no&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;no&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;5&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;get&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;p&gt;It is less verbose compared to older version of the code, but it gives neat and short presentation of the code.
 Developers can focus more on the work getting done instead of worrying about getting syntax correct.&lt;/p&gt;

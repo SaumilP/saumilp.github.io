@@ -128,7 +128,7 @@
     </p>
 
     <p>
-      &copy; 2015. Saumil Patel.
+      &copy; 2018. Saumil Patel.
     </p>
       All rights reserved.
   </div>
@@ -150,7 +150,7 @@
       <div class="container content">
         <div class="page">
   <h1 class="page-title">XML Schema Design Patterns</h1>
-  <p>This might be one of the old topic - specially when lot of developers are working with RESTful Services, but i would like to point out couple of pros and cons. </p>
+  <p>This might be one of the old topic - specially when lot of developers are working with RESTful Services, but i would like to point out couple of pros and cons.</p>
 
 <p>As most of the developers know, XML schema is very powerful, but they lack object-orientation, and are intended to capture a data model rather than an object model. In last one and half decades, there has been few tools available to architects and developers to be able to make use off some of the object orientation principles - like polymorphism for flexibility. But ultimately the whole point of the services must be general enough that it can communicate across languages. Hence i have attempted to put together some information around some of the very well known Design patterns.</p>
 
@@ -245,7 +245,7 @@ Enough with the theory, let’s have a look at the example.</p>
 
 <p>As you can see, above schema defines a single global element <string>Production</string> and it is easy to read and write because there is no mixing. The types required to create a production element are all the nested within it. Elements and types cannot be referenced, and Namespaces are localized. And because it is self-contained, changing types will not affect other schemas.</p>
 
-<p>One of the biggest disadvantages of this pattern with respect to straight XML is that the types you carefully defined cannot be reused elsewhere, hence causing very large schema. </p>
+<p>One of the biggest disadvantages of this pattern with respect to straight XML is that the types you carefully defined cannot be reused elsewhere, hence causing very large schema.</p>
 
 <p>This design pattern is perhaps an appropriate design to use when wrapping legacy data from a source that is fairly static.</p>
 

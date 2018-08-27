@@ -3,3 +3,5 @@ bower_components/
 node_modules/
 _site/bower_components/
 _site/node_modules/
+*/node_modules/*
+*/bower_components/*
