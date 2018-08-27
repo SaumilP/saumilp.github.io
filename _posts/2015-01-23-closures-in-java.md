@@ -16,7 +16,7 @@ Most of you must have used <i>Project Lambok</i> or <i>Functional Java</i> to ac
 Before going forward in more details, lets try and understand what closures mean in Java and what it can bring on the table. 
 A Closure is a first class function or reference to a function together with a referencing environment. Most of the time, function types, anonumous functions and inline function-valued expressions are also refered as closures in java. An anonymous function that contains some context surrounding it as a snapshot & can be passed as a parameter. The definition of closure can be broken down into two main parts - callbacks and contextual information surrounding this callback function. 
 
-Please note, Anonymous classes in java are close to being called as closures, but they do not fully support definition of closure. But they come close to it and hence you can find lot of literature calling anonymous inner classes as closures. The main reason behind not supporting definition, is due to the fact that inner class can only access <strong>final</strong> local variable of the enclosing method. And also, because these variables get created and stored in a stack, they get  destroyed when execution of the method completes and result gets returned. And If you want to make an anonymous inner class as a closure, it should be allowed to access all the fields surrounding body - which is not permissible by current memory management.
+Please note, Anonymous classes in java are close to being called as closures, but they do not fully support definition of closure. But they come close to it and hence you can find lot of literature calling anonymous inner classes as closures. The main reason behind not supporting definition, is due to the fact that inner class can only access <strong><i>final</i></strong> local variable of the enclosing method. And also, because these variables get created and stored in a stack, they get  destroyed when execution of the method completes and result gets returned. And If you want to make an anonymous inner class as a closure, it should be allowed to access all the fields surrounding body - which is not permissible by current memory management.
 
 Enough with the explanation, let's look at some of the examples!
 
@@ -24,7 +24,7 @@ In pre Java 8, versions we can simulate closures
 
 {% highlight java %}
 public interface Funct<A,B> {
-	public B func(A a);
+public B func(A a);
 }
 {% endhighlight %}
 
