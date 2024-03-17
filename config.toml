@@ -1,0 +1,72 @@
+# The URL the site will be built for
+base_url = "https://saumilp.github.io"
+
+# The default language; used in feeds.
+default_language = "en"
+
+# Whether to automatically compile all Sass files in the sass directory
+compile_sass = false
+
+# Whether to build a search index to be used later on by a JavaScript library
+build_search_index = true
+
+# Indicates theme
+#theme = "hermit_zola"
+
+# When set to "true", a feed is automatically generated.
+generate_feed = true
+
+# The default author for pages
+author = "Saumil"
+theme = "zola-pickles"
+
+taxonomies = [
+    { name = "tags", feed = true },
+    { name = "categories", feed = true },
+]
+
+[markdown]
+# Whether to do syntax highlighting; Theme can be customised by setting the `highlight_theme` variable to a theme supported by Zola
+highlight_code = true
+
+# The theme to use for code highlighting.
+highlight_theme = "base16-ocean-light"
+
+render_emoji = true
+
+[extra]
+home_subtitle = "coding.isFun()"
+
+footer_copyright = ' &#183; <a href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank" rel="noopener">CC BY-NC 4.0</a>'
+
+hermit_menu = [
+    { link = "/posts", name = "Posts" },
+    { link = "/about", name = "About" },
+    { link = "/rssfeed", name = "RSS Feed" },
+    { link = "/donate", name = "Donate" },
+]
+
+hermit_social = [
+    { name = "twitter", link = "https://twitter.com/SaumilP10" },
+    { name = "github", link = "https://github.com/saumilp" },
+    { name = "email", link = "mailto:saumilpatel1@gmail.com" },
+]
+
+
+[extra.highlightjs]
+enable = true
+clipboard = true
+theme = "vs2015"
+
+[extra.disqus]
+enable = false
+# Take this from your Disqus account
+shortname = "my-supa-dupa-blog"
+
+[extra.author]
+name = "Saumil Patel"
+email = "saumilpatel1@gmail.com"
+
+[extra.google_analytics]
+enable = false
+id = "UA-4XXXXXXX-X"
