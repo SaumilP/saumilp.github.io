@@ -11,7 +11,7 @@ jobs:
       - name: Checkout master
         uses: actions/checkout@master
       - name: Zola Deploy
-        uses: shalzz/zola-deploy-action@v0.12.0
+        uses: shalzz/zola-deploy-action@v0.17.2
         env:
           TOKEN: ${{ secrets.TOKEN }}
           
