@@ -1,17 +1,19 @@
+name: Build and deploy Zola site on GitHub Pages
+
 on:
    push:
      branches:
         - master
 
-name: Build and deploy on push
 jobs:
    build:
-      name: zbrox/zola-deploy-action
+      name: Publish site
       runs-on: ubuntu-latest
       steps:
-      - uses: actions/checkout@master
+      - name: Checkout master
+        uses: actions/checkout@master
       - name: zbrox/zola-deploy-action
-        uses: zbrox/zola-deploy-action@master
+        uses: zbrox/zola-deploy-action@0.12.2
         env:
           TOKEN: ${{ secrets.TOKEN }}
 
