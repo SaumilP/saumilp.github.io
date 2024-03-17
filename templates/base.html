@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta property="og:image" content="/img/profile.png" />
+    {% if page %}
+    {% if page.description %}
+    <meta name="description" content="{{ page.description }}" />
+    {% elif config.description %}
+    <meta name="description" content="{{ config.description }}" />
+    {% endif %}
+    {% elif config.description %}
+    <meta name="description" content="{{ config.description }}" />
+    {% endif %}
+
+    <title>{% if page and page.title %}{{page.title}} | {% endif %}{{ config.title }}</title>
+
+    {% if config.generate_feed %}
+    <link rel="alternate" type={% if config.feed_filename=="atom.xml" %}"application/atom+xml"{% else
+        %}"application/rss+xml"{% endif %} title="RSS" href="{{ get_url(path=config.feed_filename) | safe }}">
+    {% endif %}
+
+    <link rel="stylesheet" type="text/css" href="/css/style.css">
+    {% block stylesheets %} {% endblock %}
+</head>
+
+<body>
+    <main class="{% if not current_path or current_path == '/' or current_path == '/about/' %}index-page{% endif %}">
+        <aside class="me">
+            <div class="profile-photo-wrapper">
+                <img src="/img/profile_small.jpg" alt="Saumil Patel Profile Picture" class="profile-photo" />
+            </div>
+            <div class="contact-info">
+                <h1><a href="/">Saumil Patel</a></h1>
+                <span title="I promise I am">IT Professional, Tinkerer, Thinker</span>
+                <span class="print-hidden">coding.isFun()</span>
+                <div class="social-links print-hidden">
+                    <a href="https://github.com/saumilp" target="_blank" title="GitHub">
+                        {% include "icons/github.html" %}
+                    </a>
+                    <a href="https://gitlab.com/saumilp" target="_blank" title="GitLab">
+                        {% include "icons/gitlab.html" %}
+                    </a>
+                    <a href="https://twitter.com/SaumilP10" target="_blank" title="Twitter">
+                        {% include "icons/twitter.html" %}
+                    </a>
+                    <a href="https://www.linkedin.com/in/saumil-p-13b72219/" target="_blank" title="LinkedIn">
+                        {% include "icons/linkedin.html" %}
+                    </a>
+                    <a rel="me" href="https://mastodon.social/@saumilp" target="_blank" title="Mastodon">
+                        {% include "icons/mastodon.html" %}
+                    </a>
+                    <a href="mailto:" title="Email Me" class="not-today">
+                        {% include "icons/mail.html" %}
+                    </a>
+                </div>
+                <p class="print-hidden">
+                    Hey, I'm Saumil. I’m a experienced software engineer and a tinkerer. <br /><br />
+
+                    I like to work with simple things - things can help do day-to-day job easier for any software
+                    engineers. Most of the time i am behind a computer trying to find better ways to solve problems.
+                    And, obviously i pick up few new things now-and-then when trying to find solutions.<br /><br />
+
+                    Wish to support my work, Click to <a class="print-hidden"
+                        href="https://www.buymeacoffee.com/saumilp">buy me a coffee</a>.
+                </p>
+                <a class="print-hidden" href="/about">About Me</a>
+            </div>
+        </aside>
+        <div class="border"></div>
+        <div class="content">
+            {% block content %} {% endblock %}
+        </div>
+    </main>
+
+    {% include "partials/github-corner.html" %}
+
+    {% block scripts %} {% endblock %}
+    <script src="/js/script.js"></script>
+</body>
+
+</html>
