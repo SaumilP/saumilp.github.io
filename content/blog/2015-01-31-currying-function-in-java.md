@@ -30,10 +30,10 @@ This can be curried into something like this ( where `Function<A,B>` defines a s
 ```java
 public static Function<Integer, Function<Integer, Integer>> add() {
     return new Function<Integer, Function<Integer, Integer>>() {
-        {{"@"}}Override
+        @Override
         public Function<Integer, Integer> apply( final Integer valueX ) {
             return new Function<Integer, Integer>(){
-                {{"@"}}Override
+                @Override
                 public Integer apply( Integer valueY) {
                     return valueX + valueY;
                 }

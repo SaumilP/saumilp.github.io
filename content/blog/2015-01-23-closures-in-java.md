@@ -64,8 +64,8 @@ These method are very identical - except the conditions. These can be combined u
 
 ```java
 public static <T> T firstMatch( final List<T> objectList, final Funct<T, Boolean> functor, T refObj ){
-    for( T comparedObj : objectList ){
-        if(functor.func(comparedObj)){
+    for (T comparedObj : objectList) {
+        if (functor.func(comparedObj)) {
             return comparedObj;
         }
     }
@@ -77,12 +77,12 @@ This method can be used as :
 
 ```java
 Func<Integer,Boolean> greaterThanFive = new Func<Integer,Boolean>{
-    Boolean func(Integer no){
+    Boolean func(Integer no) {
         return no > 5;
     }
 }
 
-int numbersBiggerThanFive = firstMatch( someIntegerList, greaterThanFive, defaultValue );
+int numbersBiggerThanFive = firstMatch(someIntegerList, greaterThanFive, defaultValue);
 ```
 
 Other few examples can be found in (progfun)[https://github.com/SaumilP/java-progfun].
