@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <meta property="og:image" content="/img/profile.png" />
+    <meta property="og:image" content="/img/profile.webp" />
     {% if page %}
     {% if page.description %}
     <meta name="description" content="{{ page.description }}" />
@@ -31,12 +31,12 @@
     <main class="{% if not current_path or current_path == '/' or current_path == '/about/' %}index-page{% endif %}">
         <aside class="me">
             <div class="profile-photo-wrapper">
-                <img src="/img/profile_small.jpg" alt="Saumil Patel Profile Picture" class="profile-photo" />
+                <img src="/img/profile_sml.webp" alt="Saumil Patel Profile Picture" class="profile-photo" />
             </div>
             <div class="contact-info">
                 <h1><a href="/">Saumil Patel</a></h1>
                 <span title="I promise I am">IT Professional, Tinkerer, Thinker</span>
-                <span class="print-hidden">coding.isFun()</span>
+                <span class="print-hidden">Code, Thoughts and Ideas</span>
                 <div class="social-links print-hidden">
                     <a href="https://github.com/saumilp" target="_blank" title="GitHub">
                         {% include "icons/github.html" %}

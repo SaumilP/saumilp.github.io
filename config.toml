@@ -11,14 +11,13 @@ compile_sass = false
 build_search_index = true
 
 # Indicates theme
-#theme = "hermit_zola"
+theme = "zola-pickles"
 
 # When set to "true", a feed is automatically generated.
 generate_feed = true
 
 # The default author for pages
 author = "Saumil"
-theme = "zola-pickles"
 
 taxonomies = [
     { name = "tags", feed = true },

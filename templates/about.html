@@ -9,7 +9,7 @@
 
 {% set asset_metadata = [] %}
 {% for asset in page.assets %}
-{% if asset is matching("[.](jpg|png)$") %}
+{% if asset is matching("[.](jpg|png|webp)$") %}
 {% set meta = get_image_metadata(path=asset) %}
 {% set_global asset_metadata = asset_metadata | concat(with=meta) %}
 {% endif %}

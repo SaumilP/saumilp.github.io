@@ -1,4 +1,4 @@
 +++
 transparent = true
-redirect_to = "/"
+redirect = "/"
 +++

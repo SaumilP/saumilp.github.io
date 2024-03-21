@@ -35,7 +35,7 @@ Some of the characteristics of this pattern are:
 One of the ceavet while considering this patter, do not use this pattern when you would want to reuse types.
 Enough with the theory, let's have a look at the example.
 
-![Russian Doll XSD](/img/2015/xml-schema-design/russian_doll.png)
+![Russian Doll XSD](/img/2015/xml-schema-design/russian_doll.webp)
 
 Equivalent Xml Schema Document can be found below:
 
@@ -134,7 +134,7 @@ Some of the characteristics of this pattern are:
 - It is difficult to determine intended root element, as there can be many potential choices.
 
 Example from Russian Doll has been redesigned and represented differently with salami slice:
-![Salami Slice XSD](/img/2015/xml-schema-design/salami_slice_2015_02_09.png)
+![Salami Slice XSD](/img/2015/xml-schema-design/salami_slice_2015_02_09.webp)
 
 Equivalent Xml Schema Document can be found below:
 
@@ -234,7 +234,7 @@ Some of the characteristics of this pattern are:
 - It is verbose. Breaking apart each type in a way provides very selective, granular control over each individual aspect on the element, but makes for a lot of typing.
 
 Original Example from Russian Doll has been redesigned and represented differently with salami slice:
-![Venetian Blind XSD](/img/2015/xml-schema-design/venetian_blind_2015_02_09.png)
+![Venetian Blind XSD](/img/2015/xml-schema-design/venetian_blind_2015_02_09.webp)
 
 Equivalent Xml Schema Document can be found below:
 
