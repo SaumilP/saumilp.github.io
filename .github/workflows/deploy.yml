@@ -28,7 +28,8 @@ jobs:
            PAGES_BRANCH: gh-pages
            TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: 3__Deploy_to_GitHub_Pages
-        uses: NickSchimek/deploy_jamstack_action@v1
+        uses: peaceiris/actions-gh-pages@v3
         with:
-           deploy-branch: "gh-pages"
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./public
               
