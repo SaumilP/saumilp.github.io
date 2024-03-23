@@ -18,6 +18,14 @@
 
     <title>{% if page and page.title %}{{page.title}} | {% endif %}{{ config.title }}</title>
 
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ get_url(path="img/apple-touch-icon.png") | safe }}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ get_url(path="img/favicon-32x32.png") | safe }}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ get_url(path="img/favicon-16x16.png") | safe }}">
+    <link rel="manifest" href="{{ get_url(path="img/site.webmanifest") | safe }}">
+    <link rel="mask-icon" href="{{ get_url(path="img/safari-pinned-tab.svg") | safe }}" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="theme-color" content="#ffffff">
+
     {% if config.generate_feed %}
     <link rel="alternate" type={% if config.feed_filename=="atom.xml" %}"application/atom+xml"{% else
         %}"application/rss+xml"{% endif %} title="RSS" href="{{ get_url(path=config.feed_filename) | safe }}">
