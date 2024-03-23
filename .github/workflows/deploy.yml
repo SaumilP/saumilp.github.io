@@ -28,4 +28,7 @@ jobs:
            PAGES_BRANCH: gh-pages
            TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: 3__Deploy_to_GitHub_Pages
-        uses: Sauloxd/review-apps@v2.0.0
+        uses: NickSchimek/deploy_jamstack_action@v1
+        with:
+           deploy-branch: "gh-pages"
+              
