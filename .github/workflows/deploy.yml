@@ -28,5 +28,4 @@ jobs:
            PAGES_BRANCH: gh-pages
            TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: 3__Deploy_to_GitHub_Pages
-        id: deployment
-        uses: actions/deploy-pages@v4     
+        uses: Sauloxd/review-apps@v2.0.0
