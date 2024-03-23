@@ -51,7 +51,6 @@ hermit_social = [
     { name = "email", link = "mailto:saumilpatel1@gmail.com" },
 ]
 
-
 [extra.highlightjs]
 enable = true
 clipboard = true
@@ -59,8 +58,7 @@ theme = "vs2015"
 
 [extra.disqus]
 enable = false
-# Take this from your Disqus account
-shortname = "my-supa-dupa-blog"
+shortname = "saumilp-github-io"
 
 [extra.author]
 name = "Saumil Patel"
@@ -69,3 +67,24 @@ email = "saumilpatel1@gmail.com"
 [extra.google_analytics]
 enable = false
 id = "UA-4XXXXXXX-X"
+
+[extra.seo]
+image = "default_img.webp"
+image_height = 0
+image_width = 0
+og_locale = "en_US"
+
+  [extra.seo.twitter]
+  site = "saumilp10"
+  creator = "saumilp10"
+
+  [extra.seo.facebook]
+  admins = ""
+  publisher = ""
+  app_id = ""
+
+  # Webmaster verifications' tokens
+  [extra.seo.webmaster]
+  google = ""
+  bing = ""
+  alexa = ""
