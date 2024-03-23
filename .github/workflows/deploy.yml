@@ -16,16 +16,17 @@ concurrency:
   
 
 jobs:
-   # Deploy job
    deploy:
       name: Publish site
       runs-on: ubuntu-latest
       steps:
-      - name: Checkout
+      - name: 1__Checkout
         uses: actions/checkout@master
-      - name: Zola build and deploy
+      - name: 2__Zola_build_and_deploy
         uses: shalzz/zola-deploy-action@v0.17.2
         env:
            PAGES_BRANCH: gh-pages
            TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          
+      - name: 3__Deploy_to_GitHub_Pages
+        id: deployment
+        uses: actions/deploy-pages@v4     
