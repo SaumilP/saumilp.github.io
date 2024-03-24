@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta property="og:image" content="/img/profile.webp" />
+    
+    
+    
+
+    <title>Quick Apache Solr Setup | Code, Thoughts and Ideas</title>
+
+    <link rel="apple-touch-icon" sizes="180x180" href="https://saumilp.github.io/icons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="https://saumilp.github.io/icons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="https://saumilp.github.io/icons/favicon-16x16.png">
+    <link rel="shortcut icon" type="image/x-icon" href="https://saumilp.github.io/icons/favicon.ico">
+    <link rel="manifest" href="https://saumilp.github.io/icons/site.webmanifest">
+    <link rel="mask-icon" href="https://saumilp.github.io/icons/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="theme-color" content="#ffffff">
+
+    
+
+    
+    <link rel="alternate" type="application/atom+xml" title="RSS" href="https://saumilp.github.io/atom.xml">
+    
+
+    <link rel="stylesheet" type="text/css" href="/css/style.css">
+     
+</head>
+
+<body>
+    <header class="navbar">
+        <div class="navbarlog""><h1><a href="https://saumilp.github.io" title="Code, Thoughts and Ideas"><svg width="150" height="90" viewBox="0 0 369.65517241379314 75.46182453925974" class="looka-1j8o68f"><defs id="SvgjsDefs2262"></defs><g id="SvgjsG2263" featurekey="symbolFeature-0" transform="matrix(0.1539408866995074,0,0,0.1539408866995074,-9.236453201970443,-1.6779556063008427)" fill="#d9d9d9"><title xmlns="http://www.w3.org/2000/svg">Machine Mind</title><g xmlns="http://www.w3.org/2000/svg"><path d="M261,62.8c3.3,0,6-2.7,6-6V16.9c0-3.3-2.7-6-6-6s-6,2.7-6,6v39.9C255,60.1,257.7,62.8,261,62.8z"></path><path d="M446,201h-39.9c-3.3,0-6,2.7-6,6s2.7,6,6,6H446c3.3,0,6-2.7,6-6S449.3,201,446,201z"></path><path d="M111.9,207c0-3.3-2.7-6-6-6H66c-3.3,0-6,2.7-6,6s2.7,6,6,6h39.9C109.2,213,111.9,210.3,111.9,207z"></path><path d="M369.3,102.1L400.4,71c2.3-2.3,2.3-6.1,0-8.5c-2.3-2.3-6.1-2.3-8.5,0l-31.1,31.1c-2.3,2.3-2.3,6.1,0,8.5   C363.2,104.4,367,104.4,369.3,102.1z"></path><path d="M142.7,102.1c1.1,1.1,2.7,1.8,4.2,1.8c3.3,0,6-2.7,6-6c0-1.6-0.6-3.1-1.8-4.2l-31.1-31.1c-2.3-2.3-6.1-2.3-8.5,0   s-2.3,6.1,0,8.5L142.7,102.1z"></path><path d="M332.3,249c0-7.2-5.8-12.9-12.9-12.9c-7.2,0-12.9,5.8-12.9,12.9c0,3.4,1.4,6.7,3.8,9.2c2.4,2.4,5.7,3.8,9.2,3.8   C326.5,262,332.3,256.2,332.3,249z"></path><path d="M202.7,239.9c-5.1-5.1-13.3-5.1-18.3,0c-5.1,5.1-5.1,13.3,0,18.3c2.4,2.4,5.7,3.8,9.2,3.8c3.4,0,6.7-1.4,9.2-3.8   C207.7,253.1,207.7,244.9,202.7,239.9z"></path><path d="M308,457h-14.9c-3.3,0-6-2.7-6-6s2.7-6,6-6H308v-24H204v24h68.4c3.3,0,6,2.7,6,6s-2.7,6-6,6H204v2.3   c-0.1,7.5,5.8,13.6,13.3,13.7c0.1,0,0.2,0,0.3,0h76.8c7.5,0.1,13.6-5.9,13.6-13.4c0-0.1,0-0.2,0-0.3V457z"></path><path d="M257,98.1c-0.4,0-0.7,0-1,0c-62.2,0-114.7,46.2-122.6,107.9c-0.1,0.8-0.3,2.8-0.4,7.3c-0.4,13.4-3,26.6-7.8,39.1L107.1,300   h38.8c3.3,0,6.1,2.7,6.1,6v43.4c-0.1,12.9,10.3,23.4,23.2,23.4c0.3,0,0.5,0,0.8,0c0,0,0.1,0.1,0.1,0.1l9.6,0l0.2,0   c4.7-0.1,9.3,1.7,12.7,5c3.4,3.3,5.4,7.8,5.4,12.5V409h22v-93.5c0.1-7.2-5.6-13.2-12.8-13.3c-0.1,0-0.1,0-0.2,0   c-13.8,0-25-11.3-25-25.1c0-0.1,0-0.1,0-0.2v-3.7c-4.5-0.9-8.7-3.2-11.9-6.6c-9.8-9.7-9.9-25.4-0.2-35.2c9.7-9.8,25.4-9.9,35.2-0.2   c4.7,4.7,7.4,11.1,7.4,17.7c0.1,6.6-2.4,12.9-7.1,17.6c-3.2,3.1-7.1,5.4-11.4,6.6v3.7c-0.1,7.2,5.6,13.2,12.8,13.3   c0.1,0,0.1,0,0.2,0c13.8,0,25,11.3,25,25.1c0,0.1,0,0.1,0,0.2V409h12V212.7c-4.3-1.3-8.2-3.6-11.4-6.7h0.1   c-9.8-9.7-9.8-25.5-0.1-35.3c9.7-9.8,25.5-9.8,35.3-0.1c9.8,9.7,9.8,25.5,0.1,35.3c0,0-0.1,0.1-0.1,0.1c-3.2,3.4-7.3,5.7-11.8,6.6   V409h13v-93.5c-0.1-13.8,11-25.2,24.8-25.3c0.1,0,0.1,0,0.2,0c7.2,0,13-5.9,13-13.1c0-0.1,0-0.1,0-0.2v-3.7   c-4.3-1.2-8.3-3.4-11.5-6.6c-9.7-9.8-9.6-25.6,0.1-35.3c9.6-9.9,25.3-10.1,35.2-0.6c9.9,9.6,10.1,25.3,0.6,35.2   c-0.2,0.2-0.4,0.4-0.6,0.6c-3.2,3.3-7.3,5.6-11.8,6.6v3.7c0.1,13.8-11,25.2-24.8,25.3c-0.1,0-0.1,0-0.2,0c-7.2,0-13,5.9-13,13.1   c0,0.1,0,0.1,0,0.2V409h21v-24.4c0-27.2,11.8-53.6,32.1-72.4c49.9-46.5,52.7-124.7,6.2-174.7C323.2,112.7,290.9,98.5,257,98.1z"></path><path d="M265.6,179.3c-5.1-5.1-13.3-5.1-18.3,0c-5.1,5.1-5.1,13.3,0,18.3c5.1,5,13.2,5,18.3,0C270.6,192.5,270.6,184.3,265.6,179.3   z"></path><path d="M250,495.1c0,3.3,2.7,6,6,6s6-2.7,6-6V479h-12V495.1z"></path></g></g><g id="SvgjsG2264" featurekey="nameFeature-0" transform="matrix(1.4494354369584879,0,0,1.4494354369584879,77.68090309352301,-0.39322247892315687)" fill="#3b4972"><path d="M5.32 28.52 l-3.72 -3.72 l0 -9.08 l3.72 -3.72 l3.28 0 l0 5.04 l-1.2 0 l-0.76 0.76 l0 4.92 l0.76 0.76 l6.16 0 l3.72 3.72 l0 1.32 l-11.96 0 z M5.32 40 l-3.72 -3.72 l0 -5.24 l5.04 0 l0 3.16 l0.76 0.76 l4.08 0 l0.76 -0.76 l0 -4 l5.04 0 l0 6.08 l-3.72 3.72 l-8.24 0 z M12.24 20.96 l0 -3.16 l-0.76 -0.76 l-1.2 0 l0 -5.04 l3.28 0 l3.72 3.72 l0 5.24 l-5.04 0 z M19.68 40 l2.28 -11.2 l8.56 0 l-1.72 -8.56 l-1.36 6.88 l-5.16 0 l3.04 -15.12 l6.96 0 l4.4 21.84 l-10.6 0 l-1.24 6.16 l-5.16 0 z M32.8 40 l-0.92 -4.48 l5.16 0 l0.88 4.48 l-5.12 0 z M49.28 40 l0 -5.04 l1.48 0 l0.76 -0.76 l0 -22.2 l5.04 0 l0 24.28 l-3.72 3.72 l-3.56 0 z M44.04 40 l-3.72 -3.72 l0 -24.28 l5.04 0 l0 22.2 l0.76 0.76 l1.48 0 l0 5.04 l-3.56 0 z M67.36 31.32 l-7.6 -19.32 l5.4 0 l4.2 10.6 l4.16 -10.6 l5.4 0 l-7.6 19.32 l-3.96 0 z M59.839999999999996 40 l0 -23.24 l5.04 12.84 l0 10.4 l-5.04 0 z M73.84 40 l0 -10.4 l5.04 -12.84 l0 23.24 l-5.04 0 z M82.11999999999999 25.16 l0 -13.16 l5.04 0 l0 13.16 l-5.04 0 z M82.11999999999999 40 l0 -13.16 l5.04 0 l0 13.16 l-5.04 0 z M90.35999999999999 33.28 l0 -21.28 l5.04 0 l0 21.28 l-5.04 0 z M90.35999999999999 40 l0 -5.04 l5.04 0 l0 5.04 l-5.04 0 z M97.07999999999998 40 l0 -5.04 l6.16 0 l0 5.04 l-6.16 0 z M120.75999999999999 30.2 l0 -5.04 l3.16 0 l0.76 -0.76 l0 -6.6 l-0.76 -0.76 l-3.16 0 l0 -5.04 l5.24 0 l3.72 3.72 l0 10.76 l-3.72 3.72 l-5.24 0 z M114.03999999999998 40 l0 -8.12 l5.04 0 l0 8.12 l-5.04 0 z M114.03999999999998 30.2 l0 -18.2 l5.04 0 l0 18.2 l-5.04 0 z M132.12 40 l2.28 -11.2 l8.56 0 l-1.72 -8.56 l-1.36 6.88 l-5.16 0 l3.04 -15.12 l6.96 0 l4.4 21.84 l-10.6 0 l-1.24 6.16 l-5.16 0 z M145.23999999999998 40 l-0.92 -4.48 l5.16 0 l0.88 4.48 l-5.12 0 z M158.07999999999998 40 l0 -21.28 l5.04 0 l0 21.28 l-5.04 0 z M152.76 17.04 l0 -5.04 l15.68 0 l0 5.04 l-15.68 0 z M171.64 28.52 l0 -16.52 l5.04 0 l0 16.52 l-5.04 0 z M171.64 40 l0 -9.8 l5.04 0 l0 9.8 l-5.04 0 z M178.35999999999999 40 l0 -5.04 l7 0 l0 5.04 l-7 0 z M178.35999999999999 28.52 l0 -5.04 l4.76 0 l0 5.04 l-4.76 0 z M178.35999999999999 17.04 l0 -5.04 l7 0 l0 5.04 l-7 0 z M188.55999999999997 33.28 l0 -21.28 l5.04 0 l0 21.28 l-5.04 0 z M188.55999999999997 40 l0 -5.04 l5.04 0 l0 5.04 l-5.04 0 z M195.27999999999997 40 l0 -5.04 l6.16 0 l0 5.04 l-6.16 0 z"></path></g></svg></a></h1></div>
+    </header>
+    <main class="">
+        <aside class="me">
+            <div class="profile-photo-wrapper">
+                <img src="/img/profile_sml.webp" alt="Saumil Patel Profile Picture" class="profile-photo" />
+            </div>
+            <div class="contact-info">
+                <h1><a href="/">Saumil Patel</a></h1>
+                <span title="I promise I am">IT Professional, Tinkerer, Thinker</span>
+                <span class="print-hidden">Code, Thoughts and Ideas</span>
+                <div class="social-links print-hidden">
+                    <a href="https://github.com/saumilp" target="_blank" title="GitHub">
+                        <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+    <title>GitHub</title>
+    <path
+        d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"
+    />
+</svg>
+
+                    </a>
+                    <a href="https://gitlab.com/saumilp" target="_blank" title="GitLab">
+                        <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+    <title>GitLab</title>
+    <path
+        d="m23.6004 9.5927-.0337-.0862L20.3.9814a.851.851 0 0 0-.3362-.405.8748.8748 0 0 0-.9997.0539.8748.8748 0 0 0-.29.4399l-2.2055 6.748H7.5375l-2.2057-6.748a.8573.8573 0 0 0-.29-.4412.8748.8748 0 0 0-.9997-.0537.8585.8585 0 0 0-.3362.4049L.4332 9.5015l-.0325.0862a6.0657 6.0657 0 0 0 2.0119 7.0105l.0113.0087.03.0213 4.976 3.7264 2.462 1.8633 1.4995 1.1321a1.0085 1.0085 0 0 0 1.2197 0l1.4995-1.1321 2.4619-1.8633 5.006-3.7489.0125-.01a6.0682 6.0682 0 0 0 2.0094-7.003z"
+    />
+</svg>
+
+                    </a>
+                    <a href="https://twitter.com/SaumilP10" target="_blank" title="Twitter">
+                        <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+    <title>X</title>
+    <path
+        d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932ZM17.61 20.644h2.039L6.486 3.24H4.298Z"
+    />
+</svg>
+
+                    </a>
+                    <a href="https://www.linkedin.com/in/saumil-p-13b72219/" target="_blank" title="LinkedIn">
+                        <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+    <title>LinkedIn</title>
+    <path
+        d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"
+    />
+</svg>
+
+                    </a>
+                    <a rel="me" href="https://mastodon.social/@saumilp" target="_blank" title="Mastodon">
+                        <svg
+    fill="#000000"
+    viewBox="0 0 24 24"
+    xmlns="http://www.w3.org/2000/svg"
+    xml:space="preserve"
+>
+    <path
+        d="M21.327 8.566c0-4.339-2.843-5.61-2.843-5.61-1.433-.658-3.894-.935-6.451-.956h-.063c-2.557.021-5.016.298-6.45.956 0 0-2.843 1.272-2.843 5.61 0 .993-.019 2.181.012 3.441.103 4.243.778 8.425 4.701 9.463 1.809.479 3.362.579 4.612.51 2.268-.126 3.541-.809 3.541-.809l-.075-1.646s-1.621.511-3.441.449c-1.804-.062-3.707-.194-3.999-2.409a4.523 4.523 0 0 1-.04-.621s1.77.433 4.014.536c1.372.063 2.658-.08 3.965-.236 2.506-.299 4.688-1.843 4.962-3.254.434-2.223.398-5.424.398-5.424zm-3.353 5.59h-2.081V9.057c0-1.075-.452-1.62-1.357-1.62-1 0-1.501.647-1.501 1.927v2.791h-2.069V9.364c0-1.28-.501-1.927-1.502-1.927-.905 0-1.357.546-1.357 1.62v5.099H6.026V8.903c0-1.074.273-1.927.823-2.558.566-.631 1.307-.955 2.228-.955 1.065 0 1.872.409 2.405 1.228l.518.869.519-.869c.533-.819 1.34-1.228 2.405-1.228.92 0 1.662.324 2.228.955.549.631.822 1.484.822 2.558v5.253z"
+    />
+</svg>
+
+                    </a>
+                    <a href="mailto:" title="Email Me" class="not-today">
+                        <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 -960 960 960">
+    <path
+        d="M160-160q-33 0-56.5-23.5T80-240v-480q0-33 23.5-56.5T160-800h640q33 0 56.5 23.5T880-720v480q0 33-23.5 56.5T800-160H160Zm320-280L160-640v400h640v-400L480-440Zm0-80 320-200H160l320 200ZM160-640v-80 480-400Z"
+    />
+</svg>
+
+                    </a>
+                </div>
+                <p class="print-hidden">
+                    Hey folks, I'm Saumil. I work in tech. I’m an experienced full-stack software engineer and a tinkerer turned software architect. <br /><br />
+
+                    I like to work with simple things - things can help do day-to-day job easier for any software
+                    engineers. Most of the time i am behind a computer trying to find better ways to solve problems.
+                    And, obviously i pick up few new things now-and-then when trying to find solutions.<br /><br />
+
+                    Wish to support my work, Click to <a class="print-hidden"
+                        href="https://www.buymeacoffee.com/saumilp">buy me a coffee</a>.
+                </p>
+                <a class="print-hidden" href="/about">About Me</a>
+            </div>
+        </aside>
+        <div class="border"></div>
+        <div class="content">
+            
+<h1 class="title">
+    Quick Apache Solr Setup
+    <div class="post-info">2015-01-31</div>
+</h1>
+<script id="dsq-count-scr" src="//saumilp-github-io.disqus.com/count.js" async></script>
+<p><img src="/img/2015/quick-solr-setup/solr-header-image.webp" alt="Solr" /></p>
+<p>It has been long time since I started with setup/configuration related blog post. This post provides steps for setting up developer machine for <strong><a href="https://solr.apache.org/">Apache Solr</a></strong>. Apache Solr is an opensource search engine written in Java, from the Apache Lucene project - with many powerful <a href="http://lucene.apache.org/solr/features.html">features</a>.<span id="continue-reading"></span></p>
+<p>I have encountered quite a few experienced developers that either don't know how to use Apache solr or avoid it as it's in the scary/too hard basket. In this introductory post, we'll look into how to install Apache Solr in order to use it for development.</p>
+<p>There are many ways to install and configure Solr, but for this post we'll look at quickest way to set it up for development reasons.</p>
+<h3 id="what-is-apache-solr"><a class="zola-anchor" href="#what-is-apache-solr" aria-label="Anchor link for: what-is-apache-solr"><i class="fas fa-link"></i></a> 
+What is Apache Solr?</h3>
+<p>In nutshell, Solr is a stable, reliable, and fault-tolerant search platform with a rich set of core functions that enables developers to improve both user experience and the underlying data modeling. For instance, among functionalities that help deliver a good user experience, we can name spell checking, goespatial search, faceting, or auto-suggetst, while backend developers may benefit from features like joins, clustering, being able to import rich document formats, and many more.</p>
+<p>However, to fully grasp how to use it for your benefit, here are Solr's core features and why you may want to use Solr:</p>
+<ul>
+<li>Powerful full-text search capability</li>
+<li>High scalability and flexibility</li>
+<li>Built in security</li>
+<li>Easy monitoring</li>
+<li>Powerful analytical support</li>
+</ul>
+<h3 id="getting-started"><a class="zola-anchor" href="#getting-started" aria-label="Anchor link for: getting-started"><i class="fas fa-link"></i></a> 
+Getting started</h3>
+<h4 id="step-1"><a class="zola-anchor" href="#step-1" aria-label="Anchor link for: step-1"><i class="fas fa-link"></i></a> 
+Step 1:</h4>
+<p>Install docker on your machine. Reference: <a href="https://docs.docker.com/get-docker/" target="_blanl">get-docker</a></p>
+<h4 id="step-2"><a class="zola-anchor" href="#step-2" aria-label="Anchor link for: step-2"><i class="fas fa-link"></i></a> 
+Step 2:</h4>
+<p>Pull solr image from docker if not present. And, run it in detached container mode, if you are interested in viewing a complete run log. You can skip the detached mode by skipping <code>-d</code> in the following command.</p>
+<pre data-lang="bash" style="background-color:#eff1f5;color:#4f5b66;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#bf616a;">$</span><span>&gt; docker run</span><span style="color:#bf616a;"> --name</span><span> local-solr</span><span style="color:#bf616a;"> -d -p</span><span> 8983:8983</span><span style="color:#bf616a;"> -t</span><span> solr:9.5.0-slim
+</span></code></pre>
+<p>Or start Solr docker if present</p>
+<pre data-lang="bash" style="background-color:#eff1f5;color:#4f5b66;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#bf616a;">$</span><span>&gt; docker start {solr-container-id}
+</span></code></pre>
+<p>This will start the solr container on your machine on port specified as 8983.
+You can verify the container running by command.</p>
+<pre data-lang="bash" style="background-color:#eff1f5;color:#4f5b66;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#bf616a;">$</span><span>&gt; docker container ls
+</span></code></pre>
+<h4 id="step-3"><a class="zola-anchor" href="#step-3" aria-label="Anchor link for: step-3"><i class="fas fa-link"></i></a> 
+Step 3:</h4>
+<p>Your Solr application is up and running. You can open a Solr web-console on <a href="http://localhost:8983/">http://localhost:8983/</a>.</p>
+<p><img src="/img/2015/quick-solr-setup/solr-webconsole.webp" alt="Solr WebConsole" /></p>
+<h4 id="step-4"><a class="zola-anchor" href="#step-4" aria-label="Anchor link for: step-4"><i class="fas fa-link"></i></a> 
+Step 4:</h4>
+<p>Creating your Solr core wherein your data will reside.</p>
+<pre data-lang="bash" style="background-color:#eff1f5;color:#4f5b66;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#bf616a;">$</span><span>&gt; docker exec</span><span style="color:#bf616a;"> -it --user</span><span> solr local-solr bin/solr create_core</span><span style="color:#bf616a;"> -c</span><span> first_core
+</span></code></pre>
+<p><img src="/img/2015/quick-solr-setup/solr-first-core.webp" alt="Solr first_core" /></p>
+<h4 id="step-5"><a class="zola-anchor" href="#step-5" aria-label="Anchor link for: step-5"><i class="fas fa-link"></i></a> 
+Step 5:</h4>
+<p>Add some-data in your core. Post raw JSON data using <code>http://localhost:8983/solr/{CORE-NAME}/update</code>.</p>
+<pre data-lang="json" style="background-color:#eff1f5;color:#4f5b66;" class="language-json "><code class="language-json" data-lang="json"><span>[{
+</span><span>   &quot;</span><span style="color:#a3be8c;">id</span><span>&quot;: </span><span style="color:#d08770;">1</span><span>,
+</span><span>   &quot;</span><span style="color:#a3be8c;">name</span><span>&quot;: &quot;</span><span style="color:#a3be8c;">ramdom1</span><span>&quot;,
+</span><span>   &quot;</span><span style="color:#a3be8c;">description</span><span>&quot;: &quot;</span><span style="color:#a3be8c;">something</span><span>&quot;
+</span><span> },
+</span><span> {
+</span><span>   &quot;</span><span style="color:#a3be8c;">id</span><span>&quot;: </span><span style="color:#d08770;">2</span><span>,
+</span><span>   &quot;</span><span style="color:#a3be8c;">name</span><span>&quot;: &quot;</span><span style="color:#a3be8c;">ramdom2</span><span>&quot;,
+</span><span>   &quot;</span><span style="color:#a3be8c;">description</span><span>&quot;: &quot;</span><span style="color:#a3be8c;">nothing</span><span>&quot;
+</span><span>}]
+</span></code></pre>
+<p>And reload core using POST <code>http://localhost:8983/solr/admin/cores?action=RELOAD&amp;core={CORE-NAME}</code>.`</p>
+<h4 id="step-6"><a class="zola-anchor" href="#step-6" aria-label="Anchor link for: step-6"><i class="fas fa-link"></i></a> 
+Step 6:</h4>
+<p>Check if data exists in the core. Select core from left, click on the query link, and execute query.</p>
+<p><img src="/img/2015/quick-solr-setup/solr-query.webp" alt="Solr_query" /></p>
+<h4 id="step-7"><a class="zola-anchor" href="#step-7" aria-label="Anchor link for: step-7"><i class="fas fa-link"></i></a> 
+Step 7:</h4>
+<p>Enjoy querying via web-console. Here are some basic fields you can perform queries on.</p>
+<ul>
+<li>Request-handler (qt) — Specifies the query handler for the request. If a query handler is not specified, Solr processes the response with the standard query handler.</li>
+<li><strong>q</strong> — The query event. See <a href="https://lucene.apache.org/solr/guide/6_6/searching.html#searching">Searching</a> for an explanation of this parameter.</li>
+<li><strong>fq</strong> — The filter queries. See <a href="https://lucene.apache.org/solr/guide/6_6/common-query-parameters.html#common-query-parameters">Common Query Parameters</a> for more information on this parameter.</li>
+<li><strong>sort</strong> — Sorts the response to a query in either ascending or descending order based on the response’s score or another specified characteristic.</li>
+<li><strong>start</strong>, <strong>rows</strong> — start is the offset into the query result starting at which documents should be returned. The default value is 0, meaning that the query should return results starting with the first document that matches. This field accepts the same syntax as the start query parameter, which is described in <a href="https://lucene.apache.org/solr/guide/6_6/searching.html#searching">Searching</a>. rows is the number of rows to return.</li>
+<li><strong>fl</strong> — Defines the fields to return for each document. You can explicitly list the stored fields, <a href="https://lucene.apache.org/solr/guide/6_6/function-queries.html#function-queries">functions</a>, and <a href="https://lucene.apache.org/solr/guide/6_6/transforming-result-documents.html#transforming-result-documents">doc transformers</a> you want to have returned by separating them with either a comma or a space.</li>
+<li><strong>wt</strong> — Specifies the Response Writer to be used to format the query response. Defaults to XML if not specified.</li>
+<li><strong>indent</strong> — Click this button to request that the Response Writer use indentation to make the responses more readable.</li>
+<li><strong>debugQuery</strong> — Click this button to augment the query response with debugging information, including “explain info” for each document returned. This debugging information is intended to be intelligible to the administrator or programmer.</li>
+<li><strong>dismax</strong> — Click this button to enable the Dismax query parser. See <a href="https://lucene.apache.org/solr/guide/6_6/the-dismax-query-parser.html#the-dismax-query-parser">The DisMax Query Parser</a> for further information.</li>
+<li><strong>edismax</strong> — Click this button to enable the Extended query parser. See <a href="https://lucene.apache.org/solr/guide/6_6/the-extended-dismax-query-parser.html#the-extended-dismax-query-parser">The Extended DisMax Query Parser</a> for further information</li>
+<li><strong>hl</strong> — Click this button to enable highlighting in the query response. See <a href="https://lucene.apache.org/solr/guide/6_6/highlighting.html#highlighting">Highlighting</a> for more information.</li>
+<li><strong>facet</strong> — Enables faceting, the arrangement of search results into categories based on indexed terms. See <a href="https://lucene.apache.org/solr/guide/6_6/faceting.html#faceting">Faceting</a> for more information.</li>
+<li><strong>spatial</strong> — Click to enable using location data for use in spatial or geospatial searches. See <a href="https://lucene.apache.org/solr/guide/6_6/spatial-search.html#spatial-search">Spatial Search</a> for more information.</li>
+<li><strong>spellcheck</strong> — Click this button to enable the Spell Checker, which provides inline query suggestions based on other, similar, terms. See <a href="https://lucene.apache.org/solr/guide/6_6/spell-checking.html#spell-checking">Spell Checking</a> for more information.</li>
+</ul>
+<h3 id="conclusion"><a class="zola-anchor" href="#conclusion" aria-label="Anchor link for: conclusion"><i class="fas fa-link"></i></a> 
+Conclusion</h3>
+<p>Solr search engine is fast for text searching/analyzing because of its inverted index structure. Solr is consistent and very well-documented. If your application requires the sort of extensive text searching that Solr supports, then Solr is the right choice for you. There are dozens of big-name companies (like AT&amp;T, Netflix, Verizon, and Qualcomm) that use Solr as their primary search engine. Even Amazon Cloud search, which is a search engine service by AWS, uses Solr internally.</p>
+<h3 id="references"><a class="zola-anchor" href="#references" aria-label="Anchor link for: references"><i class="fas fa-link"></i></a> 
+References</h3>
+<ul>
+<li><a href="https://lucene.apache.org/solr/guide/6_6/query-screen.html">Lucene Query</a></li>
+<li><a href="https://lucene.apache.org/solr/">Apache Solr</a></li>
+</ul>
+
+
+<div class="back-to-top">
+    <b><a href="https://saumilp.github.io/blog/quick-solr-setup/" title="Back to top">
+        Back to Top<?xml version="1.0" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 20010904//EN"
+ "http://www.w3.org/TR/2001/REC-SVG-20010904/DTD/svg10.dtd">
+<svg version="1.0" xmlns="http://www.w3.org/2000/svg"
+ width="15pt" height="15pt" viewBox="0 0 1069.000000 1280.000000"
+ preserveAspectRatio="xMidYMid meet">
+<g transform="translate(0.000000,1280.000000) scale(0.100000,-0.100000)"
+fill="#000000" stroke="none">
+<path d="M2784 10009 l-2559 -2559 1573 0 1572 0 0 -169 0 -170 43 -6 c23 -3
+917 -4 1987 -3 l1945 3 0 173 0 172 1553 0 c853 0 1552 3 1552 7 0 7 -5032
+5048 -5081 5090 l-25 22 -2560 -2560z"/>
+<path d="M3370 6825 l0 -255 1988 2 1987 3 3 190 c2 105 0 218 -3 253 l-7 62
+-1984 0 -1984 0 0 -255z"/>
+<path d="M3370 6280 l0 -230 1988 2 1987 3 3 175 c2 96 0 199 -3 228 l-6 52
+-1985 0 -1984 0 0 -230z"/>
+<path d="M3370 5735 l0 -215 1990 0 1990 0 0 169 c0 92 -3 189 -6 215 l-7 46
+-1983 0 -1984 0 0 -215z"/>
+<path d="M3370 5191 l0 -200 53 -6 c28 -3 923 -5 1987 -3 l1935 3 3 140 c2 77
+0 168 -3 203 l-7 62 -1984 0 -1984 0 0 -199z"/>
+<path d="M3372 4643 l3 -178 1985 0 1985 0 3 125 c2 69 0 149 -3 178 l-6 52
+-1985 0 -1984 0 2 -177z"/>
+<path d="M3370 4095 l0 -165 1988 2 1987 3 3 100 c2 55 0 128 -3 163 l-7 62
+-1984 0 -1984 0 0 -165z"/>
+<path d="M3370 3550 l0 -150 1990 0 1990 0 0 104 c0 57 -3 124 -6 150 l-7 46
+-1983 0 -1984 0 0 -150z"/>
+<path d="M3377 3133 c-4 -3 -7 -62 -7 -130 l0 -123 1990 0 1990 0 0 84 c0 46
+-3 104 -6 130 l-7 46 -1977 0 c-1087 0 -1980 -3 -1983 -7z"/>
+<path d="M3370 2461 l0 -110 43 -6 c23 -3 917 -4 1987 -3 l1945 3 3 60 c2 33
+1 84 -3 113 l-6 52 -1985 0 -1984 0 0 -109z"/>
+<path d="M3370 1910 l0 -100 1988 2 1987 3 3 35 c2 19 1 63 -3 98 l-7 62
+-1984 0 -1984 0 0 -100z"/>
+<path d="M3370 1370 l0 -80 1985 0 c1767 0 1986 2 1991 15 4 9 3 45 -1 80 l-7
+65 -1984 0 -1984 0 0 -80z"/>
+<path d="M3370 820 l0 -60 1990 0 1990 0 0 23 c0 12 -3 39 -6 60 l-7 37 -1983
+0 -1984 0 0 -60z"/>
+<path d="M3370 276 l0 -43 46 -7 c69 -9 3922 -7 3928 2 2 4 2 27 -1 50 l-6 42
+-1983 0 -1984 0 0 -44z"/>
+</g>
+</svg>
+
+    </b></a>
+</div><br />
+
+<div id="disqus_thread"></div>
+<script>
+    (function() {
+        var d = document, s = d.createElement('script');
+        s.src = 'https://saumilp-github-io.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+
+        </div>
+    </main>
+    <footer class="page-footer">
+        <small>
+            <p class="page-copyright">
+                
+                Powered by <a href="https://www.getzola.org" target="_blank" rel="noopener">Zola</a> | &copy; Saumil Patel | <a href="https://saumilp.github.io/atom.xml" target="_blank">RSS</a>
+            </p>
+        </small>
+    </footer>
+
+    <a
+    href="https://github.com/saumilp/saumilp.github.io"
+    class="github-corner print-hidden"
+    aria-label="View source on GitHub"
+>
+    <svg
+        xmlns="http://www.w3.org/2000/svg"
+        xmlns:xlink="http://www.w3.org/1999/xlink"
+        viewBox="0 0 80 80"
+        width="62pt"
+        height="62pt"
+        style="
+            fill: #151513;
+            color: #fff;
+            position: absolute;
+            top: 0;
+            border: 0;
+            right: 0;
+        "
+        aria-hidden="true"
+    >
+        <defs>
+            <clipPath id="_clipPath_kekDrk9tRbWqRr4kEErigMnoXeJdMRR7">
+                <rect width="80" height="80" />
+            </clipPath>
+        </defs>
+        <g clip-path="url(#_clipPath_kekDrk9tRbWqRr4kEErigMnoXeJdMRR7)">
+            <path
+                d=" M 0 0 L 36.8 36.8 L 41.6 36.8 L 45.44 45.44 L 80 80 L 80 0 L 0 0 Z "
+            />
+            <path
+                d=" M 51.2 16 Q 52.297 13.609 55.04 12.48 C 55.238 12.399 56.922 14.469 57.28 17.6 L 51.2 16 Z  M 64 24.32 C 66.853 24.945 68.656 25.72 69.44 26.56 C 69.539 26.666 67.852 29.668 65.92 30.08 L 64 24.32 Z "
+                fill-rule="evenodd"
+                fill="currentColor"
+                class="octo-ears"
+                style="transform-origin: 130px 106px"
+            />
+            <path
+                d=" M 40.96 34.88 C 36.16 32 38.08 28.8 38.08 28.8 C 39.04 26.56 38.72 25.28 38.72 25.28 C 38.4 23.04 39.68 24.64 39.68 24.64 C 40.96 26.24 40.32 28.16 40.32 28.16 C 39.36 31.36 41.92 32.96 43.2 33.28"
+                fill="currentColor"
+                class="octo-arm"
+            />
+            <path
+                d=" M 36.8 36.8 C 36.8 36.8 38.08 37.44 38.4 36.8 L 42.88 32.32 C 43.84 31.68 44.8 31.36 45.44 31.36 C 42.88 27.84 40.64 23.68 46.08 18.24 C 47.68 16.64 49.28 16 51.2 16 C 53.594 15.953 54.422 16.172 57.28 17.6 C 58.56 18.24 59.84 19.2 61.12 20.48 C 62.4 21.76 63.36 23.04 64 24.32 C 65.063 26.031 65.5 27.438 65.92 30.08 C 65.92 32 65.28 33.6 63.68 35.2 C 58.56 40.32 54.08 38.4 50.56 35.84 C 50.56 36.8 50.24 38.08 48.96 39.36 L 45.12 42.88 C 44.8 43.2 45.44 44.48 45.44 44.48 L 36.8 36.8 Z "
+                fill="currentColor"
+                class="octo-body"
+            />
+        </g>
+    </svg>
+</a>
+
+<style>
+    .github-corner:hover .octo-ears {
+        animation: octocat-flap 460ms ease-in-out;
+    }
+
+    @keyframes octocat-flap {
+        0%,
+        100% {
+            transform: rotate(0);
+        }
+
+        20%,
+        60% {
+            transform: rotate(-3deg);
+        }
+
+        40%,
+        80% {
+            transform: rotate(0deg);
+        }
+    }
+
+    @media (max-width: 500px) {
+        .github-corner:hover .octo-ears {
+            animation: none;
+        }
+
+        .github-corner .octo-ears {
+            animation: octocat-flap 460ms ease-in-out;
+        }
+    }
+</style>
+
+
+     
+    <script src="/js/script.js"></script>
+</body>
+
+</html>
