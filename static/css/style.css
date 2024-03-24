@@ -220,7 +220,7 @@ main {
     display: flex;
     flex-direction: column;
     padding: 0 30px;
-    margin: 30px auto;
+    margin: 10px auto;
     max-width: 900px;
     outline: none;
 }
@@ -465,6 +465,40 @@ main {
 
     .visible-mobile {
         display: none;
+    }
+
+    .page-footer {
+      padding: 24px 0;
+    }
+
+    .page-copyright {
+      align-self: center;
+      font-size: smaller;
+      text-align: center;
+      margin: auto 0;
+    }
+
+    .back-to-top {
+      align-self: right;
+      text-align: right;
+      margin: auto 0;
+      text-decoration: underline;
+    }
+
+    .navbar {
+        flex-direction: column;
+        margin: 0 auto;
+        outline: none;
+        padding: 0 0 0;
+        background-color: whitesmoke;
+        height: 82px;
+    }
+
+    .navbarlog {
+        padding: 0 30px 0;
+        flex-direction: row;
+        display: flex;
+        font-family: 'Kufam', sans-serif;
     }
 }
 

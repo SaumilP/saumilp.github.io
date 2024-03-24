@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="{{ config.default_language }}">
 
 <head>
     <meta charset="utf-8">
@@ -18,7 +18,6 @@
 
     <title>{% if page and page.title %}{{page.title}} | {% endif %}{{ config.title }}</title>
 
-    <!-- created from 'https://realfavicongenerator.net/' -->
     <link rel="apple-touch-icon" sizes="180x180" href="{{ get_url(path="icons/apple-touch-icon.png") | safe }}">
     <link rel="icon" type="image/png" sizes="32x32" href="{{ get_url(path="icons/favicon-32x32.png") | safe }}">
     <link rel="icon" type="image/png" sizes="16x16" href="{{ get_url(path="icons/favicon-16x16.png") | safe }}">
@@ -27,6 +26,15 @@
     <link rel="mask-icon" href="{{ get_url(path="icons/safari-pinned-tab.svg") | safe }}" color="#5bbad5">
     <meta name="msapplication-TileColor" content="#da532c">
     <meta name="theme-color" content="#ffffff">
+
+    {% block seo %}
+    {%- set site_url = current_url | default(value=get_url(path="404.html")) -%}
+    {% set author = config.extra.author | default(value="") -%}
+    {% set description = config.description | default(value="") -%}
+    {% set image = config.extra.seo.image | default(value="") -%}
+    {% set image_height = config.extra.seo.image_height | default(value=0) -%}
+    {% set image_width = config.extra.seo.image_width | default(value=0) -%}
+    {% endblock seo %}
 
     {% if config.generate_feed %}
     <link rel="alternate" type={% if config.feed_filename=="atom.xml" %}"application/atom+xml"{% else
@@ -38,6 +46,26 @@
 </head>
 
 <body>
+    <header class="navbar">
+        <div class="navbarlog"">
+            {%- if config.extra.logo -%}
+
+            <h1><a href="{{ get_url(path="/", lang=lang) }}{%- if uglyurls %}/index.html{%- endif %}" title="{{config.title}}">
+            {%- if config.extra.logo.file -%}
+            <img src="{{ config.base_url | safe }}/{{ config.extra.logo.file | safe }}"{%- if config.extra.logo.alt %} alt="{{ config.extra.logo.alt | safe }}"{%- endif %}{%- if config.extra.logo.width %} width="{{ config.extra.logo.width | safe }}"{%- endif %}{%- if config.extra.logo.height %} height="{{ config.extra.logo.height | safe }}"{%- endif %} />
+            {%- endif -%}
+            {%- if config.extra.logo.text -%}{{ config.extra.logo.text | safe }}{%- endif -%}
+            </a></h1>
+
+            {%- elif config.extra.textlogo -%}
+            <h1><a href="{{ get_url(path="/", lang=lang) }}{%- if uglyurls -%}
+            {%- if lang == config.default_language -%}/{%- endif -%}
+            index.html{%- endif -%}" title="{{config.title}}">{{ config.extra.textlogo | safe }}</a></h1>
+            {%- elif config.title -%}
+            <h1><a href="{{ get_url(path="/", lang=lang) }}{%- if uglyurls %}/index.html{%- endif %}" title="{{config.title}}">{{ config.title | safe }}</a></h1>
+            {%- endif -%}
+        </div>
+    </header>
     <main class="{% if not current_path or current_path == '/' or current_path == '/about/' %}index-page{% endif %}">
         <aside class="me">
             <div class="profile-photo-wrapper">
@@ -85,6 +113,18 @@
             {% block content %} {% endblock %}
         </div>
     </main>
+    <footer class="page-footer">
+        {% block footer -%}
+        <small>
+            <p class="page-copyright">
+                {% if config.extra.footer_copyright -%}
+                {% set content = config.extra.footer_copyright | markdown(inline=true) %}
+                {{ content | safe }} | &copy; {{ config.extra.author.name }} | <a href="https://saumilp.github.io/atom.xml" target="_blank">RSS</a>
+                {%- endif %}
+            </p>
+        </small>
+        {%- endblock footer %}
+    </footer>
 
     {% include "partials/github-corner.html" %}
 

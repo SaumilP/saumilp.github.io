@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="{{ lang }}">
+  <title>{{ config.title }}</title>
+  <subtitle>{{ config.description }}</subtitle>
+
+  <rights>
+    {% set current_year = now() | date(format="%Y") -%}
+    © 2022 - {{ current_year }} {{ config.extra.author }}
+  </rights>
+  <author>
+    <name>{{ config.extra.author.name }}</name>
+    <email>{{ config.extra.author.email }}</email>
+    <uri>{{ config.base_url }}</uri>
+  </author>
+
+  <id>tag:saumilp.github.io,{{ "2024-01-07" | date(format="%F") }}:{{ config.extra.feed_uuid }}</id>
+
+  {# Grab all dates of all posts, find the latest one. -#}
+  {% set_global dates = [] -%}
+  {% for page in pages -%}
+    {% if not page.extra.no_feed -%}
+      {% if page.date -%}
+        {% set_global dates = dates | concat(with = page.date) -%}
+      {% endif -%}
+      {% if page.updated -%}
+        {% set_global dates = dates | concat(with = page.updated) -%}
+      {% endif -%}
+    {% endif -%}
+  {% endfor -%}
+  {% set_global dates = dates | sort() -%}
+  <updated>{{ dates | last | date(format="%+") }}</updated>
+
+  <!-- The W3C validator will complain when this is on localhost, disregard. -->
+  <link href="{{ feed_url }}" rel="self" type="application/atom+xml"/>
+  <link href="{{ config.base_url }}" hreflang="{{ lang }}"/>
+  <generator uri="https://www.getzola.org/">Zola</generator>
+
+  {% for page in pages -%}
+    {%- if page.date and not page.extra.no_feed -%}
+    <entry xml:lang="{{ page.lang }}">
+      {% if page.title -%}
+        <title>{{ page.title }}</title>
+      {%- endif %}
+      <published>{{ page.date | date(format="%+") }}</published>
+      <updated>{{
+        page.updated
+        | default(value = page.date)
+        | date(format="%+")
+      }}</updated>
+
+      <link href="{{ page.permalink }}"
+            hreflang="{{ page.lang }}"
+            type="text/html"/>
+      <id>tag:saumilp.github.io:tech:{{ page.date | date(format="%F") }}:1</id>
+
+      <author>
+        <name>{{
+            page.extra.author
+            | default(value = config.extra.author)
+        }}</name>
+      </author>
+      <rights type="html">
+        © {{ page.date | date(format="%Y")}}
+        {% if page.updated -%} - {{ page.updated|date(format="%Y") }}
+        {% endif -%} {{
+          page.extra.author
+          | default(value = config.extra.author)
+        }}
+      </rights>
+
+      {% if page.description -%}
+        <summary type="html">
+          {{ page.description | escape | safe }}
+        </summary>
+      {% endif -%}
+	<content src="{{ page.permalink }}" type="text/html">
+          {{ page.content }}
+	</content>
+      {% if page.taxonomies is containing("categories") -%}
+        {% for tag in page.taxonomies.tags -%}
+          <category term="{{ tag }}"/>
+        {% endfor -%}
+      {% endif -%}
+    </entry>
+    {% endif -%}
+  {% endfor -%}
+
+</feed>

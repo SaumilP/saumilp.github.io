@@ -10,6 +10,7 @@ categories = ["java"]
 
 [extra]
 disable_comments = true
+uuid = "ad946d41"
 +++
 
 Working on last few projects, i've realized that use of closures can come really handy in day-to-day work.

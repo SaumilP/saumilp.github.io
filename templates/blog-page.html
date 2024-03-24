@@ -7,6 +7,12 @@
 <script id="dsq-count-scr" src="//saumilp-github-io.disqus.com/count.js" async></script>
 {{ page.content | safe }}
 
+<div class="back-to-top">
+    <b><a href="{{ page.permalink | safe }}" title="Back to top">
+        Back to Top{% include "icons/up_arrow.html" %}
+    </b></a>
+</div><br />
+
 <div id="disqus_thread"></div>
 <script>
     (function() {
