@@ -14,11 +14,11 @@ disable_comments = false
 
 ![Rust in Flyio](/img/2024/app-on-flyio/rust_in_hotair_balloon.webp)
 
-Recently I updated my blog-site with [**Zola**](https://www.getzola.org/), and then I started thinking to host Rust application on cloud providers. There are multiple CSPs ( *Cloud Service Providers* ) enabling Rust enthusiasts Developers (also known as "Rustaceans") to host web-apps on cloud.<!-- more --> Some of the top contenders are AWS, Azure, Heroku, Digital Ocean etc. But for this blog I chose to go with [**Fly.io**](https://fly.io/) - a CSP that i didn't know.
+Recently I updated my blog-site with [**Zola**](https://www.getzola.org/), and then I started thinking to host Rust application on cloud providers. There are multiple CSPs ( *Cloud Service Providers* ) enabling Rust enthusiasts Developers (also known as "Rustaceans") to host web-apps on cloud.<!-- more --> Some of the top contenders are AWS, Azure, Heroku, Digital Ocean etc. But for this blog I chose to go with [**Fly.io**](https://fly.io/) - a CSP that i didn't know, So i thought of giving it a try.
 
 ## Getting started with Fly
 
-Fly.io is not mature as other CSPs but can be seen as good alternative to Heroku for basic webapps. It seems like the perfect approach to get app servers up and running quickly on Fly. Simply spin-up a project in a language/framework of your choice, write a sensible Dockerfile fit for running on a server, and deploy to fly platform ot just have things work. It also supports PostgreSQL and Redis, but I will cover provisioning and integration some other time.
+Fly.io is not mature and popular as other CSPs but it shows promising offerings (from developers prospective) & can be considered as good alternative to Heroku to host basic webapps. It seems like a good approach to get app servers up and running quickly on Fly. Simply spin-up a project in a language/framework of your choice, write a sensible Dockerfile fit for running on a server, and deploy to fly platform ot just have things work. It also supports PostgreSQL and Redis, but I will cover provisioning and integration some other time.
 
 To get up and running, fly offers a rather nice [CLI](https://fly.io/docs/hands-on/install-flyctl/) to help manage our apps/servers and account. Let's start by installing it on our local development machine. I'll be using homebrew, so a quick:
 ```bash
@@ -208,29 +208,32 @@ kill_timeout = '5s'
   size = 'shared-cpu-1x'
 ```
 
-**`fly launch`** command output looks like this...
+**`fly launch`** command output looks like this:
+
 ![Fly launch](/img/2024/app-on-flyio/fly_launch.webp)
 
-And, docker build part of deployment...
+And, docker build part of deployment:
+
 ![Docker build](/img/2024/app-on-flyio/fly_launch_docker.webp)
 
-We wait a bit, and check the console as we sit on the edge of our seats in anticipation of a successful deployment, and ... its SUCCESS!
+We wait a bit, and check the console as we sit on the edge of our seats in anticipation of a successful deployment, and ... its SUCCESS 💪!
 
-Now, if we try testing the same cURL test with fly hostname, we should be able to see correct output. This confirms that deployment was successful, and we've managed to complete deployment (hands)!
+Now, if we try testing the same cURL test with fly hostname, we should be able to see correct output. This confirms that deployment was successful, and we've managed to complete deployment 🙌!
+
 ![Simple test](/img/2024/app-on-flyio/curl_test.webp)
 
 Now if we check fly.io Dashboard, then we should be able to locate the machine. On left menu options, if we look at **Metrics**, then it provides nice basic info on our app. It also has button for Grafana dashboards. Below image shows basic grafana overview.
 ![Sneak peak at dashboard](/img/2024/app-on-flyio/grafana_app_overview.webp)
 
-From Dashboards, `Fly app` appears showing more insights into collected **Metrics**. Out-of-box such metrics are more useful and easier for most of the devs to keep an eye on the deployed app.
+From Dashboards, **`Fly app`** appears showing more insights into collected **Metrics**. Out-of-box such metrics are more useful and easier for most of the devs to keep an eye on the deployed app.
 
 **HTTP Status codes**
 ![Http Status codes](/img/2024/app-on-flyio/metrics_http_status_codes.webp)
 
-** HTTP Response times**
+**HTTP Response times**
 ![Http Response times](/img/2024/app-on-flyio/metrics_http_response_times_view.webp)
 
-** Data Transfer**
+**Data Transfer**
 ![Data tranfer](/img/2024/app-on-flyio/metrics_data_transfer_view.webp)
 
 ## Wrapping up
