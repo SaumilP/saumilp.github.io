@@ -12,7 +12,9 @@ categories = ["shell"]
 disable_comments = true
 +++
 
-Setting up Flutter on macOS can be staightforward process when using [Homebrew](https://brew.sh/), a popular package manager for macOS. Flutter, a powerful open-source UI software development toolkit by Google, enables developers to build natively compiled mobile, web, and desktop applications from a single codebase. In this guide, we’ll walk you through the necessary steps to install and configure Flutter on macOS system using Homebrew. Additionally, we will cover the installation of essential tools like Android Studio and Xcode, update Ruby, and set up CocoaPods to ensure a smooth development experience. These setup steps helps with setup and standardize across various machines. Follow along to set up your Flutter environment and build your next great app!
+![Flutter on macOS](/img/2024/dev-machine-setup-flutter-osx/macOs-dev-machine-setup.webp)
+
+Setting up [Flutter](https://flutter.dev/) on macOS can be staightforward process when using [Homebrew](https://brew.sh/), a popular package manager for macOS. Flutter, a powerful open-source UI software development toolkit by Google, enables developers to build natively compiled mobile, web, and desktop applications from a single codebase. In this guide, we’ll walk you through the necessary steps to install and configure Flutter on macOS system using Homebrew. Additionally, we will cover the installation of essential tools like Android Studio and Xcode, update Ruby, and set up CocoaPods to ensure a smooth development experience.<!-- more --> These setup steps helps with setup and standardize across various machines. Follow along to set up your Flutter environment and build your next great app!
 
 To install Flutter on macOS using Homebrew, follow these steps:
 ### 1. Install Homebrew
