@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en">
+  <title>Code, Thoughts and Ideas</title>
+  <subtitle></subtitle>
+
+  <rights>
+    © 2022 - 2024 [object]
+  </rights>
+  <author>
+    <name>Saumil Patel</name>
+    <email>email2saumil2024@gmail.com</email>
+    <uri>https:&#x2F;&#x2F;saumilp.github.io</uri>
+  </author>
+
+  <id>tag:saumilp.github.io,2024-01-07:64a90cf1-e97f-457c-93d5-0fdd287a8798</id>
+
+  <updated>2015-01-31T00:00:00+00:00</updated>
+
+  <!-- The W3C validator will complain when this is on localhost, disregard. -->
+  <link href="https:&#x2F;&#x2F;saumilp.github.io&#x2F;tags&#x2F;currying-functions&#x2F;atom.xml" rel="self" type="application/atom+xml"/>
+  <link href="https:&#x2F;&#x2F;saumilp.github.io" hreflang="en"/>
+  <generator uri="https://www.getzola.org/">Zola</generator>
+
+  <entry xml:lang="en">
+      <title>Curried Function in Java</title>
+      <published>2015-01-31T00:00:00+00:00</published>
+      <updated>2015-01-31T00:00:00+00:00</updated>
+
+      <link href="https:&#x2F;&#x2F;saumilp.github.io&#x2F;blog&#x2F;currying-function-in-java&#x2F;"
+            hreflang="en"
+            type="text/html"/>
+      <id>tag:saumilp.github.io:tech:2015-01-31:1</id>
+
+      <author>
+        <name>[object]</name>
+      </author>
+      <rights type="html">
+        © 2015
+        [object]
+      </rights>
+
+      <content src="https:&#x2F;&#x2F;saumilp.github.io&#x2F;blog&#x2F;currying-function-in-java&#x2F;" type="text/html">
+          &lt;p&gt;&lt;strong&gt;Currying&lt;&#x2F;strong&gt; is a technique of transforming a function with multiple arguments into a function with just single argument. The single argument is the value of the first argument from the original function and it returns another single argument function. This in turn would take the second original argument and itself return another single argument function. This kind of chaining continues over the arguments of the original. The last in the chain will have access to all the arguments and so can do whatever it needs to do.&lt;span id=&quot;continue-reading&quot;&gt;&lt;&#x2F;span&gt;&lt;&#x2F;p&gt;
+&lt;p&gt;You can turn any function with multiple arguments into its curried equivalent. Lets have a look at the Curryied function in Java 7 vs Java 8.&lt;&#x2F;p&gt;
+&lt;h3 id=&quot;java7&quot;&gt;&lt;a class=&quot;zola-anchor&quot; href=&quot;#java7&quot; aria-label=&quot;Anchor link for: java7&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;&#x2F;i&gt;&lt;&#x2F;a&gt; 
+Java7&lt;&#x2F;h3&gt;
+&lt;p&gt;For example, we have a function &lt;code&gt;add&lt;&#x2F;code&gt; specified below&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;java&quot; style=&quot;background-color:#eff1f5;color:#4f5b66;&quot; class=&quot;language-java &quot;&gt;&lt;code class=&quot;language-java&quot; data-lang=&quot;java&quot;&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;public&lt;&#x2F;span&gt;&lt;span&gt; function &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;add &lt;&#x2F;span&gt;&lt;span&gt;( &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;int&lt;&#x2F;span&gt;&lt;span&gt; a, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;int&lt;&#x2F;span&gt;&lt;span&gt; b ) {
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;return&lt;&#x2F;span&gt;&lt;span&gt; a+b;
+&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;This can be curried into something like this ( where &lt;code&gt;Function&amp;lt;A,B&amp;gt;&lt;&#x2F;code&gt; defines a single method &lt;code&gt;B apply(A a)&lt;&#x2F;code&gt;)&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;java&quot; style=&quot;background-color:#eff1f5;color:#4f5b66;&quot; class=&quot;language-java &quot;&gt;&lt;code class=&quot;language-java&quot; data-lang=&quot;java&quot;&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;public static &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;Function&lt;&#x2F;span&gt;&lt;span&gt;&amp;lt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;Integer&lt;&#x2F;span&gt;&lt;span&gt;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;Function&lt;&#x2F;span&gt;&lt;span&gt;&amp;lt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;Integer&lt;&#x2F;span&gt;&lt;span&gt;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;Integer&lt;&#x2F;span&gt;&lt;span&gt;&amp;gt;&amp;gt; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;add&lt;&#x2F;span&gt;&lt;span&gt;() {
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;return new &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;Function&lt;&#x2F;span&gt;&lt;span&gt;&amp;lt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;Integer&lt;&#x2F;span&gt;&lt;span&gt;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;Function&lt;&#x2F;span&gt;&lt;span&gt;&amp;lt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;Integer&lt;&#x2F;span&gt;&lt;span&gt;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;Integer&lt;&#x2F;span&gt;&lt;span&gt;&amp;gt;&amp;gt;() &lt;&#x2F;span&gt;&lt;span style=&quot;color:#343d46;&quot;&gt;{
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#343d46;&quot;&gt;        @&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;Override
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#343d46;&quot;&gt;        &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;public &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;Function&lt;&#x2F;span&gt;&lt;span style=&quot;color:#343d46;&quot;&gt;&amp;lt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;Integer&lt;&#x2F;span&gt;&lt;span style=&quot;color:#343d46;&quot;&gt;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;Integer&lt;&#x2F;span&gt;&lt;span style=&quot;color:#343d46;&quot;&gt;&amp;gt; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;apply&lt;&#x2F;span&gt;&lt;span style=&quot;color:#343d46;&quot;&gt;( &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;final &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;Integer &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;valueX &lt;&#x2F;span&gt;&lt;span style=&quot;color:#343d46;&quot;&gt;) {
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#343d46;&quot;&gt;            &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;return new &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;Function&lt;&#x2F;span&gt;&lt;span style=&quot;color:#343d46;&quot;&gt;&amp;lt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;Integer&lt;&#x2F;span&gt;&lt;span style=&quot;color:#343d46;&quot;&gt;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;Integer&lt;&#x2F;span&gt;&lt;span style=&quot;color:#343d46;&quot;&gt;&amp;gt;(){
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#343d46;&quot;&gt;                @&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;Override
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#343d46;&quot;&gt;                &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;public &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;Integer &lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;apply&lt;&#x2F;span&gt;&lt;span style=&quot;color:#343d46;&quot;&gt;( &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;Integer &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;valueY&lt;&#x2F;span&gt;&lt;span style=&quot;color:#343d46;&quot;&gt;) {
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#343d46;&quot;&gt;                    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;return&lt;&#x2F;span&gt;&lt;span style=&quot;color:#343d46;&quot;&gt; valueX &lt;&#x2F;span&gt;&lt;span&gt;+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#343d46;&quot;&gt; valueY;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#343d46;&quot;&gt;                }
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#343d46;&quot;&gt;            };
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#343d46;&quot;&gt;        }
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#343d46;&quot;&gt;    }&lt;&#x2F;span&gt;&lt;span&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;Now lets check the calling these functions, first original method&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;java&quot; style=&quot;background-color:#eff1f5;color:#4f5b66;&quot; class=&quot;language-java &quot;&gt;&lt;code class=&quot;language-java&quot; data-lang=&quot;java&quot;&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;add&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;1 &lt;&#x2F;span&gt;&lt;span&gt;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;1&lt;&#x2F;span&gt;&lt;span&gt;); &lt;&#x2F;span&gt;&lt;span style=&quot;color:#a7adba;&quot;&gt;&#x2F;&#x2F; results into value 2
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;and calling our curried function&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;java&quot; style=&quot;background-color:#eff1f5;color:#4f5b66;&quot; class=&quot;language-java &quot;&gt;&lt;code class=&quot;language-java&quot; data-lang=&quot;java&quot;&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;add&lt;&#x2F;span&gt;&lt;span&gt;(); &lt;&#x2F;span&gt;&lt;span style=&quot;color:#a7adba;&quot;&gt;&#x2F;&#x2F; results into a instance of Function&amp;lt;[A, B]&amp;gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;add&lt;&#x2F;span&gt;&lt;span&gt;().&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;apply&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;1&lt;&#x2F;span&gt;&lt;span&gt;); &lt;&#x2F;span&gt;&lt;span style=&quot;color:#a7adba;&quot;&gt;&#x2F;&#x2F; results into a instance of Funciton&amp;lt;[A, B]&amp;gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;add&lt;&#x2F;span&gt;&lt;span&gt;().&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;apply&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;1&lt;&#x2F;span&gt;&lt;span&gt;).&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;apply&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;1&lt;&#x2F;span&gt;&lt;span&gt;); &lt;&#x2F;span&gt;&lt;span style=&quot;color:#a7adba;&quot;&gt;&#x2F;&#x2F; results into value 2
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;h3 id=&quot;java-8&quot;&gt;&lt;a class=&quot;zola-anchor&quot; href=&quot;#java-8&quot; aria-label=&quot;Anchor link for: java-8&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;&#x2F;i&gt;&lt;&#x2F;a&gt; 
+Java 8&lt;&#x2F;h3&gt;
+&lt;p&gt;In Java 8, its is much less verbose using lambda syntax compared to Java 7 Example.&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;java&quot; style=&quot;background-color:#eff1f5;color:#4f5b66;&quot; class=&quot;language-java &quot;&gt;&lt;code class=&quot;language-java&quot; data-lang=&quot;java&quot;&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;public static &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;Function&lt;&#x2F;span&gt;&lt;span&gt;&amp;lt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;Integer&lt;&#x2F;span&gt;&lt;span&gt;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;Function&lt;&#x2F;span&gt;&lt;span&gt;&amp;lt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;Integer&lt;&#x2F;span&gt;&lt;span&gt;,&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;Integer&lt;&#x2F;span&gt;&lt;span&gt;&amp;gt;&amp;gt; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;add&lt;&#x2F;span&gt;&lt;span&gt;() {
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;return &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;x &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;-&amp;gt; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;y &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;-&amp;gt;&lt;&#x2F;span&gt;&lt;span&gt; x + y;
+&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+
+	</content>
+      <category term="currying-functions"/>
+        <category term="functions"/>
+        </entry>
+    </feed>

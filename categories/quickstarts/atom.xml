@@ -1,0 +1,416 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en">
+  <title>Code, Thoughts and Ideas</title>
+  <subtitle></subtitle>
+
+  <rights>
+    © 2022 - 2024 [object]
+  </rights>
+  <author>
+    <name>Saumil Patel</name>
+    <email>email2saumil2024@gmail.com</email>
+    <uri>https:&#x2F;&#x2F;saumilp.github.io</uri>
+  </author>
+
+  <id>tag:saumilp.github.io,2024-01-07:64a90cf1-e97f-457c-93d5-0fdd287a8798</id>
+
+  <updated>2024-03-23T00:00:00+00:00</updated>
+
+  <!-- The W3C validator will complain when this is on localhost, disregard. -->
+  <link href="https:&#x2F;&#x2F;saumilp.github.io&#x2F;categories&#x2F;quickstarts&#x2F;atom.xml" rel="self" type="application/atom+xml"/>
+  <link href="https:&#x2F;&#x2F;saumilp.github.io" hreflang="en"/>
+  <generator uri="https://www.getzola.org/">Zola</generator>
+
+  <entry xml:lang="en">
+      <title>Zola quickstart</title>
+      <published>2024-03-19T00:00:00+00:00</published>
+      <updated>2024-03-23T00:00:00+00:00</updated>
+
+      <link href="https:&#x2F;&#x2F;saumilp.github.io&#x2F;blog&#x2F;intro-to-zola-ssg&#x2F;"
+            hreflang="en"
+            type="text/html"/>
+      <id>tag:saumilp.github.io:tech:2024-03-19:1</id>
+
+      <author>
+        <name>[object]</name>
+      </author>
+      <rights type="html">
+        © 2024
+        - 2024
+        [object]
+      </rights>
+
+      <summary type="html">
+          Zola static site generator quickstart
+        </summary>
+      <content src="https:&#x2F;&#x2F;saumilp.github.io&#x2F;blog&#x2F;intro-to-zola-ssg&#x2F;" type="text/html">
+          &lt;p&gt;This post is one of the first one after a long time, I am evaluating &lt;strong&gt;&lt;a href=&quot;https:&#x2F;&#x2F;www.getzola.org&#x2F;&quot;&gt;&lt;code&gt;Zola&lt;&#x2F;code&gt;&lt;&#x2F;a&gt;&lt;&#x2F;strong&gt; as replacement of Jekyll, and thought of creating a blog for step-by-step site building.&lt;&#x2F;p&gt;
+&lt;p&gt;Whether you like Rust and SSG or you do not know any of these, if you wish to create a website or a blog, &lt;code&gt;Zola&lt;&#x2F;code&gt; is made for you! We are going to discover here the basic concepts.&lt;span id=&quot;continue-reading&quot;&gt;&lt;&#x2F;span&gt; For more advanced options, please refer to the &lt;a href=&quot;https:&#x2F;&#x2F;www.getzola.org&#x2F;documentation&#x2F;&quot;&gt;documentation&lt;&#x2F;a&gt;.&lt;&#x2F;p&gt;
+&lt;details closed&gt;
+&lt;summary style=&quot;display:list-item&quot;&gt;&lt;b&gt;Installation options&lt;&#x2F;b&gt;&lt;&#x2F;summary&gt;
+&lt;h4 id=&quot;macos&quot;&gt;&lt;a class=&quot;zola-anchor&quot; href=&quot;#macos&quot; aria-label=&quot;Anchor link for: macos&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;&#x2F;i&gt;&lt;&#x2F;a&gt; 
+macOS&lt;&#x2F;h4&gt;
+&lt;pre data-lang=&quot;bash&quot; style=&quot;background-color:#eff1f5;color:#4f5b66;&quot; class=&quot;language-bash &quot;&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;$&lt;&#x2F;span&gt;&lt;span&gt; brew install zola
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;It is also available for installation on MacPorts:&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;bash&quot; style=&quot;background-color:#eff1f5;color:#4f5b66;&quot; class=&quot;language-bash &quot;&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;$&lt;&#x2F;span&gt;&lt;span&gt; sudo port install zola
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;h4 id=&quot;arch-linux&quot;&gt;&lt;a class=&quot;zola-anchor&quot; href=&quot;#arch-linux&quot; aria-label=&quot;Anchor link for: arch-linux&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;&#x2F;i&gt;&lt;&#x2F;a&gt; 
+Arch Linux&lt;&#x2F;h4&gt;
+&lt;p&gt;Zola is available in the official Arch Linux repositories.&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;bash&quot; style=&quot;background-color:#eff1f5;color:#4f5b66;&quot; class=&quot;language-bash &quot;&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;$&lt;&#x2F;span&gt;&lt;span&gt; pacman&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt; -S&lt;&#x2F;span&gt;&lt;span&gt; zola
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;h4 id=&quot;apline-linux&quot;&gt;&lt;a class=&quot;zola-anchor&quot; href=&quot;#apline-linux&quot; aria-label=&quot;Anchor link for: apline-linux&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;&#x2F;i&gt;&lt;&#x2F;a&gt; 
+Apline Linux&lt;&#x2F;h4&gt;
+&lt;p&gt;Zola is available in the official Alpine Linux community repository since Alpine v3.13.&lt;&#x2F;p&gt;
+&lt;p&gt;See this section of the Alpine Wiki explaining how to enable the community repository if necessary: https:&#x2F;&#x2F;wiki.alpinelinux.org&#x2F;wiki&#x2F;Repositories#Enabling_the_community_repository.&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;bash&quot; style=&quot;background-color:#eff1f5;color:#4f5b66;&quot; class=&quot;language-bash &quot;&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;$&lt;&#x2F;span&gt;&lt;span&gt; apk add zola
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;h4 id=&quot;debian&quot;&gt;&lt;a class=&quot;zola-anchor&quot; href=&quot;#debian&quot; aria-label=&quot;Anchor link for: debian&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;&#x2F;i&gt;&lt;&#x2F;a&gt; 
+Debian&lt;&#x2F;h4&gt;
+&lt;p&gt;Zola is available over at &lt;a href=&quot;https:&#x2F;&#x2F;github.com&#x2F;barnumbirr&#x2F;zola-debian&quot;&gt;barnumbirr&#x2F;zola-debian&lt;&#x2F;a&gt;. Grab the latest &lt;code&gt;.deb&lt;&#x2F;code&gt; for your Debian version then simply run:&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;bash&quot; style=&quot;background-color:#eff1f5;color:#4f5b66;&quot; class=&quot;language-bash &quot;&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;$&lt;&#x2F;span&gt;&lt;span&gt; sudo dpkg&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt; -i&lt;&#x2F;span&gt;&lt;span&gt; zola_&amp;lt;version&amp;gt;_amd64_debian_&amp;lt;debian_version&amp;gt;.deb
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;h4 id=&quot;fedora&quot;&gt;&lt;a class=&quot;zola-anchor&quot; href=&quot;#fedora&quot; aria-label=&quot;Anchor link for: fedora&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;&#x2F;i&gt;&lt;&#x2F;a&gt; 
+Fedora&lt;&#x2F;h4&gt;
+&lt;p&gt;Zola is avaiable via COPR&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;bash&quot; style=&quot;background-color:#eff1f5;color:#4f5b66;&quot; class=&quot;language-bash &quot;&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;$&lt;&#x2F;span&gt;&lt;span&gt; sudo dnf copr enable fz0x1&#x2F;zola
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;$&lt;&#x2F;span&gt;&lt;span&gt; sudo dnf install zola
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;h4 id=&quot;freebsd&quot;&gt;&lt;a class=&quot;zola-anchor&quot; href=&quot;#freebsd&quot; aria-label=&quot;Anchor link for: freebsd&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;&#x2F;i&gt;&lt;&#x2F;a&gt; 
+FreeBSD&lt;&#x2F;h4&gt;
+&lt;p&gt;Zola is available in the official package repository.&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;bash&quot; style=&quot;background-color:#eff1f5;color:#4f5b66;&quot; class=&quot;language-bash &quot;&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;$&lt;&#x2F;span&gt;&lt;span&gt; pkg install zola
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;h4 id=&quot;docker&quot;&gt;&lt;a class=&quot;zola-anchor&quot; href=&quot;#docker&quot; aria-label=&quot;Anchor link for: docker&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;&#x2F;i&gt;&lt;&#x2F;a&gt; 
+Docker&lt;&#x2F;h4&gt;
+&lt;p&gt;Zola is available in docker registry. It has no &lt;code&gt;latest&lt;&#x2F;code&gt; tag, you will have to install with specific tag pull.&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;bash&quot; style=&quot;background-color:#eff1f5;color:#4f5b66;&quot; class=&quot;language-bash &quot;&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;$&lt;&#x2F;span&gt;&lt;span&gt; docker pull ghcr.io&#x2F;getzola&#x2F;zola:v0.17.1
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;h5 id=&quot;build&quot;&gt;&lt;a class=&quot;zola-anchor&quot; href=&quot;#build&quot; aria-label=&quot;Anchor link for: build&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;&#x2F;i&gt;&lt;&#x2F;a&gt; 
+Build&lt;&#x2F;h5&gt;
+&lt;pre data-lang=&quot;bash&quot; style=&quot;background-color:#eff1f5;color:#4f5b66;&quot; class=&quot;language-bash &quot;&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;$&lt;&#x2F;span&gt;&lt;span&gt; docker run&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt; -u &lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;$&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;id -u&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;):&lt;&#x2F;span&gt;&lt;span&gt;$&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;id -g&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;)&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt; -v &lt;&#x2F;span&gt;&lt;span&gt;$&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;PWD&lt;&#x2F;span&gt;&lt;span&gt;:&#x2F;app&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt; --workdir&lt;&#x2F;span&gt;&lt;span&gt; &#x2F;app ghcr.io&#x2F;getzola&#x2F;zola:v0.17.1 build
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;You can now browse &lt;code&gt;http:&#x2F;&#x2F;localhost:8080&lt;&#x2F;code&gt;.
+For live reload, use below command:&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;bash&quot; style=&quot;background-color:#eff1f5;color:#4f5b66;&quot; class=&quot;language-bash &quot;&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;$&lt;&#x2F;span&gt;&lt;span&gt; docker run&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt; -u &lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;$&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;id -u&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;):&lt;&#x2F;span&gt;&lt;span&gt;$&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;id -g&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;)&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt; -v &lt;&#x2F;span&gt;&lt;span&gt;$&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;PWD&lt;&#x2F;span&gt;&lt;span&gt;:&#x2F;app&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt; --workdir&lt;&#x2F;span&gt;&lt;span&gt; &#x2F;app&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt; -p&lt;&#x2F;span&gt;&lt;span&gt; 8080:8080&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt; -p&lt;&#x2F;span&gt;&lt;span&gt; 1024:1024 ghcr.io&#x2F;getzola&#x2F;zola:v0.17.1 serve&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt; --interface&lt;&#x2F;span&gt;&lt;span&gt; 0.0.0.0&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt; --port&lt;&#x2F;span&gt;&lt;span&gt; 8080&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt; --base-url&lt;&#x2F;span&gt;&lt;span&gt; localhost
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;h5 id=&quot;multi-stage-build&quot;&gt;&lt;a class=&quot;zola-anchor&quot; href=&quot;#multi-stage-build&quot; aria-label=&quot;Anchor link for: multi-stage-build&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;&#x2F;i&gt;&lt;&#x2F;a&gt; 
+Multi-stage build&lt;&#x2F;h5&gt;
+&lt;pre data-lang=&quot;bash&quot; style=&quot;background-color:#eff1f5;color:#4f5b66;&quot; class=&quot;language-bash &quot;&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;FROM&lt;&#x2F;span&gt;&lt;span&gt; ghcr.io&#x2F;getzola&#x2F;zola:v0.17.1 as zola
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;COPY&lt;&#x2F;span&gt;&lt;span&gt; . &#x2F;project
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;WORKDIR&lt;&#x2F;span&gt;&lt;span&gt; &#x2F;project
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;RUN &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;[&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;zola&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;, &amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;build&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;]
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;h5 id=&quot;serve&quot;&gt;&lt;a class=&quot;zola-anchor&quot; href=&quot;#serve&quot; aria-label=&quot;Anchor link for: serve&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;&#x2F;i&gt;&lt;&#x2F;a&gt; 
+Serve&lt;&#x2F;h5&gt;
+&lt;pre data-lang=&quot;bash&quot; style=&quot;background-color:#eff1f5;color:#4f5b66;&quot; class=&quot;language-bash &quot;&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;$&lt;&#x2F;span&gt;&lt;span&gt; docker run&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt; -u &lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;$&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;id -u&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;):&lt;&#x2F;span&gt;&lt;span&gt;$&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;id -g&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;)&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt; -v &lt;&#x2F;span&gt;&lt;span&gt;$&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;PWD&lt;&#x2F;span&gt;&lt;span&gt;:&#x2F;app&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt; --workdir&lt;&#x2F;span&gt;&lt;span&gt; &#x2F;app&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt; -p&lt;&#x2F;span&gt;&lt;span&gt; 8080:8080 ghcr.io&#x2F;getzola&#x2F;zola:v0.17.1 serve&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt; --interface&lt;&#x2F;span&gt;&lt;span&gt; 0.0.0.0&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt; --port&lt;&#x2F;span&gt;&lt;span&gt; 8080&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt; --base-url&lt;&#x2F;span&gt;&lt;span&gt; localhost
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;h4 id=&quot;windows&quot;&gt;&lt;a class=&quot;zola-anchor&quot; href=&quot;#windows&quot; aria-label=&quot;Anchor link for: windows&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;&#x2F;i&gt;&lt;&#x2F;a&gt; 
+Windows&lt;&#x2F;h4&gt;
+&lt;p&gt;For windows users, some of the below indicated tools be useful to install zola:&lt;&#x2F;p&gt;
+&lt;p&gt;Using &lt;a href=&quot;https:&#x2F;&#x2F;learn.microsoft.com&#x2F;en-us&#x2F;windows&#x2F;package-manager&#x2F;winget&#x2F;&quot;&gt;Winget&lt;&#x2F;a&gt;:&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;bash&quot; style=&quot;background-color:#eff1f5;color:#4f5b66;&quot; class=&quot;language-bash &quot;&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;$&lt;&#x2F;span&gt;&lt;span&gt; winget install getzola.zola
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;Also it is available on &lt;a href=&quot;https:&#x2F;&#x2F;chocolatey.org&#x2F;&quot;&gt;Chocolatey&lt;&#x2F;a&gt;:&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;bash&quot; style=&quot;background-color:#eff1f5;color:#4f5b66;&quot; class=&quot;language-bash &quot;&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;$&lt;&#x2F;span&gt;&lt;span&gt; choco install zola
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;and &lt;a href=&quot;https:&#x2F;&#x2F;scoop.sh&#x2F;&quot;&gt;Scoop&lt;&#x2F;a&gt;:&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;bash&quot; style=&quot;background-color:#eff1f5;color:#4f5b66;&quot; class=&quot;language-bash &quot;&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;$&lt;&#x2F;span&gt;&lt;span&gt; scoop install zola
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;Unfortunately Zola installation isn&#x27;t possible via Powershell ISE.&lt;&#x2F;p&gt;
+&lt;&#x2F;details&gt;&lt;br &#x2F;&gt;
+&lt;details closed&gt;
+&lt;summary style=&quot;display:list-item&quot;&gt;&lt;b&gt;Check the Installation&lt;&#x2F;b&gt;&lt;&#x2F;summary&gt;
+&lt;p&gt;To check if it&#x27;s working:&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;bash&quot; style=&quot;background-color:#eff1f5;color:#4f5b66;&quot; class=&quot;language-bash &quot;&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;$&lt;&#x2F;span&gt;&lt;span&gt;&amp;gt; zola&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt; --help
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;The help screen:&lt;&#x2F;p&gt;
+&lt;pre style=&quot;background-color:#eff1f5;color:#4f5b66;&quot;&gt;&lt;code&gt;&lt;span&gt;A fast static site generator with everything built-in
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;Usage: zola [OPTIONS] &amp;lt;COMMAND&amp;gt;
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;Commands:
+&lt;&#x2F;span&gt;&lt;span&gt;  init        Create a new Zola project
+&lt;&#x2F;span&gt;&lt;span&gt;  build       Deletes the output directory if there is one and builds the site
+&lt;&#x2F;span&gt;&lt;span&gt;  serve       Serve the site. Rebuild and reload on change automatically
+&lt;&#x2F;span&gt;&lt;span&gt;  check       Try to build the project without rendering it. Checks links
+&lt;&#x2F;span&gt;&lt;span&gt;  completion  Generate shell completion
+&lt;&#x2F;span&gt;&lt;span&gt;  help        Print this message or the help of the given subcommand(s)
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;Options:
+&lt;&#x2F;span&gt;&lt;span&gt;  -r, --root &amp;lt;ROOT&amp;gt;      Directory to use as root of project [default: .]
+&lt;&#x2F;span&gt;&lt;span&gt;  -c, --config &amp;lt;CONFIG&amp;gt;  Path to a config file other than config.toml in the root of project [default: config.toml]
+&lt;&#x2F;span&gt;&lt;span&gt;  -h, --help             Print help
+&lt;&#x2F;span&gt;&lt;span&gt;  -V, --version          Print version
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;&#x2F;details&gt;&lt;br &#x2F;&gt;
+&lt;h3 id=&quot;post-installation&quot;&gt;&lt;a class=&quot;zola-anchor&quot; href=&quot;#post-installation&quot; aria-label=&quot;Anchor link for: post-installation&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;&#x2F;i&gt;&lt;&#x2F;a&gt; 
+Post installation&lt;&#x2F;h3&gt;
+&lt;p&gt;Once you have installed Zola, create a site by entering the following in a terminal:&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;bash&quot; style=&quot;background-color:#eff1f5;color:#4f5b66;&quot; class=&quot;language-bash &quot;&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;$&lt;&#x2F;span&gt;&lt;span&gt; zola init quicksite
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;Answer the interactive question as follows in order to init the &lt;code&gt;config.toml&lt;&#x2F;code&gt; file:&lt;&#x2F;p&gt;
+&lt;pre style=&quot;background-color:#eff1f5;color:#4f5b66;&quot;&gt;&lt;code&gt;&lt;span&gt;Welcome to Zola!
+&lt;&#x2F;span&gt;&lt;span&gt;&amp;gt; What is the URL of your site? (https:&#x2F;&#x2F;example.com): http:&#x2F;&#x2F;example.com
+&lt;&#x2F;span&gt;&lt;span&gt;&amp;gt; Do you want to enable Sass compilation? [Y&#x2F;n]: Y
+&lt;&#x2F;span&gt;&lt;span&gt;&amp;gt; Do you want to enable syntax highlighting? [y&#x2F;N]: N
+&lt;&#x2F;span&gt;&lt;span&gt;&amp;gt; Do you want to build a search index of the content? [y&#x2F;N]: N
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;10 milliseconds later, you should get a folder with the following architecture:&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;bash&quot; style=&quot;background-color:#eff1f5;color:#4f5b66;&quot; class=&quot;language-bash &quot;&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;$&lt;&#x2F;span&gt;&lt;span&gt; tree quicksite&#x2F;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;quicksite&#x2F;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;├──&lt;&#x2F;span&gt;&lt;span&gt; config.toml
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;├──&lt;&#x2F;span&gt;&lt;span&gt; content
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;├──&lt;&#x2F;span&gt;&lt;span&gt; sass
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;├──&lt;&#x2F;span&gt;&lt;span&gt; static
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;├──&lt;&#x2F;span&gt;&lt;span&gt; templates
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;├──&lt;&#x2F;span&gt;&lt;span&gt; public
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;└──&lt;&#x2F;span&gt;&lt;span&gt; themes
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;in this folder, lets enter:&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;bash&quot; style=&quot;background-color:#eff1f5;color:#4f5b66;&quot; class=&quot;language-bash &quot;&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;$&lt;&#x2F;span&gt;&lt;span&gt; zola serve
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;and look at &lt;a href=&quot;http:&#x2F;&#x2F;127.0.0.1:1111&#x2F;&quot;&gt;http:&#x2F;&#x2F;127.0.0.1:1111&#x2F;&lt;&#x2F;a&gt; in our browser, and voila!&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;img src=&quot;&#x2F;img&#x2F;2024&#x2F;intro-to-zola-ssg&#x2F;zola_welcome.webp&quot; alt=&quot;Zola Welcome&quot; &#x2F;&gt;&lt;&#x2F;p&gt;
+&lt;p&gt;As mentioned, we can install a theme or create ourselves. &lt;br &#x2F;&gt;&lt;br &#x2F;&gt;&lt;&#x2F;p&gt;
+&lt;h3 id=&quot;custimizing-site-with-first-theme&quot;&gt;&lt;a class=&quot;zola-anchor&quot; href=&quot;#custimizing-site-with-first-theme&quot; aria-label=&quot;Anchor link for: custimizing-site-with-first-theme&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;&#x2F;i&gt;&lt;&#x2F;a&gt; 
+Custimizing site with First theme&lt;&#x2F;h3&gt;
+&lt;p&gt;Creating a theme is somewhat easy as writing a site by hand. Moreover, it allows you to understand how zola works. If you are in a hurry, you can also install the theme of this tutorial and review it. A &lt;em&gt;default theme&lt;&#x2F;em&gt; is planned by zola community, but is not yet available.&lt;&#x2F;p&gt;
+&lt;p&gt;Lets create the &lt;code&gt;index.html&lt;&#x2F;code&gt; page in the &lt;code&gt;templates&#x2F;&lt;&#x2F;code&gt; directory.&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;html&quot; style=&quot;background-color:#eff1f5;color:#4f5b66;&quot; class=&quot;language-html &quot;&gt;&lt;code class=&quot;language-html&quot; data-lang=&quot;html&quot;&gt;&lt;span&gt;&amp;lt;!doctype html&amp;gt;
+&lt;&#x2F;span&gt;&lt;span&gt;&amp;lt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;html &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;lang&lt;&#x2F;span&gt;&lt;span&gt;=&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;en&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;&amp;gt;
+&lt;&#x2F;span&gt;&lt;span&gt;&amp;lt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;head&lt;&#x2F;span&gt;&lt;span&gt;&amp;gt;
+&lt;&#x2F;span&gt;&lt;span&gt;    &amp;lt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;meta &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;charset&lt;&#x2F;span&gt;&lt;span&gt;=&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;utf-8&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;&amp;gt;
+&lt;&#x2F;span&gt;&lt;span&gt;    &amp;lt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;title&lt;&#x2F;span&gt;&lt;span&gt;&amp;gt;Zola quickstart&amp;lt;&#x2F;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;title&lt;&#x2F;span&gt;&lt;span&gt;&amp;gt;
+&lt;&#x2F;span&gt;&lt;span&gt;&amp;lt;&#x2F;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;head&lt;&#x2F;span&gt;&lt;span&gt;&amp;gt;
+&lt;&#x2F;span&gt;&lt;span&gt;&amp;lt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;body&lt;&#x2F;span&gt;&lt;span&gt;&amp;gt;
+&lt;&#x2F;span&gt;&lt;span&gt;    &amp;lt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;h1&lt;&#x2F;span&gt;&lt;span&gt;&amp;gt;Welcome&amp;lt;&#x2F;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;h1&lt;&#x2F;span&gt;&lt;span&gt;&amp;gt;
+&lt;&#x2F;span&gt;&lt;span&gt;    &amp;lt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;p&lt;&#x2F;span&gt;&lt;span&gt;&amp;gt;Hello world!&amp;lt;&#x2F;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;p&lt;&#x2F;span&gt;&lt;span&gt;&amp;gt;
+&lt;&#x2F;span&gt;&lt;span&gt;&amp;lt;&#x2F;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;body&lt;&#x2F;span&gt;&lt;span&gt;&amp;gt;
+&lt;&#x2F;span&gt;&lt;span&gt;&amp;lt;&#x2F;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;html&lt;&#x2F;span&gt;&lt;span&gt;&amp;gt;
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;If this page is opened in the browser, then it refreshes itself and we see our &amp;quot;Hello world!&amp;quot; message.&lt;&#x2F;p&gt;
+&lt;p&gt;Rather than writing the site content directly into the theme, which is like a site-by-hand without Zola, we will use the template engine (&lt;em&gt;tera&lt;&#x2F;em&gt; used by Zola) to fill the site with variables.&lt;&#x2F;p&gt;
+&lt;h4 id=&quot;site-name&quot;&gt;&lt;a class=&quot;zola-anchor&quot; href=&quot;#site-name&quot; aria-label=&quot;Anchor link for: site-name&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;&#x2F;i&gt;&lt;&#x2F;a&gt; 
+Site name&lt;&#x2F;h4&gt;
+&lt;p&gt;First, to be able to change the name of the site easily, lets add a variable into &lt;code&gt;[extra]&lt;&#x2F;code&gt; section of the &lt;code&gt;config.toml&lt;&#x2F;code&gt; file.&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;toml&quot; style=&quot;background-color:#eff1f5;color:#4f5b66;&quot; class=&quot;language-toml &quot;&gt;&lt;code class=&quot;language-toml&quot; data-lang=&quot;toml&quot;&gt;&lt;span&gt;[extra]
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a7adba;&quot;&gt;# put all your custom site variables here
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;site_name &lt;&#x2F;span&gt;&lt;span&gt;= &amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;Zola Quickstart&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;Now, to use this variable, lets replace the &lt;code&gt;title&lt;&#x2F;code&gt; line in our &lt;code&gt;index.html&lt;&#x2F;code&gt;.&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;html&quot; style=&quot;background-color:#eff1f5;color:#4f5b66;&quot; class=&quot;language-html &quot;&gt;&lt;code class=&quot;language-html&quot; data-lang=&quot;html&quot;&gt;&lt;span&gt;&amp;lt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;title&lt;&#x2F;span&gt;&lt;span&gt;&amp;gt;{{ config.extra.site_name || upper }}&amp;lt;&#x2F;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;title&lt;&#x2F;span&gt;&lt;span&gt;&amp;gt;
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;Here, we used the declared config variable and applied a filter to it. To read more about Tera, please check out the &lt;a href=&quot;https:&#x2F;&#x2F;keats.github.io&#x2F;tera&#x2F;&quot;&gt;documentation&lt;&#x2F;a&gt;.&lt;&#x2F;p&gt;
+&lt;h4 id=&quot;markdown-content&quot;&gt;&lt;a class=&quot;zola-anchor&quot; href=&quot;#markdown-content&quot; aria-label=&quot;Anchor link for: markdown-content&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;&#x2F;i&gt;&lt;&#x2F;a&gt; 
+Markdown content&lt;&#x2F;h4&gt;
+&lt;p&gt;It is always a good to be able to manage content independently of the theme whether you are managing a website or a blogsite. Part of this section, we will write content in &lt;a href=&quot;https:&#x2F;&#x2F;daringfireball.net&#x2F;projects&#x2F;markdown&#x2F;&quot;&gt;Markdown&lt;&#x2F;a&gt;. First lets create a welcome text for our site in &lt;code&gt;_index.md&lt;&#x2F;code&gt; file in &lt;code&gt;content&#x2F;&lt;&#x2F;code&gt; directory.&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;markdown&quot; style=&quot;background-color:#eff1f5;color:#4f5b66;&quot; class=&quot;language-markdown &quot;&gt;&lt;code class=&quot;language-markdown&quot; data-lang=&quot;markdown&quot;&gt;&lt;span&gt;+++
+&lt;&#x2F;span&gt;&lt;span&gt;title = &amp;quot;Welcome, you&amp;quot;
+&lt;&#x2F;span&gt;&lt;span&gt;description = &amp;quot;welcome message&amp;quot;
+&lt;&#x2F;span&gt;&lt;span&gt;+++
+&lt;&#x2F;span&gt;&lt;span&gt;Hello world!
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;and change the &lt;code&gt;index.html&lt;&#x2F;code&gt; file to handle this content,&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;html&quot; style=&quot;background-color:#eff1f5;color:#4f5b66;&quot; class=&quot;language-html &quot;&gt;&lt;code class=&quot;language-html&quot; data-lang=&quot;html&quot;&gt;&lt;span&gt;&amp;lt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;body&lt;&#x2F;span&gt;&lt;span&gt;&amp;gt;
+&lt;&#x2F;span&gt;&lt;span&gt;    &amp;lt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;h1&lt;&#x2F;span&gt;&lt;span&gt;&amp;gt;{{ section.title }}&amp;lt;&#x2F;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;h1&lt;&#x2F;span&gt;&lt;span&gt;&amp;gt;
+&lt;&#x2F;span&gt;&lt;span&gt;    &amp;lt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;p&lt;&#x2F;span&gt;&lt;span&gt;&amp;gt;{{ section.content | safe }}&amp;lt;&#x2F;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;p&lt;&#x2F;span&gt;&lt;span&gt;&amp;gt;
+&lt;&#x2F;span&gt;&lt;span&gt;&amp;lt;&#x2F;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;body&lt;&#x2F;span&gt;&lt;span&gt;&amp;gt;
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;Page reloads and you can see the content of the _index.md displayed via theme index.html file. Now, We have separated the theme and content. Please note, the name used for the markdown file and the name of the variable used to access the data.&lt;&#x2F;p&gt;
+&lt;h4 id=&quot;content-structure&quot;&gt;&lt;a class=&quot;zola-anchor&quot; href=&quot;#content-structure&quot; aria-label=&quot;Anchor link for: content-structure&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;&#x2F;i&gt;&lt;&#x2F;a&gt; 
+Content Structure&lt;&#x2F;h4&gt;
+&lt;p&gt;If you look at the overview of the Zola, it can be simple to understand tree structure and its purpose.&lt;&#x2F;p&gt;
+&lt;pre style=&quot;background-color:#eff1f5;color:#4f5b66;&quot;&gt;&lt;code&gt;&lt;span&gt;.
+&lt;&#x2F;span&gt;&lt;span&gt;└── content
+&lt;&#x2F;span&gt;&lt;span&gt;    ├── _index.md             # https:&#x2F;&#x2F;example.com&#x2F;
+&lt;&#x2F;span&gt;&lt;span&gt;    ├── blog
+&lt;&#x2F;span&gt;&lt;span&gt;    │   ├── _index.md			    # https:&#x2F;&#x2F;example.com&#x2F;blog&#x2F;
+&lt;&#x2F;span&gt;&lt;span&gt;    │   ├── hello-world.md 		# https:&#x2F;&#x2F;example.com&#x2F;blog&#x2F;hello-world&#x2F;
+&lt;&#x2F;span&gt;&lt;span&gt;    │   ├── my-first-post.md 	# https:&#x2F;&#x2F;example.com&#x2F;blog&#x2F;my-first-post&#x2F;
+&lt;&#x2F;span&gt;&lt;span&gt;    │   └── zola-is-great.md	# https:&#x2F;&#x2F;example.com&#x2F;blog&#x2F;zola-is-great&#x2F;
+&lt;&#x2F;span&gt;&lt;span&gt;    │
+&lt;&#x2F;span&gt;&lt;span&gt;    ├── wiki
+&lt;&#x2F;span&gt;&lt;span&gt;    │   ├── _index.md			    # https:&#x2F;&#x2F;example.com&#x2F;wiki&#x2F;
+&lt;&#x2F;span&gt;&lt;span&gt;    │   ├── how-to-build.md   # https:&#x2F;&#x2F;example.com&#x2F;wiki&#x2F;how-to-build&#x2F;
+&lt;&#x2F;span&gt;&lt;span&gt;    │   ├── deploy-advice.md  # https:&#x2F;&#x2F;example.com&#x2F;wiki&#x2F;deploy-advice&#x2F;
+&lt;&#x2F;span&gt;&lt;span&gt;    │   └── contrib-guide.md  # https:&#x2F;&#x2F;example.com&#x2F;wiki&#x2F;contrib-guide&#x2F;
+&lt;&#x2F;span&gt;&lt;span&gt;    │
+&lt;&#x2F;span&gt;&lt;span&gt;    ├── about.md				      # https:&#x2F;&#x2F;example.com&#x2F;about&#x2F;
+&lt;&#x2F;span&gt;&lt;span&gt;    ├── contact.md				    # https:&#x2F;&#x2F;example.com&#x2F;contact&#x2F;
+&lt;&#x2F;span&gt;&lt;span&gt;    └── cv.md					        # https:&#x2F;&#x2F;example.com&#x2F;cv&#x2F;
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;All the &lt;code&gt;.md&lt;&#x2F;code&gt; files are &amp;quot;pages&amp;quot; except for the special file called &lt;code&gt;_index.md&lt;&#x2F;code&gt; - which contains &amp;quot;sections&amp;quot;. These 2 objects just differ in the variables accepted in their header, the section in TOML format - is delimited by &amp;quot;+++&amp;quot; at the top of the file.&lt;&#x2F;p&gt;
+&lt;h4 id=&quot;page-front-matter&quot;&gt;&lt;a class=&quot;zola-anchor&quot; href=&quot;#page-front-matter&quot; aria-label=&quot;Anchor link for: page-front-matter&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;&#x2F;i&gt;&lt;&#x2F;a&gt; 
+Page front-matter&lt;&#x2F;h4&gt;
+&lt;p&gt;For more details, please refer to &lt;a href=&quot;https:&#x2F;&#x2F;www.getzola.org&#x2F;documentation&#x2F;content&#x2F;page&#x2F;#front-matter&quot;&gt;Zola documentation dedicated section&lt;&#x2F;a&gt;:&lt;&#x2F;p&gt;
+&lt;p&gt;Overall below mentioned fields to can be in page &amp;quot;section&amp;quot;:&lt;&#x2F;p&gt;
+&lt;pre style=&quot;background-color:#eff1f5;color:#4f5b66;&quot;&gt;&lt;code&gt;&lt;span&gt;title = &amp;quot;&amp;quot;
+&lt;&#x2F;span&gt;&lt;span&gt;description = &amp;quot;&amp;quot;
+&lt;&#x2F;span&gt;&lt;span&gt;date =
+&lt;&#x2F;span&gt;&lt;span&gt;weight = 0
+&lt;&#x2F;span&gt;&lt;span&gt;draft = false
+&lt;&#x2F;span&gt;&lt;span&gt;slug = &amp;quot;&amp;quot;
+&lt;&#x2F;span&gt;&lt;span&gt;path = &amp;quot;&amp;quot;
+&lt;&#x2F;span&gt;&lt;span&gt;aliases = []
+&lt;&#x2F;span&gt;&lt;span&gt;in_search_index = true
+&lt;&#x2F;span&gt;&lt;span&gt;template = &amp;quot;page.html&amp;quot;
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;[taxonomies]
+&lt;&#x2F;span&gt;&lt;span&gt;tags = [&amp;quot;tag-1&amp;quot;, &amp;quot;web&amp;quot;]
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;[extra]
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;h4 id=&quot;section-front-matter&quot;&gt;&lt;a class=&quot;zola-anchor&quot; href=&quot;#section-front-matter&quot; aria-label=&quot;Anchor link for: section-front-matter&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;&#x2F;i&gt;&lt;&#x2F;a&gt; 
+Section front-matter&lt;&#x2F;h4&gt;
+&lt;p&gt;For more details, please refer to &lt;a href=&quot;https:&#x2F;&#x2F;www.getzola.org&#x2F;documentation&#x2F;content&#x2F;section&#x2F;#front-matter&quot;&gt;Zola documentation dedicated section&lt;&#x2F;a&gt;:&lt;&#x2F;p&gt;
+&lt;p&gt;Some of the expected fields in section:&lt;&#x2F;p&gt;
+&lt;pre style=&quot;background-color:#eff1f5;color:#4f5b66;&quot;&gt;&lt;code&gt;&lt;span&gt;title = &amp;quot;&amp;quot;
+&lt;&#x2F;span&gt;&lt;span&gt;description = &amp;quot;&amp;quot;
+&lt;&#x2F;span&gt;&lt;span&gt;sort_by = &amp;quot;none&amp;quot;
+&lt;&#x2F;span&gt;&lt;span&gt;weight = 0
+&lt;&#x2F;span&gt;&lt;span&gt;template = &amp;quot;section.html&amp;quot;
+&lt;&#x2F;span&gt;&lt;span&gt;page_template =
+&lt;&#x2F;span&gt;&lt;span&gt;paginate_by = 0
+&lt;&#x2F;span&gt;&lt;span&gt;paginate_path = &amp;quot;page&amp;quot;
+&lt;&#x2F;span&gt;&lt;span&gt;insert_anchor_links = &amp;quot;none&amp;quot;
+&lt;&#x2F;span&gt;&lt;span&gt;in_search_index = true
+&lt;&#x2F;span&gt;&lt;span&gt;render = true
+&lt;&#x2F;span&gt;&lt;span&gt;redirect_to = &amp;quot;&amp;quot;
+&lt;&#x2F;span&gt;&lt;span&gt;transparent = false
+&lt;&#x2F;span&gt;&lt;span&gt;aliases = []
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;[extra]
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;h4 id=&quot;expandable-template&quot;&gt;&lt;a class=&quot;zola-anchor&quot; href=&quot;#expandable-template&quot; aria-label=&quot;Anchor link for: expandable-template&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;&#x2F;i&gt;&lt;&#x2F;a&gt; 
+Expandable template&lt;&#x2F;h4&gt;
+&lt;p&gt;The interest of a template is to maximize code reuse. Let&#x27;s discover how to use the basic features in a simple example.&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;html&quot; style=&quot;background-color:#eff1f5;color:#4f5b66;&quot; class=&quot;language-html &quot;&gt;&lt;code class=&quot;language-html&quot; data-lang=&quot;html&quot;&gt;&lt;span style=&quot;color:#a7adba;&quot;&gt;&amp;lt;!-- index.html --&amp;gt;
+&lt;&#x2F;span&gt;&lt;span&gt;&amp;lt;!doctype html&amp;gt;
+&lt;&#x2F;span&gt;&lt;span&gt;&amp;lt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;html &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;lang&lt;&#x2F;span&gt;&lt;span&gt;=&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;fr&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;&amp;gt;
+&lt;&#x2F;span&gt;&lt;span&gt;&amp;lt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;head&lt;&#x2F;span&gt;&lt;span&gt;&amp;gt;
+&lt;&#x2F;span&gt;&lt;span&gt;    &amp;lt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;meta &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;charset&lt;&#x2F;span&gt;&lt;span&gt;=&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;utf-8&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;&#x2F;&amp;gt;
+&lt;&#x2F;span&gt;&lt;span&gt;    &amp;lt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;title&lt;&#x2F;span&gt;&lt;span&gt;&amp;gt;{{ config.extra.site_name | upper }}&amp;lt;&#x2F;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;title&lt;&#x2F;span&gt;&lt;span&gt;&amp;gt;
+&lt;&#x2F;span&gt;&lt;span&gt;&amp;lt;&#x2F;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;head&lt;&#x2F;span&gt;&lt;span&gt;&amp;gt;
+&lt;&#x2F;span&gt;&lt;span&gt;&amp;lt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;body&lt;&#x2F;span&gt;&lt;span&gt;&amp;gt;
+&lt;&#x2F;span&gt;&lt;span&gt;	{% include &amp;quot;nav.html&amp;quot; %}
+&lt;&#x2F;span&gt;&lt;span&gt;	{% block content %}{% endblock content %}
+&lt;&#x2F;span&gt;&lt;span&gt;&amp;lt;&#x2F;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;body&lt;&#x2F;span&gt;&lt;span&gt;&amp;gt;
+&lt;&#x2F;span&gt;&lt;span&gt;&amp;lt;&#x2F;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;html&lt;&#x2F;span&gt;&lt;span&gt;&amp;gt;
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;Here We&#x27;ve discovered that the include tag which allows to include another template and the block tag which allows to declare a block which will be replaced by the templates which derive from it.&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;html&quot; style=&quot;background-color:#eff1f5;color:#4f5b66;&quot; class=&quot;language-html &quot;&gt;&lt;code class=&quot;language-html&quot; data-lang=&quot;html&quot;&gt;&lt;span style=&quot;color:#a7adba;&quot;&gt;&amp;lt;!-- nav.html --&amp;gt;
+&lt;&#x2F;span&gt;&lt;span&gt;&amp;lt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;nav&lt;&#x2F;span&gt;&lt;span&gt;&amp;gt;
+&lt;&#x2F;span&gt;&lt;span&gt;  &amp;lt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;ul&lt;&#x2F;span&gt;&lt;span&gt;&amp;gt;
+&lt;&#x2F;span&gt;&lt;span&gt;    &amp;lt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;li&lt;&#x2F;span&gt;&lt;span&gt;&amp;gt; &amp;lt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;a &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;href&lt;&#x2F;span&gt;&lt;span&gt;=&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;{{ get _url(path=&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;@&lt;&#x2F;span&gt;&lt;span&gt;&#x2F;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;_index.md&lt;&#x2F;span&gt;&lt;span style=&quot;background-color:#bf616a;color:#eff1f5;&quot;&gt;&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;) }}&lt;&#x2F;span&gt;&lt;span style=&quot;background-color:#bf616a;color:#eff1f5;&quot;&gt;&amp;quot;&lt;&#x2F;span&gt;&lt;span&gt;&amp;gt; Home &amp;lt;&#x2F;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;a&lt;&#x2F;span&gt;&lt;span&gt;&amp;gt; &amp;lt;&#x2F;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;li&lt;&#x2F;span&gt;&lt;span&gt;&amp;gt;
+&lt;&#x2F;span&gt;&lt;span&gt;    &amp;lt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;li&lt;&#x2F;span&gt;&lt;span&gt;&amp;gt; &amp;lt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;a &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;href&lt;&#x2F;span&gt;&lt;span&gt;=&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;{{ get _url(path=&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;@&lt;&#x2F;span&gt;&lt;span&gt;&#x2F;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;contact.md&lt;&#x2F;span&gt;&lt;span style=&quot;background-color:#bf616a;color:#eff1f5;&quot;&gt;&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;) }}&lt;&#x2F;span&gt;&lt;span style=&quot;background-color:#bf616a;color:#eff1f5;&quot;&gt;&amp;quot;&lt;&#x2F;span&gt;&lt;span&gt;&amp;gt; Contact &amp;lt;&#x2F;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;a&lt;&#x2F;span&gt;&lt;span&gt;&amp;gt; &amp;lt;&#x2F;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;li&lt;&#x2F;span&gt;&lt;span&gt;&amp;gt;
+&lt;&#x2F;span&gt;&lt;span&gt;    &amp;lt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;li&lt;&#x2F;span&gt;&lt;span&gt;&amp;gt; &amp;lt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;a &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;href&lt;&#x2F;span&gt;&lt;span&gt;=&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;{{ get _url(path=&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;@&lt;&#x2F;span&gt;&lt;span&gt;&#x2F;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;about.md&lt;&#x2F;span&gt;&lt;span style=&quot;background-color:#bf616a;color:#eff1f5;&quot;&gt;&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;) }}&lt;&#x2F;span&gt;&lt;span style=&quot;background-color:#bf616a;color:#eff1f5;&quot;&gt;&amp;quot;&lt;&#x2F;span&gt;&lt;span&gt;&amp;gt; About &amp;lt;&#x2F;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;a&lt;&#x2F;span&gt;&lt;span&gt;&amp;gt; &amp;lt;&#x2F;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;li&lt;&#x2F;span&gt;&lt;span&gt;&amp;gt;
+&lt;&#x2F;span&gt;&lt;span&gt;  &amp;lt;&#x2F;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;ul&lt;&#x2F;span&gt;&lt;span&gt;&amp;gt;
+&lt;&#x2F;span&gt;&lt;span&gt;&amp;lt;&#x2F;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;nav&lt;&#x2F;span&gt;&lt;span&gt;&amp;gt;
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;Here We&#x27;ve discovered that the &lt;code&gt;get _url&lt;&#x2F;code&gt; function which allows to obtain the URL of a page in the site, and the notation @&#x2F;file which allows to make an internal link to a page of the site.&lt;&#x2F;p&gt;
+&lt;pre style=&quot;background-color:#eff1f5;color:#4f5b66;&quot;&gt;&lt;code&gt;&lt;span&gt;{% extends &amp;quot;index.html&amp;quot; %}
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;{% block content %}
+&lt;&#x2F;span&gt;&lt;span&gt;  &amp;lt;h1&amp;gt;{{ page.title }}&amp;lt;&#x2F;h1&amp;gt;
+&lt;&#x2F;span&gt;&lt;span&gt;  &amp;lt;p&amp;gt;{{ page.content | safe }}&amp;lt;&#x2F;p&amp;gt;
+&lt;&#x2F;span&gt;&lt;span&gt;{% endblock content %}
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;Here We&#x27;ve discovered that the `extends&#x27; tag which allows to derive from an existing template to replace one or more blocks.&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;html&quot; style=&quot;background-color:#eff1f5;color:#4f5b66;&quot; class=&quot;language-html &quot;&gt;&lt;code class=&quot;language-html&quot; data-lang=&quot;html&quot;&gt;&lt;span style=&quot;color:#a7adba;&quot;&gt;&amp;lt;!-- section.html --&amp;gt;
+&lt;&#x2F;span&gt;&lt;span&gt;{% extends &amp;quot;index.html&amp;quot; %}
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;{% block content %}
+&lt;&#x2F;span&gt;&lt;span&gt;  &amp;lt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;h1&lt;&#x2F;span&gt;&lt;span&gt;&amp;gt;{{ section.title }}&amp;lt;&#x2F;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;h1&lt;&#x2F;span&gt;&lt;span&gt;&amp;gt;
+&lt;&#x2F;span&gt;&lt;span&gt;  &amp;lt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;p&lt;&#x2F;span&gt;&lt;span&gt;&amp;gt;{{ section.content | safe }}&amp;lt;&#x2F;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;p&lt;&#x2F;span&gt;&lt;span&gt;&amp;gt;
+&lt;&#x2F;span&gt;&lt;span&gt;  &amp;lt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;p&lt;&#x2F;span&gt;&lt;span&gt;&amp;gt;Pages in section&amp;lt;&#x2F;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;p&lt;&#x2F;span&gt;&lt;span&gt;&amp;gt;
+&lt;&#x2F;span&gt;&lt;span&gt;  &amp;lt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;ul&lt;&#x2F;span&gt;&lt;span&gt;&amp;gt;
+&lt;&#x2F;span&gt;&lt;span&gt;  {% for page in section.pages | reverse %}
+&lt;&#x2F;span&gt;&lt;span&gt;      &amp;lt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;li&lt;&#x2F;span&gt;&lt;span&gt;&amp;gt;
+&lt;&#x2F;span&gt;&lt;span&gt;        &amp;lt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;em&lt;&#x2F;span&gt;&lt;span&gt;&amp;gt; &amp;lt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;a &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;href&lt;&#x2F;span&gt;&lt;span&gt;=&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;{{ page.permalink }}&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;&amp;gt; {{ page.title }} &amp;lt;&#x2F;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;a&lt;&#x2F;span&gt;&lt;span&gt;&amp;gt; &amp;lt;&#x2F;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;em&lt;&#x2F;span&gt;&lt;span&gt;&amp;gt;
+&lt;&#x2F;span&gt;&lt;span&gt;        &amp;lt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;span&lt;&#x2F;span&gt;&lt;span&gt;&amp;gt;{{ page.date | date(format=&amp;quot;%Y-%m-%d&amp;quot;) }}&amp;lt;&#x2F;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;span&lt;&#x2F;span&gt;&lt;span&gt;&amp;gt;
+&lt;&#x2F;span&gt;&lt;span&gt;      &amp;lt;&#x2F;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;li&lt;&#x2F;span&gt;&lt;span&gt;&amp;gt;
+&lt;&#x2F;span&gt;&lt;span&gt;  {% endfor %}
+&lt;&#x2F;span&gt;&lt;span&gt;  &amp;lt;&#x2F;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;ul&lt;&#x2F;span&gt;&lt;span&gt;&amp;gt;
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;{% endblock content %}
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;Here We&#x27;ve discovered that the for tag which allows to make a loop in a list of elements and filters like date which can take arguments.&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;markdown&quot; style=&quot;background-color:#eff1f5;color:#4f5b66;&quot; class=&quot;language-markdown &quot;&gt;&lt;code class=&quot;language-markdown&quot; data-lang=&quot;markdown&quot;&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;# contact.md
+&lt;&#x2F;span&gt;&lt;span&gt;+++
+&lt;&#x2F;span&gt;&lt;span&gt;title = &amp;quot;contact&amp;quot;
+&lt;&#x2F;span&gt;&lt;span&gt;date = 2024-03-18
+&lt;&#x2F;span&gt;&lt;span&gt;+++
+&lt;&#x2F;span&gt;&lt;span&gt;Contact me at ...
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;Here We&#x27;ve discovered that an additional metadata indicating the date of the page.&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;markdown&quot; style=&quot;background-color:#eff1f5;color:#4f5b66;&quot; class=&quot;language-markdown &quot;&gt;&lt;code class=&quot;language-markdown&quot; data-lang=&quot;markdown&quot;&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;# about.md
+&lt;&#x2F;span&gt;&lt;span&gt;+++
+&lt;&#x2F;span&gt;&lt;span&gt;title = &amp;quot;about&amp;quot;
+&lt;&#x2F;span&gt;&lt;span&gt;date = 2019-09-25
+&lt;&#x2F;span&gt;&lt;span&gt;+++
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;This site has been made with :
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;- Zola
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;- Sass
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;- TOML
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;Here We&#x27;ve discovered that a Markdown list will be rendered as an HTML list. &lt;br &#x2F;&gt;&lt;br &#x2F;&gt;&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;a-bit-of-colour&quot;&gt;&lt;a class=&quot;zola-anchor&quot; href=&quot;#a-bit-of-colour&quot; aria-label=&quot;Anchor link for: a-bit-of-colour&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;&#x2F;i&gt;&lt;&#x2F;a&gt; 
+A bit of colour&lt;&#x2F;h2&gt;
+&lt;p&gt;SASS is a kind of CSS without punctuation of type &lt;code&gt;{, ;&lt;&#x2F;code&gt; and a variable management. It is used by many css frameworks. If you don&#x27;t want to use it, you can of course write css files directly and jump to the next section.&lt;&#x2F;p&gt;
+&lt;h4 id=&quot;sass&quot;&gt;&lt;a class=&quot;zola-anchor&quot; href=&quot;#sass&quot; aria-label=&quot;Anchor link for: sass&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;&#x2F;i&gt;&lt;&#x2F;a&gt; 
+SASS&lt;&#x2F;h4&gt;
+&lt;p&gt;Lets enjoy a very nice feature of Zola: the Sass compilation. Lets add the line&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;htm.j2&quot; style=&quot;background-color:#eff1f5;color:#4f5b66;&quot; class=&quot;language-htm.j2 &quot;&gt;&lt;code class=&quot;language-htm.j2&quot; data-lang=&quot;htm.j2&quot;&gt;&lt;span&gt;&amp;lt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;link &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;rel&lt;&#x2F;span&gt;&lt;span&gt;=&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;stylesheet&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;href&lt;&#x2F;span&gt;&lt;span&gt;=&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;{{ get _url(path=&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;extra.css&lt;&#x2F;span&gt;&lt;span style=&quot;background-color:#bf616a;color:#eff1f5;&quot;&gt;&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;) }}&lt;&#x2F;span&gt;&lt;span style=&quot;background-color:#bf616a;color:#eff1f5;&quot;&gt;&amp;quot;&lt;&#x2F;span&gt;&lt;span&gt;&#x2F;&amp;gt;
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;in the head of our &lt;code&gt;index.html&lt;&#x2F;code&gt; and add the file &lt;code&gt;extra.sass&lt;&#x2F;code&gt; to the root of our sass folder.&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;sass&quot; style=&quot;background-color:#eff1f5;color:#4f5b66;&quot; class=&quot;language-sass &quot;&gt;&lt;code class=&quot;language-sass&quot; data-lang=&quot;sass&quot;&gt;&lt;span&gt;$&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;bg&lt;&#x2F;span&gt;&lt;span&gt;: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;#111
+&lt;&#x2F;span&gt;&lt;span&gt;$&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;cl&lt;&#x2F;span&gt;&lt;span&gt;: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;#0f0
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;nav ul li
+&lt;&#x2F;span&gt;&lt;span&gt;  display: inline-block
+&lt;&#x2F;span&gt;&lt;span&gt;  margin-left: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;10px
+&lt;&#x2F;span&gt;&lt;span&gt;  border: solid &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;1px &lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;#666
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;body
+&lt;&#x2F;span&gt;&lt;span&gt;  color: $&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;cl
+&lt;&#x2F;span&gt;&lt;span&gt;  background-color: $&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;bg
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;a
+&lt;&#x2F;span&gt;&lt;span&gt;  color: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;#a5a
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;h4 id=&quot;css&quot;&gt;&lt;a class=&quot;zola-anchor&quot; href=&quot;#css&quot; aria-label=&quot;Anchor link for: css&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;&#x2F;i&gt;&lt;&#x2F;a&gt; 
+CSS&lt;&#x2F;h4&gt;
+&lt;p&gt;To add CSS to our theme, we just need to add this line&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;htm.j2&quot; style=&quot;background-color:#eff1f5;color:#4f5b66;&quot; class=&quot;language-htm.j2 &quot;&gt;&lt;code class=&quot;language-htm.j2&quot; data-lang=&quot;htm.j2&quot;&gt;&lt;span&gt;&amp;lt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;link &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;rel&lt;&#x2F;span&gt;&lt;span&gt;=&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;stylesheet&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;href&lt;&#x2F;span&gt;&lt;span&gt;=&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;{{ get _url(path=&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;extra.css&lt;&#x2F;span&gt;&lt;span style=&quot;background-color:#bf616a;color:#eff1f5;&quot;&gt;&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;) }}&lt;&#x2F;span&gt;&lt;span style=&quot;background-color:#bf616a;color:#eff1f5;&quot;&gt;&amp;quot;&lt;&#x2F;span&gt;&lt;span&gt;&#x2F;&amp;gt;
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;in the &lt;head&gt; of our &lt;code&gt;index.html&lt;&#x2F;code&gt; file and add the &lt;code&gt;extra.css&lt;&#x2F;code&gt; to the root of our &lt;code&gt;static&#x2F;&lt;&#x2F;code&gt; directory.&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;css&quot; style=&quot;background-color:#eff1f5;color:#4f5b66;&quot; class=&quot;language-css &quot;&gt;&lt;code class=&quot;language-css&quot; data-lang=&quot;css&quot;&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;nav ul li&lt;&#x2F;span&gt;&lt;span&gt;{
+&lt;&#x2F;span&gt;&lt;span&gt;  display: inline-block;
+&lt;&#x2F;span&gt;&lt;span&gt;  margin-left: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;10px&lt;&#x2F;span&gt;&lt;span&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;  border: solid &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;1px &lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;#666&lt;&#x2F;span&gt;&lt;span&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;body &lt;&#x2F;span&gt;&lt;span&gt;{
+&lt;&#x2F;span&gt;&lt;span&gt;  color: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;#0f0&lt;&#x2F;span&gt;&lt;span&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;  background-color: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;#111&lt;&#x2F;span&gt;&lt;span&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;a&lt;&#x2F;span&gt;&lt;span&gt;{
+&lt;&#x2F;span&gt;&lt;span&gt;  color: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;#a5a&lt;&#x2F;span&gt;&lt;span&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;br &#x2F;&gt;
+&lt;h2 id=&quot;for-the-future&quot;&gt;&lt;a class=&quot;zola-anchor&quot; href=&quot;#for-the-future&quot; aria-label=&quot;Anchor link for: for-the-future&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;&#x2F;i&gt;&lt;&#x2F;a&gt; 
+For the future&lt;&#x2F;h2&gt;
+&lt;p&gt;In short, this post is to get you started on building your own Zola site - introducing to some of the key concepts. Hope you continue exploring Zola!&lt;&#x2F;p&gt;
+
+	</content>
+      <category term="zola"/>
+        <category term="static-site generator"/>
+        </entry>
+    </feed>

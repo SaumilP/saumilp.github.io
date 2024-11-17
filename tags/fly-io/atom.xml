@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en">
+  <title>Code, Thoughts and Ideas</title>
+  <subtitle></subtitle>
+
+  <rights>
+    © 2022 - 2024 [object]
+  </rights>
+  <author>
+    <name>Saumil Patel</name>
+    <email>email2saumil2024@gmail.com</email>
+    <uri>https:&#x2F;&#x2F;saumilp.github.io</uri>
+  </author>
+
+  <id>tag:saumilp.github.io,2024-01-07:64a90cf1-e97f-457c-93d5-0fdd287a8798</id>
+
+  <updated>2024-04-01T00:00:00+00:00</updated>
+
+  <!-- The W3C validator will complain when this is on localhost, disregard. -->
+  <link href="https:&#x2F;&#x2F;saumilp.github.io&#x2F;tags&#x2F;fly-io&#x2F;atom.xml" rel="self" type="application/atom+xml"/>
+  <link href="https:&#x2F;&#x2F;saumilp.github.io" hreflang="en"/>
+  <generator uri="https://www.getzola.org/">Zola</generator>
+
+  <entry xml:lang="en">
+      <title>Learning to fly with Rust</title>
+      <published>2024-04-01T00:00:00+00:00</published>
+      <updated>2024-04-01T00:00:00+00:00</updated>
+
+      <link href="https:&#x2F;&#x2F;saumilp.github.io&#x2F;blog&#x2F;app-on-flyio&#x2F;"
+            hreflang="en"
+            type="text/html"/>
+      <id>tag:saumilp.github.io:tech:2024-04-01:1</id>
+
+      <author>
+        <name>[object]</name>
+      </author>
+      <rights type="html">
+        © 2024
+        [object]
+      </rights>
+
+      <summary type="html">
+          Test driving Fly.io ...
+        </summary>
+      <content src="https:&#x2F;&#x2F;saumilp.github.io&#x2F;blog&#x2F;app-on-flyio&#x2F;" type="text/html">
+          &lt;p&gt;&lt;img src=&quot;&#x2F;img&#x2F;2024&#x2F;app-on-flyio&#x2F;rust_in_hotair_balloon.webp&quot; alt=&quot;Rust in Flyio&quot; &#x2F;&gt;&lt;&#x2F;p&gt;
+&lt;p&gt;Recently I updated my blog-site with &lt;a href=&quot;https:&#x2F;&#x2F;www.getzola.org&#x2F;&quot;&gt;&lt;strong&gt;Zola&lt;&#x2F;strong&gt;&lt;&#x2F;a&gt;, and then I started thinking to host Rust application on cloud providers. There are multiple CSPs ( &lt;em&gt;Cloud Service Providers&lt;&#x2F;em&gt; ) enabling Rust enthusiasts Developers (also known as &amp;quot;Rustaceans&amp;quot;) to host web-apps on cloud.&lt;span id=&quot;continue-reading&quot;&gt;&lt;&#x2F;span&gt; Some of the top contenders are AWS, Azure, Heroku, Digital Ocean etc. But for this blog I chose to go with &lt;a href=&quot;https:&#x2F;&#x2F;fly.io&#x2F;&quot;&gt;&lt;strong&gt;Fly.io&lt;&#x2F;strong&gt;&lt;&#x2F;a&gt; - a CSP that i didn&#x27;t know, So i thought of giving it a try.&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;getting-started-with-fly&quot;&gt;&lt;a class=&quot;zola-anchor&quot; href=&quot;#getting-started-with-fly&quot; aria-label=&quot;Anchor link for: getting-started-with-fly&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;&#x2F;i&gt;&lt;&#x2F;a&gt; 
+Getting started with Fly&lt;&#x2F;h2&gt;
+&lt;p&gt;Fly.io is not mature and popular as other CSPs but it shows promising offerings (from developers prospective) &amp;amp; can be considered as good alternative to Heroku to host basic webapps. It seems like a good approach to get app servers up and running quickly on Fly. Simply spin-up a project in a language&#x2F;framework of your choice, write a sensible Dockerfile fit for running on a server, and deploy to fly platform to just have things work. It also supports PostgreSQL and Redis, but I will cover provisioning and integration some other time.&lt;&#x2F;p&gt;
+&lt;p&gt;To get up and running, fly offers a rather nice &lt;a href=&quot;https:&#x2F;&#x2F;fly.io&#x2F;docs&#x2F;hands-on&#x2F;install-flyctl&#x2F;&quot;&gt;CLI&lt;&#x2F;a&gt; to help manage our apps&#x2F;servers and account. Let&#x27;s start by installing it on our local development machine. I&#x27;ll be using homebrew, so a quick:&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;bash&quot; style=&quot;background-color:#eff1f5;color:#4f5b66;&quot; class=&quot;language-bash &quot;&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;$&lt;&#x2F;span&gt;&lt;span&gt;&amp;gt; brew install flyctl
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;You can also use brew with WSL2, please follow instructions mentioend &lt;a href=&quot;https:&#x2F;&#x2F;gist.github.com&#x2F;farhad-taran&#x2F;41ea3c5f336a09285a9ac9b5c963d051&quot;&gt;here&lt;&#x2F;a&gt;.&lt;&#x2F;p&gt;
+&lt;p&gt;Above should do the trick for you. Now that we&#x27;ve got the CLI installed, lets go ahead and login with &lt;strong&gt;&lt;code&gt;fly auth login&lt;&#x2F;code&gt;&lt;&#x2F;strong&gt; and follow the login prompts on the default web-browser. Once we&#x27;ve authenticated, we should be good to start spinning up some apps.&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;bootstraping-our-service&quot;&gt;&lt;a class=&quot;zola-anchor&quot; href=&quot;#bootstraping-our-service&quot; aria-label=&quot;Anchor link for: bootstraping-our-service&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;&#x2F;i&gt;&lt;&#x2F;a&gt; 
+Bootstraping our service&lt;&#x2F;h2&gt;
+&lt;p&gt;Since we are building a simple web-api with no persistence, let&#x27;s go and create the app in local machine.&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;bash&quot; style=&quot;background-color:#eff1f5;color:#4f5b66;&quot; class=&quot;language-bash &quot;&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span style=&quot;color:#a7adba;&quot;&gt;# create a new rust-app
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;$&lt;&#x2F;span&gt;&lt;span&gt;&amp;gt; cargo new heya-from-rust
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;For the application, we&#x27;ll use &lt;a href=&quot;https:&#x2F;&#x2F;tokio.rs&#x2F;&quot;&gt;tokio&lt;&#x2F;a&gt; and &lt;a href=&quot;https:&#x2F;&#x2F;github.com&#x2F;seanmonstar&#x2F;warp&quot;&gt;warp&lt;&#x2F;a&gt;.&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;bash&quot; style=&quot;background-color:#eff1f5;color:#4f5b66;&quot; class=&quot;language-bash &quot;&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;$&lt;&#x2F;span&gt;&lt;span&gt;&amp;gt; cd heya-from-rust
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a7adba;&quot;&gt;# Once carog is done with its things, lets add warp dependency
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;$&lt;&#x2F;span&gt;&lt;span&gt;&amp;gt; cargo add warp
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a7adba;&quot;&gt;# and while we&amp;#39;re at it, let&amp;#39;s grab tokio too
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;$&lt;&#x2F;span&gt;&lt;span&gt;&amp;gt; cargo add tokio&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt; --features&lt;&#x2F;span&gt;&lt;span&gt; full
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a7adba;&quot;&gt;# kick off app build to pull all dependencies
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;$&lt;&#x2F;span&gt;&lt;span&gt;&amp;gt; cargo build
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;Now that we&#x27;ve got our project bootstrapped, let&#x27;s look into &lt;ins&gt;&lt;strong&gt;&lt;code&gt;main.rs&lt;&#x2F;code&gt;&lt;&#x2F;strong&gt;&lt;&#x2F;ins&gt; and scaffold out a simple default route &amp;quot;&#x2F;&amp;quot;:&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;rust&quot; style=&quot;background-color:#eff1f5;color:#4f5b66;&quot; class=&quot;language-rust &quot;&gt;&lt;code class=&quot;language-rust&quot; data-lang=&quot;rust&quot;&gt;&lt;span&gt;#![&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;deny&lt;&#x2F;span&gt;&lt;span&gt;(warnings)]
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;use &lt;&#x2F;span&gt;&lt;span&gt;warp::Filter;
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;#[&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;tokio&lt;&#x2F;span&gt;&lt;span&gt;::&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;main&lt;&#x2F;span&gt;&lt;span&gt;]
+&lt;&#x2F;span&gt;&lt;span&gt;async &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;fn &lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;main&lt;&#x2F;span&gt;&lt;span&gt;() {
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#a7adba;&quot;&gt;&#x2F;&#x2F; Default response
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;let&lt;&#x2F;span&gt;&lt;span&gt; routes = warp::any().&lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;map&lt;&#x2F;span&gt;&lt;span&gt;(|| &amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;Heya!&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;);
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#a7adba;&quot;&gt;&#x2F;&#x2F; Bind to whatever the hosting interface is - localhost on our machine&#x2F;container in Fly
+&lt;&#x2F;span&gt;&lt;span&gt;    warp::serve(routes)
+&lt;&#x2F;span&gt;&lt;span&gt;        .&lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;run&lt;&#x2F;span&gt;&lt;span&gt;(([&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;0&lt;&#x2F;span&gt;&lt;span&gt;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;0&lt;&#x2F;span&gt;&lt;span&gt;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;0&lt;&#x2F;span&gt;&lt;span&gt;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;0&lt;&#x2F;span&gt;&lt;span&gt;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;0&lt;&#x2F;span&gt;&lt;span&gt;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;0&lt;&#x2F;span&gt;&lt;span&gt;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;0&lt;&#x2F;span&gt;&lt;span&gt;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;0&lt;&#x2F;span&gt;&lt;span&gt;], &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;8080&lt;&#x2F;span&gt;&lt;span&gt;))
+&lt;&#x2F;span&gt;&lt;span&gt;        .await;
+&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;Let&#x27;s spin things up to make sure that we&#x27;ve got water flowing through pipes, so to speak:&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;bash&quot; style=&quot;background-color:#eff1f5;color:#4f5b66;&quot; class=&quot;language-bash &quot;&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;$&lt;&#x2F;span&gt;&lt;span&gt;&amp;gt; cargo run
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a7adba;&quot;&gt;# in another terminal...
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;$&lt;&#x2F;span&gt;&lt;span&gt;&amp;gt; curl&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt; -l&lt;&#x2F;span&gt;&lt;span&gt; http:&#x2F;&#x2F;localhost:8080&#x2F;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;Heya!
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;Nice! We&#x27;ve got the (arguably) simplest API ready to rockn&#x27;roll, now lets get this in the fly.&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;dockerizing-our-app&quot;&gt;&lt;a class=&quot;zola-anchor&quot; href=&quot;#dockerizing-our-app&quot; aria-label=&quot;Anchor link for: dockerizing-our-app&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;&#x2F;i&gt;&lt;&#x2F;a&gt; 
+Dockerizing our app&lt;&#x2F;h2&gt;
+&lt;p&gt;I&#x27;ll be the first to admit that I&#x27;m far from an experienced docker aficionado - most of my daily docker work is around java, this is the first time I&#x27;m trying to package rust-app in docker. Let&#x27;s add &lt;ins&gt;&lt;strong&gt;&lt;code&gt;Dockerfile&lt;&#x2F;code&gt;&lt;&#x2F;strong&gt;&lt;&#x2F;ins&gt; to build and package the app. Here i&#x27;m using multi-stage build for our app. Fly allows hosting of the Dockerfile natively, and so it is very easy to build, register the image and deploy to platform.&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;dockerfile&quot; style=&quot;background-color:#eff1f5;color:#4f5b66;&quot; class=&quot;language-dockerfile &quot;&gt;&lt;code class=&quot;language-dockerfile&quot; data-lang=&quot;dockerfile&quot;&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;FROM&lt;&#x2F;span&gt;&lt;span&gt; rust:1-bookworm &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;as &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;builder
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;WORKDIR &lt;&#x2F;span&gt;&lt;span&gt;&#x2F;usr&#x2F;src&#x2F;app
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;COPY&lt;&#x2F;span&gt;&lt;span&gt; . .
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;RUN &lt;&#x2F;span&gt;&lt;span&gt;--mount=type=cache,target=&#x2F;usr&#x2F;local&#x2F;cargo,from=rust:latest,source=&#x2F;usr&#x2F;local&#x2F;cargo \
+&lt;&#x2F;span&gt;&lt;span&gt;    --mount=type=cache,target=target \
+&lt;&#x2F;span&gt;&lt;span&gt;    cargo build --release &amp;amp;&amp;amp; mv .&#x2F;target&#x2F;release&#x2F;heya .&#x2F;heya
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a7adba;&quot;&gt;# Runtime image
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;FROM&lt;&#x2F;span&gt;&lt;span&gt; debian:bookworm-slim
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;RUN &lt;&#x2F;span&gt;&lt;span&gt;useradd -ms &#x2F;bin&#x2F;bash app
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;USER &lt;&#x2F;span&gt;&lt;span&gt;app
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;WORKDIR &lt;&#x2F;span&gt;&lt;span&gt;&#x2F;app
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;COPY&lt;&#x2F;span&gt;&lt;span&gt; --from=&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;builder&lt;&#x2F;span&gt;&lt;span&gt; &#x2F;usr&#x2F;src&#x2F;app&#x2F;heya &#x2F;app&#x2F;heya
+&lt;&#x2F;span&gt;&lt;span&gt;CMD .&#x2F;heya
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;With our Dockerfile in place, let&#x27;s build the bad boy:&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;bash&quot; style=&quot;background-color:#eff1f5;color:#4f5b66;&quot; class=&quot;language-bash &quot;&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;$&lt;&#x2F;span&gt;&lt;span&gt;&amp;gt; docker build .&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt; -t&lt;&#x2F;span&gt;&lt;span&gt; heya-from-rust
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;After a lengthy initial build (successive builds will be quicker, thanks to docker layering), we can spin up our container locally and verify we&#x27;re still looking good from a server prospective:&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;bash&quot; style=&quot;background-color:#eff1f5;color:#4f5b66;&quot; class=&quot;language-bash &quot;&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;$&lt;&#x2F;span&gt;&lt;span&gt;&amp;gt; docker run&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt; -d -p&lt;&#x2F;span&gt;&lt;span&gt; 8080:8080&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt; --name&lt;&#x2F;span&gt;&lt;span&gt; heya_from_rust&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt; -it&lt;&#x2F;span&gt;&lt;span&gt; heya-from-rust
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;After a few seconds, we should see the container detaching in terminal and if we send a HTTP request, we should see the same output:&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;bash&quot; style=&quot;background-color:#eff1f5;color:#4f5b66;&quot; class=&quot;language-bash &quot;&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;$&lt;&#x2F;span&gt;&lt;span&gt;&amp;gt; curl&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt; -l&lt;&#x2F;span&gt;&lt;span&gt; http:&#x2F;&#x2F;localhost:8080
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;Heya!
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;Our app is running in a containerized manner, now let&#x27;s get this things deployed on Fly!&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;deploying-to-fly&quot;&gt;&lt;a class=&quot;zola-anchor&quot; href=&quot;#deploying-to-fly&quot; aria-label=&quot;Anchor link for: deploying-to-fly&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;&#x2F;i&gt;&lt;&#x2F;a&gt; 
+Deploying to Fly&lt;&#x2F;h2&gt;
+&lt;p&gt;Alright, Deploying to fly requires some pre-reading specially around some of the basic commands, but not difficult. Let&#x27;s figure out how this deployment story looks like. There is gotta be something in the CLI, right? let&#x27;s do a bit of trial and error:&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;bash&quot; style=&quot;background-color:#eff1f5;color:#4f5b66;&quot; class=&quot;language-bash &quot;&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;$&lt;&#x2F;span&gt;&lt;span&gt;&amp;gt; fly
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;This&lt;&#x2F;span&gt;&lt;span&gt; is flyctl, the Fly.io command line interface.
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;Heres&lt;&#x2F;span&gt;&lt;span&gt; a few commands to get you started:
+&lt;&#x2F;span&gt;&lt;span&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;fly&lt;&#x2F;span&gt;&lt;span&gt; launch      Launch a new application
+&lt;&#x2F;span&gt;&lt;span&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;fly&lt;&#x2F;span&gt;&lt;span&gt; apps        Create and manage apps
+&lt;&#x2F;span&gt;&lt;span&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;fly&lt;&#x2F;span&gt;&lt;span&gt; postgres    Create and manage Postgres databases
+&lt;&#x2F;span&gt;&lt;span&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;fly&lt;&#x2F;span&gt;&lt;span&gt; redis       Create and manage Redis databases
+&lt;&#x2F;span&gt;&lt;span&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;fly&lt;&#x2F;span&gt;&lt;span&gt; machines    Create and manage individual Fly.io machines
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;If&lt;&#x2F;span&gt;&lt;span&gt; you need help along the way:
+&lt;&#x2F;span&gt;&lt;span&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;fly&lt;&#x2F;span&gt;&lt;span&gt; help            Display a complete list of commands
+&lt;&#x2F;span&gt;&lt;span&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;fly&lt;&#x2F;span&gt;&lt;span&gt; help &amp;lt;command&amp;gt;  Display help for a specific command, e.g. &amp;#39;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;fly help launch&lt;&#x2F;span&gt;&lt;span&gt;&amp;#39;
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;Visit&lt;&#x2F;span&gt;&lt;span&gt; https:&#x2F;&#x2F;fly.io&#x2F;docs for additional documentation &amp;amp; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;guides
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;Okay... &lt;strong&gt;&lt;code&gt;fly launch&lt;&#x2F;code&gt;&lt;&#x2F;strong&gt; looks promising, let&#x27;s check it out:&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;bash&quot; style=&quot;background-color:#eff1f5;color:#4f5b66;&quot; class=&quot;language-bash &quot;&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span&gt;&amp;gt; fly &lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;help&lt;&#x2F;span&gt;&lt;span&gt; launch
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;Create&lt;&#x2F;span&gt;&lt;span&gt; and configure a new app from source code or a Docker image.
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;Usage:
+&lt;&#x2F;span&gt;&lt;span&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;flyctl&lt;&#x2F;span&gt;&lt;span&gt; launch &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;[&lt;&#x2F;span&gt;&lt;span&gt;flags&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;]
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;Flags:
+&lt;&#x2F;span&gt;&lt;span&gt;      &lt;&#x2F;span&gt;&lt;span style=&quot;color:#a7adba;&quot;&gt;# ...a bunch of options and whatnot
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;Alright, this looks like &lt;ins&gt;exactly&lt;&#x2F;ins&gt; what we need. We have a Dockerfile, and all we need to put this thing on the fly app server. Let&#x27;s take it for a spin:&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;bash&quot; style=&quot;background-color:#eff1f5;color:#4f5b66;&quot; class=&quot;language-bash &quot;&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;$&lt;&#x2F;span&gt;&lt;span&gt;&amp;gt; fly launch
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;We get asked a bunch of questions, like we want the app named, where it should be located, etc. What&#x27;s even neater is that fly generates a config file for us in the &lt;strong&gt;&lt;code&gt;fly.toml&lt;&#x2F;code&gt;&lt;&#x2F;strong&gt; that now appears in our editor:&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;toml&quot; style=&quot;background-color:#eff1f5;color:#4f5b66;&quot; class=&quot;language-toml &quot;&gt;&lt;code class=&quot;language-toml&quot; data-lang=&quot;toml&quot;&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;app &lt;&#x2F;span&gt;&lt;span&gt;= &amp;#39;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;${APP_NAME}&lt;&#x2F;span&gt;&lt;span&gt;&amp;#39;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;primary_region &lt;&#x2F;span&gt;&lt;span&gt;= &amp;#39;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;${REGION}&lt;&#x2F;span&gt;&lt;span&gt;&amp;#39;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;kill_signal &lt;&#x2F;span&gt;&lt;span&gt;= &amp;#39;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;SIGINT&lt;&#x2F;span&gt;&lt;span&gt;&amp;#39;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;kill_timeout &lt;&#x2F;span&gt;&lt;span&gt;= &amp;#39;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;5s&lt;&#x2F;span&gt;&lt;span&gt;&amp;#39;
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;[build]
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;dockerfile &lt;&#x2F;span&gt;&lt;span&gt;= &amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;Dockerfile&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;ignorefile &lt;&#x2F;span&gt;&lt;span&gt;= &amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;.&#x2F;dockerignore&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;[env]
+&lt;&#x2F;span&gt;&lt;span&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;FLY_SCALE_TO_ZERO &lt;&#x2F;span&gt;&lt;span&gt;= &amp;#39;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;15m&lt;&#x2F;span&gt;&lt;span&gt;&amp;#39;
+&lt;&#x2F;span&gt;&lt;span&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;PORT &lt;&#x2F;span&gt;&lt;span&gt;= &amp;#39;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;8080&lt;&#x2F;span&gt;&lt;span&gt;&amp;#39;
+&lt;&#x2F;span&gt;&lt;span&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;PRIMARY_REGION &lt;&#x2F;span&gt;&lt;span&gt;= &amp;#39;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;${REGION}&lt;&#x2F;span&gt;&lt;span&gt;&amp;#39;
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;[http_service]
+&lt;&#x2F;span&gt;&lt;span&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;internal_port &lt;&#x2F;span&gt;&lt;span&gt;= &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;8080
+&lt;&#x2F;span&gt;&lt;span&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;force_https &lt;&#x2F;span&gt;&lt;span&gt;= &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;true
+&lt;&#x2F;span&gt;&lt;span&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;auto_stop_machines &lt;&#x2F;span&gt;&lt;span&gt;= &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;true
+&lt;&#x2F;span&gt;&lt;span&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;auto_start_machines &lt;&#x2F;span&gt;&lt;span&gt;= &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;true
+&lt;&#x2F;span&gt;&lt;span&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;min_machines_running &lt;&#x2F;span&gt;&lt;span&gt;= &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;0
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;[[services]]
+&lt;&#x2F;span&gt;&lt;span&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;protocol &lt;&#x2F;span&gt;&lt;span&gt;= &amp;#39;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;tcp&lt;&#x2F;span&gt;&lt;span&gt;&amp;#39;
+&lt;&#x2F;span&gt;&lt;span&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;internal_port &lt;&#x2F;span&gt;&lt;span&gt;= &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;8080
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;[[services.ports]]
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;port &lt;&#x2F;span&gt;&lt;span&gt;= &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;80
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;handlers &lt;&#x2F;span&gt;&lt;span&gt;= [&amp;#39;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;http&lt;&#x2F;span&gt;&lt;span&gt;&amp;#39;]
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;[[services.ports]]
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;port &lt;&#x2F;span&gt;&lt;span&gt;= &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;443
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;handlers &lt;&#x2F;span&gt;&lt;span&gt;= [&amp;#39;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;tls&lt;&#x2F;span&gt;&lt;span&gt;&amp;#39;, &amp;#39;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;http&lt;&#x2F;span&gt;&lt;span&gt;&amp;#39;]
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;  [services.concurrency]
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;hard_limit &lt;&#x2F;span&gt;&lt;span&gt;= &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;25
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;soft_limit &lt;&#x2F;span&gt;&lt;span&gt;= &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;20
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;[[services.tcp_checks]]
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;interval &lt;&#x2F;span&gt;&lt;span&gt;= &amp;#39;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;15s&lt;&#x2F;span&gt;&lt;span&gt;&amp;#39;
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;timeout &lt;&#x2F;span&gt;&lt;span&gt;= &amp;#39;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;2s&lt;&#x2F;span&gt;&lt;span&gt;&amp;#39;
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;grace_period &lt;&#x2F;span&gt;&lt;span&gt;= &amp;#39;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;1s&lt;&#x2F;span&gt;&lt;span&gt;&amp;#39;
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;port &lt;&#x2F;span&gt;&lt;span&gt;= &amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;8080&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;restart_limit &lt;&#x2F;span&gt;&lt;span&gt;= &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;6
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;[[vm]]
+&lt;&#x2F;span&gt;&lt;span&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;size &lt;&#x2F;span&gt;&lt;span&gt;= &amp;#39;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;shared-cpu-1x&lt;&#x2F;span&gt;&lt;span&gt;&amp;#39;
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;&lt;strong&gt;&lt;code&gt;fly launch&lt;&#x2F;code&gt;&lt;&#x2F;strong&gt; command output looks like this:&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;img src=&quot;&#x2F;img&#x2F;2024&#x2F;app-on-flyio&#x2F;fly_launch.webp&quot; alt=&quot;Fly launch&quot; &#x2F;&gt;&lt;&#x2F;p&gt;
+&lt;p&gt;And, docker build part of deployment:&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;img src=&quot;&#x2F;img&#x2F;2024&#x2F;app-on-flyio&#x2F;fly_launch_docker.webp&quot; alt=&quot;Docker build&quot; &#x2F;&gt;&lt;&#x2F;p&gt;
+&lt;p&gt;We wait a bit, and check the console as we sit on the edge of our seats in anticipation of a successful deployment, and ... its SUCCESS 💪!&lt;&#x2F;p&gt;
+&lt;p&gt;Now, if we try testing the same cURL test with fly hostname, we should be able to see correct output. This confirms that deployment was successful, and we&#x27;ve managed to complete deployment 🙌!&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;img src=&quot;&#x2F;img&#x2F;2024&#x2F;app-on-flyio&#x2F;curl_test.webp&quot; alt=&quot;Simple test&quot; &#x2F;&gt;&lt;&#x2F;p&gt;
+&lt;p&gt;Now if we check fly.io Dashboard, then we should be able to locate the machine. On left menu options, if we look at &lt;strong&gt;Metrics&lt;&#x2F;strong&gt;, then it provides nice basic info on our app. It also has button for Grafana dashboards. Below image shows basic grafana overview.&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;img src=&quot;&#x2F;img&#x2F;2024&#x2F;app-on-flyio&#x2F;grafana_app_overview.webp&quot; alt=&quot;Sneak peak at dashboard&quot; &#x2F;&gt;&lt;&#x2F;p&gt;
+&lt;p&gt;From &lt;strong&gt;Dashboards&lt;&#x2F;strong&gt;, &lt;strong&gt;&lt;code&gt;Fly app&lt;&#x2F;code&gt;&lt;&#x2F;strong&gt; appears showing more insights into collected &lt;strong&gt;Metrics&lt;&#x2F;strong&gt;. Out-of-box such metrics are more useful and easier for most of the devs to keep an eye on the deployed app.&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;strong&gt;HTTP Status codes&lt;&#x2F;strong&gt;&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;img src=&quot;&#x2F;img&#x2F;2024&#x2F;app-on-flyio&#x2F;metrics_http_status_codes.webp&quot; alt=&quot;Http Status codes&quot; &#x2F;&gt;&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;strong&gt;HTTP Response times&lt;&#x2F;strong&gt;&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;img src=&quot;&#x2F;img&#x2F;2024&#x2F;app-on-flyio&#x2F;metrics_http_response_times_view.webp&quot; alt=&quot;Http Response times&quot; &#x2F;&gt;&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;strong&gt;Data Transfer&lt;&#x2F;strong&gt;&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;img src=&quot;&#x2F;img&#x2F;2024&#x2F;app-on-flyio&#x2F;metrics_data_transfer_view.webp&quot; alt=&quot;Data tranfer&quot; &#x2F;&gt;&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;wrapping-up&quot;&gt;&lt;a class=&quot;zola-anchor&quot; href=&quot;#wrapping-up&quot; aria-label=&quot;Anchor link for: wrapping-up&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;&#x2F;i&gt;&lt;&#x2F;a&gt; 
+Wrapping up&lt;&#x2F;h2&gt;
+&lt;p&gt;In my attempt to find developer-friendly hosting platform and alternate to Heroku&#x2F;AWS&#x2F;Azure, I&#x27;ve been thoroughly satisfied with what Fly offers. I&#x27;m excited to see what else I can build, and deploy.&lt;&#x2F;p&gt;
+&lt;p&gt;All the code we wrote today, you can find it in my &lt;a href=&quot;https:&#x2F;&#x2F;github.com&#x2F;SaumilP&#x2F;tryouts&#x2F;tree&#x2F;master&#x2F;rust&#x2F;flyio-sample-app&quot;&gt;repo&lt;&#x2F;a&gt;.&lt;&#x2F;p&gt;
+
+	</content>
+      <category term="fly.io"/>
+        <category term="rust"/>
+        <category term="http"/>
+        </entry>
+    </feed>

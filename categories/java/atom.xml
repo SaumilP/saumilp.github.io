@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en">
+  <title>Code, Thoughts and Ideas</title>
+  <subtitle></subtitle>
+
+  <rights>
+    © 2022 - 2024 [object]
+  </rights>
+  <author>
+    <name>Saumil Patel</name>
+    <email>email2saumil2024@gmail.com</email>
+    <uri>https:&#x2F;&#x2F;saumilp.github.io</uri>
+  </author>
+
+  <id>tag:saumilp.github.io,2024-01-07:64a90cf1-e97f-457c-93d5-0fdd287a8798</id>
+
+  <updated>2015-01-31T00:00:00+00:00</updated>
+
+  <!-- The W3C validator will complain when this is on localhost, disregard. -->
+  <link href="https:&#x2F;&#x2F;saumilp.github.io&#x2F;categories&#x2F;java&#x2F;atom.xml" rel="self" type="application/atom+xml"/>
+  <link href="https:&#x2F;&#x2F;saumilp.github.io" hreflang="en"/>
+  <generator uri="https://www.getzola.org/">Zola</generator>
+
+  <entry xml:lang="en">
+      <title>Curried Function in Java</title>
+      <published>2015-01-31T00:00:00+00:00</published>
+      <updated>2015-01-31T00:00:00+00:00</updated>
+
+      <link href="https:&#x2F;&#x2F;saumilp.github.io&#x2F;blog&#x2F;currying-function-in-java&#x2F;"
+            hreflang="en"
+            type="text/html"/>
+      <id>tag:saumilp.github.io:tech:2015-01-31:1</id>
+
+      <author>
+        <name>[object]</name>
+      </author>
+      <rights type="html">
+        © 2015
+        [object]
+      </rights>
+
+      <content src="https:&#x2F;&#x2F;saumilp.github.io&#x2F;blog&#x2F;currying-function-in-java&#x2F;" type="text/html">
+          &lt;p&gt;&lt;strong&gt;Currying&lt;&#x2F;strong&gt; is a technique of transforming a function with multiple arguments into a function with just single argument. The single argument is the value of the first argument from the original function and it returns another single argument function. This in turn would take the second original argument and itself return another single argument function. This kind of chaining continues over the arguments of the original. The last in the chain will have access to all the arguments and so can do whatever it needs to do.&lt;span id=&quot;continue-reading&quot;&gt;&lt;&#x2F;span&gt;&lt;&#x2F;p&gt;
+&lt;p&gt;You can turn any function with multiple arguments into its curried equivalent. Lets have a look at the Curryied function in Java 7 vs Java 8.&lt;&#x2F;p&gt;
+&lt;h3 id=&quot;java7&quot;&gt;&lt;a class=&quot;zola-anchor&quot; href=&quot;#java7&quot; aria-label=&quot;Anchor link for: java7&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;&#x2F;i&gt;&lt;&#x2F;a&gt; 
+Java7&lt;&#x2F;h3&gt;
+&lt;p&gt;For example, we have a function &lt;code&gt;add&lt;&#x2F;code&gt; specified below&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;java&quot; style=&quot;background-color:#eff1f5;color:#4f5b66;&quot; class=&quot;language-java &quot;&gt;&lt;code class=&quot;language-java&quot; data-lang=&quot;java&quot;&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;public&lt;&#x2F;span&gt;&lt;span&gt; function &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;add &lt;&#x2F;span&gt;&lt;span&gt;( &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;int&lt;&#x2F;span&gt;&lt;span&gt; a, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;int&lt;&#x2F;span&gt;&lt;span&gt; b ) {
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;return&lt;&#x2F;span&gt;&lt;span&gt; a+b;
+&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;This can be curried into something like this ( where &lt;code&gt;Function&amp;lt;A,B&amp;gt;&lt;&#x2F;code&gt; defines a single method &lt;code&gt;B apply(A a)&lt;&#x2F;code&gt;)&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;java&quot; style=&quot;background-color:#eff1f5;color:#4f5b66;&quot; class=&quot;language-java &quot;&gt;&lt;code class=&quot;language-java&quot; data-lang=&quot;java&quot;&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;public static &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;Function&lt;&#x2F;span&gt;&lt;span&gt;&amp;lt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;Integer&lt;&#x2F;span&gt;&lt;span&gt;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;Function&lt;&#x2F;span&gt;&lt;span&gt;&amp;lt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;Integer&lt;&#x2F;span&gt;&lt;span&gt;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;Integer&lt;&#x2F;span&gt;&lt;span&gt;&amp;gt;&amp;gt; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;add&lt;&#x2F;span&gt;&lt;span&gt;() {
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;return new &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;Function&lt;&#x2F;span&gt;&lt;span&gt;&amp;lt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;Integer&lt;&#x2F;span&gt;&lt;span&gt;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;Function&lt;&#x2F;span&gt;&lt;span&gt;&amp;lt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;Integer&lt;&#x2F;span&gt;&lt;span&gt;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;Integer&lt;&#x2F;span&gt;&lt;span&gt;&amp;gt;&amp;gt;() &lt;&#x2F;span&gt;&lt;span style=&quot;color:#343d46;&quot;&gt;{
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#343d46;&quot;&gt;        @&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;Override
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#343d46;&quot;&gt;        &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;public &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;Function&lt;&#x2F;span&gt;&lt;span style=&quot;color:#343d46;&quot;&gt;&amp;lt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;Integer&lt;&#x2F;span&gt;&lt;span style=&quot;color:#343d46;&quot;&gt;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;Integer&lt;&#x2F;span&gt;&lt;span style=&quot;color:#343d46;&quot;&gt;&amp;gt; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;apply&lt;&#x2F;span&gt;&lt;span style=&quot;color:#343d46;&quot;&gt;( &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;final &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;Integer &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;valueX &lt;&#x2F;span&gt;&lt;span style=&quot;color:#343d46;&quot;&gt;) {
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#343d46;&quot;&gt;            &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;return new &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;Function&lt;&#x2F;span&gt;&lt;span style=&quot;color:#343d46;&quot;&gt;&amp;lt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;Integer&lt;&#x2F;span&gt;&lt;span style=&quot;color:#343d46;&quot;&gt;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;Integer&lt;&#x2F;span&gt;&lt;span style=&quot;color:#343d46;&quot;&gt;&amp;gt;(){
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#343d46;&quot;&gt;                @&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;Override
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#343d46;&quot;&gt;                &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;public &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;Integer &lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;apply&lt;&#x2F;span&gt;&lt;span style=&quot;color:#343d46;&quot;&gt;( &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;Integer &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;valueY&lt;&#x2F;span&gt;&lt;span style=&quot;color:#343d46;&quot;&gt;) {
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#343d46;&quot;&gt;                    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;return&lt;&#x2F;span&gt;&lt;span style=&quot;color:#343d46;&quot;&gt; valueX &lt;&#x2F;span&gt;&lt;span&gt;+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#343d46;&quot;&gt; valueY;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#343d46;&quot;&gt;                }
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#343d46;&quot;&gt;            };
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#343d46;&quot;&gt;        }
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#343d46;&quot;&gt;    }&lt;&#x2F;span&gt;&lt;span&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;Now lets check the calling these functions, first original method&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;java&quot; style=&quot;background-color:#eff1f5;color:#4f5b66;&quot; class=&quot;language-java &quot;&gt;&lt;code class=&quot;language-java&quot; data-lang=&quot;java&quot;&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;add&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;1 &lt;&#x2F;span&gt;&lt;span&gt;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;1&lt;&#x2F;span&gt;&lt;span&gt;); &lt;&#x2F;span&gt;&lt;span style=&quot;color:#a7adba;&quot;&gt;&#x2F;&#x2F; results into value 2
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;and calling our curried function&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;java&quot; style=&quot;background-color:#eff1f5;color:#4f5b66;&quot; class=&quot;language-java &quot;&gt;&lt;code class=&quot;language-java&quot; data-lang=&quot;java&quot;&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;add&lt;&#x2F;span&gt;&lt;span&gt;(); &lt;&#x2F;span&gt;&lt;span style=&quot;color:#a7adba;&quot;&gt;&#x2F;&#x2F; results into a instance of Function&amp;lt;[A, B]&amp;gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;add&lt;&#x2F;span&gt;&lt;span&gt;().&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;apply&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;1&lt;&#x2F;span&gt;&lt;span&gt;); &lt;&#x2F;span&gt;&lt;span style=&quot;color:#a7adba;&quot;&gt;&#x2F;&#x2F; results into a instance of Funciton&amp;lt;[A, B]&amp;gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;add&lt;&#x2F;span&gt;&lt;span&gt;().&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;apply&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;1&lt;&#x2F;span&gt;&lt;span&gt;).&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;apply&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;1&lt;&#x2F;span&gt;&lt;span&gt;); &lt;&#x2F;span&gt;&lt;span style=&quot;color:#a7adba;&quot;&gt;&#x2F;&#x2F; results into value 2
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;h3 id=&quot;java-8&quot;&gt;&lt;a class=&quot;zola-anchor&quot; href=&quot;#java-8&quot; aria-label=&quot;Anchor link for: java-8&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;&#x2F;i&gt;&lt;&#x2F;a&gt; 
+Java 8&lt;&#x2F;h3&gt;
+&lt;p&gt;In Java 8, its is much less verbose using lambda syntax compared to Java 7 Example.&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;java&quot; style=&quot;background-color:#eff1f5;color:#4f5b66;&quot; class=&quot;language-java &quot;&gt;&lt;code class=&quot;language-java&quot; data-lang=&quot;java&quot;&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;public static &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;Function&lt;&#x2F;span&gt;&lt;span&gt;&amp;lt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;Integer&lt;&#x2F;span&gt;&lt;span&gt;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;Function&lt;&#x2F;span&gt;&lt;span&gt;&amp;lt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;Integer&lt;&#x2F;span&gt;&lt;span&gt;,&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;Integer&lt;&#x2F;span&gt;&lt;span&gt;&amp;gt;&amp;gt; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;add&lt;&#x2F;span&gt;&lt;span&gt;() {
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;return &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;x &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;-&amp;gt; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;y &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;-&amp;gt;&lt;&#x2F;span&gt;&lt;span&gt; x + y;
+&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+
+	</content>
+      <category term="currying-functions"/>
+        <category term="functions"/>
+        </entry>
+    <entry xml:lang="en">
+      <title>Closures in Java</title>
+      <published>2015-01-23T00:00:00+00:00</published>
+      <updated>2015-01-23T00:00:00+00:00</updated>
+
+      <link href="https:&#x2F;&#x2F;saumilp.github.io&#x2F;blog&#x2F;closures-in-java&#x2F;"
+            hreflang="en"
+            type="text/html"/>
+      <id>tag:saumilp.github.io:tech:2015-01-23:1</id>
+
+      <author>
+        <name>[object]</name>
+      </author>
+      <rights type="html">
+        © 2015
+        [object]
+      </rights>
+
+      <summary type="html">
+          A Closure is a first class function or reference to a function together with a referencing environment...
+        </summary>
+      <content src="https:&#x2F;&#x2F;saumilp.github.io&#x2F;blog&#x2F;closures-in-java&#x2F;" type="text/html">
+          &lt;p&gt;Working on last few projects, i&#x27;ve realized that use of closures can come really handy in day-to-day work.
+Can you imagine writing loops after loops to extract or collect properties from list of custom objects? It can be tiring and painful. And hence, I have decided to add this post - mainly to point out couple of situations where introduction to closures can really ease this pain.&lt;span id=&quot;continue-reading&quot;&gt;&lt;&#x2F;span&gt;&lt;&#x2F;p&gt;
+&lt;p&gt;Most of you must have used &lt;a href=&quot;https:&#x2F;&#x2F;projectlombok.org&quot;&gt;&lt;i&gt;Project Lambok&lt;&#x2F;i&gt;&lt;&#x2F;a&gt; or &lt;i&gt;Functional Java&lt;&#x2F;i&gt; to achive this. Unfortunately not everyone gets the choice to be able to use opensource libraries. Yeah, there are clients who prefers to avoid use of opensource libraries in this day and age, can you believe it ? Anyways, i have tried to point out some of the features offerred by closures in this post.&lt;&#x2F;p&gt;
+&lt;p&gt;Before going forward in more details, let&#x27;s try and understand what closures mean in Java and what it can bring on the table.
+A Closure is a first class function or reference to a function together with a referencing environment. Most of the time, function types, anonumous functions and inline function-valued expressions are also refered as closures in java. An anonymous function that contains some context surrounding it as a snapshot &amp;amp; can be passed as a parameter. The definition of closure can be broken down into two main parts - callbacks and contextual information surrounding this callback function.&lt;&#x2F;p&gt;
+&lt;p&gt;Please note, Anonymous classes in java are close to being called as closures, but they do not fully support definition of closure. But they come close to it and hence you can find lot of literature calling anonymous inner classes as closures. The main reason behind not supporting definition, is due to the fact that inner class can only access &lt;strong&gt;&lt;i&gt;final&lt;&#x2F;i&gt;&lt;&#x2F;strong&gt; local variable of the enclosing method. And also, because these variables get created and stored in a stack, they get destroyed when execution of the method completes and result gets returned. And If you want to make an anonymous inner class as a closure, it should be allowed to access all the fields surrounding body - which is not permissible by current memory management.&lt;&#x2F;p&gt;
+&lt;p&gt;Enough with the explanation, let&#x27;s look at some of the examples!&lt;&#x2F;p&gt;
+&lt;p&gt;In pre Java 8, versions we can simulate closures&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;java&quot; style=&quot;background-color:#eff1f5;color:#4f5b66;&quot; class=&quot;language-java &quot;&gt;&lt;code class=&quot;language-java&quot; data-lang=&quot;java&quot;&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;public interface &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;Funct&lt;&#x2F;span&gt;&lt;span style=&quot;color:#343d46;&quot;&gt;&amp;lt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;A&lt;&#x2F;span&gt;&lt;span style=&quot;color:#343d46;&quot;&gt;,&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;B&lt;&#x2F;span&gt;&lt;span style=&quot;color:#343d46;&quot;&gt;&amp;gt; {
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#343d46;&quot;&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;public &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;B &lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;func&lt;&#x2F;span&gt;&lt;span style=&quot;color:#343d46;&quot;&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;A &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;a&lt;&#x2F;span&gt;&lt;span style=&quot;color:#343d46;&quot;&gt;);
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#343d46;&quot;&gt;}
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;We can use this interface to emulate anonymous inner class easily. Below mentioned methods can be used to perform simple comparison tasks and can be later extended to combine with interface &lt;code&gt;Funct&amp;lt;A,B&amp;gt;&lt;&#x2F;code&gt; to simulate closures.&lt;&#x2F;p&gt;
+&lt;p&gt;Method to retrieve larger values compared to provided comparison value:&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;java&quot; style=&quot;background-color:#eff1f5;color:#4f5b66;&quot; class=&quot;language-java &quot;&gt;&lt;code class=&quot;language-java&quot; data-lang=&quot;java&quot;&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;public static int &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;larger&lt;&#x2F;span&gt;&lt;span&gt;( final &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;List&lt;&#x2F;span&gt;&lt;span&gt;&amp;lt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;Integer&lt;&#x2F;span&gt;&lt;span&gt;&amp;gt; objectList, final &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;Integer&lt;&#x2F;span&gt;&lt;span&gt; refObj ){
+&lt;&#x2F;span&gt;&lt;span&gt;   &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;for&lt;&#x2F;span&gt;&lt;span&gt;( &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;Integer&lt;&#x2F;span&gt;&lt;span&gt; comparedObj : objectList ){
+&lt;&#x2F;span&gt;&lt;span&gt;      &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;if&lt;&#x2F;span&gt;&lt;span&gt;( comaredObj &amp;gt; refObj ){
+&lt;&#x2F;span&gt;&lt;span&gt;        &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;return&lt;&#x2F;span&gt;&lt;span&gt; comparedObj;
+&lt;&#x2F;span&gt;&lt;span&gt;      }
+&lt;&#x2F;span&gt;&lt;span&gt;   }
+&lt;&#x2F;span&gt;&lt;span&gt;   &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;return&lt;&#x2F;span&gt;&lt;span&gt; refObj;
+&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;Another method to determine smaller value compared to provided comparison value:&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;java&quot; style=&quot;background-color:#eff1f5;color:#4f5b66;&quot; class=&quot;language-java &quot;&gt;&lt;code class=&quot;language-java&quot; data-lang=&quot;java&quot;&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;public static int &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;smaller&lt;&#x2F;span&gt;&lt;span&gt;( final &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;List&lt;&#x2F;span&gt;&lt;span&gt;&amp;lt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;Integer&lt;&#x2F;span&gt;&lt;span&gt;&amp;gt; objectList, final &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;Integer&lt;&#x2F;span&gt;&lt;span&gt; refObj ){
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;for&lt;&#x2F;span&gt;&lt;span&gt;( &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;Integer&lt;&#x2F;span&gt;&lt;span&gt; comparedObj : objectList ){
+&lt;&#x2F;span&gt;&lt;span&gt;        &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;if&lt;&#x2F;span&gt;&lt;span&gt;( comparedObj &amp;lt; refObj ){
+&lt;&#x2F;span&gt;&lt;span&gt;            &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;return&lt;&#x2F;span&gt;&lt;span&gt; comparedObj;
+&lt;&#x2F;span&gt;&lt;span&gt;        }
+&lt;&#x2F;span&gt;&lt;span&gt;    }
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;return&lt;&#x2F;span&gt;&lt;span&gt; refObj;
+&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;These method are very identical - except the conditions. These can be combined using above mentioned interface like this:&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;java&quot; style=&quot;background-color:#eff1f5;color:#4f5b66;&quot; class=&quot;language-java &quot;&gt;&lt;code class=&quot;language-java&quot; data-lang=&quot;java&quot;&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;public static &lt;&#x2F;span&gt;&lt;span&gt;&amp;lt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;T&lt;&#x2F;span&gt;&lt;span&gt;&amp;gt; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;T &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;firstMatch&lt;&#x2F;span&gt;&lt;span&gt;( final &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;List&lt;&#x2F;span&gt;&lt;span&gt;&amp;lt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;T&lt;&#x2F;span&gt;&lt;span&gt;&amp;gt; objectList, final &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;Funct&lt;&#x2F;span&gt;&lt;span&gt;&amp;lt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;T&lt;&#x2F;span&gt;&lt;span&gt;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;Boolean&lt;&#x2F;span&gt;&lt;span&gt;&amp;gt; functor, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;T&lt;&#x2F;span&gt;&lt;span&gt; refObj ){
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;for &lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;T&lt;&#x2F;span&gt;&lt;span&gt; comparedObj : objectList) {
+&lt;&#x2F;span&gt;&lt;span&gt;        &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;if &lt;&#x2F;span&gt;&lt;span&gt;(functor.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;func&lt;&#x2F;span&gt;&lt;span&gt;(comparedObj)) {
+&lt;&#x2F;span&gt;&lt;span&gt;            &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;return&lt;&#x2F;span&gt;&lt;span&gt; comparedObj;
+&lt;&#x2F;span&gt;&lt;span&gt;        }
+&lt;&#x2F;span&gt;&lt;span&gt;    }
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;return&lt;&#x2F;span&gt;&lt;span&gt; refObj;
+&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;This method can be used as :&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;java&quot; style=&quot;background-color:#eff1f5;color:#4f5b66;&quot; class=&quot;language-java &quot;&gt;&lt;code class=&quot;language-java&quot; data-lang=&quot;java&quot;&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;Func&lt;&#x2F;span&gt;&lt;span&gt;&amp;lt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;Integer&lt;&#x2F;span&gt;&lt;span&gt;,&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;Boolean&lt;&#x2F;span&gt;&lt;span&gt;&amp;gt; greaterThanFive = &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;new &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;Func&lt;&#x2F;span&gt;&lt;span&gt;&amp;lt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;Integer&lt;&#x2F;span&gt;&lt;span&gt;,&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;Boolean&lt;&#x2F;span&gt;&lt;span&gt;&amp;gt;{
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;Boolean &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;func&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;Integer&lt;&#x2F;span&gt;&lt;span&gt; no) {
+&lt;&#x2F;span&gt;&lt;span&gt;        &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;return&lt;&#x2F;span&gt;&lt;span&gt; no &amp;gt; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;5&lt;&#x2F;span&gt;&lt;span&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;    }
+&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;int&lt;&#x2F;span&gt;&lt;span&gt; numbersBiggerThanFive = &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;firstMatch&lt;&#x2F;span&gt;&lt;span&gt;(someIntegerList, greaterThanFive, defaultValue);
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;Other few examples can be found in (progfun)[https:&#x2F;&#x2F;github.com&#x2F;SaumilP&#x2F;java-progfun].&lt;&#x2F;p&gt;
+&lt;p&gt;In Java 8, streams can be used to make use of newly added feature - lambda expressions.&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;java&quot; style=&quot;background-color:#eff1f5;color:#4f5b66;&quot; class=&quot;language-java &quot;&gt;&lt;code class=&quot;language-java&quot; data-lang=&quot;java&quot;&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;final &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;Integer&lt;&#x2F;span&gt;&lt;span&gt; noBiggerThanFive = someList.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;stream&lt;&#x2F;span&gt;&lt;span&gt;().&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;filter&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;no &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;-&amp;gt;&lt;&#x2F;span&gt;&lt;span&gt; no &amp;gt; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;5 &lt;&#x2F;span&gt;&lt;span&gt;).&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;get&lt;&#x2F;span&gt;&lt;span&gt;();
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;It is less verbose compared to older version of the code, but it gives neat and short presentation of the code.
+Developers can focus more on the work getting done instead of worrying about getting syntax correct.&lt;&#x2F;p&gt;
+&lt;p&gt;I will add more Java 8 examples in next post.&lt;&#x2F;p&gt;
+
+	</content>
+      <category term="closures"/>
+        <category term="functions"/>
+        </entry>
+    </feed>

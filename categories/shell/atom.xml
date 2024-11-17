@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en">
+  <title>Code, Thoughts and Ideas</title>
+  <subtitle></subtitle>
+
+  <rights>
+    © 2022 - 2024 [object]
+  </rights>
+  <author>
+    <name>Saumil Patel</name>
+    <email>email2saumil2024@gmail.com</email>
+    <uri>https:&#x2F;&#x2F;saumilp.github.io</uri>
+  </author>
+
+  <id>tag:saumilp.github.io,2024-01-07:64a90cf1-e97f-457c-93d5-0fdd287a8798</id>
+
+  <updated>2024-11-16T00:00:00+00:00</updated>
+
+  <!-- The W3C validator will complain when this is on localhost, disregard. -->
+  <link href="https:&#x2F;&#x2F;saumilp.github.io&#x2F;categories&#x2F;shell&#x2F;atom.xml" rel="self" type="application/atom+xml"/>
+  <link href="https:&#x2F;&#x2F;saumilp.github.io" hreflang="en"/>
+  <generator uri="https://www.getzola.org/">Zola</generator>
+
+  <entry xml:lang="en">
+      <title>Dev machine setup for Flutter App development</title>
+      <published>2024-11-16T00:00:00+00:00</published>
+      <updated>2024-11-16T00:00:00+00:00</updated>
+
+      <link href="https:&#x2F;&#x2F;saumilp.github.io&#x2F;blog&#x2F;dev-machine-setup-for-flutter&#x2F;"
+            hreflang="en"
+            type="text/html"/>
+      <id>tag:saumilp.github.io:tech:2024-11-16:1</id>
+
+      <author>
+        <name>[object]</name>
+      </author>
+      <rights type="html">
+        © 2024
+        [object]
+      </rights>
+
+      <summary type="html">
+          Setting up Flutter on macOS can be staightforward...
+        </summary>
+      <content src="https:&#x2F;&#x2F;saumilp.github.io&#x2F;blog&#x2F;dev-machine-setup-for-flutter&#x2F;" type="text/html">
+          &lt;p&gt;&lt;img src=&quot;&#x2F;img&#x2F;2024&#x2F;dev-machine-setup-flutter-osx&#x2F;macOs-dev-machine-setup.webp&quot; alt=&quot;Flutter on macOS&quot; &#x2F;&gt;&lt;&#x2F;p&gt;
+&lt;p&gt;Setting up &lt;a href=&quot;https:&#x2F;&#x2F;flutter.dev&#x2F;&quot;&gt;Flutter&lt;&#x2F;a&gt;{:target=&amp;quot;_blank&amp;quot;} on macOS can be staightforward process when using &lt;a href=&quot;https:&#x2F;&#x2F;brew.sh&#x2F;&quot;&gt;Homebrew&lt;&#x2F;a&gt;{:target=&amp;quot;_blank&amp;quot;}, a popular package manager for macOS. Flutter, a powerful open-source UI software development toolkit by Google, enables developers to build natively compiled mobile, web, and desktop applications from a single codebase. In this guide, we’ll walk you through the necessary steps to install and configure Flutter on macOS system using Homebrew. Additionally, we will cover the installation of essential tools like Android Studio and Xcode, update Ruby, and set up CocoaPods to ensure a smooth development experience.&lt;span id=&quot;continue-reading&quot;&gt;&lt;&#x2F;span&gt; These setup steps helps with setup and standardize across various machines. Follow along to set up your Flutter environment and build your next great app!&lt;&#x2F;p&gt;
+&lt;p&gt;To install Flutter on macOS using Homebrew, follow these steps:&lt;&#x2F;p&gt;
+&lt;h3 id=&quot;1-install-homebrew&quot;&gt;&lt;a class=&quot;zola-anchor&quot; href=&quot;#1-install-homebrew&quot; aria-label=&quot;Anchor link for: 1-install-homebrew&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;&#x2F;i&gt;&lt;&#x2F;a&gt; 
+1. Install Homebrew&lt;&#x2F;h3&gt;
+&lt;p&gt;Open Terminal and run:&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;bash&quot; style=&quot;background-color:#eff1f5;color:#4f5b66;&quot; class=&quot;language-bash &quot;&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;$&lt;&#x2F;span&gt;&lt;span&gt;&amp;gt; &#x2F;bin&#x2F;bash&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt; -c &lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;$&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;curl -fsSL&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt; https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;Homebrew&#x2F;install&#x2F;HEAD&#x2F;install.sh)&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;h3 id=&quot;2-install-flutter-using-homebrew&quot;&gt;&lt;a class=&quot;zola-anchor&quot; href=&quot;#2-install-flutter-using-homebrew&quot; aria-label=&quot;Anchor link for: 2-install-flutter-using-homebrew&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;&#x2F;i&gt;&lt;&#x2F;a&gt; 
+2. Install Flutter using Homebrew&lt;&#x2F;h3&gt;
+&lt;p&gt;In Terminal, run:&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;bash&quot; style=&quot;background-color:#eff1f5;color:#4f5b66;&quot; class=&quot;language-bash &quot;&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;$&lt;&#x2F;span&gt;&lt;span&gt;&amp;gt; brew install&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt; --cask&lt;&#x2F;span&gt;&lt;span&gt; flutter
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;h3 id=&quot;3-verify-flutter-installation&quot;&gt;&lt;a class=&quot;zola-anchor&quot; href=&quot;#3-verify-flutter-installation&quot; aria-label=&quot;Anchor link for: 3-verify-flutter-installation&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;&#x2F;i&gt;&lt;&#x2F;a&gt; 
+3. Verify Flutter installation&lt;&#x2F;h3&gt;
+&lt;p&gt;After successful installation, verify if Flutter is correctly installed by checking version:&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;bash&quot; style=&quot;background-color:#eff1f5;color:#4f5b66;&quot; class=&quot;language-bash &quot;&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;$&lt;&#x2F;span&gt;&lt;span&gt;&amp;gt; flutter&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt; --version
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;h3 id=&quot;4-configure-path&quot;&gt;&lt;a class=&quot;zola-anchor&quot; href=&quot;#4-configure-path&quot; aria-label=&quot;Anchor link for: 4-configure-path&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;&#x2F;i&gt;&lt;&#x2F;a&gt; 
+4. Configure PATH&lt;&#x2F;h3&gt;
+&lt;p&gt;Add the Flutter SDK to your system PATH variable. You can do this by adding flollwing line in to your shell configuration file.&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;bash&quot; style=&quot;background-color:#eff1f5;color:#4f5b66;&quot; class=&quot;language-bash &quot;&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;$&lt;&#x2F;span&gt;&lt;span&gt;&amp;gt; vim ˜&#x2F;.zshrc
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;Paste,&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;bash&quot; style=&quot;background-color:#eff1f5;color:#4f5b66;&quot; class=&quot;language-bash &quot;&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;export &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;PATH&lt;&#x2F;span&gt;&lt;span&gt;=&amp;quot;$&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;PATH&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;:&#x2F;usr&#x2F;local&#x2F;Caskroom&#x2F;flutter&#x2F;3.24.5&#x2F;flutter&#x2F;bin&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;To save the changes, Ctrl+X and Press &#x27;Enter&#x27;.
+To find Flutter path, run:&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;bash&quot; style=&quot;background-color:#eff1f5;color:#4f5b66;&quot; class=&quot;language-bash &quot;&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;$&lt;&#x2F;span&gt;&lt;span&gt;&amp;gt; which flutter
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;Load newly captured conigs:&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;bash&quot; style=&quot;background-color:#eff1f5;color:#4f5b66;&quot; class=&quot;language-bash &quot;&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;$&lt;&#x2F;span&gt;&lt;span&gt;&amp;gt; source ˜&#x2F;.zshrc
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;h3 id=&quot;5-run-flutter-doctor&quot;&gt;&lt;a class=&quot;zola-anchor&quot; href=&quot;#5-run-flutter-doctor&quot; aria-label=&quot;Anchor link for: 5-run-flutter-doctor&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;&#x2F;i&gt;&lt;&#x2F;a&gt; 
+5. Run Flutter doctor&lt;&#x2F;h3&gt;
+&lt;p&gt;Finally, check for any dependencies or issues by running:&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;bash&quot; style=&quot;background-color:#eff1f5;color:#4f5b66;&quot; class=&quot;language-bash &quot;&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;$&lt;&#x2F;span&gt;&lt;span&gt;&amp;gt; flutter doctor
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;h3 id=&quot;6-install-android-studio&quot;&gt;&lt;a class=&quot;zola-anchor&quot; href=&quot;#6-install-android-studio&quot; aria-label=&quot;Anchor link for: 6-install-android-studio&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;&#x2F;i&gt;&lt;&#x2F;a&gt; 
+6. Install Android Studio&lt;&#x2F;h3&gt;
+&lt;pre data-lang=&quot;bash&quot; style=&quot;background-color:#eff1f5;color:#4f5b66;&quot; class=&quot;language-bash &quot;&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;$&lt;&#x2F;span&gt;&lt;span&gt;&amp;gt; brew install&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt; --cask&lt;&#x2F;span&gt;&lt;span&gt; android-studio
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;h3 id=&quot;7-install-xcode-using-app-store-and-setup&quot;&gt;&lt;a class=&quot;zola-anchor&quot; href=&quot;#7-install-xcode-using-app-store-and-setup&quot; aria-label=&quot;Anchor link for: 7-install-xcode-using-app-store-and-setup&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;&#x2F;i&gt;&lt;&#x2F;a&gt; 
+7. Install Xcode using App Store and Setup&lt;&#x2F;h3&gt;
+&lt;h3 id=&quot;8-update-ruby-using-homebrew&quot;&gt;&lt;a class=&quot;zola-anchor&quot; href=&quot;#8-update-ruby-using-homebrew&quot; aria-label=&quot;Anchor link for: 8-update-ruby-using-homebrew&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;&#x2F;i&gt;&lt;&#x2F;a&gt; 
+8. Update Ruby using Homebrew&lt;&#x2F;h3&gt;
+&lt;pre data-lang=&quot;bash&quot; style=&quot;background-color:#eff1f5;color:#4f5b66;&quot; class=&quot;language-bash &quot;&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;$&lt;&#x2F;span&gt;&lt;span&gt;&amp;gt; brew install ruby
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;h3 id=&quot;9-add-the-new-ruby-version-to-path-environment-variable&quot;&gt;&lt;a class=&quot;zola-anchor&quot; href=&quot;#9-add-the-new-ruby-version-to-path-environment-variable&quot; aria-label=&quot;Anchor link for: 9-add-the-new-ruby-version-to-path-environment-variable&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;&#x2F;i&gt;&lt;&#x2F;a&gt; 
+9. Add the new Ruby version to PATH environment variable&lt;&#x2F;h3&gt;
+&lt;p&gt;Open your shell configuration file (~&#x2F;.zshrc or ~&#x2F;.bash_profile) in a text editor and add the following line:
+(Save Ctrl X and Enter)&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;bash&quot; style=&quot;background-color:#eff1f5;color:#4f5b66;&quot; class=&quot;language-bash &quot;&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;export &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;PATH&lt;&#x2F;span&gt;&lt;span&gt;=&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;&#x2F;opt&#x2F;homebrew&#x2F;opt&#x2F;ruby&#x2F;bin:&lt;&#x2F;span&gt;&lt;span&gt;$&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;PATH&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;source&lt;&#x2F;span&gt;&lt;span&gt; ˜&#x2F;.zshrc
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;h3 id=&quot;10-verify-the-ruby-version&quot;&gt;&lt;a class=&quot;zola-anchor&quot; href=&quot;#10-verify-the-ruby-version&quot; aria-label=&quot;Anchor link for: 10-verify-the-ruby-version&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;&#x2F;i&gt;&lt;&#x2F;a&gt; 
+10. Verify the Ruby version&lt;&#x2F;h3&gt;
+&lt;p&gt;Ensure the updated Ruby version is now in use:&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;bash&quot; style=&quot;background-color:#eff1f5;color:#4f5b66;&quot; class=&quot;language-bash &quot;&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;$&lt;&#x2F;span&gt;&lt;span&gt;&amp;gt; ruby&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt; -v
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;h3 id=&quot;11-install-cocoapods&quot;&gt;&lt;a class=&quot;zola-anchor&quot; href=&quot;#11-install-cocoapods&quot; aria-label=&quot;Anchor link for: 11-install-cocoapods&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;&#x2F;i&gt;&lt;&#x2F;a&gt; 
+11. Install CocoaPods&lt;&#x2F;h3&gt;
+&lt;pre data-lang=&quot;bash&quot; style=&quot;background-color:#eff1f5;color:#4f5b66;&quot; class=&quot;language-bash &quot;&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;$&lt;&#x2F;span&gt;&lt;span&gt;&amp;gt; sudo gem install cocoapods
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;By following the steps outlined above, you can successfully install Flutter on your macOS system using Homebrew. This installation includes configuring essential development tools such as Android Studio and Xcode, which are required for Flutter development on macOS. Additionally, updating Ruby and installing CocoaPods ensures compatibility and smooth operation of the development environment. After completing these steps, you’ll be ready to start building and running Flutter applications on your macOS machine. Remember to periodically run flutter doctor to check for any additional dependencies or updates needed to maintain your development environment.&lt;&#x2F;p&gt;
+
+	</content>
+      <category term="flutter"/>
+        <category term="dart"/>
+        <category term="osx"/>
+        <category term="homebrew"/>
+        </entry>
+    </feed>
