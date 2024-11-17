@@ -18,7 +18,7 @@ Recently I updated my blog-site with [**Zola**](https://www.getzola.org/), and t
 
 ## Getting started with Fly
 
-Fly.io is not mature and popular as other CSPs but it shows promising offerings (from developers prospective) & can be considered as good alternative to Heroku to host basic webapps. It seems like a good approach to get app servers up and running quickly on Fly. Simply spin-up a project in a language/framework of your choice, write a sensible Dockerfile fit for running on a server, and deploy to fly platform ot just have things work. It also supports PostgreSQL and Redis, but I will cover provisioning and integration some other time.
+Fly.io is not mature and popular as other CSPs but it shows promising offerings (from developers prospective) & can be considered as good alternative to Heroku to host basic webapps. It seems like a good approach to get app servers up and running quickly on Fly. Simply spin-up a project in a language/framework of your choice, write a sensible Dockerfile fit for running on a server, and deploy to fly platform to just have things work. It also supports PostgreSQL and Redis, but I will cover provisioning and integration some other time.
 
 To get up and running, fly offers a rather nice [CLI](https://fly.io/docs/hands-on/install-flyctl/) to help manage our apps/servers and account. Let's start by installing it on our local development machine. I'll be using homebrew, so a quick:
 ```bash
@@ -106,14 +106,14 @@ With our Dockerfile in place, let's build the bad boy:
 $> docker build . -t heya-from-rust
 ```
 
-After a lengthy initial build (successive builds will be quicker, thanks to docker layerings), we can spin up our container locally and verify we're still looking good from a server prospective:
+After a lengthy initial build (successive builds will be quicker, thanks to docker layering), we can spin up our container locally and verify we're still looking good from a server prospective:
 ```bash
 $> docker run -d -p 8080:8080 --name heya_from_rust -it heya-from-rust
 ```
 
 After a few seconds, we should see the container detaching in terminal and if we send a HTTP request, we should see the same output:
 ```bash
-$> curl -l http://localhost:8080/
+$> curl -l http://localhost:8080
 Heya!
 ```
 
@@ -223,17 +223,21 @@ Now, if we try testing the same cURL test with fly hostname, we should be able t
 ![Simple test](/img/2024/app-on-flyio/curl_test.webp)
 
 Now if we check fly.io Dashboard, then we should be able to locate the machine. On left menu options, if we look at **Metrics**, then it provides nice basic info on our app. It also has button for Grafana dashboards. Below image shows basic grafana overview.
+
 ![Sneak peak at dashboard](/img/2024/app-on-flyio/grafana_app_overview.webp)
 
-From Dashboards, **`Fly app`** appears showing more insights into collected **Metrics**. Out-of-box such metrics are more useful and easier for most of the devs to keep an eye on the deployed app.
+From **Dashboards**, **`Fly app`** appears showing more insights into collected **Metrics**. Out-of-box such metrics are more useful and easier for most of the devs to keep an eye on the deployed app.
 
 **HTTP Status codes**
+
 ![Http Status codes](/img/2024/app-on-flyio/metrics_http_status_codes.webp)
 
 **HTTP Response times**
+
 ![Http Response times](/img/2024/app-on-flyio/metrics_http_response_times_view.webp)
 
 **Data Transfer**
+
 ![Data tranfer](/img/2024/app-on-flyio/metrics_data_transfer_view.webp)
 
 ## Wrapping up
