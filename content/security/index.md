@@ -24,7 +24,7 @@ user accounts, payment flows, private dashboards, or password-based access.
 ## Responsible disclosure
 
 If you believe you have found a security issue affecting this site, please email
-**[pate.saumil@gmail.com](mailto:pate.saumil@gmail.com)** with a clear description
+**[email2saumil2024@gmail.com](mailto:email2saumil2024@gmail.com)** with a clear description
 and steps to reproduce. Please allow reasonable time for a response before any
 public disclosure. There is no bug-bounty program; this is a personal site.
 
