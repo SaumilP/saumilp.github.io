@@ -4,7 +4,7 @@ date = 2015-04-25
 draft=true
 
 [taxonomies]
-tags = ["coniguration", "solr"]
+tags = ["configuration", "solr"]
 categories = ["configuration"]
 
 [extra]

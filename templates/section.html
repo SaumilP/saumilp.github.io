@@ -1,12 +1,24 @@
 {% extends "base.html" %}
 {% import "macros/cards.html" as cards %}
+{% import "macros/icons.html" as ic %}
 
 {% block content %}
+{%- set is_blog = section.path == "/blog/" -%}
+{%- set first_page = not paginator or paginator.current_index == 1 -%}
 <div class="container">
   <header class="page-header">
     <h1>{{ section.title }}</h1>
     {%- if section.description %}<p>{{ section.description }}</p>{% endif %}
   </header>
+
+  {%- if is_blog %}
+  <div class="blog-toolbar">
+    <a class="more-link" href="{{ get_url(path='/blog/archive/') | safe }}">
+      {{ ic::icon(name="clock", size=15) }} View posts by years
+      {{ ic::icon(name="arrow-right", size=14) }}
+    </a>
+  </div>
+  {%- endif %}
 
   {%- if paginator %}
     {%- set pages = paginator.pages %}
@@ -25,6 +37,30 @@
   <div class="empty-state">
     <p>No posts here yet — check back soon.</p>
   </div>
+  {%- endif %}
+
+  {%- if is_blog and first_page %}
+  {# ---- Tags cloud built from every post's tags ---- #}
+  {%- set tags = get_taxonomy(kind="tags") -%}
+  {%- if tags.items | length > 0 %}
+  {%- set shown = tags.items | sort(attribute="name") -%}
+  {%- set total = shown | length -%}
+  <section class="blog-tags" aria-label="Browse by tag">
+    <div class="section-head">
+      <h2>Tags</h2>
+      {%- if total > 30 %}
+      <a class="more-link" href="{{ get_taxonomy_url(kind='tags') | safe }}">View all ({{ total }}) {{ ic::icon(name="arrow-right", size=14) }}</a>
+      {%- endif %}
+    </div>
+    <ul class="tag-list">
+      {%- for term in shown | slice(end=30) %}
+      <li>
+        <a class="tag" href="{{ term.permalink | safe }}">#{{ term.name }}<span class="tag__count">{{ term.pages | length }}</span></a>
+      </li>
+      {%- endfor %}
+    </ul>
+  </section>
+  {%- endif %}
   {%- endif %}
 </div>
 {% endblock content %}

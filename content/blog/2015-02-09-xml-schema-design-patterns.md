@@ -108,7 +108,7 @@ Equivalent Xml Schema Document can be found below:
 </xs:schema>
 ```
 
-As you can see, above schema defines a single global element <string>Production</string> and it is easy to read and write because there is no mixing. The types required to create a production element are all the nested within it. Elements and types cannot be referenced, and Namespaces are localized. And because it is self-contained, changing types will not affect other schemas.
+As you can see, above schema defines a single global element `Production` and it is easy to read and write because there is no mixing. The types required to create a production element are all the nested within it. Elements and types cannot be referenced, and Namespaces are localized. And because it is self-contained, changing types will not affect other schemas.
 
 One of the biggest disadvantages of this pattern with respect to straight XML is that the types you carefully defined cannot be reused elsewhere, hence causing very large schema.
 

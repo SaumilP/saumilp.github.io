@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% import "macros/icons.html" as ic %}
+{% import "macros/breadcrumbs.html" as bc %}
+
+{% block content %}
+<div class="container container--narrow">
+  {%- set home_url = get_url(path="/") -%}
+  {%- set blog = get_section(path="blog/_index.md") -%}
+  {{ bc::trail(names=["Home", blog.title, section.title], urls=[home_url, blog.permalink, section.permalink]) }}
+
+  <header class="page-header">
+    <h1>{{ section.title }}</h1>
+    {%- if section.description %}<p>{{ section.description }}</p>{% endif %}
+  </header>
+
+  {%- if blog.pages | length > 0 %}
+  <div class="archive">
+    {%- set_global cur_year = 0 -%}
+    {%- for p in blog.pages %}
+      {%- if p.year != cur_year %}
+        {%- if not loop.first %}</ul>{% endif %}
+        {%- set y_posts = blog.pages | filter(attribute="year", value=p.year) -%}
+        <h2 class="archive__year" id="y{{ p.year }}">{{ p.year }}<span class="archive__count">{{ y_posts | length }} post{% if y_posts | length != 1 %}s{% endif %}</span></h2>
+        <ul class="archive__list">
+        {%- set_global cur_year = p.year -%}
+      {%- endif %}
+        <li class="archive__item">
+          <time class="archive__date" datetime="{{ p.date }}">{{ p.date | date(format="%b %e") }}</time>
+          <a class="archive__link" href="{{ p.permalink | safe }}">{{ p.title }}</a>
+          {%- if p.taxonomies.categories %}<span class="archive__cat">{{ p.taxonomies.categories.0 }}</span>{% endif %}
+        </li>
+      {%- if loop.last %}</ul>{% endif %}
+    {%- endfor %}
+  </div>
+  {%- else %}
+  <div class="empty-state"><p>No posts yet — check back soon.</p></div>
+  {%- endif %}
+</div>
+{% endblock content %}

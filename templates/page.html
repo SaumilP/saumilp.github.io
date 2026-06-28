@@ -77,18 +77,32 @@
       {%- endif %}{% endif %}
 
       {# ---- Prev / next ---- #}
-      {%- if page.earlier or page.later %}
+      {# Computed from the section's pages because a paginated section does not #}
+      {# populate page.earlier / page.later. Pages are sorted newest-first.    #}
+      {%- set_global newer_post = false -%}
+      {%- set_global older_post = false -%}
+      {%- set_global pn_prev = false -%}
+      {%- set_global pn_found = false -%}
+      {%- for p in parent.pages -%}
+        {%- if pn_found and not older_post -%}{%- set_global older_post = p -%}{%- endif -%}
+        {%- if p.permalink == page.permalink -%}
+          {%- set_global pn_found = true -%}
+          {%- set_global newer_post = pn_prev -%}
+        {%- endif -%}
+        {%- set_global pn_prev = p -%}
+      {%- endfor -%}
+      {%- if newer_post or older_post %}
       <nav class="article-nav" aria-label="More posts">
-        {%- if page.later %}
-        <a class="article-nav__link" href="{{ page.later.permalink | safe }}" rel="prev">
+        {%- if newer_post %}
+        <a class="article-nav__link" href="{{ newer_post.permalink | safe }}" rel="prev">
           <span class="article-nav__dir">{{ ic::icon(name="arrow-left", size=14) }} Newer</span>
-          <span class="article-nav__title">{{ page.later.title }}</span>
+          <span class="article-nav__title">{{ newer_post.title }}</span>
         </a>
         {%- else %}<span></span>{% endif %}
-        {%- if page.earlier %}
-        <a class="article-nav__link is-next" href="{{ page.earlier.permalink | safe }}" rel="next">
+        {%- if older_post %}
+        <a class="article-nav__link is-next" href="{{ older_post.permalink | safe }}" rel="next">
           <span class="article-nav__dir">Older {{ ic::icon(name="arrow-right", size=14) }}</span>
-          <span class="article-nav__title">{{ page.earlier.title }}</span>
+          <span class="article-nav__title">{{ older_post.title }}</span>
         </a>
         {%- endif %}
       </nav>
