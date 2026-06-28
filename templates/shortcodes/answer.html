@@ -1,0 +1,5 @@
+{# Short direct answer block. Usage: {% answer() %} Markdown answer {% end %} #}
+<div class="answer-box" role="note">
+  <p class="answer-box__label">Short answer</p>
+  {{ body | markdown | safe }}
+</div>

@@ -1,0 +1,62 @@
+{% import "macros/icons.html" as ic %}
+{%- set social = config.extra.social -%}
+<footer class="site-footer">
+  <div class="container site-footer__inner">
+    <div class="site-footer__brand">
+      <a class="brand" href="{{ get_url(path='/') | safe }}">
+        <span class="brand__mark" aria-hidden="true">MM</span>
+        <span>{{ config.extra.brand }}</span>
+      </a>
+      <p class="site-footer__tagline">{{ config.extra.positioning }}</p>
+      <div class="footer-social" aria-label="Social links">
+        {%- if social.github %}<a class="icon-btn" href="{{ social.github | safe }}" rel="me noopener noreferrer" aria-label="GitHub">{{ ic::icon(name="github", size=18) }}</a>{% endif %}
+        {%- if social.linkedin %}<a class="icon-btn" href="{{ social.linkedin | safe }}" rel="me noopener noreferrer" aria-label="LinkedIn">{{ ic::icon(name="linkedin", size=18) }}</a>{% endif %}
+        {%- if social.email %}<a class="icon-btn" href="mailto:{{ social.email }}" aria-label="Email">{{ ic::icon(name="mail", size=18) }}</a>{% endif %}
+        <a class="icon-btn" href="{{ get_url(path='atom.xml') | safe }}" aria-label="RSS feed">{{ ic::icon(name="rss", size=18) }}</a>
+      </div>
+    </div>
+
+    <nav class="footer-nav" aria-label="Footer">
+      <div class="footer-nav__col">
+        <p class="footer-nav__title">Explore</p>
+        <ul role="list">
+          <li><a href="{{ get_url(path='/blog/') | safe }}">Blog</a></li>
+          <li><a href="{{ get_url(path='/notes/') | safe }}">Notes</a></li>
+          <li><a href="{{ get_url(path='/projects/') | safe }}">Projects</a></li>
+          <li><a href="{{ get_url(path='/categories/') | safe }}">Topics</a></li>
+        </ul>
+      </div>
+      <div class="footer-nav__col">
+        <p class="footer-nav__title">Topics</p>
+        <ul role="list">
+          {%- for topic in config.extra.topics | slice(end=4) %}
+          <li><a href="{{ get_taxonomy_url(kind=topic.kind, name=topic.term) | safe }}">{{ topic.name }}</a></li>
+          {%- endfor %}
+        </ul>
+      </div>
+      <div class="footer-nav__col">
+        <p class="footer-nav__title">Site</p>
+        <ul role="list">
+          <li><a href="{{ get_url(path='/about/') | safe }}">About</a></li>
+          <li><a href="{{ get_url(path='atom.xml') | safe }}">RSS / Atom</a></li>
+          <li><a href="{{ get_url(path='sitemap.xml') | safe }}">Sitemap</a></li>
+        </ul>
+      </div>
+      <div class="footer-nav__col">
+        <p class="footer-nav__title">Info</p>
+        <ul role="list">
+          <li><a href="{{ get_url(path='/security/') | safe }}">Security</a></li>
+          <li><a href="{{ get_url(path='/privacy/') | safe }}">Privacy</a></li>
+          <li><a href="{{ get_url(path='/terms/') | safe }}">Disclaimer</a></li>
+        </ul>
+      </div>
+    </nav>
+  </div>
+
+  <div class="container">
+    <div class="footer-bottom">
+      <span>© {{ now() | date(format="%Y") }} {{ config.extra.copyright }}</span>
+      <span class="muted">Built with <a href="https://www.getzola.org" rel="noopener noreferrer">Zola</a> · Searched with <a href="https://pagefind.app" rel="noopener noreferrer">Pagefind</a></span>
+    </div>
+  </div>
+</footer>

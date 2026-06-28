@@ -1,0 +1,12 @@
+{# Usage: {{ repo_card(name="user/repo", description="...", url="https://...", stack="Rust, CLI") }} #}
+<a class="card project-card" href="{{ url | safe }}" rel="noopener" style="text-decoration:none;">
+  <div class="project-card__head">
+    <h3 class="project-card__name">{{ name }}</h3>
+  </div>
+  {%- if description %}<p class="project-card__desc">{{ description }}</p>{% endif %}
+  {%- if stack %}
+  <div class="stack-list">
+    {%- for s in stack | split(pat=",") %}<span class="stack-badge">{{ s | trim }}</span>{% endfor %}
+  </div>
+  {%- endif %}
+</a>

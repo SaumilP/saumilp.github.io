@@ -1,0 +1,143 @@
+// =============================================================================
+//  Small utilities (kept intentionally minimal)
+// =============================================================================
+
+.muted { color: var(--color-text-muted); }
+.mono { font-family: var(--font-mono); }
+.text-center { text-align: center; }
+.flex { display: flex; }
+.items-center { align-items: center; }
+.gap-3 { gap: var(--space-3); }
+.gap-4 { gap: var(--space-4); }
+.mt-6 { margin-top: var(--space-6); }
+.mt-7 { margin-top: var(--space-7); }
+.no-js-hidden { }
+
+// Pagination -----------------------------------------------------------------
+.pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-3);
+  margin-top: var(--space-8);
+  flex-wrap: wrap;
+}
+
+.pagination__link {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  min-width: 40px;
+  height: 40px;
+  padding-inline: var(--space-4);
+  justify-content: center;
+  border: var(--border);
+  border-radius: var(--radius-sm);
+  color: var(--color-text);
+  font-size: var(--text-sm);
+  font-weight: 500;
+  transition: background-color var(--transition), border-color var(--transition);
+
+  &:hover {
+    background: var(--color-surface-muted);
+  }
+
+  &[aria-current="page"] {
+    background: var(--color-text);
+    color: var(--color-bg);
+    border-color: var(--color-text);
+  }
+
+  &[aria-disabled="true"] {
+    opacity: 0.4;
+    pointer-events: none;
+  }
+}
+
+// Empty state ----------------------------------------------------------------
+.empty-state {
+  text-align: center;
+  padding: var(--space-9) var(--space-6);
+  border: 1px dashed var(--color-border);
+  border-radius: var(--radius-lg);
+  color: var(--color-text-muted);
+}
+
+// Taxonomy index -------------------------------------------------------------
+.taxo-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-4);
+}
+
+.taxo-chip {
+  display: inline-flex;
+  align-items: baseline;
+  gap: var(--space-3);
+  padding: var(--space-4) var(--space-5);
+  border: var(--border);
+  border-radius: var(--radius-sm);
+  background: var(--color-surface);
+  color: var(--color-text);
+  font-size: var(--text-sm);
+  font-weight: 500;
+  transition: border-color var(--transition), background-color var(--transition);
+
+  &:hover {
+    border-color: var(--color-text-muted);
+    background: var(--color-surface);
+  }
+
+  .count {
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    color: var(--color-text-muted);
+  }
+}
+
+// About page -----------------------------------------------------------------
+.about-grid {
+  display: grid;
+  gap: var(--space-7);
+}
+
+@media (min-width: 900px) {
+  .about-grid {
+    grid-template-columns: minmax(0, 1fr) 280px;
+  }
+}
+
+.about-aside {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+}
+
+.about-card {
+  padding: var(--space-6);
+  border: var(--border);
+  border-radius: var(--radius-lg);
+  background: var(--color-surface);
+}
+
+.about-card h3 {
+  font-size: var(--text-sm);
+  font-family: var(--font-mono);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--color-text-muted);
+  margin-bottom: var(--space-4);
+}
+
+.about-card ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  font-size: var(--text-sm);
+}
+
+// No-JS fallback: ensure mobile nav contents reachable
+.no-js .nav-toggle { display: none; }

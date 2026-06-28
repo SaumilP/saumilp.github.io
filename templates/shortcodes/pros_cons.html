@@ -1,0 +1,19 @@
+{# Pros/cons comparison. Usage:
+   {{ pros_cons(pros="Fast; Simple; Cheap", cons="Less flexible; Manual scaling") }}
+   Items are separated by semicolons. #}
+{%- set pro_items = pros | default(value="") | split(pat=";") -%}
+{%- set con_items = cons | default(value="") | split(pat=";") -%}
+<div class="pros-cons">
+  <div class="pros-cons__col pros-cons__col--pro">
+    <p class="pros-cons__title">Pros</p>
+    <ul>
+      {%- for p in pro_items %}{% if p | trim %}<li>{{ p | trim }}</li>{% endif %}{% endfor %}
+    </ul>
+  </div>
+  <div class="pros-cons__col pros-cons__col--con">
+    <p class="pros-cons__title">Cons</p>
+    <ul>
+      {%- for c in con_items %}{% if c | trim %}<li>{{ c | trim }}</li>{% endif %}{% endfor %}
+    </ul>
+  </div>
+</div>

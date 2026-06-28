@@ -1,0 +1,7 @@
+# Machine Mind — security contact (RFC 9116)
+# This is a static personal blog/portfolio with no accounts, payments, or backend.
+Contact: mailto:pate.saumil@gmail.com
+Expires: 2027-06-28T00:00:00.000Z
+Preferred-Languages: en
+Canonical: https://saumilp.github.io/.well-known/security.txt
+Policy: https://saumilp.github.io/security/

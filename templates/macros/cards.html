@@ -1,0 +1,68 @@
+{# Reusable card macros. #}
+{% import "macros/meta.html" as meta %}
+{% import "macros/icons.html" as ic %}
+
+{# Post card used in archives and homepage grids. #}
+{% macro post_card(page) %}
+<article class="card post-card">
+  {{ meta::post_meta(page=page) }}
+  <h3 class="post-card__title"><a href="{{ page.permalink | safe }}">{{ page.title }}</a></h3>
+  {%- if page.description %}
+  <p class="post-card__excerpt">{{ page.description }}</p>
+  {%- elif page.summary %}
+  <p class="post-card__excerpt">{{ page.summary | striptags | truncate(length=140) }}</p>
+  {%- endif %}
+  {%- if page.taxonomies.tags %}
+  <ul class="tag-list post-card__footer">
+    {%- for tag in page.taxonomies.tags | slice(end=3) %}
+    <li><a class="tag" href="{{ get_taxonomy_url(kind='tags', name=tag) | safe }}">#{{ tag }}</a></li>
+    {%- endfor %}
+  </ul>
+  {%- endif %}
+</article>
+{% endmacro post_card %}
+
+{# Featured (larger) post card. #}
+{% macro featured_card(page) %}
+<article class="featured-card">
+  <span class="eyebrow">Featured</span>
+  {{ meta::post_meta(page=page) }}
+  <h3 class="post-card__title"><a href="{{ page.permalink | safe }}">{{ page.title }}</a></h3>
+  {%- if page.description %}
+  <p class="featured-card__excerpt">{{ page.description }}</p>
+  {%- elif page.summary %}
+  <p class="featured-card__excerpt">{{ page.summary | striptags | truncate(length=220) }}</p>
+  {%- endif %}
+  <div class="hero__actions">
+    <a class="btn btn--primary" href="{{ page.permalink | safe }}">Read article {{ ic::icon(name="arrow-right", size=16) }}</a>
+  </div>
+</article>
+{% endmacro featured_card %}
+
+{# Topic card (homepage explore-by-topic). #}
+{% macro topic_card(topic) %}
+<a class="topic-card" data-topic="{{ topic.key | default(value='') }}" href="{{ get_taxonomy_url(kind=topic.kind, name=topic.term) | safe }}">
+  <span class="topic-card__icon">{{ ic::icon(name=topic.icon, size=20) }}</span>
+  <span class="topic-card__name">{{ topic.name }}</span>
+  <span class="topic-card__desc">{{ topic.description }}</span>
+</a>
+{% endmacro topic_card %}
+
+{# Project card. #}
+{% macro project_card(project) %}
+<article class="card project-card">
+  <div class="project-card__head">
+    <h3 class="project-card__name">
+      {%- if project.url %}<a href="{{ project.url | safe }}" rel="noopener">{{ project.name }}</a>
+      {%- else %}{{ project.name }}{% endif -%}
+    </h3>
+    {%- if project.status %}<span class="status-badge" data-status="{{ project.status }}">{{ project.status }}</span>{% endif %}
+  </div>
+  <p class="project-card__desc">{{ project.description }}</p>
+  {%- if project.stack %}
+  <div class="stack-list">
+    {%- for s in project.stack %}<span class="stack-badge">{{ s }}</span>{% endfor %}
+  </div>
+  {%- endif %}
+</article>
+{% endmacro project_card %}

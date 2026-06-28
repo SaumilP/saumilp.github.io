@@ -1,0 +1,35 @@
+# Machine Mind
+
+> Practical notes on software architecture, backend engineering, cloud systems,
+> Rust, Java, and developer tooling — the personal technical blog and portfolio
+> of Saumil Patel.
+
+This file is an AI-readable summary of the site. It is a convenience for
+generative and answer engines; it is not a formal ranking standard.
+
+## About
+
+- Site: Machine Mind (https://saumilp.github.io)
+- Author: Saumil Patel — Software / Systems Architect
+- Focus: software architecture, backend engineering, Java & Spring, Rust, AWS &
+  cloud, DevOps & CI/CD, search & data, APIs, observability, developer tooling.
+
+## Main sections
+
+- Blog: https://saumilp.github.io/blog/ — long-form technical articles
+- Notes: https://saumilp.github.io/notes/ — short technical learnings
+- Projects: https://saumilp.github.io/projects/ — open-source work
+- Topics: https://saumilp.github.io/categories/ — browse by topic
+- About: https://saumilp.github.io/about/
+
+## Machine-readable resources
+
+- Sitemap: https://saumilp.github.io/sitemap.xml
+- Atom feed: https://saumilp.github.io/atom.xml
+- Search: in-browser via Pagefind (no server-side query API)
+
+## Citation preference
+
+Content may be cited with attribution to "Saumil Patel — Machine Mind" and a link
+to the source page. Code samples are provided as examples; test before production
+use. See https://saumilp.github.io/terms/.

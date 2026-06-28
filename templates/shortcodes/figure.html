@@ -1,0 +1,7 @@
+{# Usage: {{ figure(src="img/x.webp", alt="...", caption="...", width=800, height=450) }} #}
+<figure>
+  <img src="{{ get_url(path=src) | safe }}" alt="{{ alt | default(value='') }}"
+    {%- if width %} width="{{ width }}"{% endif %}{% if height %} height="{{ height }}"{% endif %}
+    loading="lazy" decoding="async">
+  {%- if caption %}<figcaption>{{ caption }}</figcaption>{% endif %}
+</figure>

@@ -1,0 +1,18 @@
+{% import "macros/icons.html" as ic %}
+{# Numbered pagination. Expects `paginator` in context. #}
+{%- if paginator.number_pagers > 1 %}
+<nav class="pagination" aria-label="Pagination">
+  <a class="pagination__link" href="{{ paginator.previous | default(value='') | safe }}"
+     {% if not paginator.previous %}aria-disabled="true" tabindex="-1"{% endif %} rel="prev" aria-label="Previous page">
+    {{ ic::icon(name="arrow-left", size=16) }}
+  </a>
+  {%- for pager in range(start=1, end=paginator.number_pagers + 1) %}
+  <a class="pagination__link" href="{{ paginator.base_url | safe }}{% if pager > 1 %}{{ pager }}/{% endif %}"
+     {% if pager == paginator.current_index %}aria-current="page"{% endif %}>{{ pager }}</a>
+  {%- endfor %}
+  <a class="pagination__link" href="{{ paginator.next | default(value='') | safe }}"
+     {% if not paginator.next %}aria-disabled="true" tabindex="-1"{% endif %} rel="next" aria-label="Next page">
+    {{ ic::icon(name="arrow-right", size=16) }}
+  </a>
+</nav>
+{%- endif %}

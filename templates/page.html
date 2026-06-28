@@ -1,0 +1,137 @@
+{% extends "base.html" %}
+{% import "macros/meta.html" as meta %}
+{% import "macros/icons.html" as ic %}
+{% import "partials/toc.html" as toc %}
+{% import "macros/cards.html" as cards %}
+{% import "macros/breadcrumbs.html" as bc %}
+
+{% block content %}
+{%- set has_toc = page.toc and page.toc | length > 2 -%}
+{%- set parent = get_section(path=page.ancestors | last) -%}
+<div class="read-progress" id="read-progress" aria-hidden="true"></div>
+
+<div class="container">
+  {%- set home_url = get_url(path="/") -%}
+  {{ bc::trail(names=["Home", parent.title, page.title], urls=[home_url, parent.permalink, page.permalink]) }}
+  <div class="article-layout {% if not has_toc %}article-layout--no-toc{% endif %}">
+    <article class="article"
+      data-pagefind-meta="title:{{ page.title }}{% if page.taxonomies.categories %},category:{{ page.taxonomies.categories.0 }}{% endif %}{% if page.date %},date:{{ page.date }}{% endif %}">
+      <header class="article-header">
+        <div class="article-header__meta">
+          {{ meta::date(page=page) }}
+          {%- if page.reading_time %}<span class="dot"></span><span>{{ page.reading_time }} min read</span>{% endif -%}
+          {%- if page.updated %}<span class="dot"></span><span>Updated {{ page.updated | date(format=config.extra.date_format) }}</span>{% endif -%}
+          {%- if page.taxonomies.categories %}<span class="dot"></span><a href="{{ get_taxonomy_url(kind='categories', name=page.taxonomies.categories.0) | safe }}">{{ page.taxonomies.categories.0 }}</a>{% endif -%}
+        </div>
+        <h1>{{ page.title }}</h1>
+        {%- if page.description %}<p class="article-header__desc">{{ page.description }}</p>{% endif %}
+        {%- if page.taxonomies.tags %}
+        <ul class="tag-list article-header__tags">
+          {%- for tag in page.taxonomies.tags %}
+          <li><a class="tag" href="{{ get_taxonomy_url(kind='tags', name=tag) | safe }}">#{{ tag }}</a></li>
+          {%- endfor %}
+        </ul>
+        {%- endif %}
+      </header>
+
+      {# ---- AEO: short answer near the top (front matter `summary_answer`) ---- #}
+      {%- if page.extra.summary_answer | default(value="") %}
+      <div class="answer-box" role="note">
+        <p class="answer-box__label">{{ ic::icon(name="check", size=14) }} Short answer</p>
+        <p>{{ page.extra.summary_answer }}</p>
+      </div>
+      {%- endif %}
+
+      {# ---- AEO: key takeaways (front matter `takeaways = [..]`) ---- #}
+      {%- if page.extra.takeaways | default(value="") %}
+      <aside class="takeaways" aria-label="Key takeaways">
+        <p class="takeaways__title">Key takeaways</p>
+        <ul>
+          {%- for t in page.extra.takeaways %}<li>{{ t }}</li>{% endfor %}
+        </ul>
+      </aside>
+      {%- endif %}
+
+      {%- if has_toc %}
+      <details class="toc-mobile">
+        <summary>On this page {{ ic::icon(name="arrow-right", size=14) }}</summary>
+        <nav aria-label="Table of contents">{{ toc::toc_list(headings=page.toc) }}</nav>
+      </details>
+      {%- endif %}
+
+      <div class="prose" data-pagefind-body>
+        {{ page.content | safe }}
+      </div>
+
+      {# ---- AEO: FAQ (front matter `[extra.faq] items`) — visible + JSON-LD ---- #}
+      {%- if page.extra.faq | default(value=false) %}{% if page.extra.faq.items %}
+      <section class="faq" aria-label="Frequently asked questions">
+        <h2>Frequently asked questions</h2>
+        {%- for item in page.extra.faq.items %}
+        <details class="faq__item">
+          <summary>{{ item.question }}</summary>
+          <div class="faq__answer"><p>{{ item.answer }}</p></div>
+        </details>
+        {%- endfor %}
+      </section>
+      {%- endif %}{% endif %}
+
+      {# ---- Prev / next ---- #}
+      {%- if page.earlier or page.later %}
+      <nav class="article-nav" aria-label="More posts">
+        {%- if page.later %}
+        <a class="article-nav__link" href="{{ page.later.permalink | safe }}" rel="prev">
+          <span class="article-nav__dir">{{ ic::icon(name="arrow-left", size=14) }} Newer</span>
+          <span class="article-nav__title">{{ page.later.title }}</span>
+        </a>
+        {%- else %}<span></span>{% endif %}
+        {%- if page.earlier %}
+        <a class="article-nav__link is-next" href="{{ page.earlier.permalink | safe }}" rel="next">
+          <span class="article-nav__dir">Older {{ ic::icon(name="arrow-right", size=14) }}</span>
+          <span class="article-nav__title">{{ page.earlier.title }}</span>
+        </a>
+        {%- endif %}
+      </nav>
+      {%- endif %}
+
+      {# ---- Related posts (shared tags, same section) ---- #}
+      {%- set this_tags = page.taxonomies.tags | default(value=[]) -%}
+      {%- set_global related = [] -%}
+      {%- if this_tags and page.ancestors %}
+        {%- set sec = get_section(path=page.ancestors | last) -%}
+        {%- for p in sec.pages -%}
+          {%- if p.permalink != page.permalink -%}
+            {%- set_global is_match = false -%}
+            {%- for t in p.taxonomies.tags | default(value=[]) -%}
+              {%- if t in this_tags -%}{%- set_global is_match = true -%}{%- endif -%}
+            {%- endfor -%}
+            {%- if is_match and related | length < 3 -%}
+              {%- set_global related = related | concat(with=p) -%}
+            {%- endif -%}
+          {%- endif -%}
+        {%- endfor -%}
+      {%- endif %}
+      {%- if related | length > 0 %}
+      <section class="related" aria-label="Related posts">
+        <div class="section-head"><h2>Related reading</h2></div>
+        <div class="grid grid--cards grid--cards-3">
+          {%- for p in related %}{{ cards::post_card(page=p) }}{% endfor %}
+        </div>
+      </section>
+      {%- endif %}
+    </article>
+
+    {%- if has_toc %}
+    <aside class="toc" aria-label="Table of contents">
+      <p class="toc__title">On this page</p>
+      <nav id="toc-nav">{{ toc::toc_list(headings=page.toc) }}</nav>
+    </aside>
+    {%- endif %}
+  </div>
+</div>
+{% endblock content %}
+
+{% block extra_js %}
+<script src="{{ get_url(path='js/copy-code.js') | safe }}" defer></script>
+<script src="{{ get_url(path='js/toc.js') | safe }}" defer></script>
+{% endblock extra_js %}

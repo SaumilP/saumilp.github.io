@@ -1,0 +1,23 @@
+{# Post metadata helpers. #}
+{% import "macros/icons.html" as ic %}
+
+{# Formatted publication date as a <time> element. #}
+{% macro date(page) %}
+{%- if page.date -%}
+<time datetime="{{ page.date }}">{{ page.date | date(format=config.extra.date_format) }}</time>
+{%- endif -%}
+{% endmacro date %}
+
+{# Reading time (Zola computes page.reading_time at ~200 wpm). #}
+{% macro reading_time(page) %}
+{%- if page.reading_time -%}{{ page.reading_time }} min read{%- endif -%}
+{% endmacro reading_time %}
+
+{# Compact meta row: date · reading time · category. #}
+{% macro post_meta(page) %}
+<div class="post-card__meta">
+  {%- if page.date %}<time datetime="{{ page.date }}">{{ page.date | date(format=config.extra.date_format) }}</time>{% endif -%}
+  {%- if page.reading_time %}<span class="dot"></span><span>{{ page.reading_time }} min read</span>{% endif -%}
+  {%- if page.taxonomies.categories %}<span class="dot"></span><span>{{ page.taxonomies.categories.0 }}</span>{% endif -%}
+</div>
+{% endmacro post_meta %}
