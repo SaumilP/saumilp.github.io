@@ -1,135 +1,48 @@
+{% import "macros/icons.html" as ic %}
 <!DOCTYPE html>
-<html lang="{{ config.default_language }}">
-
+<html lang="{{ lang | default(value=config.default_language) }}" class="no-js">
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <meta property="og:image" content="/img/profile.webp" />
-    {% if page %}
-    {% if page.description %}
-    <meta name="description" content="{{ page.description }}" />
-    {% elif config.description %}
-    <meta name="description" content="{{ config.description }}" />
-    {% endif %}
-    {% elif config.description %}
-    <meta name="description" content="{{ config.description }}" />
-    {% endif %}
-
-    <title>{% if page and page.title %}{{page.title}} | {% endif %}{{ config.title }}</title>
-
-    <link rel="apple-touch-icon" sizes="180x180" href="{{ get_url(path="icons/apple-touch-icon.png") | safe }}">
-    <link rel="icon" type="image/png" sizes="32x32" href="{{ get_url(path="icons/favicon-32x32.png") | safe }}">
-    <link rel="icon" type="image/png" sizes="16x16" href="{{ get_url(path="icons/favicon-16x16.png") | safe }}">
-    <link rel="shortcut icon" type="image/x-icon" href="{{ get_url(path="icons/favicon.ico") | safe }}">
-    <link rel="manifest" href="{{ get_url(path="icons/site.webmanifest") | safe }}">
-    <link rel="mask-icon" href="{{ get_url(path="icons/safari-pinned-tab.svg") | safe }}" color="#5bbad5">
-    <meta name="msapplication-TileColor" content="#da532c">
-    <meta name="theme-color" content="#ffffff">
-
-    {% block seo %}
-    {%- set site_url = current_url | default(value=get_url(path="404.html")) -%}
-    {% set author = config.extra.author | default(value="") -%}
-    {% set description = config.description | default(value="") -%}
-    {% set image = config.extra.seo.image | default(value="") -%}
-    {% set image_height = config.extra.seo.image_height | default(value=0) -%}
-    {% set image_width = config.extra.seo.image_width | default(value=0) -%}
-    {% endblock seo %}
-
-    {% if config.generate_feed %}
-    <link rel="alternate" type={% if config.feed_filename=="atom.xml" %}"application/atom+xml"{% else
-        %}"application/rss+xml"{% endif %} title="RSS" href="{{ get_url(path=config.feed_filename) | safe }}">
-    {% endif %}
-
-    <link rel="stylesheet" type="text/css" href="/css/style.css">
-    {% block stylesheets %} {% endblock %}
+{# ---- Compute SEO context from the active page/section/term ---- #}
+{%- if page %}
+  {%- set seo_title = page.title ~ " · " ~ config.extra.brand -%}
+  {%- set seo_description = page.description | default(value=config.description) -%}
+  {%- set seo_image = page.extra.image | default(value=config.extra.default_og_image) -%}
+  {%- set seo_type = "article" -%}
+{%- elif term %}
+  {%- set seo_title = term.name ~ " · " ~ config.extra.brand -%}
+  {%- set seo_description = "Articles tagged " ~ term.name ~ " — " ~ config.description -%}
+  {%- set seo_type = "website" -%}
+{%- elif section and not section.extra.is_home %}
+  {%- set seo_title = section.title ~ " · " ~ config.extra.brand -%}
+  {%- set seo_description = section.description | default(value=config.description) -%}
+  {%- set seo_type = "website" -%}
+{%- elif taxonomy %}
+  {%- if taxonomy.name == "categories" %}{% set tx_name = "Topics" %}{% else %}{% set tx_name = "Tags" %}{% endif -%}
+  {%- set seo_title = tx_name ~ " · " ~ config.extra.brand -%}
+  {%- set seo_description = "Browse " ~ config.extra.brand ~ " articles by topic." -%}
+  {%- set seo_type = "website" -%}
+{%- else %}
+  {%- set seo_title = config.title ~ " — " ~ config.description | truncate(length=60) -%}
+  {%- set seo_description = config.description -%}
+  {%- set seo_type = "website" -%}
+{%- endif %}
+{% include "partials/head.html" %}
+{% block extra_head %}{% endblock extra_head %}
 </head>
-
 <body>
-    <header class="navbar">
-        <div class="navbarlog"">
-            {%- if config.extra.logo -%}
+  {% include "partials/header.html" %}
 
-            <h1><a href="{{ get_url(path="/", lang=lang) }}{%- if uglyurls %}/index.html{%- endif %}" title="{{config.title}}">
-            {%- if config.extra.logo.file -%}
-            <img src="{{ config.base_url | safe }}/{{ config.extra.logo.file | safe }}"{%- if config.extra.logo.alt %} alt="{{ config.extra.logo.alt | safe }}"{%- endif %}{%- if config.extra.logo.width %} width="{{ config.extra.logo.width | safe }}"{%- endif %}{%- if config.extra.logo.height %} height="{{ config.extra.logo.height | safe }}"{%- endif %} />
-            {%- endif -%}
-            {%- if config.extra.logo.text -%}{{ config.extra.logo.text | safe }}{%- endif -%}
-            </a></h1>
+  <main id="main">
+    {% block content %}{% endblock content %}
+  </main>
 
-            {%- elif config.extra.textlogo -%}
-            <h1><a href="{{ get_url(path="/", lang=lang) }}{%- if uglyurls -%}
-            {%- if lang == config.default_language -%}/{%- endif -%}
-            index.html{%- endif -%}" title="{{config.title}}">{{ config.extra.textlogo | safe }}</a></h1>
-            {%- elif config.title -%}
-            <h1><a href="{{ get_url(path="/", lang=lang) }}{%- if uglyurls %}/index.html{%- endif %}" title="{{config.title}}">{{ config.title | safe }}</a></h1>
-            {%- endif -%}
-        </div>
-    </header>
-    <main class="{% if not current_path or current_path == '/' or current_path == '/about/' %}index-page{% endif %}">
-        <aside class="me">
-            <div class="profile-photo-wrapper">
-                <img src="/img/profile_sml.webp" alt="Saumil Patel Profile Picture" class="profile-photo" />
-            </div>
-            <div class="contact-info">
-                <h1><a href="/">Saumil Patel</a></h1>
-                <span title="I promise I am">IT Professional, Tinkerer, Thinker</span>
-                <span class="print-hidden">Code, Thoughts and Ideas</span>
-                <div class="social-links print-hidden">
-                    <a href="https://github.com/saumilp" target="_blank" title="GitHub">
-                        {% include "icons/github.html" %}
-                    </a>
-                    <a href="https://gitlab.com/saumilp" target="_blank" title="GitLab">
-                        {% include "icons/gitlab.html" %}
-                    </a>
-                    <a href="https://twitter.com/SaumilP10" target="_blank" title="Twitter">
-                        {% include "icons/twitter.html" %}
-                    </a>
-                    <a href="https://www.linkedin.com/in/saumil-p-13b72219/" target="_blank" title="LinkedIn">
-                        {% include "icons/linkedin.html" %}
-                    </a>
-                    <a rel="me" href="https://mastodon.social/@saumilp" target="_blank" title="Mastodon">
-                        {% include "icons/mastodon.html" %}
-                    </a>
-                    <a href="mailto:" title="Email Me" class="not-today">
-                        {% include "icons/mail.html" %}
-                    </a>
-                </div>
-                <p class="print-hidden">
-                    Hey folks, I'm Saumil. I work in tech. I’m an experienced full-stack software engineer and a tinkerer turned software architect. <br /><br />
+  {% include "partials/footer.html" %}
+  {% include "partials/search-modal.html" %}
 
-                    I like to work with simple things - things can help do day-to-day job easier for any software
-                    engineers. Most of the time i am behind a computer trying to find better ways to solve problems.
-                    And, obviously i pick up few new things now-and-then when trying to find solutions.<br /><br />
-
-                    Wish to support my work, Click to <a class="print-hidden"
-                        href="https://www.buymeacoffee.com/saumilp">buy me a coffee</a>.
-                </p>
-                <a class="print-hidden" href="/about">About Me</a>
-            </div>
-        </aside>
-        <div class="border"></div>
-        <div class="content">
-            {% block content %} {% endblock %}
-        </div>
-    </main>
-    <footer class="page-footer">
-        {% block footer -%}
-        <small>
-            <p class="page-copyright">
-                {% if config.extra.footer_copyright -%}
-                {% set content = config.extra.footer_copyright | markdown(inline=true) %}
-                {{ content | safe }} | &copy; {{ config.extra.author.name }} | <a href="https://saumilp.github.io/atom.xml" target="_blank">RSS</a>
-                {%- endif %}
-            </p>
-        </small>
-        {%- endblock footer %}
-    </footer>
-
-    {% include "partials/github-corner.html" %}
-
-    {% block scripts %} {% endblock %}
-    <script src="/js/script.js"></script>
+  {# ---- Vanilla JS (deferred, tiny, namespaced) ---- #}
+  <script src="{{ get_url(path='js/mobile-nav.js') | safe }}" defer></script>
+  <script src="{{ get_url(path='js/theme-toggle.js') | safe }}" defer></script>
+  <script src="{{ get_url(path='js/search.js') | safe }}" defer></script>
+  {% block extra_js %}{% endblock extra_js %}
 </body>
-
 </html>

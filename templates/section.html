@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% import "macros/cards.html" as cards %}
+
+{% block content %}
+<div class="container">
+  <header class="page-header">
+    <h1>{{ section.title }}</h1>
+    {%- if section.description %}<p>{{ section.description }}</p>{% endif %}
+  </header>
+
+  {%- if paginator %}
+    {%- set pages = paginator.pages %}
+  {%- else %}
+    {%- set pages = section.pages %}
+  {%- endif %}
+
+  {%- if pages | length > 0 %}
+  <div class="grid grid--cards grid--cards-3">
+    {%- for page in pages %}
+    {{ cards::post_card(page=page) }}
+    {%- endfor %}
+  </div>
+    {%- if paginator %}{% include "partials/pagination.html" %}{% endif %}
+  {%- else %}
+  <div class="empty-state">
+    <p>No posts here yet — check back soon.</p>
+  </div>
+  {%- endif %}
+</div>
+{% endblock content %}

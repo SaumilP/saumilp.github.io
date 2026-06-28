@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% import "macros/cards.html" as cards %}
+
+{% block content %}
+<div class="container">
+  <header class="page-header">
+    <h1>{{ section.title }}</h1>
+    {%- if section.description %}<p>{{ section.description }}</p>{% endif %}
+  </header>
+
+  {%- if config.extra.projects %}
+  <div class="grid grid--cards grid--cards-3">
+    {%- for project in config.extra.projects %}
+    {{ cards::project_card(project=project) }}
+    {%- endfor %}
+  </div>
+  {%- else %}
+  <div class="empty-state"><p>Projects coming soon.</p></div>
+  {%- endif %}
+
+  {%- if section.content %}
+  <div class="prose mt-7">{{ section.content | safe }}</div>
+  {%- endif %}
+</div>
+{% endblock content %}

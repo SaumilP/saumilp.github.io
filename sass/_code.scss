@@ -1,0 +1,110 @@
+// =============================================================================
+//  Code blocks & inline code
+//  Syntax token colors come from Zola-generated syntax-light.css /
+//  syntax-dark.css (class-based). This file styles the container, scrolling,
+//  inline code, and the copy button.
+// =============================================================================
+
+// Inline code
+.prose :not(pre) > code {
+  font-family: var(--font-mono);
+  font-size: 0.875em;
+  padding: 0.15em 0.4em;
+  border-radius: 6px;
+  background: var(--color-code-inline-bg);
+  color: var(--color-code-inline-text);
+  word-break: break-word;
+}
+
+// Code block wrapper (added by copy-code.js)
+.code-block {
+  position: relative;
+  margin-block: var(--space-6);
+}
+
+// Zola-generated <pre> for fenced blocks
+pre {
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+  line-height: 1.6;
+  background: var(--color-code-bg);
+  border: var(--border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-5) var(--space-6);
+  overflow-x: auto;           // long lines scroll inside the block
+  -webkit-overflow-scrolling: touch;
+  tab-size: 4;
+
+  code {
+    font-family: inherit;
+    font-size: inherit;
+    background: none;
+    padding: 0;
+    border: none;
+    color: inherit;
+    white-space: pre;          // preserve formatting; horizontal scroll
+    display: block;
+    min-width: 0;
+  }
+}
+
+// Line numbers (Zola, if enabled) stay aligned and non-selectable
+pre table td:nth-of-type(1) {
+  text-align: right;
+  user-select: none;
+  opacity: 0.5;
+  padding-right: var(--space-5);
+}
+
+pre mark,
+pre table td {
+  background: none;
+}
+
+// Copy button ----------------------------------------------------------------
+.copy-code-btn {
+  position: absolute;
+  top: var(--space-4);
+  right: var(--space-4);
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-2) var(--space-3);
+  border: var(--border);
+  border-radius: var(--radius-sm);
+  background: var(--color-bg);
+  color: var(--color-text-muted);
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  line-height: 1;
+  opacity: 0;
+  transition: opacity var(--transition), color var(--transition),
+    border-color var(--transition);
+
+  svg {
+    width: 14px;
+    height: 14px;
+  }
+
+  &:hover {
+    color: var(--color-text);
+    border-color: var(--color-text-muted);
+  }
+
+  &.is-copied {
+    color: #16794a;
+    border-color: color-mix(in srgb, #16794a 40%, transparent);
+  }
+}
+
+.code-block:hover .copy-code-btn,
+.copy-code-btn:focus-visible {
+  opacity: 1;
+}
+
+// Always show on touch devices (no hover)
+@media (hover: none) {
+  .copy-code-btn {
+    opacity: 1;
+  }
+}

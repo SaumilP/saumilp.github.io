@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% import "macros/cards.html" as cards %}
+
+{% block content %}
+{%- set is_cat = taxonomy.name == "categories" -%}
+<div class="container">
+  <header class="page-header">
+    <p class="eyebrow">{% if is_cat %}Topic{% else %}Tag{% endif %}</p>
+    <h1>{% if not is_cat %}#{% endif %}{{ term.name }}</h1>
+    <p>{{ term.pages | length }} article{{ term.pages | length | pluralize }}.</p>
+  </header>
+
+  {%- if paginator %}{% set pages = paginator.pages %}{% else %}{% set pages = term.pages %}{% endif %}
+  <div class="grid grid--cards grid--cards-3">
+    {%- for page in pages %}
+    {{ cards::post_card(page=page) }}
+    {%- endfor %}
+  </div>
+  {%- if paginator %}{% include "partials/pagination.html" %}{% endif %}
+
+  <p class="mt-7"><a class="more-link" href="{% if is_cat %}{{ get_url(path='/categories/') | safe }}{% else %}{{ get_url(path='/tags/') | safe }}{% endif %}">← All {% if is_cat %}topics{% else %}tags{% endif %}</a></p>
+</div>
+{% endblock content %}

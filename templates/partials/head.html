@@ -1,0 +1,48 @@
+{# <head> contents. #}
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0b0b0d" media="(prefers-color-scheme: dark)">
+<meta name="author" content="{{ config.extra.author_name }}">
+<meta name="generator" content="Zola">
+
+<title>{{ seo_title | default(value=config.title) }}</title>
+
+{% include "partials/seo.html" %}
+
+{# Favicons #}
+<link rel="icon" href="{{ get_url(path='icons/favicon.ico') | safe }}" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="{{ get_url(path='icons/favicon-32x32.png') | safe }}">
+<link rel="icon" type="image/png" sizes="16x16" href="{{ get_url(path='icons/favicon-16x16.png') | safe }}">
+<link rel="apple-touch-icon" href="{{ get_url(path='icons/apple-touch-icon.png') | safe }}">
+<link rel="manifest" href="{{ get_url(path='icons/site.webmanifest') | safe }}">
+<link rel="mask-icon" href="{{ get_url(path='icons/safari-pinned-tab.svg') | safe }}" color="#09090b">
+
+{# Feed #}
+<link rel="alternate" type="application/atom+xml" title="{{ config.title }} — Atom" href="{{ get_url(path='atom.xml') | safe }}">
+
+{# Styles #}
+<link rel="stylesheet" href="{{ get_url(path='main.css') | safe }}">
+{# Class-based syntax highlighting: one active at a time, toggled by theme. #}
+<link id="hl-light" rel="stylesheet" href="{{ get_url(path='syntax-light.css') | safe }}">
+<link id="hl-dark" rel="stylesheet" href="{{ get_url(path='syntax-dark.css') | safe }}" disabled>
+
+{# Set theme + active syntax sheet before paint to avoid flash. #}
+<script>
+  (function () {
+    try {
+      document.documentElement.classList.remove('no-js');
+      document.documentElement.classList.add('js');
+      var stored = localStorage.getItem('theme');
+      var prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      var theme = stored || (prefersDark ? 'dark' : 'light');
+      document.documentElement.setAttribute('data-theme', theme);
+      var light = document.getElementById('hl-light');
+      var dark = document.getElementById('hl-dark');
+      if (light && dark) {
+        light.disabled = theme === 'dark';
+        dark.disabled = theme !== 'dark';
+      }
+    } catch (e) {}
+  })();
+</script>

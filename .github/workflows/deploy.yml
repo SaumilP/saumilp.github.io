@@ -1,30 +1,91 @@
-name: Build and deploy Zola site on GitHub Pages
+name: Build and deploy to GitHub Pages
+
 on:
-   push:
-     branches:
-        - master
-# Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
+  push:
+    branches: [master, main]
+  pull_request:
+    branches: [master, main]
+  workflow_dispatch:
+
+# Least-privilege permissions for Pages deployment via OIDC.
 permissions:
-  contents: write
+  contents: read
   pages: write
   id-token: write
 
-# Allow one concurrent deployment
+# Allow one concurrent deployment; don't cancel an in-flight production deploy.
 concurrency:
-  group: "pages"
+  group: pages
   cancel-in-progress: false
-  
+
+env:
+  ZOLA_VERSION: "0.18.0"
+  PAGEFIND_VERSION: "1.1.1"
 
 jobs:
-   deploy:
-      name: Publish site
-      runs-on: ubuntu-latest
-      steps:
-      - name: 1__Checkout
-        uses: actions/checkout@master
-      - name: 2__Zola_build_and_deploy
-        uses: shalzz/zola-deploy-action@v0.17.2
-        env:
-           PAGES_BRANCH: gh-pages
-           TOKEN: ${{ secrets.GITHUB_TOKEN }}
-              
+  build:
+    name: Build & validate
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Configure Pages
+        if: github.event_name == 'push' || github.event_name == 'workflow_dispatch'
+        uses: actions/configure-pages@v5
+
+      - name: Install Zola ${{ env.ZOLA_VERSION }}
+        run: |
+          curl -sSL "https://github.com/getzola/zola/releases/download/v${ZOLA_VERSION}/zola-v${ZOLA_VERSION}-x86_64-unknown-linux-gnu.tar.gz" \
+            | tar -xz
+          sudo install -m 0755 zola /usr/local/bin/zola
+          zola --version
+
+      - name: Validate site (zola check)
+        # Non-blocking: external links can be transiently unavailable.
+        continue-on-error: true
+        run: zola check
+
+      - name: Build site (zola build)
+        run: zola build
+
+      - name: Generate Pagefind search index
+        run: npx -y pagefind@${PAGEFIND_VERSION} --site public
+
+      - name: Add .nojekyll
+        run: touch public/.nojekyll
+
+      - name: Validate build output
+        run: |
+          set -e
+          test -f public/index.html       || { echo "missing index.html"; exit 1; }
+          test -d public/pagefind         || { echo "missing pagefind index"; exit 1; }
+          test -f public/sitemap.xml      || { echo "missing sitemap.xml"; exit 1; }
+          test -f public/atom.xml         || { echo "missing atom.xml"; exit 1; }
+          test -f public/404.html         || { echo "missing 404.html"; exit 1; }
+          test -f public/main.css         || { echo "missing main.css"; exit 1; }
+          test -f public/syntax-light.css || { echo "missing syntax-light.css"; exit 1; }
+          test -f public/syntax-dark.css  || { echo "missing syntax-dark.css"; exit 1; }
+          echo "Build output validated."
+
+      - name: Check internal links & local assets
+        run: python3 scripts/check_links.py public
+
+      - name: Upload Pages artifact
+        if: github.event_name == 'push' || github.event_name == 'workflow_dispatch'
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: public
+
+  deploy:
+    name: Deploy
+    if: github.event_name == 'push' || github.event_name == 'workflow_dispatch'
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

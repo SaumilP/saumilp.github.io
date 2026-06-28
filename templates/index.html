@@ -1,16 +1,83 @@
 {% extends "base.html" %}
+{% import "macros/cards.html" as cards %}
+{% import "macros/icons.html" as ic %}
+
 {% block content %}
-{% set section =get_section(path="blog/_index.md") %}
-{% for page in section.pages | sort(attribute="date") | reverse %}
-<section class="post-list-item">
-    <h1 class="post-title">
-        <a href="{{ page.permalink | safe }}">{{ page.title }}</a>
-    </h1>
-    <div class="post-summary">
-        {{ page.summary | safe }}
-        <a href="{{ page.permalink | safe }}">...read on</a>
+{%- set blog = get_section(path="blog/_index.md") -%}
+{%- set posts = blog.pages -%}
+{%- set featured = posts | first -%}
+
+{# ---------- Hero ---------- #}
+<section class="hero">
+  <div class="container">
+    <p class="hero__eyebrow eyebrow">{{ config.extra.brand }} — {{ config.extra.tagline }}</p>
+    <h1 class="hero__title">Practical notes on <span class="accent">backend</span>, architecture &amp; systems.</h1>
+    <p class="hero__lead">{{ config.extra.positioning }}</p>
+    <div class="hero__actions">
+      <a class="btn btn--primary" href="{{ get_url(path='/blog/') | safe }}">Read the latest {{ ic::icon(name="arrow-right", size=16) }}</a>
+      <a class="btn btn--ghost" href="{{ get_url(path='/projects/') | safe }}">View projects</a>
     </div>
-    <div class="post-info">{{ page.date }}</div>
-    <div class="post-info">{{ page.reading_time }} min read</div>
+  </div>
 </section>
-{% endfor %} {% endblock content %}
+
+{# ---------- Featured ---------- #}
+{%- if featured %}
+<section class="section home-section">
+  <div class="container">
+    <div class="section-head"><h2>Featured writing</h2></div>
+    {{ cards::featured_card(page=featured) }}
+  </div>
+</section>
+{%- endif %}
+
+{# ---------- Latest posts ---------- #}
+{%- if posts | length > 1 %}
+<section class="section home-section">
+  <div class="container">
+    <div class="section-head">
+      <h2>Latest posts</h2>
+      <a class="more-link" href="{{ get_url(path='/blog/') | safe }}">All posts {{ ic::icon(name="arrow-right", size=14) }}</a>
+    </div>
+    <div class="grid grid--cards grid--cards-3">
+      {%- for page in posts | slice(start=1, end=7) %}
+      {{ cards::post_card(page=page) }}
+      {%- endfor %}
+    </div>
+  </div>
+</section>
+{%- endif %}
+
+{# ---------- Explore by topic ---------- #}
+{%- if config.extra.topics %}
+<section class="section home-section">
+  <div class="container">
+    <div class="section-head">
+      <h2>Explore by topic</h2>
+      <a class="more-link" href="{{ get_url(path='/categories/') | safe }}">All topics {{ ic::icon(name="arrow-right", size=14) }}</a>
+    </div>
+    <div class="grid grid--cards grid--cards-3">
+      {%- for topic in config.extra.topics %}
+      {{ cards::topic_card(topic=topic) }}
+      {%- endfor %}
+    </div>
+  </div>
+</section>
+{%- endif %}
+
+{# ---------- Selected projects ---------- #}
+{%- if config.extra.projects %}
+<section class="section home-section">
+  <div class="container">
+    <div class="section-head">
+      <h2>Selected projects</h2>
+      <a class="more-link" href="{{ get_url(path='/projects/') | safe }}">All projects {{ ic::icon(name="arrow-right", size=14) }}</a>
+    </div>
+    <div class="grid grid--cards grid--cards-3">
+      {%- for project in config.extra.projects | slice(end=3) %}
+      {{ cards::project_card(project=project) }}
+      {%- endfor %}
+    </div>
+  </div>
+</section>
+{%- endif %}
+{% endblock content %}

@@ -1,0 +1,53 @@
+// =============================================================================
+//  Homepage hero & sections
+// =============================================================================
+
+.hero {
+  padding-block: var(--space-9) var(--space-8);
+  border-bottom: var(--border);
+}
+
+.hero__eyebrow {
+  margin-bottom: var(--space-5);
+}
+
+.hero__title {
+  font-size: clamp(2rem, 5vw, 3rem);
+  line-height: 1.08;
+  letter-spacing: -0.03em;
+  max-width: 18ch;
+  margin-bottom: var(--space-6);
+}
+
+.hero__title .accent {
+  color: var(--color-accent);
+}
+
+.hero__lead {
+  font-size: var(--text-lg);
+  color: var(--color-text-muted);
+  max-width: 56ch;
+  line-height: var(--leading-normal);
+  margin-bottom: var(--space-7);
+}
+
+.hero__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-4);
+}
+
+.featured-block {
+  display: grid;
+  gap: var(--space-6);
+}
+
+@media (min-width: 1024px) {
+  .featured-block {
+    grid-template-columns: 1fr;
+  }
+}
+
+.home-section + .home-section {
+  border-top: var(--border);
+}

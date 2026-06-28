@@ -1,0 +1,26 @@
+{# Table of contents (explicit nesting, max 3 levels — no recursion). #}
+{% macro toc_list(headings) %}
+<ul class="toc__list">
+  {%- for h in headings %}
+  <li>
+    <a class="toc__link" href="#{{ h.id | safe }}">{{ h.title }}</a>
+    {%- if h.children %}
+    <ul class="toc__list">
+      {%- for h2 in h.children %}
+      <li>
+        <a class="toc__link" href="#{{ h2.id | safe }}">{{ h2.title }}</a>
+        {%- if h2.children %}
+        <ul class="toc__list">
+          {%- for h3 in h2.children %}
+          <li><a class="toc__link" href="#{{ h3.id | safe }}">{{ h3.title }}</a></li>
+          {%- endfor %}
+        </ul>
+        {%- endif %}
+      </li>
+      {%- endfor %}
+    </ul>
+    {%- endif %}
+  </li>
+  {%- endfor %}
+</ul>
+{% endmacro toc_list %}
