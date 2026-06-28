@@ -4,7 +4,8 @@
 <header class="site-header">
   <div class="container site-header__inner">
     <a class="brand" href="{{ get_url(path='/') | safe }}" aria-label="{{ config.extra.brand }} — home">
-      <span class="brand__mark" aria-hidden="true">MM</span>
+      <img class="brand__mark" src="{{ get_url(path='img/machine_mind_logo.webp') | safe }}"
+           width="32" height="32" alt="" aria-hidden="true" decoding="async">
       <span>{{ config.extra.brand }}</span>
     </a>
 

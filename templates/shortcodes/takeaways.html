@@ -1,0 +1,5 @@
+{# Key takeaways. Usage: {% takeaways() %} - point one\n- point two {% end %} #}
+<aside class="takeaways" aria-label="Key takeaways">
+  <p class="takeaways__title">Key takeaways</p>
+  {{ body | markdown | safe }}
+</aside>

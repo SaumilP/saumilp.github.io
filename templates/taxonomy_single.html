@@ -1,9 +1,13 @@
 {% extends "base.html" %}
 {% import "macros/cards.html" as cards %}
+{% import "macros/breadcrumbs.html" as bc %}
 
 {% block content %}
 {%- set is_cat = taxonomy.name == "categories" -%}
 <div class="container">
+  {%- set home_url = get_url(path="/") -%}
+  {%- if is_cat %}{% set parent_name = "Topics" %}{% set parent_url = get_url(path="/categories/") %}{% else %}{% set parent_name = "Tags" %}{% set parent_url = get_url(path="/tags/") %}{% endif -%}
+  {{ bc::trail(names=["Home", parent_name, term.name], urls=[home_url, parent_url, term.permalink]) }}
   <header class="page-header">
     <p class="eyebrow">{% if is_cat %}Topic{% else %}Tag{% endif %}</p>
     <h1>{% if not is_cat %}#{% endif %}{{ term.name }}</h1>

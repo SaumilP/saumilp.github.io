@@ -21,6 +21,9 @@ build_search_index = false
 # Minify the generated HTML in production builds.
 minify_html = true
 
+# Never copy OS/editor junk into the built site.
+ignored_content = ["**/.DS_Store", "**/Thumbs.db"]
+
 # Atom feed generated automatically (Zola 0.18 supports a single feed).
 generate_feed = true
 feed_filename = "atom.xml"
@@ -66,13 +69,22 @@ anchors = "on"
 # -----------------------------------------------------------------------------
 [extra]
 brand = "Machine Mind"
+site_name = "Machine Mind"
+site_tagline = "Practical notes on software architecture, backend engineering, cloud systems, Rust, Java, and developer tooling."
+site_description = "Machine Mind is Saumil Patel's technical blog covering software architecture, backend engineering, Java, Rust, AWS, DevOps, search, observability, and developer tooling."
 tagline = "coding.isFun()"
 positioning = "Practical notes on software architecture, backend engineering, cloud systems, Rust, Java, and developer tooling."
 author_name = "Saumil Patel"
+author_job_title = "Software / Systems Architect"
+author_url = "https://saumilp.github.io"
 default_og_image = "/img/default_img.webp"
+default_locale = "en_ZA"
+theme_color = "#2563eb"
 date_format = "%B %e, %Y"   # e.g. June 28, 2026
 words_per_minute = 220
 copyright = "Saumil Patel"
+# Real, already-configured contact used for responsible disclosure (security.txt).
+security_contact = "email2saumil2024@gmail.com"
 
 # Optional comments (disabled until fully configured).
 [extra.comments]
@@ -81,10 +93,10 @@ enable = false
 # Social / profile links (used in header, footer, About, JSON-LD).
 [extra.social]
 github = "https://github.com/SaumilP"
-linkedin = "https://www.linkedin.com/in/saumilp"
-mastodon = ""
+linkedin = "https://www.linkedin.com/in/saumil-p-13b72219/"
+mastodon = "https://mastodon.social/@saumilp"
 twitter = "saumilp10"
-email = "pate.saumil@gmail.com"
+email = "email2saumil2024@gmail.com"
 
 # Primary navigation (rendered in header + mobile nav).
 [[extra.nav]]
@@ -110,6 +122,7 @@ url = "/about/"
 # Explore-by-topic cards on the homepage. `match` filters by category/tag slug.
 [[extra.topics]]
 name = "Architecture"
+key = "architecture"
 kind = "tags"
 term = "architecture"
 icon = "layers"
@@ -117,6 +130,7 @@ description = "System design, patterns, and trade-offs."
 
 [[extra.topics]]
 name = "Java & Spring"
+key = "java"
 kind = "categories"
 term = "java"
 icon = "coffee"
@@ -124,6 +138,7 @@ description = "JVM, Spring Boot, and backend craft."
 
 [[extra.topics]]
 name = "Rust"
+key = "rust"
 kind = "tags"
 term = "rust"
 icon = "cog"
@@ -131,6 +146,7 @@ description = "Systems programming and fast services."
 
 [[extra.topics]]
 name = "Cloud"
+key = "cloud"
 kind = "categories"
 term = "cloud"
 icon = "cloud"
@@ -138,6 +154,7 @@ description = "AWS, Fly.io, and deploying real systems."
 
 [[extra.topics]]
 name = "DevOps"
+key = "devops"
 kind = "categories"
 term = "shell"
 icon = "terminal"
@@ -145,6 +162,7 @@ description = "CI/CD, shell, and automation."
 
 [[extra.topics]]
 name = "Search & Data"
+key = "search"
 kind = "categories"
 term = "configuration"
 icon = "search"

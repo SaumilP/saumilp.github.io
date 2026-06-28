@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% import "macros/breadcrumbs.html" as bc %}
+
+{% block content %}
+<div class="container">
+  {%- set home_url = get_url(path="/") -%}
+  {{ bc::trail(names=["Home", page.title], urls=[home_url, page.permalink]) }}
+  <article class="article">
+    <header class="page-header">
+      <h1>{{ page.title }}</h1>
+      {%- if page.description %}<p>{{ page.description }}</p>{% endif %}
+      {%- if page.updated %}<p class="muted" style="font-size: var(--text-sm); margin-top: var(--space-3);">Last updated {{ page.updated | date(format=config.extra.date_format) }}</p>{% endif %}
+    </header>
+
+    <div class="prose" data-pagefind-body>
+      {{ page.content | safe }}
+    </div>
+
+    {# Visible FAQ (matches FAQPage JSON-LD generated in jsonld.html) #}
+    {%- if page.extra.faq | default(value=false) %}{% if page.extra.faq.items %}
+    <section class="faq" aria-label="Frequently asked questions">
+      <h2>{{ page.extra.faq_title | default(value="Frequently asked questions") }}</h2>
+      {%- for item in page.extra.faq.items %}
+      <details class="faq__item">
+        <summary>{{ item.question }}</summary>
+        <div class="faq__answer"><p>{{ item.answer }}</p></div>
+      </details>
+      {%- endfor %}
+    </section>
+    {%- endif %}{% endif %}
+  </article>
+</div>
+{% endblock content %}

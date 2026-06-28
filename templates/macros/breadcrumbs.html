@@ -1,0 +1,13 @@
+{# Visible breadcrumb trail. Parallel arrays: `names` and `urls` (last = current). #}
+{% macro trail(names, urls) %}
+<nav class="breadcrumbs" aria-label="Breadcrumb">
+  <ol>
+    {%- for name in names %}
+    <li>
+      {%- if loop.last %}<span aria-current="page">{{ name }}</span>
+      {%- else %}<a href="{{ urls[loop.index0] | safe }}">{{ name }}</a><span class="breadcrumbs__sep" aria-hidden="true">/</span>{% endif %}
+    </li>
+    {%- endfor %}
+  </ol>
+</nav>
+{% endmacro trail %}

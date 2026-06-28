@@ -5,25 +5,46 @@
 // =============================================================================
 
 :root {
-  // ---- Color: light theme -------------------------------------------------
-  --color-text: #09090b;
-  --color-text-muted: #45454a;
-  --color-border: #dfdfe2;
-  --color-bg: #ffffff;
-  --color-surface: #f7f7f8;
-  --color-surface-2: #f2f2f3;
-  --color-surface-3: #ececec;
+  color-scheme: light;
+
+  // ---- Color: light theme (default) --------------------------------------
+  --color-bg: #f8fafc;
+  --color-surface: #ffffff;
+  --color-surface-muted: #f1f5f9;
+  --color-surface-elevated: #ffffff;
+
+  --color-text: #0f172a;
+  --color-text-secondary: #475569;
+  --color-text-muted: #64748b;
+
+  --color-border: #e2e8f0;
+
   --color-accent: #2563eb;
   --color-accent-hover: #1d4ed8;
-  --color-accent-soft: rgb(37 99 235 / 0.08);
-  --color-on-accent: #ffffff;
-  --focus-ring: rgb(147 197 253 / 0.6);
-  --color-code-bg: #f7f7f8;
-  --color-code-inline-bg: #f2f2f3;
-  --color-code-inline-text: #be1c5e;
-  --color-selection: rgb(37 99 235 / 0.18);
+  --color-accent-soft: #dbeafe;
+  --color-on-accent: #ffffff; // text on a filled accent surface
 
-  // ---- Spacing (8px base rhythm) -----------------------------------------
+  // Semantic / topic accents
+  --color-cyan: #0891b2;
+  --color-green: #059669;
+  --color-warm: #d97706;
+  --color-danger: #dc2626;
+  --color-rust: #b45309;
+  --color-ui: #7c3aed;
+
+  // Code
+  --color-code-bg: #f8fafc;
+  --color-code-border: #e2e8f0;
+  --color-code-text: #0f172a;
+  --color-code-inline-bg: #f1f5f9;
+  --color-code-inline-text: #0f172a;
+
+  // Selection & focus
+  --color-selection-bg: #dbeafe;
+  --color-selection-text: #0f172a;
+  --color-focus-ring: rgba(37, 99, 235, 0.35);
+
+  // ---- Spacing (8px-based rhythm; preserved to avoid layout regressions) --
   --space-1: 4px;
   --space-2: 6px;
   --space-3: 8px;
@@ -36,6 +57,7 @@
 
   // ---- Radius -------------------------------------------------------------
   --radius-sm: 8px;
+  --radius-md: 12px;
   --radius-lg: 16px;
   --radius-pill: 999px;
 
@@ -61,10 +83,10 @@
   --leading-normal: 1.6;
   --leading-relaxed: 1.75;
 
-  // ---- Shadows ------------------------------------------------------------
-  --shadow-sm: 0 1px 2px rgb(9 9 11 / 0.04);
-  --shadow-md: 0 4px 16px rgb(9 9 11 / 0.06);
-  --shadow-lg: 0 12px 32px rgb(9 9 11 / 0.10);
+  // ---- Shadows (kept minimal) --------------------------------------------
+  --shadow-sm: 0 1px 2px rgb(15 23 42 / 0.04);
+  --shadow-md: 0 4px 16px rgb(15 23 42 / 0.06);
+  --shadow-lg: 0 12px 32px rgb(15 23 42 / 0.10);
 
   // ---- Layout -------------------------------------------------------------
   --content-width: 1100px;
@@ -73,34 +95,48 @@
 
   // ---- Motion -------------------------------------------------------------
   --transition: 160ms ease;
-
-  color-scheme: light;
 }
 
 // ---- Dark theme -----------------------------------------------------------
 @mixin dark-theme {
-  --color-text: #f4f4f5;
-  --color-text-muted: #a1a1aa;
-  --color-border: #2a2a30;
-  --color-bg: #0b0b0d;
-  --color-surface: #141417;
-  --color-surface-2: #1a1a1f;
-  --color-surface-3: #222228;
-  --color-accent: #60a5fa;
-  --color-accent-hover: #93c5fd;
-  --color-accent-soft: rgb(96 165 250 / 0.12);
-  --color-on-accent: #0b0b0d;
-  --focus-ring: rgb(147 197 253 / 0.5);
-  --color-code-bg: #141417;
-  --color-code-inline-bg: #1f1f25;
-  --color-code-inline-text: #f9a8d4;
-  --color-selection: rgb(96 165 250 / 0.25);
+  color-scheme: dark;
+
+  --color-bg: #0b1020;
+  --color-surface: #111827;
+  --color-surface-muted: #172033;
+  --color-surface-elevated: #1a2336;
+
+  --color-text: #e5e7eb;
+  --color-text-secondary: #cbd5e1;
+  --color-text-muted: #94a3b8;
+
+  --color-border: #263244;
+
+  --color-accent: #7aa2f7;
+  --color-accent-hover: #9abdfb;
+  --color-accent-soft: rgba(122, 162, 247, 0.14);
+  --color-on-accent: #0b1020; // dark text on the lighter dark-mode accent (AA)
+
+  --color-cyan: #7dcfff;
+  --color-green: #9ece6a;
+  --color-warm: #e0af68;
+  --color-danger: #f7768e;
+  --color-rust: #e0af68;
+  --color-ui: #bb9af7;
+
+  --color-code-bg: #111827;
+  --color-code-border: #263244;
+  --color-code-text: #e5e7eb;
+  --color-code-inline-bg: #172033;
+  --color-code-inline-text: #e5e7eb;
+
+  --color-selection-bg: rgba(122, 162, 247, 0.35);
+  --color-selection-text: #ffffff;
+  --color-focus-ring: rgba(122, 162, 247, 0.45);
 
   --shadow-sm: 0 1px 2px rgb(0 0 0 / 0.4);
   --shadow-md: 0 4px 16px rgb(0 0 0 / 0.5);
   --shadow-lg: 0 12px 32px rgb(0 0 0 / 0.6);
-
-  color-scheme: dark;
 }
 
 // Explicit user choice wins.

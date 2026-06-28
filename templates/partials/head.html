@@ -1,14 +1,17 @@
 {# <head> contents. #}
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
-<meta name="theme-color" content="#0b0b0d" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#f8fafc" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0b1020" media="(prefers-color-scheme: dark)">
 <meta name="author" content="{{ config.extra.author_name }}">
 <meta name="generator" content="Zola">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+{% if noindex %}<meta name="robots" content="noindex,follow">{% else %}<meta name="robots" content="index,follow">{% endif %}
 
 <title>{{ seo_title | default(value=config.title) }}</title>
 
 {% include "partials/seo.html" %}
+{% include "partials/jsonld.html" %}
 
 {# Favicons #}
 <link rel="icon" href="{{ get_url(path='icons/favicon.ico') | safe }}" sizes="any">

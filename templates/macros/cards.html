@@ -41,7 +41,7 @@
 
 {# Topic card (homepage explore-by-topic). #}
 {% macro topic_card(topic) %}
-<a class="topic-card" href="{{ get_taxonomy_url(kind=topic.kind, name=topic.term) | safe }}">
+<a class="topic-card" data-topic="{{ topic.key | default(value='') }}" href="{{ get_taxonomy_url(kind=topic.kind, name=topic.term) | safe }}">
   <span class="topic-card__icon">{{ ic::icon(name=topic.icon, size=20) }}</span>
   <span class="topic-card__name">{{ topic.name }}</span>
   <span class="topic-card__desc">{{ topic.description }}</span>

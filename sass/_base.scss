@@ -111,8 +111,9 @@ hr {
     color var(--transition), transform var(--transition);
 
   &:hover {
-    background: var(--color-surface-3);
+    background: var(--color-surface-muted);
     color: var(--color-text);
+    border-color: color-mix(in srgb, var(--color-text-muted) 40%, var(--color-border));
   }
 
   &:active {
@@ -134,6 +135,14 @@ hr {
 
 .btn--ghost {
   background: transparent;
+  border-color: transparent;
+  color: var(--color-text-secondary);
+
+  &:hover {
+    background: var(--color-surface-muted);
+    border-color: transparent;
+    color: var(--color-text);
+  }
 }
 
 // Tags / chips ---------------------------------------------------------------
@@ -144,8 +153,8 @@ hr {
   padding: var(--space-1) var(--space-4);
   border: var(--border);
   border-radius: var(--radius-pill);
-  background: var(--color-surface-2);
-  color: var(--color-text-muted);
+  background: var(--color-surface-muted);
+  color: var(--color-text-secondary);
   font-size: var(--text-xs);
   font-family: var(--font-mono);
   line-height: 1.5;
@@ -173,5 +182,5 @@ hr {
   font-size: var(--text-xs);
   letter-spacing: 0.04em;
   text-transform: uppercase;
-  color: var(--color-text-muted);
+  color: var(--color-accent);
 }

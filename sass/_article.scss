@@ -55,7 +55,7 @@
 
 .article-header__desc {
   font-size: var(--text-lg);
-  color: var(--color-text-muted);
+  color: var(--color-text-secondary);
   line-height: var(--leading-normal);
 }
 
@@ -144,9 +144,9 @@
     margin-block: var(--space-7);
     padding: var(--space-5) var(--space-6);
     border-left: 3px solid var(--color-accent);
-    background: var(--color-surface);
+    background: var(--color-surface-muted);
     border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
-    color: var(--color-text-muted);
+    color: var(--color-text-secondary);
 
     p { margin-top: 0; }
     > * + * { margin-top: var(--space-4); }
@@ -188,7 +188,7 @@
   }
 
   thead th {
-    background: var(--color-surface-2);
+    background: var(--color-surface-muted);
     font-weight: 600;
   }
 
@@ -375,7 +375,7 @@
   border: var(--border);
   border-left-width: 3px;
   border-radius: var(--radius-sm);
-  background: var(--color-surface);
+  background: var(--color-surface-muted);
   margin-block: var(--space-6);
 
   p { margin-top: 0; }
@@ -385,6 +385,170 @@
 .callout__icon { flex-shrink: 0; }
 
 .callout--note { border-left-color: var(--color-accent); }
-.callout--tip { border-left-color: #16794a; }
-.callout--warning { border-left-color: #9a6700; }
-.callout--danger { border-left-color: #be1c5e; }
+.callout--tip { border-left-color: var(--color-green); }
+.callout--warning { border-left-color: var(--color-warm); }
+.callout--danger { border-left-color: var(--color-danger); }
+.callout--architecture { border-left-color: var(--color-accent); }
+.callout--definition { border-left-color: var(--color-cyan); }
+
+// ---------------------------------------------------------------------------
+//  AEO components: breadcrumbs, answer box, takeaways, pros/cons, FAQ
+// ---------------------------------------------------------------------------
+
+.breadcrumbs {
+  margin-bottom: var(--space-6);
+  font-size: var(--text-sm);
+
+  ol {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--space-3);
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  li {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-3);
+  }
+
+  a {
+    color: var(--color-text-muted);
+    &:hover { color: var(--color-accent); }
+  }
+
+  [aria-current="page"] {
+    color: var(--color-text-secondary);
+  }
+
+  &__sep {
+    color: var(--color-text-muted);
+    opacity: 0.6;
+  }
+}
+
+// Short answer box (AEO) -----------------------------------------------------
+.answer-box {
+  margin-block: var(--space-6);
+  padding: var(--space-5) var(--space-6);
+  border: 1px solid color-mix(in srgb, var(--color-accent) 35%, var(--color-border));
+  border-radius: var(--radius-md);
+  background: var(--color-accent-soft);
+
+  > * + * { margin-top: var(--space-3); }
+  p { margin-top: 0; }
+}
+
+.answer-box__label {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--color-accent);
+  margin-bottom: var(--space-3);
+
+  svg { width: 14px; height: 14px; }
+}
+
+// Key takeaways --------------------------------------------------------------
+.takeaways {
+  margin-block: var(--space-6);
+  padding: var(--space-5) var(--space-6);
+  border: var(--border);
+  border-left: 3px solid var(--color-green);
+  border-radius: var(--radius-sm);
+  background: var(--color-surface-muted);
+
+  ul { margin: 0; padding-left: var(--space-6); }
+  li + li { margin-top: var(--space-2); }
+}
+
+.takeaways__title {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--color-text-secondary);
+  margin-bottom: var(--space-3);
+}
+
+// Pros / cons ----------------------------------------------------------------
+.pros-cons {
+  display: grid;
+  gap: var(--space-5);
+  margin-block: var(--space-6);
+
+  @media (min-width: 640px) {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.pros-cons__col {
+  padding: var(--space-5) var(--space-6);
+  border: var(--border);
+  border-radius: var(--radius-md);
+  background: var(--color-surface);
+
+  ul { margin: 0; padding-left: var(--space-6); }
+  li + li { margin-top: var(--space-2); }
+}
+
+.pros-cons__col--pro { border-top: 3px solid var(--color-green); }
+.pros-cons__col--con { border-top: 3px solid var(--color-warm); }
+
+.pros-cons__title {
+  font-weight: 600;
+  margin-bottom: var(--space-3);
+}
+
+// FAQ ------------------------------------------------------------------------
+.faq {
+  margin-top: var(--space-8);
+  padding-top: var(--space-7);
+  border-top: var(--border);
+
+  h2 { margin-bottom: var(--space-5); }
+}
+
+.faq__item {
+  border: var(--border);
+  border-radius: var(--radius-md);
+  background: var(--color-surface);
+  margin-bottom: var(--space-4);
+  overflow: hidden;
+
+  summary {
+    cursor: pointer;
+    padding: var(--space-4) var(--space-5);
+    font-weight: 600;
+    list-style: none;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-4);
+
+    &::after {
+      content: "+";
+      color: var(--color-text-muted);
+      font-family: var(--font-mono);
+    }
+    &::-webkit-details-marker { display: none; }
+  }
+
+  &[open] summary {
+    border-bottom: var(--border);
+    &::after { content: "−"; }
+  }
+}
+
+.faq__answer {
+  padding: var(--space-5);
+  color: var(--color-text-secondary);
+  p { margin: 0; }
+}

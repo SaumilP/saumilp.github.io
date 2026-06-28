@@ -3,14 +3,19 @@
 {% import "macros/icons.html" as ic %}
 {% import "partials/toc.html" as toc %}
 {% import "macros/cards.html" as cards %}
+{% import "macros/breadcrumbs.html" as bc %}
 
 {% block content %}
 {%- set has_toc = page.toc and page.toc | length > 2 -%}
+{%- set parent = get_section(path=page.ancestors | last) -%}
 <div class="read-progress" id="read-progress" aria-hidden="true"></div>
 
 <div class="container">
+  {%- set home_url = get_url(path="/") -%}
+  {{ bc::trail(names=["Home", parent.title, page.title], urls=[home_url, parent.permalink, page.permalink]) }}
   <div class="article-layout {% if not has_toc %}article-layout--no-toc{% endif %}">
-    <article class="article">
+    <article class="article"
+      data-pagefind-meta="title:{{ page.title }}{% if page.taxonomies.categories %},category:{{ page.taxonomies.categories.0 }}{% endif %}{% if page.date %},date:{{ page.date }}{% endif %}">
       <header class="article-header">
         <div class="article-header__meta">
           {{ meta::date(page=page) }}
@@ -29,6 +34,24 @@
         {%- endif %}
       </header>
 
+      {# ---- AEO: short answer near the top (front matter `summary_answer`) ---- #}
+      {%- if page.extra.summary_answer | default(value="") %}
+      <div class="answer-box" role="note">
+        <p class="answer-box__label">{{ ic::icon(name="check", size=14) }} Short answer</p>
+        <p>{{ page.extra.summary_answer }}</p>
+      </div>
+      {%- endif %}
+
+      {# ---- AEO: key takeaways (front matter `takeaways = [..]`) ---- #}
+      {%- if page.extra.takeaways | default(value="") %}
+      <aside class="takeaways" aria-label="Key takeaways">
+        <p class="takeaways__title">Key takeaways</p>
+        <ul>
+          {%- for t in page.extra.takeaways %}<li>{{ t }}</li>{% endfor %}
+        </ul>
+      </aside>
+      {%- endif %}
+
       {%- if has_toc %}
       <details class="toc-mobile">
         <summary>On this page {{ ic::icon(name="arrow-right", size=14) }}</summary>
@@ -39,6 +62,19 @@
       <div class="prose" data-pagefind-body>
         {{ page.content | safe }}
       </div>
+
+      {# ---- AEO: FAQ (front matter `[extra.faq] items`) — visible + JSON-LD ---- #}
+      {%- if page.extra.faq | default(value=false) %}{% if page.extra.faq.items %}
+      <section class="faq" aria-label="Frequently asked questions">
+        <h2>Frequently asked questions</h2>
+        {%- for item in page.extra.faq.items %}
+        <details class="faq__item">
+          <summary>{{ item.question }}</summary>
+          <div class="faq__answer"><p>{{ item.answer }}</p></div>
+        </details>
+        {%- endfor %}
+      </section>
+      {%- endif %}{% endif %}
 
       {# ---- Prev / next ---- #}
       {%- if page.earlier or page.later %}

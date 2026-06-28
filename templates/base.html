@@ -2,28 +2,67 @@
 <!DOCTYPE html>
 <html lang="{{ lang | default(value=config.default_language) }}" class="no-js">
 <head>
-{# ---- Compute SEO context from the active page/section/term ---- #}
-{%- if page %}
-  {%- set seo_title = page.title ~ " · " ~ config.extra.brand -%}
-  {%- set seo_description = page.description | default(value=config.description) -%}
-  {%- set seo_image = page.extra.image | default(value=config.extra.default_og_image) -%}
-  {%- set seo_type = "article" -%}
+{# ---- Resolve the page kind, then derive all SEO context from it ---- #}
+{%- set brand = config.extra.site_name | default(value=config.title) -%}
+{%- set noindex = false -%}
+{%- if page and page.date %}
+  {%- set page_kind = "article" -%}
+{%- elif page and page.path == "/about/" %}
+  {%- set page_kind = "about" -%}
+{%- elif page %}
+  {%- set page_kind = "prose" -%}
 {%- elif term %}
-  {%- set seo_title = term.name ~ " · " ~ config.extra.brand -%}
-  {%- set seo_description = "Articles tagged " ~ term.name ~ " — " ~ config.description -%}
-  {%- set seo_type = "website" -%}
-{%- elif section and not section.extra.is_home %}
-  {%- set seo_title = section.title ~ " · " ~ config.extra.brand -%}
-  {%- set seo_description = section.description | default(value=config.description) -%}
-  {%- set seo_type = "website" -%}
+  {%- set page_kind = "taxonomy_term" -%}
 {%- elif taxonomy %}
+  {%- set page_kind = "taxonomy_list" -%}
+{%- elif section and section.extra.is_home %}
+  {%- set page_kind = "home" -%}
+{%- elif section and section.path == "/projects/" %}
+  {%- set page_kind = "projects" -%}
+{%- elif section and section.path == "/blog/" %}
+  {%- set page_kind = "blog_archive" -%}
+{%- elif section %}
+  {%- set page_kind = "collection" -%}
+{%- else %}
+  {# No page/section/term/taxonomy in context — this is the 404 template. #}
+  {%- set page_kind = "notfound" -%}
+  {%- set noindex = true -%}
+{%- endif %}
+
+{# ---- Titles & descriptions ---- #}
+{%- if page_kind == "article" %}
+  {%- set t = page.extra.seo_title | default(value=page.title) -%}
+  {%- set seo_title = t ~ " | " ~ brand -%}
+  {%- set seo_description = page.extra.seo_description | default(value=page.description) | default(value=config.extra.site_description) -%}
+  {%- set seo_image = page.extra.featured_image | default(value=config.extra.default_og_image) -%}
+  {%- set seo_type = "article" -%}
+{%- elif page_kind == "about" or page_kind == "prose" %}
+  {%- set t = page.extra.seo_title | default(value=page.title) -%}
+  {%- set seo_title = t ~ " | " ~ brand -%}
+  {%- set seo_description = page.extra.seo_description | default(value=page.description) | default(value=config.extra.site_description) -%}
+  {%- set seo_image = page.extra.featured_image | default(value=config.extra.default_og_image) -%}
+  {%- set seo_type = "website" -%}
+{%- elif page_kind == "taxonomy_term" %}
+  {%- set seo_title = term.name ~ " | " ~ brand -%}
+  {%- set seo_description = "Articles on " ~ term.name ~ " — " ~ config.extra.site_description -%}
+  {%- set seo_type = "website" -%}
+{%- elif page_kind == "taxonomy_list" %}
   {%- if taxonomy.name == "categories" %}{% set tx_name = "Topics" %}{% else %}{% set tx_name = "Tags" %}{% endif -%}
-  {%- set seo_title = tx_name ~ " · " ~ config.extra.brand -%}
-  {%- set seo_description = "Browse " ~ config.extra.brand ~ " articles by topic." -%}
+  {%- set tx_lower = tx_name | lower -%}
+  {%- set seo_title = tx_name ~ " | " ~ brand -%}
+  {%- set seo_description = "Browse " ~ brand ~ " articles by " ~ tx_lower ~ "." -%}
+  {%- set seo_type = "website" -%}
+{%- elif page_kind == "blog_archive" or page_kind == "projects" or page_kind == "collection" %}
+  {%- set seo_title = section.title ~ " | " ~ brand -%}
+  {%- set seo_description = section.description | default(value=config.extra.site_description) -%}
+  {%- set seo_type = "website" -%}
+{%- elif page_kind == "notfound" %}
+  {%- set seo_title = "Page not found | " ~ brand -%}
+  {%- set seo_description = "The page you’re looking for doesn’t exist or has moved." -%}
   {%- set seo_type = "website" -%}
 {%- else %}
-  {%- set seo_title = config.title ~ " — " ~ config.description | truncate(length=60) -%}
-  {%- set seo_description = config.description -%}
+  {%- set seo_title = brand ~ " — Software architecture, backend, Rust & Java notes" -%}
+  {%- set seo_description = config.extra.site_description | default(value=config.description) -%}
   {%- set seo_type = "website" -%}
 {%- endif %}
 {% include "partials/head.html" %}

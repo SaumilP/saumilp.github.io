@@ -1,52 +1,146 @@
 // =============================================================================
 //  Code blocks & inline code
 //  Syntax token colors come from Zola-generated syntax-light.css /
-//  syntax-dark.css (class-based). This file styles the container, scrolling,
-//  inline code, and the copy button.
+//  syntax-dark.css (class-based). This file styles the container, header bar,
+//  scrolling, inline code, terminal prompts, and the copy button.
 // =============================================================================
 
-// Inline code
+// Inline code -----------------------------------------------------------------
 .prose :not(pre) > code {
-  font-family: var(--font-mono);
-  font-size: 0.875em;
-  padding: 0.15em 0.4em;
-  border-radius: 6px;
+  padding: 0.12rem 0.35rem;
+  border: 1px solid var(--color-code-border);
+  border-radius: 0.375rem;
   background: var(--color-code-inline-bg);
   color: var(--color-code-inline-text);
+  font-family: var(--font-mono);
+  font-size: 0.9em;
+  white-space: break-spaces;
   word-break: break-word;
 }
 
-// Code block wrapper (added by copy-code.js)
+// Code block wrapper (built by copy-code.js around each <pre>) ----------------
 .code-block {
   position: relative;
-  margin-block: var(--space-6);
+  margin: var(--space-6) 0;
+  border: 1px solid var(--color-code-border);
+  border-radius: var(--radius-lg);
+  background: var(--color-code-bg);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
 }
 
-// Zola-generated <pre> for fenced blocks
+// Header bar: language badge (left) + copy button (right)
+.code-block__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-5);
+  padding: var(--space-3) var(--space-4) var(--space-3) var(--space-5);
+  border-bottom: 1px solid var(--color-code-border);
+  background: var(--color-surface-muted);
+  color: var(--color-text-muted);
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+}
+
+.code-block__lang {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-3);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+// Coloured dot distinguishes terminal / config / code blocks at a glance.
+.code-block__dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--color-accent);
+}
+.code-block[data-kind="terminal"] .code-block__dot { background: var(--color-green); }
+.code-block[data-kind="config"] .code-block__dot { background: var(--color-warm); }
+
+.code-block__name {
+  color: var(--color-text-secondary);
+  text-transform: none;
+  letter-spacing: 0;
+}
+
+.code-block__copy {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  background: var(--color-surface);
+  color: var(--color-text-secondary);
+  padding: 0.25rem 0.5rem;
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  line-height: 1;
+  cursor: pointer;
+  transition: color var(--transition), border-color var(--transition);
+
+  svg { width: 13px; height: 13px; }
+
+  &:hover {
+    color: var(--color-accent);
+    border-color: var(--color-accent);
+  }
+
+  &:focus-visible {
+    outline: 3px solid var(--color-focus-ring);
+    outline-offset: 2px;
+  }
+
+  &.is-copied {
+    color: var(--color-green);
+    border-color: color-mix(in srgb, var(--color-green) 40%, transparent);
+  }
+}
+
+// The <pre> itself -----------------------------------------------------------
+// Standalone (unwrapped) pre keeps its own frame; inside .code-block the
+// wrapper supplies the frame so we strip the inner one.
 pre {
   font-family: var(--font-mono);
   font-size: var(--text-sm);
-  line-height: 1.6;
+  line-height: 1.65;
   background: var(--color-code-bg);
-  border: var(--border);
+  color: var(--color-code-text);
+  border: 1px solid var(--color-code-border);
   border-radius: var(--radius-lg);
   padding: var(--space-5) var(--space-6);
-  overflow-x: auto;           // long lines scroll inside the block
+  overflow-x: auto;            // long lines scroll inside the block
+  scrollbar-width: thin;
   -webkit-overflow-scrolling: touch;
   tab-size: 4;
 
+  &.z-code { background: var(--color-code-bg); } // beat syntect's baked bg
+
   code {
+    display: block;
+    min-width: max-content;     // enable horizontal scroll for long lines
     font-family: inherit;
     font-size: inherit;
     background: none;
     padding: 0;
     border: none;
     color: inherit;
-    white-space: pre;          // preserve formatting; horizontal scroll
-    display: block;
-    min-width: 0;
+    white-space: pre;
   }
 }
+
+.code-block > pre {
+  margin: 0;
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+}
+
+// Terminal prompt accent (shell blocks)
+.code-block[data-kind="terminal"] .code-block__lang { color: var(--color-green); }
 
 // Line numbers (Zola, if enabled) stay aligned and non-selectable
 pre table td:nth-of-type(1) {
@@ -61,50 +155,10 @@ pre table td {
   background: none;
 }
 
-// Copy button ----------------------------------------------------------------
-.copy-code-btn {
-  position: absolute;
-  top: var(--space-4);
-  right: var(--space-4);
-  display: inline-flex;
-  align-items: center;
-  gap: var(--space-2);
-  padding: var(--space-2) var(--space-3);
-  border: var(--border);
-  border-radius: var(--radius-sm);
-  background: var(--color-bg);
-  color: var(--color-text-muted);
-  font-family: var(--font-mono);
-  font-size: var(--text-xs);
-  line-height: 1;
-  opacity: 0;
-  transition: opacity var(--transition), color var(--transition),
-    border-color var(--transition);
-
-  svg {
-    width: 14px;
-    height: 14px;
-  }
-
-  &:hover {
-    color: var(--color-text);
-    border-color: var(--color-text-muted);
-  }
-
-  &.is-copied {
-    color: #16794a;
-    border-color: color-mix(in srgb, #16794a 40%, transparent);
-  }
-}
-
-.code-block:hover .copy-code-btn,
-.copy-code-btn:focus-visible {
-  opacity: 1;
-}
-
-// Always show on touch devices (no hover)
-@media (hover: none) {
-  .copy-code-btn {
-    opacity: 1;
-  }
+// Highlighted lines (Zola hl_lines) — subtle accent wash
+pre mark {
+  display: block;
+  background: var(--color-accent-soft);
+  margin-inline: calc(-1 * var(--space-6));
+  padding-inline: var(--space-6);
 }

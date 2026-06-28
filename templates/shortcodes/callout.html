@@ -1,8 +1,9 @@
-{# Usage: {% callout(type="tip", title="Heads up") %} body markdown {% end %} #}
+{# Usage: {% callout(type="tip", title="Heads up") %} body markdown {% end %}
+   Types: note · tip · warning · danger · architecture · definition #}
 {%- set kind = type | default(value="note") -%}
 <div class="callout callout--{{ kind }}">
   <div class="callout__icon" aria-hidden="true">
-    {%- if kind == "tip" %}💡{% elif kind == "warning" %}⚠️{% elif kind == "danger" %}🛑{% else %}ℹ️{% endif -%}
+    {%- if kind == "tip" %}💡{% elif kind == "warning" %}⚠️{% elif kind == "danger" %}🛑{% elif kind == "architecture" %}🏗️{% elif kind == "definition" %}📖{% else %}ℹ️{% endif -%}
   </div>
   <div>
     {%- if title %}<strong>{{ title }}</strong>{% endif %}

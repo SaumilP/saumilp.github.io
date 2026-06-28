@@ -1,0 +1,13 @@
+/* TEAM */
+Author: Saumil Patel
+Site: Machine Mind
+Contact: pate.saumil [at] gmail.com
+GitHub: https://github.com/SaumilP
+
+/* SITE */
+Standards: HTML5, CSS3
+Components: Zola, Tera, SCSS, Pagefind
+Hosting: GitHub Pages
+Software: Zola static site generator
+Note: Static personal blog and portfolio. No private data or sensitive
+infrastructure details are published here.

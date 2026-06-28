@@ -30,7 +30,7 @@
   max-height: 80vh;
   display: flex;
   flex-direction: column;
-  background: var(--color-bg);
+  background: var(--color-surface);
   border: var(--border);
   border-radius: var(--radius-lg);
   box-shadow: var(--shadow-lg);
@@ -63,21 +63,33 @@
   padding: var(--space-7) 0;
 }
 
-// Pagefind UI theming via its CSS variables
+// Pagefind UI theming via its CSS variables (matched to the site palette)
 .pagefind-ui {
   --pagefind-ui-scale: 0.9;
-  --pagefind-ui-primary: var(--color-text);
+  --pagefind-ui-primary: var(--color-accent);
   --pagefind-ui-text: var(--color-text);
-  --pagefind-ui-background: var(--color-bg);
+  --pagefind-ui-background: var(--color-surface);
   --pagefind-ui-border: var(--color-border);
-  --pagefind-ui-tag: var(--color-surface-2);
+  --pagefind-ui-tag: var(--color-surface-muted);
   --pagefind-ui-border-width: 1px;
-  --pagefind-ui-border-radius: var(--radius-sm);
+  --pagefind-ui-border-radius: 8px;
+  --pagefind-ui-image-border-radius: 8px;
   --pagefind-ui-font: var(--font-sans);
 }
 
 .pagefind-ui__search-input {
-  background: var(--color-surface-2);
+  background: var(--color-surface-muted);
+  color: var(--color-text);
+
+  &::placeholder {
+    color: var(--color-text-muted);
+  }
+
+  &:focus {
+    border-color: var(--color-accent);
+    outline: 3px solid var(--color-focus-ring);
+    outline-offset: 1px;
+  }
 }
 
 .pagefind-ui__result {
