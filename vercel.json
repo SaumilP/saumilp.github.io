@@ -1,9 +1,6 @@
 {
   "buildCommand": "zola build",
   "outputDirectory": "public",
-  "functions": {
-    "api/**/*.ts": {
-      "runtime": "nodejs24.x"
-    }
-  }
+  "cleanUrls": true,
+  "trailingSlash": true
 }

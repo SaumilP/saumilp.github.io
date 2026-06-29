@@ -7,5 +7,9 @@
   },
   "devDependencies": {
     "@types/node": "^20.0.0"
+  },
+  "type": "module",
+  "engines": {
+    "node": "24.x"
   }
 }
