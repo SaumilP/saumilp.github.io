@@ -22,6 +22,8 @@
           {%- if page.reading_time %}<span class="dot"></span><span>{{ page.reading_time }} min read</span>{% endif -%}
           {%- if page.updated %}<span class="dot"></span><span>Updated {{ page.updated | date(format=config.extra.date_format) }}</span>{% endif -%}
           {%- if page.taxonomies.categories %}<span class="dot"></span><a href="{{ get_taxonomy_url(kind='categories', name=page.taxonomies.categories.0) | safe }}">{{ page.taxonomies.categories.0 }}</a>{% endif -%}
+          <span class="dot"></span>
+          <span id="view-count" hx-get="/api/views?slug={{ page.slug }}" hx-trigger="load" hx-swap="innerHTML">—</span>
         </div>
         <h1>{{ page.title }}</h1>
         {%- if page.description %}<p class="article-header__desc">{{ page.description }}</p>{% endif %}
@@ -146,6 +148,15 @@
 {% endblock content %}
 
 {% block extra_js %}
+<script src="https://unpkg.com/htmx.org@1.9.10"></script>
 <script src="{{ get_url(path='js/copy-code.js') | safe }}" defer></script>
 <script src="{{ get_url(path='js/toc.js') | safe }}" defer></script>
+<script defer>
+  // Increment view count after page load
+  document.addEventListener('htmx:afterSwap', function(event) {
+    if (event.detail.target.id === 'view-count') {
+      fetch('/api/views?slug={{ page.slug }}', { method: 'POST' });
+    }
+  });
+</script>
 {% endblock extra_js %}
