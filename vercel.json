@@ -1,4 +1,9 @@
 {
   "buildCommand": "zola build",
-  "outputDirectory": "public"
+  "outputDirectory": "public",
+  "functions": {
+    "api/**/*.ts": {
+      "runtime": "nodejs@24.x"
+    }
+  }
 }
