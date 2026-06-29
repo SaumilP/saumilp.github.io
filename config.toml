@@ -41,13 +41,6 @@ taxonomies = [
 ]
 
 [markdown]
-# Class-based syntax highlighting so light & dark themes can both be styled.
-highlight_code = true
-highlight_theme = "css"
-highlight_themes_css = [
-    { theme = "ayu-light", filename = "syntax-light.css" },
-    { theme = "ayu-dark", filename = "syntax-dark.css" },
-]
 render_emoji = true
 # Lazy-load + async-decode images, and make external links safe.
 lazy_async_image = true
@@ -55,6 +48,15 @@ external_links_target_blank = true
 external_links_no_follow = true
 external_links_no_referrer = true
 smart_punctuation = true
+
+# Class-based syntax highlighting so light & dark themes can both be styled.
+# Zola 0.22 uses the Giallo engine: dual themes emit `giallo-light.css` and
+# `giallo-dark.css` into static/ (filenames are fixed), both using `z-`-prefixed
+# token classes, so the light/dark stylesheet toggle in head.html still applies.
+[markdown.highlighting]
+style = "class"
+light_theme = "ayu-light"
+dark_theme = "ayu-dark"
 
 [link_checker]
 # Skip local-dev URLs referenced inside tutorial content.
