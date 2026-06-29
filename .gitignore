@@ -13,6 +13,9 @@ node_modules/
 bower_components/
 */node_modules/*
 */bower_components/*
+.env
+.env.local
+.env.*.local
 
 # Editor / OS
 .idea/
