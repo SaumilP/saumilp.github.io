@@ -211,6 +211,33 @@
   }
 }
 
+// View counter (end of post) ------------------------------------------------
+.post-views {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  margin-top: var(--space-8);
+  padding-top: var(--space-7);
+  border-top: var(--border);
+  color: var(--color-text-secondary);
+  font-size: var(--text-lg);
+
+  .icon { color: var(--color-accent); }
+
+  &__count {
+    font-weight: 700;
+    color: var(--color-text);
+    font-variant-numeric: tabular-nums;
+  }
+
+  &__label {
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    font-size: var(--text-sm);
+    color: var(--color-text-muted);
+  }
+}
+
 // Article footer: prev/next + related ---------------------------------------
 .article-nav {
   display: grid;

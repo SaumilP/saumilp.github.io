@@ -1,6 +1,6 @@
 name: Redirect GitHub Pages to Vercel
 
-# The canonical site is hosted on Vercel (https://saumilp-github-io.vercel.app).
+# The canonical site is hosted on Vercel (https://saumilpgithubio.vercel.app).
 # GitHub Pages now serves only a lightweight, path-preserving redirect so any
 # old saumilp.github.io links forward to the Vercel deployment.
 
@@ -40,19 +40,19 @@ jobs:
           <head>
             <meta charset="utf-8">
             <title>Redirecting…</title>
-            <link rel="canonical" href="https://saumilp-github-io.vercel.app/">
+            <link rel="canonical" href="https://saumilpgithubio.vercel.app/">
             <meta name="robots" content="noindex">
-            <meta http-equiv="refresh" content="0; url=https://saumilp-github-io.vercel.app/">
+            <meta http-equiv="refresh" content="0; url=https://saumilpgithubio.vercel.app/">
             <script>
               location.replace(
-                "https://saumilp-github-io.vercel.app" +
+                "https://saumilpgithubio.vercel.app" +
                 location.pathname + location.search + location.hash
               );
             </script>
           </head>
           <body>
             <p>This site has moved to
-              <a href="https://saumilp-github-io.vercel.app/">saumilp-github-io.vercel.app</a>.</p>
+              <a href="https://saumilpgithubio.vercel.app/">saumilpgithubio.vercel.app</a>.</p>
           </body>
           </html>
           HTML

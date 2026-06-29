@@ -22,8 +22,6 @@
           {%- if page.reading_time %}<span class="dot"></span><span>{{ page.reading_time }} min read</span>{% endif -%}
           {%- if page.updated %}<span class="dot"></span><span>Updated {{ page.updated | date(format=config.extra.date_format) }}</span>{% endif -%}
           {%- if page.taxonomies.categories %}<span class="dot"></span><a href="{{ get_taxonomy_url(kind='categories', name=page.taxonomies.categories.0) | safe }}">{{ page.taxonomies.categories.0 }}</a>{% endif -%}
-          <span class="dot"></span>
-          <span id="view-count" hx-get="/api/views?slug={{ page.path | trim_end_matches(pat='/') }}" hx-trigger="load" hx-swap="innerHTML">—</span>
         </div>
         <h1>{{ page.title }}</h1>
         {%- if page.description %}<p class="article-header__desc">{{ page.description }}</p>{% endif %}
@@ -77,6 +75,13 @@
         {%- endfor %}
       </section>
       {%- endif %}{% endif %}
+
+      {# ---- View counter (Supabase via /api/views, same-origin on Vercel) ---- #}
+      <div class="post-views" data-slug="{{ page.path | trim_end_matches(pat='/') }}" aria-live="polite">
+        {{ ic::icon(name="eye", size=20) }}
+        <span class="post-views__count" data-count>—</span>
+        <span class="post-views__label">views</span>
+      </div>
 
       {# ---- Prev / next ---- #}
       {# Computed from the section's pages because a paginated section does not #}
@@ -148,15 +153,22 @@
 {% endblock content %}
 
 {% block extra_js %}
-<script src="https://unpkg.com/htmx.org@1.9.10" defer></script>
 <script src="{{ get_url(path='js/copy-code.js') | safe }}" defer></script>
 <script src="{{ get_url(path='js/toc.js') | safe }}" defer></script>
 <script defer>
-  // After HTMX loads & displays the count, record this view (same-origin /api).
-  document.addEventListener('htmx:afterSwap', function (event) {
-    if (event.detail.target.id === 'view-count') {
-      fetch('/api/views?slug={{ page.path | trim_end_matches(pat="/") }}', { method: 'POST' });
-    }
-  });
+  // Record this view and show the running total, formatted (e.g. "1,234").
+  // POST increments and returns the new count, so one round trip does both.
+  (function () {
+    var box = document.querySelector('.post-views');
+    if (!box) return;
+    var out = box.querySelector('[data-count]');
+    var slug = box.getAttribute('data-slug');
+    fetch('/api/views?slug=' + encodeURIComponent(slug), { method: 'POST' })
+      .then(function (r) { return r.json(); })
+      .then(function (d) {
+        out.textContent = new Intl.NumberFormat().format(d.views || 0);
+      })
+      .catch(function () { box.hidden = true; });
+  })();
 </script>
 {% endblock extra_js %}
