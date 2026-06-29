@@ -1,0 +1,11 @@
+{
+  "name": "saumilp-github-io",
+  "version": "1.0.0",
+  "description": "Machine Mind - Personal technical blog",
+  "dependencies": {
+    "@supabase/supabase-js": "^2.38.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0"
+  }
+}

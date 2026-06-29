@@ -4,7 +4,8 @@
 # =============================================================================
 
 # The URL the site will be built for (GitHub user site: saumilp.github.io)
-base_url = "https://saumilp.github.io"
+#base_url = "https://saumilp.github.io"
+base_url = "https://saumilp-github-io.vercel.app"
 
 # The default language; used in feeds and lang attributes.
 default_language = "en"
