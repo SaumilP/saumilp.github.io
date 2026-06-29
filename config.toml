@@ -53,10 +53,12 @@ smart_punctuation = true
 # Zola 0.22 uses the Giallo engine: dual themes emit `giallo-light.css` and
 # `giallo-dark.css` into static/ (filenames are fixed), both using `z-`-prefixed
 # token classes, so the light/dark stylesheet toggle in head.html still applies.
+# Theme names must exist in giallo 0.2.2 (bundled by Zola 0.22.1); `ayu-light`
+# is not in that release, so we use the Catppuccin latte/mocha pair.
 [markdown.highlighting]
 style = "class"
-light_theme = "ayu-light"
-dark_theme = "ayu-dark"
+light_theme = "catppuccin-latte"
+dark_theme = "catppuccin-mocha"
 
 [link_checker]
 # Skip local-dev URLs referenced inside tutorial content.
