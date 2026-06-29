@@ -25,9 +25,9 @@ minify_html = true
 # Never copy OS/editor junk into the built site.
 ignored_content = ["**/.DS_Store", "**/Thumbs.db"]
 
-# Atom feed generated automatically (Zola 0.18 supports a single feed).
-generate_feed = true
-feed_filename = "atom.xml"
+# Atom feed generated automatically (Zola 0.22 supports multiple feeds).
+generate_feeds = true
+feed_filenames = { atom = "atom.xml" }
 
 # The default author for pages.
 author = "Saumil Patel"
