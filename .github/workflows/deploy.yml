@@ -1,9 +1,11 @@
-name: Build and deploy to GitHub Pages
+name: Redirect GitHub Pages to Vercel
+
+# The canonical site is hosted on Vercel (https://saumilp-github-io.vercel.app).
+# GitHub Pages now serves only a lightweight, path-preserving redirect so any
+# old saumilp.github.io links forward to the Vercel deployment.
 
 on:
   push:
-    branches: [master, main]
-  pull_request:
     branches: [master, main]
   workflow_dispatch:
 
@@ -18,68 +20,52 @@ concurrency:
   group: pages
   cancel-in-progress: false
 
-env:
-  ZOLA_VERSION: "0.18.0"
-  PAGEFIND_VERSION: "1.1.1"
-
 jobs:
   build:
-    name: Build & validate
+    name: Build redirect site
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
       - name: Configure Pages
-        if: github.event_name == 'push' || github.event_name == 'workflow_dispatch'
         uses: actions/configure-pages@v5
 
-      - name: Install Zola ${{ env.ZOLA_VERSION }}
+      - name: Generate redirect pages
         run: |
-          curl -sSL "https://github.com/getzola/zola/releases/download/v${ZOLA_VERSION}/zola-v${ZOLA_VERSION}-x86_64-unknown-linux-gnu.tar.gz" \
-            | tar -xz
-          sudo install -m 0755 zola /usr/local/bin/zola
-          zola --version
-
-      - name: Validate site (zola check)
-        # Non-blocking: external links can be transiently unavailable.
-        continue-on-error: true
-        run: zola check
-
-      - name: Build site (zola build)
-        run: zola build
-
-      - name: Generate Pagefind search index
-        run: npx -y pagefind@${PAGEFIND_VERSION} --site public
-
-      - name: Add .nojekyll
-        run: touch public/.nojekyll
-
-      - name: Validate build output
-        run: |
-          set -e
-          test -f public/index.html       || { echo "missing index.html"; exit 1; }
-          test -d public/pagefind         || { echo "missing pagefind index"; exit 1; }
-          test -f public/sitemap.xml      || { echo "missing sitemap.xml"; exit 1; }
-          test -f public/atom.xml         || { echo "missing atom.xml"; exit 1; }
-          test -f public/404.html         || { echo "missing 404.html"; exit 1; }
-          test -f public/main.css         || { echo "missing main.css"; exit 1; }
-          test -f public/syntax-light.css || { echo "missing syntax-light.css"; exit 1; }
-          test -f public/syntax-dark.css  || { echo "missing syntax-dark.css"; exit 1; }
-          echo "Build output validated."
-
-      - name: Check internal links & local assets
-        run: python3 scripts/check_links.py public
+          mkdir -p _site
+          # index.html handles the root; 404.html handles every deep link
+          # (GitHub Pages serves 404.html for any path it can't find), and the
+          # JS preserves pathname + query + hash so links land on the same page.
+          cat > _site/index.html <<'HTML'
+          <!doctype html>
+          <html lang="en">
+          <head>
+            <meta charset="utf-8">
+            <title>Redirecting…</title>
+            <link rel="canonical" href="https://saumilp-github-io.vercel.app/">
+            <meta name="robots" content="noindex">
+            <meta http-equiv="refresh" content="0; url=https://saumilp-github-io.vercel.app/">
+            <script>
+              location.replace(
+                "https://saumilp-github-io.vercel.app" +
+                location.pathname + location.search + location.hash
+              );
+            </script>
+          </head>
+          <body>
+            <p>This site has moved to
+              <a href="https://saumilp-github-io.vercel.app/">saumilp-github-io.vercel.app</a>.</p>
+          </body>
+          </html>
+          HTML
+          cp _site/index.html _site/404.html
+          touch _site/.nojekyll
 
       - name: Upload Pages artifact
-        if: github.event_name == 'push' || github.event_name == 'workflow_dispatch'
         uses: actions/upload-pages-artifact@v3
         with:
-          path: public
+          path: _site
 
   deploy:
-    name: Deploy
-    if: github.event_name == 'push' || github.event_name == 'workflow_dispatch'
+    name: Deploy redirect
     needs: build
     runs-on: ubuntu-latest
     environment:
