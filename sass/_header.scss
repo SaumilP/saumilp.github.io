@@ -173,3 +173,16 @@ kbd {
     display: inline-flex;
   }
 }
+
+// Theme toggle icon spin on click.
+@media (prefers-reduced-motion: no-preference) {
+  @keyframes icon-spin {
+    from { transform: rotate(0deg) scale(1); }
+    50%  { transform: rotate(180deg) scale(0.75); }
+    to   { transform: rotate(360deg) scale(1); }
+  }
+
+  .icon-btn.is-spinning {
+    animation: icon-spin 320ms ease;
+  }
+}

@@ -271,6 +271,19 @@
     text-align: right;
     align-items: flex-end;
   }
+
+  // Directional arrow nudge: prev slides left, next slides right.
+  svg {
+    transition: transform var(--transition);
+  }
+
+  &:not(.is-next):hover svg {
+    transform: translateX(-3px);
+  }
+
+  &.is-next:hover svg {
+    transform: translateX(3px);
+  }
 }
 
 .article-nav__dir {
@@ -346,6 +359,7 @@
   border-left: 2px solid transparent;
   color: var(--color-text-muted);
   line-height: var(--leading-snug);
+  transition: color 200ms ease, border-left-color 200ms ease;
 
   &:hover {
     color: var(--color-text);
@@ -560,18 +574,40 @@
     justify-content: space-between;
     gap: var(--space-4);
 
+    // Rotating chevron replaces the static +/− character.
     &::after {
-      content: "+";
-      color: var(--color-text-muted);
-      font-family: var(--font-mono);
+      content: "";
+      flex-shrink: 0;
+      width: 10px;
+      height: 10px;
+      border-right: 2px solid var(--color-text-muted);
+      border-bottom: 2px solid var(--color-text-muted);
+      transform: rotate(-45deg);
+      transition: transform 200ms ease, border-color 200ms ease;
     }
     &::-webkit-details-marker { display: none; }
   }
 
   &[open] summary {
     border-bottom: var(--border);
-    &::after { content: "−"; }
+
+    &::after {
+      transform: rotate(45deg);
+      border-color: var(--color-accent);
+    }
   }
+}
+
+// Fade + slide the answer in when the item opens.
+@media (prefers-reduced-motion: no-preference) {
+  .faq__item[open] .faq__answer {
+    animation: faq-reveal 220ms ease;
+  }
+}
+
+@keyframes faq-reveal {
+  from { opacity: 0; transform: translateY(-6px); }
+  to   { opacity: 1; transform: none; }
 }
 
 .faq__answer {

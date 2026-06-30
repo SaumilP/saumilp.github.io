@@ -159,11 +159,12 @@ hr {
   font-family: var(--font-mono);
   line-height: 1.5;
   transition: background-color var(--transition), color var(--transition),
-    border-color var(--transition);
+    border-color var(--transition), transform var(--transition);
 
   &:hover {
     color: var(--color-text);
     border-color: var(--color-text-muted);
+    transform: translateY(-1px);
   }
 }
 
@@ -183,4 +184,15 @@ hr {
   letter-spacing: 0.04em;
   text-transform: uppercase;
   color: var(--color-accent);
+}
+
+// Directional arrow nudge: all links/buttons that carry a right-arrow icon
+.btn svg,
+.more-link svg {
+  transition: transform var(--transition);
+}
+
+.btn:hover svg,
+.more-link:hover svg {
+  transform: translateX(3px);
 }

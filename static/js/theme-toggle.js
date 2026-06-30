@@ -36,6 +36,12 @@
 
   if (toggle) {
     toggle.addEventListener("click", function () {
+      // Spin the icon before swapping it so the motion feels intentional.
+      toggle.classList.add("is-spinning");
+      toggle.addEventListener("animationend", function () {
+        toggle.classList.remove("is-spinning");
+      }, { once: true });
+
       var next = currentTheme() === "dark" ? "light" : "dark";
       try {
         localStorage.setItem("theme", next);
