@@ -17,6 +17,7 @@
   &:hover {
     border-color: color-mix(in srgb, var(--color-text-muted) 40%, var(--color-border));
     box-shadow: var(--shadow-md);
+    transform: translateY(-2px);
   }
 }
 
@@ -102,12 +103,13 @@
   background: var(--color-surface);
   color: var(--color-text);
   transition: border-color var(--transition), box-shadow var(--transition),
-    background-color var(--transition);
+    background-color var(--transition), transform var(--transition);
 
   &:hover {
     color: var(--color-text);
     border-color: color-mix(in srgb, var(--topic-color) 45%, var(--color-border));
     box-shadow: var(--shadow-md);
+    transform: translateY(-2px);
   }
 }
 
@@ -128,11 +130,16 @@
   border-radius: var(--radius-sm);
   background: color-mix(in srgb, var(--topic-color) 14%, transparent);
   color: var(--topic-color);
+  transition: transform var(--transition);
 
   svg {
     width: 20px;
     height: 20px;
   }
+}
+
+.topic-card:hover .topic-card__icon {
+  transform: scale(1.12);
 }
 
 .topic-card__name {

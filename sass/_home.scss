@@ -73,3 +73,15 @@
 .home-section + .home-section {
   border-top: var(--border);
 }
+
+// Scroll-triggered reveal — JS adds .reveal on load, .is-visible on intersect.
+.home-section.reveal {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 500ms ease, transform 500ms ease;
+}
+
+.home-section.reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
