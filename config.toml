@@ -136,6 +136,10 @@ url = "/projects/"
 name = "About"
 url = "/about/"
 
+[[extra.nav]]
+name = "Resume"
+url = "/resume/"
+
 # Explore-by-topic cards on the homepage. `match` filters by category/tag slug.
 [[extra.topics]]
 name = "Architecture"
