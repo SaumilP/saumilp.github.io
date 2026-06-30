@@ -92,9 +92,20 @@ copyright = "Saumil Patel"
 # Real, already-configured contact used for responsible disclosure (security.txt).
 security_contact = "email2saumil2024@gmail.com"
 
-# Optional comments (disabled until fully configured).
+# Optional comments (Giscus GitHub Discussions integration).
 [extra.comments]
-enable = false
+enable = true
+provider = "giscus"
+repo = "SaumilP/saumilp.github.io"
+repo_id = "REPLACE_WITH_REPO_ID"
+category = "Announcements"
+category_id = "REPLACE_WITH_CATEGORY_ID"
+mapping = "pathname"
+reactions_enabled = "1"
+emit_metadata = "0"
+input_position = "bottom"
+lang = "en"
+loading = "lazy"
 
 # Social / profile links (used in header, footer, About, JSON-LD).
 [extra.social]
