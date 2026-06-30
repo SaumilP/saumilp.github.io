@@ -63,12 +63,13 @@
 }
 
 .series-list__num {
+  --_badge-size: 2rem; /* 32px — no space token maps here */
   flex-shrink: 0;
   display: grid;
   place-items: center;
-  width: 32px;
-  height: 32px;
-  border-radius: 50%;
+  width: var(--_badge-size);
+  height: var(--_badge-size);
+  border-radius: var(--radius-pill);
   background: var(--color-accent-soft);
   color: var(--color-accent);
   font-family: var(--font-mono);
