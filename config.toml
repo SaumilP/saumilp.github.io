@@ -178,6 +178,7 @@ description = "Solr, indexing, and data plumbing."
 name = "draw.io Architecture Libraries"
 description = "Reusable draw.io shape libraries for clean, professional software architecture diagrams."
 url = "https://github.com/SaumilP/drawio_libraries"
+case_study_path = "/projects/draw-io-architecture-libraries/"
 stack = ["Diagrams", "Architecture", "Python"]
 status = "Active"
 
@@ -185,6 +186,7 @@ status = "Active"
 name = "Java Design Patterns"
 description = "Practical Java design patterns — runnable examples, tests, and architecture notes."
 url = "https://github.com/SaumilP/design-patterns"
+case_study_path = "/projects/java-design-patterns/"
 stack = ["Java", "Patterns", "OOP"]
 status = "Active"
 
@@ -192,6 +194,7 @@ status = "Active"
 name = "Enterprise Spring Patterns"
 description = "Spring Boot patterns and recipes for building maintainable enterprise systems."
 url = "https://github.com/SaumilP/enterprise-spring-patterns-and-recipes"
+case_study_path = "/projects/enterprise-spring-patterns/"
 stack = ["Java", "Spring Boot", "Backend"]
 status = "Active"
 
@@ -199,6 +202,7 @@ status = "Active"
 name = "Mastodon Toot Client"
 description = "A Rust Mastodon bot CLI — scheduled posts from files with safe automation."
 url = "https://github.com/SaumilP/mastodon-toot-client"
+case_study_path = "/projects/mastodon-toot-client/"
 stack = ["Rust", "CLI", "Automation"]
 status = "Active"
 

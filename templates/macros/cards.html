@@ -64,5 +64,10 @@
     {%- for s in project.stack %}<span class="stack-badge">{{ s }}</span>{% endfor %}
   </div>
   {%- endif %}
+  {%- if project.case_study_path %}
+  <a class="more-link" href="{{ project.case_study_path | safe }}" style="margin-top: var(--space-3); font-size: var(--text-sm);">
+    Read case study {{ ic::icon(name="arrow-right", size=14) }}
+  </a>
+  {%- endif %}
 </article>
 {% endmacro project_card %}
