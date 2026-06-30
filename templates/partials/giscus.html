@@ -1,7 +1,7 @@
 {# Giscus comments widget. Only rendered when config.extra.comments.enable = true. #}
 {%- set c = config.extra.comments -%}
 {%- if c.enable and c.provider == "giscus" %}
-<section class="comments-section" aria-label="Comments">
+<section class="comments" aria-label="Comments">
   <h2 class="comments-section__title">Discussion</h2>
   <script src="https://giscus.app/client.js"
     data-repo="{{ c.repo }}"
