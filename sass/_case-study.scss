@@ -47,6 +47,10 @@
   }
 }
 
+.case-study__main {
+  min-width: 0; // prevents grid/flex children from overflowing
+}
+
 .case-study__meta-block {
   padding: var(--space-5) var(--space-6);
   border: var(--border);
