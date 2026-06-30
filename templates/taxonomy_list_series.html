@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container">
+  <header class="page-header">
+    <h1>All Series</h1>
+    <p>Browse articles organized by series.</p>
+  </header>
+
+  {%- if terms | length > 0 %}
+  <div class="series-index">
+    {%- for term in terms %}
+    <div class="series-index__item">
+      <a class="series-index__link" href="{{ term.permalink | safe }}">
+        <h2 class="series-index__name">{{ term.name }}</h2>
+        <p class="series-index__count">{{ term.pages | length }} post{% if term.pages | length != 1 %}s{% endif %}</p>
+      </a>
+    </div>
+    {%- endfor %}
+  </div>
+  {%- else %}
+  <div class="empty-state"><p>Nothing here yet.</p></div>
+  {%- endif %}
+</div>
+{% endblock content %}
