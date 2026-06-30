@@ -48,6 +48,6 @@ social media trackers.
 ## Contact
 
 For privacy questions, email
-**[pate.saumil@gmail.com](mailto:pate.saumil@gmail.com)**.
+**[email2saumil2024@gmail.com](mailto:email2saumil2024@gmail.com)**.
 
 See also: [Security](/security/) · [Disclaimer](/terms/)
