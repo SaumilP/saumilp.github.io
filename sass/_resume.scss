@@ -86,3 +86,16 @@
     margin-bottom: var(--space-4);
   }
 }
+
+@media print {
+  .site-header,
+  .site-footer,
+  nav,
+  .resume .btn {
+    display: none;
+  }
+
+  .resume {
+    max-width: 100%;
+  }
+}
