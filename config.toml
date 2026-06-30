@@ -94,7 +94,7 @@ security_contact = "email2saumil2024@gmail.com"
 
 # Optional comments (Giscus GitHub Discussions integration).
 [extra.comments]
-enable = true
+enable = false
 provider = "giscus"
 repo = "SaumilP/saumilp.github.io"
 repo_id = "REPLACE_WITH_REPO_ID"

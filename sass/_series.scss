@@ -97,3 +97,47 @@
   color: var(--color-text-muted);
   margin: 0;
 }
+
+// Series taxonomy index page (taxonomy_list_series.html) ---------------------
+.series-index {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.series-index__item {
+  margin-bottom: var(--space-2);
+}
+
+.series-index__link {
+  display: block;
+  padding: var(--space-5) var(--space-6);
+  border: var(--border);
+  border-radius: var(--radius-lg);
+  background: var(--color-surface);
+  text-decoration: none;
+  transition: border-color var(--transition), box-shadow var(--transition), transform var(--transition);
+
+  &:hover {
+    border-color: color-mix(in srgb, var(--color-text-muted) 40%, var(--color-border));
+    box-shadow: var(--shadow-md);
+    transform: translateY(-2px);
+  }
+}
+
+.series-index__name {
+  font-size: var(--text-lg);
+  font-weight: 600;
+  color: var(--color-text);
+  margin: 0 0 var(--space-2);
+}
+
+.series-index__count {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  color: var(--color-text-muted);
+  margin: 0;
+}
