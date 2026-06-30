@@ -38,6 +38,7 @@ author = "Saumil Patel"
 taxonomies = [
     { name = "tags", feed = true, paginate_by = 12 },
     { name = "categories", feed = true, paginate_by = 12 },
+    { name = "series", feed = false, paginate_by = 20 },
 ]
 
 [markdown]
