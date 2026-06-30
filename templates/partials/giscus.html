@@ -1,0 +1,23 @@
+{# Giscus comments widget. Only rendered when config.extra.comments.enable = true. #}
+{%- set c = config.extra.comments -%}
+{%- if c.enable and c.provider == "giscus" %}
+<section class="comments" aria-label="Comments">
+  <h2 class="comments-section__title">Discussion</h2>
+  <script src="https://giscus.app/client.js"
+    data-repo="{{ c.repo }}"
+    data-repo-id="{{ c.repo_id }}"
+    data-category="{{ c.category }}"
+    data-category-id="{{ c.category_id }}"
+    data-mapping="{{ c.mapping | default(value='pathname') }}"
+    data-strict="0"
+    data-reactions-enabled="{{ c.reactions_enabled | default(value='1') }}"
+    data-emit-metadata="{{ c.emit_metadata | default(value='0') }}"
+    data-input-position="{{ c.input_position | default(value='bottom') }}"
+    data-theme="preferred_color_scheme"
+    data-lang="{{ c.lang | default(value='en') }}"
+    data-loading="{{ c.loading | default(value='lazy') }}"
+    crossorigin="anonymous"
+    async>
+  </script>
+</section>
+{%- endif %}

@@ -1,0 +1,15 @@
+{# Expects: series_name (string), series_pages (array), current_permalink (string) #}
+{%- set sorted = series_pages | sort(attribute="date") -%}
+{%- set total = sorted | length -%}
+{%- set_global part_num = 0 -%}
+{%- for p in sorted -%}
+  {%- if p.permalink == current_permalink -%}{%- set_global part_num = loop.index -%}{%- endif -%}
+{%- endfor -%}
+
+<aside class="series-widget" aria-label="Article series">
+  <p class="series-widget__label eyebrow">Part {{ part_num }} of {{ total }}</p>
+  <p class="series-widget__name">{{ series_name }}</p>
+  <a class="series-widget__index" href="{{ get_taxonomy_url(kind='series', name=series_name) | safe }}">
+    View all {{ total }} posts in this series →
+  </a>
+</aside>

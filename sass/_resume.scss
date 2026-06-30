@@ -1,0 +1,101 @@
+// =============================================================================
+//  Resume / profile page
+// =============================================================================
+
+.resume-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--space-6);
+  flex-wrap: wrap;
+  padding-block: var(--space-8) var(--space-7);
+  border-bottom: var(--border);
+  margin-bottom: var(--space-7);
+
+  h1 {
+    font-size: clamp(1.75rem, 4vw, 2.5rem);
+    margin-bottom: var(--space-3);
+  }
+}
+
+.resume-header__role {
+  font-size: var(--text-lg);
+  color: var(--color-text-secondary);
+  margin-bottom: var(--space-4);
+}
+
+.resume-header__links {
+  display: flex;
+  gap: var(--space-5);
+  font-size: var(--text-sm);
+}
+
+.resume-body {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  max-width: var(--prose-width);
+  padding-bottom: var(--space-9);
+}
+
+.resume-section {
+  padding-block: var(--space-7);
+  border-bottom: var(--border);
+
+  &:last-child { border-bottom: none; }
+
+  h2 {
+    font-size: var(--text-xl);
+    margin-bottom: var(--space-5);
+  }
+
+  p, ul { font-size: var(--text-base); line-height: var(--leading-relaxed); }
+
+  ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+  }
+
+  a {
+    color: var(--color-accent);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+}
+
+.resume-skills {
+  display: grid;
+  gap: var(--space-6);
+
+  @media (min-width: 640px) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.resume-skills__group {
+  h3 {
+    font-size: var(--text-sm);
+    font-family: var(--font-mono);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: var(--color-text-muted);
+    margin-bottom: var(--space-4);
+  }
+}
+
+@media print {
+  .site-header,
+  .site-footer,
+  nav,
+  .resume .btn {
+    display: none;
+  }
+
+  .resume {
+    max-width: 100%;
+  }
+}

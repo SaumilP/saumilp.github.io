@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+{% import "macros/icons.html" as ic %}
+
+{% block content %}
+<div class="resume container section">
+
+  <div class="resume-header">
+    <div>
+      <h1>{{ config.extra.author_name }}</h1>
+      <p class="resume-header__role">{{ config.extra.author_job_title }}</p>
+      <div class="resume-header__links">
+        {% if config.extra.social.github %}
+        <a href="{{ config.extra.social.github }}" target="_blank" rel="noopener noreferrer">GitHub</a>
+        {% endif %}
+        {% if config.extra.social.linkedin %}
+        <a href="{{ config.extra.social.linkedin }}" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+        {% endif %}
+      </div>
+    </div>
+    <a class="btn btn--primary" href="/resume.pdf" download>
+      {{ ic::icon(name="arrow-right", size=16) }} Download PDF
+    </a>
+  </div>
+
+  <div class="resume-body">
+
+    <section class="resume-section">
+      <h2>Summary</h2>
+      <p>Software and systems architect with experience designing distributed backends, Java/Spring systems, and cloud infrastructure on AWS. Writes about architecture trade-offs, backend craft, and developer tooling at Machine Mind.</p>
+    </section>
+
+    <section class="resume-section">
+      <h2>Core skills</h2>
+      <div class="resume-skills">
+        <div class="resume-skills__group">
+          <h3>Languages</h3>
+          <ul><li>Java 21</li><li>Rust</li><li>TypeScript</li><li>Python</li><li>Shell</li></ul>
+        </div>
+        <div class="resume-skills__group">
+          <h3>Frameworks &amp; Platforms</h3>
+          <ul><li>Spring Boot 3</li><li>Tokio (Rust async)</li><li>AWS (EC2, ECS, Lambda, RDS)</li><li>Fly.io</li><li>Kafka</li></ul>
+        </div>
+        <div class="resume-skills__group">
+          <h3>Architecture</h3>
+          <ul><li>Domain-driven design</li><li>Event sourcing &amp; CQRS</li><li>Microservices</li><li>C4 modelling</li><li>Observability</li></ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="resume-section">
+      <h2>Selected projects</h2>
+      <p>See the <a href="/projects/">Projects page</a> for full case studies on architecture tooling, Java patterns, Spring Boot recipes, and Rust CLIs.</p>
+    </section>
+
+    <section class="resume-section">
+      <h2>Writing</h2>
+      <p>Publishes technical notes at <a href="/blog/">Machine Mind</a> covering distributed systems, backend engineering, and cloud infrastructure. Topics include Solr, Spring Boot internals, Rust async, and AWS architecture patterns.</p>
+    </section>
+
+  </div>
+
+</div>
+{% endblock content %}

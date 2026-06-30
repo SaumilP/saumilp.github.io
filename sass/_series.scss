@@ -1,0 +1,143 @@
+// =============================================================================
+//  Series: in-article widget + series index page
+// =============================================================================
+
+// In-article series widget ---------------------------------------------------
+.series-widget {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  padding: var(--space-5) var(--space-6);
+  border: var(--border);
+  border-left: 3px solid var(--color-accent);
+  border-radius: var(--radius-sm);
+  background: var(--color-accent-soft);
+  margin-bottom: var(--space-7);
+}
+
+.series-widget__label {
+  margin: 0;
+}
+
+.series-widget__name {
+  font-size: var(--text-lg);
+  font-weight: 600;
+  color: var(--color-text);
+  margin: 0;
+}
+
+.series-widget__index {
+  font-size: var(--text-sm);
+  color: var(--color-accent);
+  text-decoration: none;
+
+  &:hover { text-decoration: underline; }
+}
+
+// Series index page ----------------------------------------------------------
+.series-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  counter-reset: series-counter;
+}
+
+.series-list__item {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-5);
+  padding: var(--space-5) var(--space-6);
+  border: var(--border);
+  border-radius: var(--radius-lg);
+  background: var(--color-surface);
+  transition: border-color var(--transition), box-shadow var(--transition), transform var(--transition);
+
+  &:hover {
+    border-color: color-mix(in srgb, var(--color-text-muted) 40%, var(--color-border));
+    box-shadow: var(--shadow-md);
+    transform: translateY(-2px);
+  }
+}
+
+.series-list__num {
+  --_badge-size: 2rem; /* 32px — no space token maps here */
+  flex-shrink: 0;
+  display: grid;
+  place-items: center;
+  width: var(--_badge-size);
+  height: var(--_badge-size);
+  border-radius: var(--radius-pill);
+  background: var(--color-accent-soft);
+  color: var(--color-accent);
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+  font-weight: 700;
+}
+
+.series-list__content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.series-list__title {
+  font-size: var(--text-lg);
+  font-weight: 600;
+  color: var(--color-text);
+
+  &:hover { color: var(--color-accent); }
+}
+
+.series-list__meta {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  color: var(--color-text-muted);
+  margin: 0;
+}
+
+// Series taxonomy index page (taxonomy_list_series.html) ---------------------
+.series-index {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.series-index__item {
+  margin-bottom: var(--space-2);
+}
+
+.series-index__link {
+  display: block;
+  padding: var(--space-5) var(--space-6);
+  border: var(--border);
+  border-radius: var(--radius-lg);
+  background: var(--color-surface);
+  text-decoration: none;
+  transition: border-color var(--transition), box-shadow var(--transition), transform var(--transition);
+
+  &:hover {
+    border-color: color-mix(in srgb, var(--color-text-muted) 40%, var(--color-border));
+    box-shadow: var(--shadow-md);
+    transform: translateY(-2px);
+  }
+}
+
+.series-index__name {
+  font-size: var(--text-lg);
+  font-weight: 600;
+  color: var(--color-text);
+  margin: 0 0 var(--space-2);
+}
+
+.series-index__count {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  color: var(--color-text-muted);
+  margin: 0;
+}

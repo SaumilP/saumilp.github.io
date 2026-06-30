@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container section">
+  <header class="section-head" style="margin-bottom: var(--space-7);">
+    <div>
+      <p class="eyebrow">Series</p>
+      <h1 style="font-size: clamp(1.75rem, 4vw, 2.5rem); margin-top: var(--space-3);">{{ term.name }}</h1>
+      <p style="color: var(--color-text-secondary); margin-top: var(--space-4);">
+        {{ term.pages | length }} post{% if term.pages | length != 1 %}s{% endif %} in this series
+      </p>
+    </div>
+  </header>
+
+  <ol class="series-list">
+    {% for page in term.pages | sort(attribute="date") %}
+    <li class="series-list__item">
+      <span class="series-list__num">{{ loop.index }}</span>
+      <div class="series-list__content">
+        <a class="series-list__title" href="{{ page.permalink | safe }}">{{ page.title }}</a>
+        <p class="series-list__meta">
+          {{ page.date | date(format="%B %e, %Y") }}
+          {% if page.reading_time %} · {{ page.reading_time }} min read{% endif %}
+        </p>
+      </div>
+    </li>
+    {% endfor %}
+  </ol>
+</div>
+{% endblock content %}

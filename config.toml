@@ -38,6 +38,7 @@ author = "Saumil Patel"
 taxonomies = [
     { name = "tags", feed = true, paginate_by = 12 },
     { name = "categories", feed = true, paginate_by = 12 },
+    { name = "series", feed = false, paginate_by = 0 },
 ]
 
 [markdown]
@@ -76,9 +77,9 @@ anchors = "on"
 brand = "Machine Mind"
 site_name = "Machine Mind"
 site_tagline = "Practical notes on software architecture, backend engineering, cloud systems, Rust, Java, and developer tooling."
-site_description = "Machine Mind is Saumil Patel's technical blog covering software architecture, backend engineering, Java, Rust, AWS, DevOps, search, observability, and developer tooling."
-tagline = "build.withClarity()"
-positioning = "Practical notes on software architecture, backend engineering, cloud systems, Rust, Java, and developer tooling."
+site_description = "Machine Mind is Saumil Patel's technical blog — systems architecture, backend engineering, Java, Rust, cloud infrastructure, and developer craft."
+tagline = "Software / Systems Architect"
+positioning = "I design backend systems, document architectural trade-offs, and write practical notes on Rust, Java, AWS, and distributed systems."
 author_name = "Saumil Patel"
 author_job_title = "Software / Systems Architect"
 author_url = "https://saumilp.github.io"
@@ -91,9 +92,20 @@ copyright = "Saumil Patel"
 # Real, already-configured contact used for responsible disclosure (security.txt).
 security_contact = "email2saumil2024@gmail.com"
 
-# Optional comments (disabled until fully configured).
+# Optional comments (Giscus GitHub Discussions integration).
 [extra.comments]
 enable = false
+provider = "giscus"
+repo = "SaumilP/saumilp.github.io"
+repo_id = "REPLACE_WITH_REPO_ID"
+category = "Announcements"
+category_id = "REPLACE_WITH_CATEGORY_ID"
+mapping = "pathname"
+reactions_enabled = "1"
+emit_metadata = "0"
+input_position = "bottom"
+lang = "en"
+loading = "lazy"
 
 # Social / profile links (used in header, footer, About, JSON-LD).
 [extra.social]
@@ -123,6 +135,10 @@ url = "/projects/"
 [[extra.nav]]
 name = "About"
 url = "/about/"
+
+[[extra.nav]]
+name = "Resume"
+url = "/resume/"
 
 # Explore-by-topic cards on the homepage. `match` filters by category/tag slug.
 [[extra.topics]]
@@ -178,6 +194,7 @@ description = "Solr, indexing, and data plumbing."
 name = "draw.io Architecture Libraries"
 description = "Reusable draw.io shape libraries for clean, professional software architecture diagrams."
 url = "https://github.com/SaumilP/drawio_libraries"
+case_study_path = "/projects/draw-io-architecture-libraries/"
 stack = ["Diagrams", "Architecture", "Python"]
 status = "Active"
 
@@ -185,6 +202,7 @@ status = "Active"
 name = "Java Design Patterns"
 description = "Practical Java design patterns — runnable examples, tests, and architecture notes."
 url = "https://github.com/SaumilP/design-patterns"
+case_study_path = "/projects/java-design-patterns/"
 stack = ["Java", "Patterns", "OOP"]
 status = "Active"
 
@@ -192,6 +210,7 @@ status = "Active"
 name = "Enterprise Spring Patterns"
 description = "Spring Boot patterns and recipes for building maintainable enterprise systems."
 url = "https://github.com/SaumilP/enterprise-spring-patterns-and-recipes"
+case_study_path = "/projects/enterprise-spring-patterns/"
 stack = ["Java", "Spring Boot", "Backend"]
 status = "Active"
 
@@ -199,6 +218,7 @@ status = "Active"
 name = "Mastodon Toot Client"
 description = "A Rust Mastodon bot CLI — scheduled posts from files with safe automation."
 url = "https://github.com/SaumilP/mastodon-toot-client"
+case_study_path = "/projects/mastodon-toot-client/"
 stack = ["Rust", "CLI", "Automation"]
 status = "Active"
 

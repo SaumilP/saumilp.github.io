@@ -34,6 +34,18 @@
         {%- endif %}
       </header>
 
+      {%- if page.taxonomies.series %}
+      {%- set series_name = page.taxonomies.series | first -%}
+      {%- set s_taxonomy = get_taxonomy(kind="series") -%}
+      {%- set_global s_pages = [] -%}
+      {%- for item in s_taxonomy.items -%}
+        {%- if item.name == series_name -%}{%- set_global s_pages = item.pages -%}{%- endif -%}
+      {%- endfor -%}
+      {%- set series_pages = s_pages -%}
+      {%- set current_permalink = page.permalink -%}
+      {% include "partials/series-widget.html" %}
+      {%- endif %}
+
       {# ---- AEO: short answer near the top (front matter `summary_answer`) ---- #}
       {%- if page.extra.summary_answer | default(value="") %}
       <div class="answer-box" role="note">
@@ -141,6 +153,8 @@
       </section>
       {%- endif %}
     </article>
+
+    {% include "partials/giscus.html" %}
 
     {%- if has_toc %}
     <aside class="toc" aria-label="Table of contents">
